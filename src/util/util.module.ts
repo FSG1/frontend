@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { NavComponent } from './nav/nav.component';
-import {BrowserModule} from '@angular/platform-browser';
-import {ErrorComponent} from './error/error.component';
-import {ApiClient} from "./ApiClient";
-import {RouterModule} from "@angular/router";
-import {LoaderComponent} from "./loader/loader.component";
+import { BrowserModule } from '@angular/platform-browser';
+import { ErrorComponent } from './error/error.component';
+import { RouterModule } from '@angular/router';
+
+
 
 @NgModule({
   declarations: [
     NavComponent,
-    ErrorComponent,
-    LoaderComponent
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -19,11 +18,9 @@ import {LoaderComponent} from "./loader/loader.component";
   ],
   exports: [
     NavComponent,
-    ErrorComponent,
-    LoaderComponent
+    ErrorComponent
   ],
   providers: [
-    ApiClient
   ],
 })
 export class UtilModule { }

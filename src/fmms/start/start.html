@@ -3,25 +3,8 @@
 
   <div class="row">
 
-    <div class="col-sm-8 offset-sm-2 text-center">
-      <form>
-        <p-panel>
-          <p-header>
-            Newsletter System / Musikverein Elten
-          </p-header>
-
-          <label for="username">Username:</label><br/>
-          <input pInputText type="text" id="username" (keyup.enter)="onLogin()" [(ngModel)]="username" name="username" required /> <br/><br/>
-
-          <label for="password">Passwort:</label> <br/>
-          <input pPassword [feedback]="false" type="password" id="password" (keyup.enter)="onLogin()" [(ngModel)]="password" name="password" required>
-
-          <p-footer>
-            <button pButton type="button" label="Login" (click)="onLogin()"></button>
-          </p-footer>
-
-        </p-panel>
-      </form>
+    <div class="col-sm-12">
+      Welcome to FMMS.
     </div>
 
   </div>
