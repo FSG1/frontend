@@ -19,4 +19,4 @@ RUN npm i
 EXPOSE 4200
 
 ENTRYPOINT ["ng"]
-CMD ["serve"]
+CMD ["serve", "--host=0.0.0.0"]
