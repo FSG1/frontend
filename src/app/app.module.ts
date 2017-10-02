@@ -7,11 +7,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app.routing';
 import {LoginModule} from '../fmms/login/login.module';
 import {StartModule} from '../fmms/start/start.module';
+import { ModuleOverviewComponent } from './module-overview/module-overview.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModuleOverviewComponent
   ],
   imports: [
     BrowserModule,
