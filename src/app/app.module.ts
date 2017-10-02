@@ -8,6 +8,14 @@ import {AppRoutingModule} from './app.routing';
 import {LoginModule} from '../fmms/login/login.module';
 import {StartModule} from '../fmms/start/start.module';
 
+import { HttpModule } from '@angular/http';
+
+// In memory imports
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+
+// import { BackendMockupService } from './backend.mockup.service';
+
 
 @NgModule({
   declarations: [
@@ -16,13 +24,14 @@ import {StartModule} from '../fmms/start/start.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-
+    HttpModule,
     UtilModule,
     AppRoutingModule,
 
 
     LoginModule,
-    StartModule
+    StartModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   providers: [],
   bootstrap: [AppComponent]
