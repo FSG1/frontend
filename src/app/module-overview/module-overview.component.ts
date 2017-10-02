@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Curriculum } from './curriculum.model';
 
 @Component({
   selector: 'app-module-overview',
@@ -7,14 +8,14 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
   styleUrls: ['./module-overview.component.scss']
 })
 export class ModuleOverviewComponent implements OnInit {
-  result: CurriculumOverview[];
+  result: Curriculum;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get<CurriculumOverview>('url', ).subscribe(data => {
-      this.result = data['modules'];
-    });
+    // this.http.get<CurriculumOverview>('url').subscribe(data => {
+    //  this.result = data['modules'];
+    // });
   }
 
 }

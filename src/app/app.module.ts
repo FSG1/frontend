@@ -8,6 +8,7 @@ import {AppRoutingModule} from './app.routing';
 import {LoginModule} from '../fmms/login/login.module';
 import {StartModule} from '../fmms/start/start.module';
 import { ModuleOverviewComponent } from './module-overview/module-overview.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ModuleOverviewComponent } from './module-overview/module-overview.compo
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     UtilModule,
     AppRoutingModule,
