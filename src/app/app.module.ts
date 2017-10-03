@@ -14,7 +14,7 @@ import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
- import { BackendMockupService } from './backend.mockup.service';
+ import { BackendMockupService } from './backend-mockup.service';
 
 
 @NgModule({
@@ -27,8 +27,6 @@ import { InMemoryDataService } from './in-memory-data.service';
     HttpModule,
     UtilModule,
     AppRoutingModule,
-
-
     LoginModule,
     StartModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService)
