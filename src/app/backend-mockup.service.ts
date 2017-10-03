@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import { SEMESTERS} from './mock-semester';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -14,7 +13,11 @@ export class BackendMockupService {
   constructor(private http: Http) { }
 
   getSemesters(): Promise<Semester[]> {
-    return Promise.resolve(SEMESTERS);
+    return this.http.get(this.semestersUrl)
+      .toPromise()
+      .then(response => response.json().data as Semester[])
+      .catch(this.handleError);
+
   }
 
 
