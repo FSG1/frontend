@@ -3,7 +3,7 @@ import {Headers, Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Semester} from './semester';
+import { Semesters } from './module-overview/semesters.model';
 
 @Injectable()
 export class BackendMockupService {
@@ -12,10 +12,10 @@ export class BackendMockupService {
 
   constructor(private http: Http) { }
 
-  getSemesters(): Promise<Semester[]> {
+  getSemesters(): Promise<Semesters[]> {
     return this.http.get(this.semestersUrl)
       .toPromise()
-      .then(response => response.json().data as Semester[])
+      .then(response => response.json().data as Semesters[])
       .catch(this.handleError);
 
   }
