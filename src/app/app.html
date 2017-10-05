@@ -1,9 +1,8 @@
-<app-nav *ngIf="isLoggedIn"></app-nav>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <app-module-overview></app-module-overview>
+    </div>
+  </div>
+</div>
 
-<ul>
-  <li *ngFor="let semester of semesters">
-    <span>{{semester.semester}}</span>
-  </li>
-</ul>
-
-<router-outlet></router-outlet>

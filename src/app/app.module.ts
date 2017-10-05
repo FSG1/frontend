@@ -7,6 +7,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app.routing';
 import {LoginModule} from '../fmms/login/login.module';
 import {StartModule} from '../fmms/start/start.module';
+import { ModuleOverviewComponent } from './module-overview/module-overview.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HttpModule } from '@angular/http';
 
@@ -19,11 +21,14 @@ import { InMemoryDataService } from './in-memory-data.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModuleOverviewComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+
     HttpModule,
     UtilModule,
     AppRoutingModule,
