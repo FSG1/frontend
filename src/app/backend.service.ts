@@ -17,7 +17,6 @@ export class BackendService {
       .toPromise()
       .then(response => response.json().data as Semester[])
       .catch(this.handleError);
-
   }
 
 

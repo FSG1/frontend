@@ -13,7 +13,7 @@ import { HttpModule } from '@angular/http';
 // In memory imports
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-db/in-memory-data.service';
- import { BackendService } from './backend.service';
+import { BackendService } from './backend.service';
 
 
 @NgModule({
