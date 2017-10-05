@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Curriculum } from './curriculum.model';
-import { Semesters } from './semesters.model';
-import { BackendMockupService} from '../backend-mockup.service';
+import { Curriculum } from '../models/curriculum.model';
+import { Semester } from '../models/semester.model';
+import { BackendService} from '../backend.service';
 
 @Component({
   selector: 'app-module-overview',
@@ -10,9 +10,9 @@ import { BackendMockupService} from '../backend-mockup.service';
   styleUrls: ['./module-overview.component.scss']
 })
 export class ModuleOverviewComponent implements OnInit {
-  semesters: Semesters[];
+  semesters: Semester[];
 
-  constructor( private bms: BackendMockupService) {}
+  constructor( private bms: BackendService) {}
 
   getSemesters(): void {
     this.bms.getSemesters().then(semesters => this.semesters = semesters);

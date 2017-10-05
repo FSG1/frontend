@@ -1,6 +1,6 @@
-import { Semesters} from './module-overview/semesters.model';
+import { Semester} from './models/semester.model';
 
-export const SEMESTERS: Semesters[] = [
+export const SEMESTERS: Semester[] = [
   { 'semester': 1,
     'modules': [
       {'module_code': 'JAV1',        'module_name': 'Programming in Java 1',       'credits': 5 },

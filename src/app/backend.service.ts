@@ -3,19 +3,19 @@ import {Headers, Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Semesters } from './module-overview/semesters.model';
+import { Semester } from './models/semester.model';
 
 @Injectable()
-export class BackendMockupService {
+export class BackendService {
   private headers = new Headers({'Content-type': 'application/json'});
   private semestersUrl = 'api/semesters';
 
   constructor(private http: Http) { }
 
-  getSemesters(): Promise<Semesters[]> {
+  getSemesters(): Promise<Semester[]> {
     return this.http.get(this.semestersUrl)
       .toPromise()
-      .then(response => response.json().data as Semesters[])
+      .then(response => response.json().data as Semester[])
       .catch(this.handleError);
 
   }

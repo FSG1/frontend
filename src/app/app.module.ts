@@ -5,15 +5,15 @@ import {AppComponent} from './app.component';
 import {UtilModule} from '../util/util.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app.routing';
-import { ModuleOverviewComponent } from './module-overview/module-overview.component';
+import { ModuleOverviewComponent } from './module-overview-component/module-overview.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HttpModule } from '@angular/http';
 
 // In memory imports
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
- import { BackendMockupService } from './backend-mockup.service';
+import { InMemoryDataService } from './in-memory-db/in-memory-data.service';
+ import { BackendService } from './backend.service';
 
 
 @NgModule({
@@ -32,7 +32,7 @@ import { InMemoryDataService } from './in-memory-data.service';
     AppRoutingModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
-  providers: [ BackendMockupService],
+  providers: [ BackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
