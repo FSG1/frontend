@@ -5,9 +5,8 @@ import {BackendService} from '../backend.service';
 import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
 import {HttpModule} from '@angular/http';
-import {AppModule} from "../app.module";
-import {InMemoryDataService} from "../in-memory-db/in-memory-data.service";
-import {InMemoryWebApiModule} from "angular-in-memory-web-api";
+import {InMemoryDataService} from '../in-memory-db/in-memory-data.service';
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 
 
 
