@@ -8,7 +8,7 @@ import { Semester } from './models/semester.model';
 @Injectable()
 export class BackendService {
   private headers = new Headers({'Content-type': 'application/json'});
-  private semestersUrl = 'api/semesters';
+  private semestersUrl = 'http://localhost:8080/fmms/curriculum/BI/semesters';
 
   constructor(private http: Http) { }
 

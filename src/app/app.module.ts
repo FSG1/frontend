@@ -30,7 +30,7 @@ import { BackendService } from './backend.service';
     HttpModule,
     UtilModule,
     AppRoutingModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService)
+    // InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   providers: [ BackendService],
   bootstrap: [AppComponent]
