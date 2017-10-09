@@ -1,5 +1,4 @@
-<div class="container" *ngFor="let semester of semesters">
-<ul class="list-inline">
+<ul class="list-inline" *ngFor="let semester of semesters">
   <hr>
   <li class="list-inline-item">
     <h2 class="list-group item-heading">Semester {{ semester.semester }}</h2>
@@ -10,4 +9,3 @@
       <div class="list-group-item-text">Credits {{ module.credits }}</div>
     </a>
 </ul>
-</div>
