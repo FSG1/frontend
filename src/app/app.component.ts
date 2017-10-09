@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-fmms',
@@ -6,9 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.scss']
 })
 export class AppComponent {
-
-  get isLoggedIn() {
-    return true;
-  }
 
 }

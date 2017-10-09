@@ -5,26 +5,34 @@ import {AppComponent} from './app.component';
 import {UtilModule} from '../util/util.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app.routing';
-import {LoginModule} from '../fmms/login/login.module';
-import {StartModule} from '../fmms/start/start.module';
+import { ModuleOverviewComponent } from './module-overview-component/module-overview.component';
+import { HttpClientModule } from '@angular/common/http';
+
+import { HttpModule } from '@angular/http';
+
+// In memory imports
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-db/in-memory-data.service';
+import { BackendService } from './backend.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModuleOverviewComponent
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
+    HttpModule,
     UtilModule,
     AppRoutingModule,
-
-
-    LoginModule,
-    StartModule
+    // InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
-  providers: [],
+  providers: [ BackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
