@@ -1,22 +1,22 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
-
-import 'rxjs/add/operator/toPromise';
 
 import { Semester } from './models/semester.model';
+import {CurriculumResponse} from './models/CurriculumResponse';
+import {Observable} from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
+
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BackendService {
   private headers = new Headers({'Content-type': 'application/json'});
   private semestersUrl = 'http://localhost:8080/fmms/curriculum/BI/semesters';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-  getSemesters(): Promise<Semester[]> {
-    return this.http.get(this.semestersUrl)
-      .toPromise()
-      .then(response => response.json().data as Semester[])
-      .catch(this.handleError);
+  getSemesters(): Observable<Semester[]> {
+    return this.http.get<CurriculumResponse>(this.semestersUrl)
+      .map(data => data.semesters);
   }
 
 

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Curriculum } from '../models/curriculum.model';
 import { Semester } from '../models/semester.model';
 import { BackendService} from '../backend.service';
 
@@ -15,12 +13,13 @@ export class ModuleOverviewComponent implements OnInit {
   constructor( private bms: BackendService) {}
 
   getSemesters(): void {
-    this.bms.getSemesters().then(semesters => this.semesters = semesters);
+    this.bms.getSemesters().subscribe(semesters => this.semesters = semesters);
   }
 
   ngOnInit(): void {
     this.getSemesters();
   }
+
   get isLoggedIn() {
     return true;
   }
