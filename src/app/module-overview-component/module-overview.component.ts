@@ -24,8 +24,6 @@ export class ModuleOverviewComponent implements OnInit {
   getSemesters(): void {
     if (this.selectedCurriculum != null) {
       this.backendService.getSemesters(this.selectedCurriculum).subscribe(semesters => this.semesters = semesters);
-    }else {
-      console.log('selectedCurriculum is empty!');
     }
   }
 
@@ -35,8 +33,6 @@ export class ModuleOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurriculum();
-    // this.selectedCurriculum = 'BI';
-    // this.getSemesters();
   }
 
   get isLoggedIn() {
