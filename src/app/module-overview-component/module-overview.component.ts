@@ -11,20 +11,22 @@ import {Curriculum} from '../models/curriculum.model';
 export class ModuleOverviewComponent implements AfterContentInit {
   semesters: Semester[];
   curricula: Curriculum[];
-  selectedCurriculum: number;
+  selectedCurriculum: Curriculum;
+  selectedCurriculumName: string;
 
   constructor(private backendService: BackendService) {
     this.curricula = [];
   }
 
   onSelect(curriculum: Curriculum): void {
-    this.selectedCurriculum = curriculum.id;
+    this.selectedCurriculum = curriculum;
+    this.selectedCurriculumName = curriculum.name;
     this.getSemesters();
   }
 
   getSemesters(): void {
     if (this.selectedCurriculum != null) {
-      this.backendService.getSemesters(this.selectedCurriculum).subscribe(semesters => this.semesters = semesters);
+      this.backendService.getSemesters(this.selectedCurriculum.id).subscribe(semesters => this.semesters = semesters);
     }
   }
 
