@@ -1,5 +1,5 @@
 export interface Curriculum {
-  code: string;
   name: string;
+  code: string;
   id: number;
 }
