@@ -10,32 +10,32 @@ import {Curriculum} from '../models/curriculum.model';
 })
 export class ModuleOverviewComponent implements OnInit {
   semesters: Semester[];
-  curriculums: Curriculum[];
-  selectedCurriculum: string;
+  curricula: Curriculum[];
+  selectedCurriculum: number;
 
   constructor(private backendService: BackendService) {
-    this.curriculums = [
-      { id: 1, code: 'BI', name: 'Business Informatics' },
-      { id: 2, code: 'SE', name: 'Software Engineering' },
-    ];
   }
 
   onSelect(curriculum: Curriculum): void {
-    this.selectedCurriculum = curriculum.code;
+    this.selectedCurriculum = curriculum.id;
     console.log(this.selectedCurriculum);
     this.getSemesters();
   }
 
   getSemesters(): void {
     if (this.selectedCurriculum != null) {
-      this.backendService.setUrl('http://localhost:8080/fmms/curriculum/' + this.selectedCurriculum + '/semesters');
-      this.backendService.getSemesters().subscribe(semesters => this.semesters = semesters);
+      this.backendService.getSemesters(this.selectedCurriculum).subscribe(semesters => this.semesters = semesters);
     }else {
       console.log('selectedCurriculum is empty!');
     }
   }
 
+  getCurriculum(): void {
+    this.backendService.getCurricula().subscribe(curricula => this.curricula = curricula);
+  }
+
   ngOnInit(): void {
+    this.getCurriculum();
     // this.selectedCurriculum = 'BI';
     // this.getSemesters();
   }
