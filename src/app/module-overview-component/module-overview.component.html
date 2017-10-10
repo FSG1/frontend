@@ -4,9 +4,9 @@
     <span class="caret"></span>
   </button>
 
-  <ul class="dropdown-menu" *ngFor="let curriculum of curricula">
-    <li (click)="onSelect(curriculum)" class="dropdown-item">
-      <a href="#">{{curriculum.code}}</a>
+  <ul class="dropdown-menu">
+    <li class="dropdown-item" *ngFor="let curriculum of curricula">
+      <a (click)="onSelect(curriculum)" href="#">{{curriculum.code}}</a>
     </li>
   </ul>
 </div>
