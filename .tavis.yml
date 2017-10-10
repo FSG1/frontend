@@ -13,7 +13,7 @@ install:
   - npm install
 
 script:
-  - ng test
+  - ng test --browsers Chrome_no_sandbox -w false
 
 notifications:
   email:
