@@ -12,8 +12,7 @@ import {CurriculaResponse} from './backend-responses/CurriculaResponse';
 @Injectable()
 export class BackendService {
   private headers = new Headers({'Content-type': 'application/json'});
-
-  private curriculaUrl = 'http://localhost:8080/fmms/curricula';
+  private semestersUrl = 'http://172.17.0.1:8080/fmms/curriculum/BI/semesters';
 
   constructor(private http: HttpClient) {
   }

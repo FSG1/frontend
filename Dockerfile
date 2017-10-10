@@ -1,14 +1,6 @@
-FROM node:alpine
+FROM teracy/angular-cli
 
-MAINTAINER Tobias Derksen <tobias.derksen@student.fontys.nl>
-
-USER root
-
-RUN apk update \
-  && apk add --update alpine-sdk \
-  && npm install -g @angular/cli@1.4.3 \
-  && ng set --global packageManager=yarn \
-  && apk del alpine-sdk
+LABEL maintainer="Tobias Derksen <tobias.derksen@student.fontys.nl>"
 
 RUN mkdir -p /usr/src/fmms
 COPY . /usr/src/fmms
@@ -18,5 +10,9 @@ RUN npm i
 
 EXPOSE 4200
 
+STOPSIGNAL SIGTERM
+
 ENTRYPOINT ["ng"]
+
+# Execute ng to listen on all adresses
 CMD ["serve", "--host=0.0.0.0"]
