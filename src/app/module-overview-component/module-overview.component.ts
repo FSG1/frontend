@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Semester } from '../models/semester.model';
 import { BackendService} from '../backend.service';
+import {Curriculum} from '../models/curriculum.model';
 
 @Component({
   selector: 'app-module-overview',
@@ -9,15 +10,29 @@ import { BackendService} from '../backend.service';
 })
 export class ModuleOverviewComponent implements OnInit {
   semesters: Semester[];
+  curricula: Curriculum[];
+  selectedCurriculum: number;
 
-  constructor( private bms: BackendService) {}
+  constructor(private backendService: BackendService) {
+  }
+
+  onSelect(curriculum: Curriculum): void {
+    this.selectedCurriculum = curriculum.id;
+    this.getSemesters();
+  }
 
   getSemesters(): void {
-    this.bms.getSemesters().subscribe(semesters => this.semesters = semesters);
+    if (this.selectedCurriculum != null) {
+      this.backendService.getSemesters(this.selectedCurriculum).subscribe(semesters => this.semesters = semesters);
+    }
+  }
+
+  getCurriculum(): void {
+    this.backendService.getCurricula().subscribe(curricula => this.curricula = curricula);
   }
 
   ngOnInit(): void {
-    this.getSemesters();
+    this.getCurriculum();
   }
 
   get isLoggedIn() {
