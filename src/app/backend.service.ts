@@ -18,8 +18,7 @@ export class BackendService {
   }
 
   getCurricula(): Observable<Curriculum[]> {
-    return this.http.get<CurriculaResponse>(this.curriculaUrl)
-      .map(data => data.curricula);
+    return this.http.get<Curriculum[]>(this.curriculaUrl);
   }
 
 // TO CHECK might need to be casted to string before appending it.
