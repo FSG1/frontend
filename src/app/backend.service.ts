@@ -12,13 +12,17 @@ export class BackendService {
   private headers = new Headers({'Content-type': 'application/json'});
   private semestersUrl = 'http://localhost:8080/fmms/curriculum/BI/semesters';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getSemesters(): Observable<Semester[]> {
     return this.http.get<CurriculumResponse>(this.semestersUrl)
       .map(data => data.semesters);
   }
 
+  public setUrl(url: string) {
+    this.semestersUrl = url;
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
