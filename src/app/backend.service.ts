@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 
 import { Semester } from './models/semester.model';
 import { Curriculum } from './models/curriculum.model';
-import {Observable } from 'rxjs/Observable';
-import {HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/map';
 import {CurriculumResponse} from './backend-responses/CurriculumResponse';
