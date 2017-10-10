@@ -1,8 +1,13 @@
 <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Curriculum
-    <span class="caret"></span></button>
-  <ul class="dropdown-menu" *ngFor="let curriculum of curriculums">
-    <li (click)="onSelect(curriculum)"><a href="#"></a>{{curriculum.code}}</li>
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+    Curriculum
+    <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu">
+    <li class="dropdown-item" *ngFor="let curriculum of curricula">
+      <a (click)="onSelect(curriculum)" href="#">{{curriculum.code}}</a>
+    </li>
   </ul>
 </div>
 <ul class="list-inline" *ngFor="let semester of semesters">

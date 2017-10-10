@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
 import { Semester } from '../models/semester.model';
 import { BackendService} from '../backend.service';
 import {Curriculum} from '../models/curriculum.model';
@@ -8,12 +8,13 @@ import {Curriculum} from '../models/curriculum.model';
   templateUrl: './module-overview.component.html',
   styleUrls: ['./module-overview.component.scss']
 })
-export class ModuleOverviewComponent implements OnInit {
+export class ModuleOverviewComponent implements AfterContentInit {
   semesters: Semester[];
   curricula: Curriculum[];
   selectedCurriculum: number;
 
   constructor(private backendService: BackendService) {
+    this.curricula = [];
   }
 
   onSelect(curriculum: Curriculum): void {
@@ -28,14 +29,12 @@ export class ModuleOverviewComponent implements OnInit {
   }
 
   getCurriculum(): void {
-    this.backendService.getCurricula().subscribe(curricula => this.curricula = curricula);
+    this.backendService.getCurricula()
+      .subscribe(curricula => this.curricula = curricula);
   }
 
-  ngOnInit(): void {
+  ngAfterContentInit(): void {
     this.getCurriculum();
   }
 
-  get isLoggedIn() {
-    return true;
-  }
 }
