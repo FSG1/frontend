@@ -18,7 +18,6 @@ export class ModuleOverviewComponent implements OnInit {
 
   onSelect(curriculum: Curriculum): void {
     this.selectedCurriculum = curriculum.id;
-    console.log(this.selectedCurriculum);
     this.getSemesters();
   }
 
