@@ -4,19 +4,19 @@
     <span class="caret"></span>
   </button>
 
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu" style="opacity: 1; float: none;">
     <li class="dropdown-item" *ngFor="let curriculum of curricula">
       <a (click)="onSelect(curriculum)" href="#">{{curriculum.code}}</a>
     </li>
   </ul>
 </div>
 
-<h2 class="text-center">{{ selectedCurriculumName }}</h2>
+<h2 class="text-center text-secondary">{{ selectedCurriculumName }}</h2>
 
-
-<ul class="list-inline" *ngFor="let semester of semesters">
+<!--
+<ul class="list-inline " *ngFor="let semester of semesters">
   <li class="list-inline-item">
-    <h2 class="list-group item-heading">Semester {{ semester.semester }}</h2>
+    <h2 class="list-group item-heading text-light">Semester {{ semester.semester }}</h2>
   </li>
   <li class="list-inline-item text-center" *ngFor="let module of semester.modules">
     <a href="#" class="list-group-item">
@@ -25,3 +25,14 @@
     </a>
   </li>
 </ul>
+-->
+<div class="row" *ngFor="let semester of semesters">
+  <h2 class="text-secondary" grid>Semester {{ semester.semester }}</h2>
+  <div class="col-xl-1 hoverable" *ngFor="let module of semester.modules">
+    <a href="#">
+      <h4 class="text-primary">{{ module.module_code }}</h4>
+      <p class="text-secondary">Credits {{ module.credits }}</p>
+    </a>
+  </div>
+</div>
+

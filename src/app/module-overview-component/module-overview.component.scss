@@ -6,7 +6,31 @@ h2 {
   margin-top: 2%;
 }
 
+.row {
+  display: flex;
+  vertical-align: middle;
+  float: none;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.col-xl-1 {
+  text-align: center;
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  margin: 1%;
+  background-color: #fafafa;
+  //border-radius: 20%;
+  //border: ridge;
+  //margin: 1%;
+}
+
+.col-xl-1.a {
+  link: white;
+}
 ul.list-inline {
   display: flex;
   align-items: center;
+  //background-color: #90CAF9;
+  padding: 1%;
 }
