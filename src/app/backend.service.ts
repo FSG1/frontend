@@ -28,7 +28,6 @@ export class BackendService {
     return this.http.get<Curriculum[]>(this.curriculaUrl);
   }
 
-  
   getSemesters(id: number): Observable<Semester[]> {
     const semestersUrl = 'http://localhost:8080/fmms/curriculum/' + id + '/semesters';
     return this.http.get<CurriculumResponse>(semestersUrl)
