@@ -25,12 +25,10 @@ export class BackendService {
   }
 
   getCurricula(): Observable<Curriculum[]> {
-    return this.http.get<CurriculaResponse>(this.curriculaUrl)
-      .map(data => data.curricula);
+    return this.http.get<Curriculum[]>(this.curriculaUrl);
   }
 
-// TO CHECK might need to be casted to string before appending it.
-// I'm not that familair with angular. If it works you can remove this comment
+  
   getSemesters(id: number): Observable<Semester[]> {
     const semestersUrl = 'http://localhost:8080/fmms/curriculum/' + id + '/semesters';
     return this.http.get<CurriculumResponse>(semestersUrl)
