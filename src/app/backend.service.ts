@@ -18,6 +18,8 @@ export class BackendService {
   constructor(private http: HttpClient) {
   }
 
+  getModule(): Observable
+
   getCurricula(): Observable<Curriculum[]> {
     return this.http.get<CurriculaResponse>(this.curriculaUrl)
       .map(data => data.curricula);
