@@ -52,8 +52,8 @@ const modulemodel = {
 describe('Testing module component', () => {
   let component: ModuleComponent;
   let fixture: ComponentFixture<ModuleComponent>;
-  //let de:      DebugElement;
-  //let el:      HTMLElement;
+  let de:      DebugElement;
+  let el:      HTMLElement;
   let backendService;
 
   const backendServiceStub = {
@@ -78,9 +78,31 @@ describe('Testing module component', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     backendService = fixture.debugElement.injector.get(BackendService);
-    //de = fixture.debugElement.query(By.css('.dropdown-menu'));
-    // el = de.nativeElement;
   });
 
+  it('Should be three personal learning goals', () => {
+    de = fixture.debugElement.query(By.css('.personal-learning-goals'));
+    fixture.detectChanges();
+    expect(de.childNodes.length).toBe(3);
+  });
+  it('Should be one group learning goal', () => {
+    de = fixture.debugElement.query(By.css('.group-learning-goals'));
+    fixture.detectChanges();
+    expect(de.childNodes.length).toBe(1);
+  });
+  it('personal learning goal should display table when selected', () => {
+    fixture.detectChanges();
+    const LG = {
+      'name': 'LG 1',
+        'description': 'apply control structures, function invocation and memory management in C ',
+        'type': 'personal',
+        'skillmatrix': [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
+        {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 1}]
+     };
+    component.onSelect(LG);
+    el = fixture.debugElement.query(By.css('.skill-matrix')).nativeElement;
+    // have to check if it exists n has some values.
+    // expect(el.).toBe(1);
+  });
 });
 
