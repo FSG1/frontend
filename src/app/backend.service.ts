@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 
 import 'rxjs/add/operator/map';
 import {CurriculaResponse} from './backend-responses/CurriculaResponse';
+import {ModuleContent} from "./models/modulecontent.model";
 
 @Injectable()
 export class BackendService {
@@ -18,7 +19,10 @@ export class BackendService {
   constructor(private http: HttpClient) {
   }
 
-  getModule(): Observable
+  //needs to return something in the future, implemented it for testing purposes
+  getModule(modulecode: string): Observable<ModuleContent[]> {
+    return null;
+  }
 
   getCurricula(): Observable<Curriculum[]> {
     return this.http.get<CurriculaResponse>(this.curriculaUrl)

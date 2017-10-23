@@ -1,7 +1,7 @@
 <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Curriculum
     <span class="caret"></span></button>
-  <ul class="dropdown-menu" *ngFor="let curriculum of curriculums">
+  <ul class="dropdown-menu" *ngFor="let curriculum of curricula">
     <li (click)="onSelect(curriculum)"><a href="#"></a>{{curriculum.code}}</li>
   </ul>
 </div>

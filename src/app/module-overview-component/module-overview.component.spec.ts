@@ -11,7 +11,7 @@ import {Subscriber} from 'rxjs/Subscriber';
 
 const curricula = [
   { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
-  { 'name': 'Business Informatics', 'code': 'BI', 'id': 2}
+  { 'name': 'Business Informatics', 'code': 'BI', 'id': 2},
 ];
 
 const semesters = [
@@ -77,13 +77,13 @@ describe('ModuleOverviewComponent', () => {
     fixture.detectChanges();
     backendService = fixture.debugElement.injector.get(BackendService);
     de = fixture.debugElement.query(By.css('.dropdown-menu'));
-    el = de.nativeElement;
+    el = fixture.nativeElement;
   });
 
   it('Dropdown menu should have 2 items SE and BI', () => {
     fixture.detectChanges();
     // checking the innertext
-    expect(el.innerText).toBe('SE\nBI') ;
+    expect(de.childNodes.length).toBe(2) ;
   });
   it('After selecting dropdown item, semester 1 should be displayed', () => {
     fixture.detectChanges();

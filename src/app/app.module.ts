@@ -14,13 +14,14 @@ import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-db/in-memory-data.service';
 import { BackendService } from './backend.service';
+import {ModuleComponent} from "./module-component/module.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ModuleOverviewComponent
-
+    ModuleOverviewComponent,
+    ModuleComponent
   ],
   imports: [
     BrowserModule,
