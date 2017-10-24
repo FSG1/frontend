@@ -7,7 +7,6 @@ import {BackendService} from '../backend.service';
 import {By} from '@angular/platform-browser';
 import {SkillMatrixComponent} from "./skillmatrix.component";
 
-
 const modulemodel = {
   'module_code': 'IOT',
   'module_name': 'Internet of Things',
@@ -90,7 +89,5 @@ describe('Testing skillmatrix component', () => {
     de = fixture.debugElement.query(By.css('tr'));
     expect(de.nativeElement.query(By.css('td'))).toBe(4);
   });
-
-
 });
 
