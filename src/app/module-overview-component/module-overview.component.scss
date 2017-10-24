@@ -2,11 +2,19 @@ a {
   display: block;
 }
 
+.head {
+  background-color: #663366;
+}
+
+.head h2 {
+  color: white;
+}
+
 h2 {
   margin-top: 2%;
 }
 
-.row {
+.semesterGrid {
   display: flex;
   vertical-align: middle;
   float: none;
@@ -14,23 +22,23 @@ h2 {
   margin-right: 1%;
 }
 
-.col-xl-1 {
+.semesterGridContent {
   text-align: center;
   border: 2px solid #e0e0e0;
   border-radius: 5px;
   margin: 1%;
   background-color: #fafafa;
-  //border-radius: 20%;
-  //border: ridge;
-  //margin: 1%;
 }
 
-.col-xl-1.a {
-  link: white;
+hr {
+  width: 100%;
+  color: #fafafa;
+  height: 1px;
+  background-color: #fafafa;
 }
-ul.list-inline {
-  display: flex;
-  align-items: center;
-  //background-color: #90CAF9;
-  padding: 1%;
+
+
+.semesterGridContent h4 {
+  color: #663366;
+  font-weight: 400;
 }
