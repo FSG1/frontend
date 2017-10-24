@@ -4,11 +4,15 @@ import { ModuleOverviewComponent } from './module-overview.component';
 import {BackendService} from '../backend.service';
 import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
-import {HttpModule} from '@angular/http';
-import {InMemoryDataService} from '../in-memory-db/in-memory-data.service';
-import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {Semester} from '../models/semester.model';
+import {Curriculum} from '../models/curriculum.model';
+import {Observable} from 'rxjs/Observable';
+import {Subscriber} from 'rxjs/Subscriber';
 
-
+const curricula = [
+  { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
+  { 'name': 'Business Informatics', 'code': 'BI', 'id': 2},
+];
 
 const semesters = [
   { 'semester': 1,
@@ -41,16 +45,29 @@ describe('ModuleOverviewComponent', () => {
   let de:      DebugElement;
   let el:      HTMLElement;
   let backendService;
-  let spy;
+  const backendServiceStube = {
+
+    getCurricula(): Observable<Curriculum[]> {
+      return Observable.create((observer: Subscriber<any>) => {
+        observer.next(curricula);
+        observer.complete();
+      });
+    },
+    getSemesters(id: number): Observable<Semester[]> {
+      return Observable.create((observer: Subscriber<any>) => {
+        observer.next(semesters);
+        observer.complete();
+      });
+    }
+  };
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpModule,
-                  InMemoryWebApiModule.forRoot(InMemoryDataService)],
       declarations: [ ModuleOverviewComponent ],
-      providers: [BackendService]
+      providers: [ {provide: BackendService, useValue: backendServiceStube} ]
     })
-    .compileComponents();
+      .compileComponents();
 
   }));
 
@@ -58,19 +75,32 @@ describe('ModuleOverviewComponent', () => {
     fixture = TestBed.createComponent(ModuleOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
     backendService = fixture.debugElement.injector.get(BackendService);
-    spy = spyOn(backendService, 'getSemesters').and.returnValues(Promise.resolve(semesters));
-    de = fixture.debugElement.query(By.css('div'));
-    el = fixture.nativeElement.querySelector('h2');
+    de = fixture.debugElement.query(By.css('.dropdown-menu'));
+    el = fixture.nativeElement;
   });
 
-  it('should show semester 1 after the data is send', async(() => {
+  it('Dropdown menu should have 2 items SE and BI', () => {
     fixture.detectChanges();
-
-    fixture.whenStable().then(() => { // wait for async getQuote
-      fixture.detectChanges();        // update view with quote
-      expect(el.innerText).toBe('Semester 1');
-    });
-  }));
+    // checking the innertext
+    expect(de.childNodes.length).toBe(2) ;
+  });
+  it('After selecting dropdown item, semester 1 should be displayed', () => {
+    fixture.detectChanges();
+    const curriculum = { 'name': 'Software Engineering', 'code': 'SE', 'id': 1};
+    component.onSelect(curriculum);
+    fixture.detectChanges();
+    // get the first semester element
+    el = fixture.debugElement.query(By.css('.list-group-item-heading')).nativeElement;
+    expect(el.innerText).toBe('Semester 1');
+  });
+  it('After selecting dropdown item, modules should be displayed', () => {
+    fixture.detectChanges();
+    const curriculum = { 'name': 'Software Engineering', 'code': 'SE', 'id': 1};
+    component.onSelect(curriculum);
+    fixture.detectChanges();
+    // get the first module element
+    el = fixture.debugElement.query(By.css('h4')).nativeElement;
+    expect(el.innerText).toBe('JAV1');
+  });
 });
