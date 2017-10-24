@@ -14,6 +14,7 @@ import { HttpModule } from '@angular/http';
 import { BackendService } from './backend.service';
 import {ModuleComponent} from './components/module-component/module.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {LearningGoalsOverviewComponent} from './components/learningGoalsOverview-component/learningGoalsOverview.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     ModuleOverviewComponent,
     ModuleComponent,
     SkillMatrixComponent,
+    LearningGoalsOverviewComponent
   ],
   imports: [
     BrowserModule,

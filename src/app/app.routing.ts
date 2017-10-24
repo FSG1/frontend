@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ErrorComponent} from '../util/error/error.component';
 import {ModuleComponent} from './components/module-component/module.component';
 import {ModuleOverviewComponent} from './components/module-overview-component/module-overview.component';
+import {LearningGoalsOverviewComponent} from './components/learningGoalsOverview-component/learningGoalsOverview.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'module',
     component: ModuleComponent
+  },
+  {
+    path: 'LearningGoalsOverviewComponent',
+    component: LearningGoalsOverviewComponent,
   },
   {
     path: '',
