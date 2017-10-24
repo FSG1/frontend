@@ -1,20 +1,18 @@
 import {Injectable} from '@angular/core';
 
 import { Semester } from './models/semester.model';
-import { Curriculum} from './models/curriculum.model';
-import {CurriculumResponse} from './backend-responses/CurriculumResponse';
-import {Observable} from 'rxjs/Observable';
-import {HttpClient} from '@angular/common/http';
+import { Curriculum } from './models/curriculum.model';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/map';
 import {CurriculaResponse} from './backend-responses/CurriculaResponse';
 import {ModuleContent} from "./models/modulecontent.model";
 
+
 @Injectable()
 export class BackendService {
-  private headers = new Headers({'Content-type': 'application/json'});
-
-  private curriculaUrl = 'http://localhost:8080/fmms/curricula';
+  private curriculaUrl = 'http://172.17.0.1:8080/fmms/curricula';
 
   constructor(private http: HttpClient) {
   }
@@ -29,7 +27,7 @@ export class BackendService {
   }
 
   getSemesters(id: number): Observable<Semester[]> {
-    const semestersUrl = 'http://localhost:8080/fmms/curriculum/' + id + '/semesters';
+    const semestersUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + id + '/semesters';
     return this.http.get<CurriculumResponse>(semestersUrl)
       .map(data => data.semesters);
   }

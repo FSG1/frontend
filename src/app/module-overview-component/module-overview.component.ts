@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
 import { Semester } from '../models/semester.model';
 import { BackendService} from '../backend.service';
 import {Curriculum} from '../models/curriculum.model';
@@ -8,39 +8,35 @@ import {Curriculum} from '../models/curriculum.model';
   templateUrl: './module-overview.component.html',
   styleUrls: ['./module-overview.component.scss']
 })
-export class ModuleOverviewComponent implements OnInit {
+export class ModuleOverviewComponent implements AfterContentInit {
   semesters: Semester[];
   curricula: Curriculum[];
-  selectedCurriculum: number;
+  selectedCurriculum: Curriculum;
+  selectedCurriculumName: string;
 
   constructor(private backendService: BackendService) {
+    this.curricula = [];
   }
 
   onSelect(curriculum: Curriculum): void {
-    this.selectedCurriculum = curriculum.id;
-    console.log(this.selectedCurriculum);
+    this.selectedCurriculum = curriculum;
+    this.selectedCurriculumName = curriculum.name;
     this.getSemesters();
   }
 
   getSemesters(): void {
     if (this.selectedCurriculum != null) {
-      this.backendService.getSemesters(this.selectedCurriculum).subscribe(semesters => this.semesters = semesters);
-    }else {
-      console.log('selectedCurriculum is empty!');
+      this.backendService.getSemesters(this.selectedCurriculum.id).subscribe(semesters => this.semesters = semesters);
     }
   }
 
   getCurriculum(): void {
-    this.backendService.getCurricula().subscribe(curricula => this.curricula = curricula);
+    this.backendService.getCurricula()
+      .subscribe(curricula => this.curricula = curricula);
   }
 
-  ngOnInit(): void {
+  ngAfterContentInit(): void {
     this.getCurriculum();
-    // this.selectedCurriculum = 'BI';
-    // this.getSemesters();
   }
 
-  get isLoggedIn() {
-    return true;
-  }
 }

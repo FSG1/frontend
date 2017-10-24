@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {UtilModule} from '../util/util.module';
@@ -11,9 +11,10 @@ import { SkillMatrixComponent } from './skillmatrix-component/skillmatrix.compon
 
 import { HttpModule } from '@angular/http';
 
-// In memory imports
 import { BackendService } from './backend.service';
 import {ModuleComponent} from "./module-component/module.component";
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 
 
 @NgModule({
@@ -32,7 +33,9 @@ import {ModuleComponent} from "./module-component/module.component";
     UtilModule,
     AppRoutingModule,
     // InMemoryWebApiModule.forRoot(InMemoryDataService)
+    MDBBootstrapModule.forRoot()
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ BackendService],
   bootstrap: [AppComponent]
 })
