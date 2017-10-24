@@ -1,9 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ErrorComponent} from '../util/error/error.component';
-import {ModuleComponent} from "./components/module-component/module.component";
-import {SkillMatrixComponent} from "./components/skillmatrix-component/skillmatrix.component";
-import {ModuleOverviewComponent} from "./components/module-overview-component/module-overview.component";
+import {ModuleComponent} from './components/module-component/module.component';
+import {ModuleOverviewComponent} from './components/module-overview-component/module-overview.component';
 
 const routes: Routes = [
   {
