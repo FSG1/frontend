@@ -1,7 +1,7 @@
 import {AfterContentInit, Component, OnInit} from '@angular/core';
-import { Semester } from '../models/semester.model';
-import { BackendService} from '../backend.service';
-import {Curriculum} from '../models/curriculum.model';
+import { Semester } from '../../models/semester.model';
+import { BackendService} from '../../backend.service';
+import {Curriculum} from '../../models/curriculum.model';
 
 @Component({
   selector: 'app-module-overview',

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {LearningGoal} from "../models/learninggoal";
-import {ArchitecturalLayer} from "../models/architecturallayer";
+import {LearningGoal} from "../../models/learninggoal";
+import {ArchitecturalLayer} from "../../models/architecturallayer";
 import {Router} from "@angular/router";
-import {LifecycleActivity} from "../models/lifecycleactivity";
-import {StudentSkill} from "../models/studentskill";
+import {LifecycleActivity} from "../../models/lifecycleactivity";
+import {StudentSkill} from "../../models/studentskill";
 
 @Component({
   selector: 'app-module',

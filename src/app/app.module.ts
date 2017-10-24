@@ -5,34 +5,30 @@ import {AppComponent} from './app.component';
 import {UtilModule} from '../util/util.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app.routing';
-import { ModuleOverviewComponent } from './module-overview-component/module-overview.component';
+import { ModuleOverviewComponent } from './components/module-overview-component/module-overview.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SkillMatrixComponent } from './skillmatrix-component/skillmatrix.component';
+import { SkillMatrixComponent } from './components/skillmatrix-component/skillmatrix.component';
 
 import { HttpModule } from '@angular/http';
 
 import { BackendService } from './backend.service';
-import {ModuleComponent} from "./module-component/module.component";
+import {ModuleComponent} from './components/module-component/module.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     ModuleOverviewComponent,
     ModuleComponent,
-    SkillMatrixComponent
+    SkillMatrixComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
     HttpModule,
     UtilModule,
     AppRoutingModule,
-    // InMemoryWebApiModule.forRoot(InMemoryDataService)
     MDBBootstrapModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
