@@ -6,8 +6,8 @@
   </button>
 
   <ul class="dropdown-menu">
-    <li class="dropdown-item" *ngFor="let curriculum of curricula">
-      <a (click)="onSelect(curriculum)" href="#">{{ curriculum.code }}</a>
+    <li class="dropdown-item" *ngFor="let curriculum of curricula" (click)="onSelect(curriculum)">
+      {{ curriculum.code }}
     </li>
   </ul>
 </div>
