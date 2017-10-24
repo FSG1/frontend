@@ -80,12 +80,12 @@ describe('Testing skillmatrix component', () => {
     backendService = fixture.debugElement.injector.get(BackendService);
   });
 
-  it('should have 4 rows', () => {
+  it('should have 5 rows', () => {
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('tr'));
     expect(de.childNodes.length).toBe(4);
   });
-  it('should have 4 columns', () => {
+  it('should have 5 columns', () => {
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('tr'));
     expect(de.nativeElement.query(By.css('td'))).toBe(4);
