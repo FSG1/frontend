@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {UtilModule} from '../util/util.module';
@@ -14,6 +14,7 @@ import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-db/in-memory-data.service';
 import { BackendService } from './backend.service';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import { BackendService } from './backend.service';
     UtilModule,
     AppRoutingModule,
     // InMemoryWebApiModule.forRoot(InMemoryDataService)
+    MDBBootstrapModule.forRoot()
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ BackendService],
   bootstrap: [AppComponent]
 })

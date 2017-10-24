@@ -1,4 +1,4 @@
-{
+  {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
     "name": "FMMS - Frontend"
@@ -20,6 +20,7 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/angular-bootstrap-md/scss/mdb-free.scss",
         "styles.scss"
       ],
       "scripts": [
