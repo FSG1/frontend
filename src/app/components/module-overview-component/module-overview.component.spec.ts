@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModuleOverviewComponent } from './module-overview.component';
-import {BackendService} from '../backend.service';
+import {BackendService} from '../../backend.service';
 import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
-import {Semester} from '../models/semester.model';
-import {Curriculum} from '../models/curriculum.model';
+import {Semester} from '../../models/semester.model';
+import {Curriculum} from '../../models/curriculum.model';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
 

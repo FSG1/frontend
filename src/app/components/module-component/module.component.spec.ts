@@ -2,9 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {DebugElement} from '@angular/core';
 import {ModuleComponent} from './module.component';
 import {Observable} from 'rxjs/Observable';
-import {ModuleContent} from '../models/modulecontent.model';
+import {ModuleContent} from '../../models/modulecontent.model';
 import {Subscriber} from 'rxjs/Subscriber';
-import {BackendService} from '../backend.service';
+import {BackendService} from '../../backend.service';
 import {By} from '@angular/platform-browser';
 
 

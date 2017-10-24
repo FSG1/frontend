@@ -1,17 +1,21 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ErrorComponent} from '../util/error/error.component';
-import {ModuleComponent} from "./module-component/module.component";
-import {SkillMatrixComponent} from "./skillmatrix-component/skillmatrix.component";
+import {ModuleComponent} from './components/module-component/module.component';
+import {ModuleOverviewComponent} from './components/module-overview-component/module-overview.component';
 
 const routes: Routes = [
+  {
+    path: 'moduleoverview',
+    component: ModuleOverviewComponent
+  },
   {
     path: 'module',
     component: ModuleComponent
   },
   {
     path: '',
-    redirectTo: '/module',
+    redirectTo: '/moduleoverview',
     pathMatch: 'full'
   },
   {
