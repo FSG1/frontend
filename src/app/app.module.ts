@@ -14,15 +14,13 @@ import { HttpModule } from '@angular/http';
 import { BackendService } from './backend.service';
 import {ModuleComponent} from './components/module-component/module.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import {LearningGoalsOverviewComponent} from './components/learningGoalsOverview-component/learningGoalsOverview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ModuleOverviewComponent,
     ModuleComponent,
-    SkillMatrixComponent,
-    LearningGoalsOverviewComponent
+    SkillMatrixComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +32,7 @@ import {LearningGoalsOverviewComponent} from './components/learningGoalsOverview
     MDBBootstrapModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ BackendService],
+  providers: [ BackendService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

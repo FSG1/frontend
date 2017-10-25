@@ -1,1 +1,45 @@
-<app-skill-matrix [architecturallayers]="architecturallayers" [lifecycleactivities]="lifecycleactivities" [studentskills]="studentskills"></app-skill-matrix>
+<p>{{ selectedModule }}</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p class="big">Learning goals:</p>
+    </div>
+  </div>
+  <div *ngFor="let learninggoal of learninggoals">
+    <div class="row" *ngIf="learninggoal.type == 'personal'">
+      <div class="col-sm-4 colContent hoverable">
+        <p class="big" (click)="onSelect(learninggoal)">{{ learninggoal.name }}</p>
+      </div>
+      <div class="col-sm-8 colContent">
+        <p>{{ learninggoal.description }}</p>
+      </div>
+    </div>
+    <div class="row" *ngIf="learninggoal.type == 'personal'">
+      <div class="col-sm-12">
+        <app-skill-matrix [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="architecturallayers" [lifecycleactivities]="lifecycleactivities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p class="big">Group learning goals:</p>
+    </div>
+  </div>
+  <div *ngFor="let learninggoal of learninggoals">
+    <div class="row" *ngIf="learninggoal.type == 'group'">
+      <div class="col-sm-4 colContent hoverable">
+        <p class="big" (click)="onSelect(learninggoal)">{{ learninggoal.name }}</p>
+      </div>
+      <div class="col-sm-8 colContent">
+        <p>{{ learninggoal.description }}</p>
+      </div>
+    </div>
+    <div class="row" *ngIf="learninggoal.type == 'group'">
+      <div class="col-sm-12">
+        <app-skill-matrix [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="architecturallayers" [lifecycleactivities]="lifecycleactivities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+      </div>
+    </div>
+  </div>
+</div>
+

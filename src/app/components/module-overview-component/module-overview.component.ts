@@ -25,6 +25,10 @@ export class ModuleOverviewComponent implements AfterContentInit {
     this.getSemesters();
   }
 
+  onClick(module_code: string): void {
+    this.router.navigate(['/module', module_code]);
+  }
+
   getSemesters(): void {
     if (this.selectedCurriculum != null) {
       this.backendService.getSemesters(this.selectedCurriculum.id).subscribe(semesters => this.semesters = semesters);
