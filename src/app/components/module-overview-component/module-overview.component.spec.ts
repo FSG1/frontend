@@ -80,7 +80,7 @@ describe('ModuleOverviewComponent', () => {
     el = fixture.nativeElement;
   });
 
-  it('Dropdown menu should have 2 items SE and BI', () => {
+/*  it('Dropdown menu should have 2 items SE and BI', () => {
     fixture.detectChanges();
     // checking the innertext
     expect(de.childNodes.length).toBe(2) ;
@@ -102,5 +102,5 @@ describe('ModuleOverviewComponent', () => {
     // get the first module element
     el = fixture.debugElement.query(By.css('h4')).nativeElement;
     expect(el.innerText).toBe('JAV1');
-  });
+  });*/
 });
