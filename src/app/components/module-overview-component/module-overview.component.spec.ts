@@ -76,14 +76,13 @@ describe('ModuleOverviewComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     backendService = fixture.debugElement.injector.get(BackendService);
-    de = fixture.debugElement.query(By.css('.dropdown-menu'));
-    el = fixture.nativeElement;
+    de = fixture.debugElement;
   });
 
-/*  it('Dropdown menu should have 2 items SE and BI', () => {
+  it('Dropdown menu should have 2 items SE and BI', () => {
     fixture.detectChanges();
     // checking the innertext
-    expect(de.childNodes.length).toBe(2) ;
+    expect(de.queryAll(By.css('.dropdown-item')).length).toBe(2) ;
   });
   it('After selecting dropdown item, semester 1 should be displayed', () => {
     fixture.detectChanges();
@@ -91,8 +90,8 @@ describe('ModuleOverviewComponent', () => {
     component.onSelect(curriculum);
     fixture.detectChanges();
     // get the first semester element
-    el = fixture.debugElement.query(By.css('.list-group-item-heading')).nativeElement;
-    expect(el.innerText).toBe('Semester 1');
+    el = de.query(By.css('.text-secondary')).nativeElement;
+    expect(el.innerText).toBe('Semester 1:');
   });
   it('After selecting dropdown item, modules should be displayed', () => {
     fixture.detectChanges();
@@ -100,7 +99,7 @@ describe('ModuleOverviewComponent', () => {
     component.onSelect(curriculum);
     fixture.detectChanges();
     // get the first module element
-    el = fixture.debugElement.query(By.css('h4')).nativeElement;
+    el = de.query(By.css('h4')).nativeElement;
     expect(el.innerText).toBe('JAV1');
-  });*/
+  });
 });
