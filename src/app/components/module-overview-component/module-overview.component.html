@@ -21,8 +21,8 @@
 <div class="row semesterGrid" *ngFor="let semester of semesters">
   <h2 class="text-secondary">Semester {{ semester.semester }}:</h2>
   <div class="col-lg-1 hoverable semesterGridContent" *ngFor="let module of semester.modules">
-    <a (click)="onClick(module.module_code)">
-      <h4>{{ module.module_code }}</h4>
+    <a (click)="onClick(module.code)">
+      <h4>{{ module.code }}</h4>
       <p class="text-secondary">Credits {{ module.credits }}</p>
     </a>
   </div>

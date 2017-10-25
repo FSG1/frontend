@@ -23,7 +23,7 @@ export class ModuleComponent implements OnInit{
   constructor(private route: ActivatedRoute) {
     this.selectedLearningGoalName = '';
    this.route.params.subscribe(
-     params => {this.selectedModule = params['module_code'];
+     params => {this.selectedModule = params['code'];
      });
   }
 

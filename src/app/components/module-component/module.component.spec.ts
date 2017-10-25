@@ -12,14 +12,16 @@ const modulemodel = {
     'module_code': 'IOT',
     'module_name': 'Internet of Things',
     'credits': 5,
-    'architecturallayers': [{'Architectural_layer_id': 0, 'Architectural_layer_name': 'User Interaction', 'Architectural_layer_description': 'something'},
-                            {'Architectural_layer_id': 1, 'Architectural_layer_name': 'Business Processes', 'Architectural_layer_description': 'something'},
-                            {'Architectural_layer_id': 2, 'Architectural_layer_name': 'Infrastructure', 'Architectural_layer_description': 'something'},
-                            {'Architectural_layer_id': 3, 'Architectural_layer_name': 'software', 'Architectural_layer_description': 'something'}],
-    'lifecycleactivities': [{'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
-                            {'lifecycle_activity_id': 1, 'lifecycle_activity_name': 'Analyze', 'lifecycle_activity_description': 'something'},
-                            {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
-                            {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}],
+    'architecturallayers':
+      [{'Architectural_layer_id': 0, 'Architectural_layer_name': 'User Interaction', 'Architectural_layer_description': 'something'},
+      {'Architectural_layer_id': 1, 'Architectural_layer_name': 'Business Processes', 'Architectural_layer_description': 'something'},
+      {'Architectural_layer_id': 2, 'Architectural_layer_name': 'Infrastructure', 'Architectural_layer_description': 'something'},
+      {'Architectural_layer_id': 3, 'Architectural_layer_name': 'software', 'Architectural_layer_description': 'something'}],
+    'lifecycleactivities':
+      [{'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
+      {'lifecycle_activity_id': 1, 'lifecycle_activity_name': 'Analyze', 'lifecycle_activity_description': 'something'},
+      {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
+      {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}],
     'learning_goals':  [
       {
         'name': 'LG 1',
