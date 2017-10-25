@@ -13,7 +13,6 @@ const curricula = [
   { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
   { 'name': 'Business Informatics', 'code': 'BI', 'id': 2},
 ];
-
 const semesters = [
   { 'semester': 1,
     'modules': [
@@ -37,8 +36,6 @@ const semesters = [
     ]}
 ];
 
-
-
 describe('ModuleOverviewComponent', () => {
   let component: ModuleOverviewComponent;
   let fixture: ComponentFixture<ModuleOverviewComponent>;
@@ -46,7 +43,6 @@ describe('ModuleOverviewComponent', () => {
   let el:      HTMLElement;
   let backendService;
   const backendServiceStube = {
-
     getCurricula(): Observable<Curriculum[]> {
       return Observable.create((observer: Subscriber<any>) => {
         observer.next(curricula);
@@ -60,8 +56,6 @@ describe('ModuleOverviewComponent', () => {
       });
     }
   };
-
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ModuleOverviewComponent ],
