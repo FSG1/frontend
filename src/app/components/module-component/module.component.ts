@@ -72,6 +72,8 @@ export class ModuleComponent implements OnInit{
       this.selectedLearningGoalName = learningGoal.name;
     }else if (this.selectedLearningGoalName === learningGoal.name) {
       this.selectedLearningGoalName = '';
+    }else {
+      this.selectedLearningGoalName = learningGoal.name;
     }
   }
 }
