@@ -9,7 +9,6 @@ import 'rxjs/add/operator/map';
 import {CurriculumResponse} from './backend-responses/CurriculumResponse';
 import {ModuleContent} from './models/modulecontent.model';
 
-
 @Injectable()
 export class BackendService {
   private curriculaUrl = 'http://172.17.0.1:8080/fmms/curricula';
@@ -17,9 +16,9 @@ export class BackendService {
   constructor(private http: HttpClient) {
   }
 
-  // needs to return something in the future, implemented it for testing purposes
-  getModule(modulecode: string): Observable<ModuleContent[]> {
-    return null;
+  getModuleContent(code: string): Observable<ModuleContent> {
+    const moduleContentUrl = 'http://172.17.0.1:8080/fmms/modules/' + code;
+    return this.http.get<ModuleContent>(moduleContentUrl);
   }
 
   getCurricula(): Observable<Curriculum[]> {
