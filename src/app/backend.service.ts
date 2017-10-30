@@ -16,8 +16,8 @@ export class BackendService {
   constructor(private http: HttpClient) {
   }
 
-  getModuleContent(code: string): Observable<ModuleContent> {
-    const moduleContentUrl = 'http://172.17.0.1:8080/fmms/modules/' + code;
+  getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
+    const moduleContentUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + curriculum + '/modules/' + code;
     return this.http.get<ModuleContent>(moduleContentUrl);
   }
 

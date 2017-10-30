@@ -10,7 +10,7 @@ const routes: Routes = [
     component: ModuleOverviewComponent
   },
   {
-    path: 'module/:code',
+    path: 'curriculum/:curriculum/modules/:code',
     component: ModuleComponent
   },
   {
