@@ -6,4 +6,6 @@ export interface LearningGoal {
   description: string;
   type: string;
   skillmatrix: StudentSkill[];
+  assesment_types: string[];
+  weight: number;
 }
