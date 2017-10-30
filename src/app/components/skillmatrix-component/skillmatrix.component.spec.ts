@@ -1,17 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {Component, DebugElement} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {ModuleContent} from '../../models/modulecontent.model';
-import {Subscriber} from 'rxjs/Subscriber';
-import {BackendService} from '../../backend.service';
+import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {SkillMatrixComponent} from './skillmatrix.component';
 
 describe('Testing skillmatrix component', () => {
   let component: TestHostComponent;
   let testhostfixture: ComponentFixture<TestHostComponent>;
-  // let de:      DebugElement;
-  // let el:      HTMLElement;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SkillMatrixComponent, TestHostComponent ]
