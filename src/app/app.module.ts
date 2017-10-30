@@ -21,8 +21,8 @@ import {ExamLGComponent} from './components/examlg-component/examlg.component';
     AppComponent,
     ModuleOverviewComponent,
     ModuleComponent,
-    SkillMatrixComponent,
-    ExamLGComponent
+    ExamLGComponent,
+    SkillMatrixComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +34,7 @@ import {ExamLGComponent} from './components/examlg-component/examlg.component';
     MDBBootstrapModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ BackendService],
+  providers: [ BackendService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
