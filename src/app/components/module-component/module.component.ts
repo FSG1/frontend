@@ -16,7 +16,7 @@ export class ModuleComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private backendService: BackendService) {
     this.selectedLearningGoalName = '';
-   this.route.params.subscribe(
+    this.route.params.subscribe(
      params => {this.selectedModule = params['code'];
      });
   }

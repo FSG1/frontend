@@ -1,14 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {DebugElement} from '@angular/core';
+import {DebugElement, Injectable} from '@angular/core';
 import {ModuleComponent} from './module.component';
 import {Observable} from 'rxjs/Observable';
 import {ModuleContent} from '../../models/modulecontent.model';
 import {Subscriber} from 'rxjs/Subscriber';
 import {BackendService} from '../../backend.service';
 import {By} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 
-const modulemodel = {
+const moduleContent = {
     'module_code': 'IOT',
     'module_name': 'Internet of Things',
     'credits': 5,
@@ -51,7 +53,17 @@ const modulemodel = {
     ]
   };
 
+@Injectable()
+export class ActivatedRouteStub
+{
+  params = {
+    code: 'IOT'
+  };
+}
+
+
 describe('Testing module component', () => {
+  let activatedRouteStub;
   let component: ModuleComponent;
   let fixture: ComponentFixture<ModuleComponent>;
   let de:      DebugElement;
@@ -59,18 +71,22 @@ describe('Testing module component', () => {
   let backendService;
 
   const backendServiceStub = {
-    getModule(modulecode: string): Observable<ModuleContent[]> {
+    selectedModulle: 'IOT',
+    getModuleContent(): Observable<ModuleContent> {
       return Observable.create((observer: Subscriber<any>) => {
-        observer.next(modulemodel);
+        observer.next(moduleContent);
         observer.complete();
       });
     }
   };
 
   beforeEach(async(() => {
+    activatedRouteStub = new ActivatedRouteStub();
+
     TestBed.configureTestingModule({
       declarations: [ ModuleComponent ],
-      providers: [ {provide: BackendService, useValue: backendServiceStub} ]
+      providers: [ {provide: BackendService, useValue: backendServiceStub},
+                    {provide: ActivatedRoute, useValue: activatedRouteStub}]
     })
       .compileComponents();
   }));
@@ -80,6 +96,7 @@ describe('Testing module component', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     backendService = fixture.debugElement.injector.get(BackendService);
+
   });
 
   it('Should be three personal learning goals', () => {
