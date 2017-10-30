@@ -8,6 +8,7 @@ import {Semester} from '../../models/semester.model';
 import {Curriculum} from '../../models/curriculum.model';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
+import {Router} from '@angular/router';
 
 const curricula = [
   { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
@@ -59,7 +60,8 @@ describe('ModuleOverviewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ModuleOverviewComponent ],
-      providers: [ {provide: BackendService, useValue: backendServiceStube} ]
+      providers: [ {provide: BackendService, useValue: backendServiceStube},
+                   {provide: Router }]
     })
       .compileComponents();
 
@@ -93,7 +95,7 @@ describe('ModuleOverviewComponent', () => {
     component.onSelect(curriculum);
     fixture.detectChanges();
     // get the first module element
-    el = de.query(By.css('h4')).nativeElement;
-    expect(el.innerText).toBe('JAV1');
+    el = de.query(By.css('p')).nativeElement;
+    expect(el.innerText).toBe('Credits 5');
   });
 });
