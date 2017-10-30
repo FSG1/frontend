@@ -20,7 +20,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     AppComponent,
     ModuleOverviewComponent,
     ModuleComponent,
-    SkillMatrixComponent,
+    SkillMatrixComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MDBBootstrapModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ BackendService],
+  providers: [ BackendService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

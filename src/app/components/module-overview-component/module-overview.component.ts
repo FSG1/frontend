@@ -2,11 +2,12 @@ import {AfterContentInit, Component, OnInit} from '@angular/core';
 import { Semester } from '../../models/semester.model';
 import { BackendService} from '../../backend.service';
 import {Curriculum} from '../../models/curriculum.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-module-overview',
   templateUrl: './module-overview.component.html',
-  styleUrls: ['./module-overview.component.scss']
+  styleUrls: ['./module-overview.component.scss'],
 })
 export class ModuleOverviewComponent implements AfterContentInit {
   semesters: Semester[];
@@ -14,7 +15,7 @@ export class ModuleOverviewComponent implements AfterContentInit {
   selectedCurriculum: Curriculum;
   selectedCurriculumName: string;
 
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService, private router: Router) {
     this.curricula = [];
   }
 
@@ -22,6 +23,10 @@ export class ModuleOverviewComponent implements AfterContentInit {
     this.selectedCurriculum = curriculum;
     this.selectedCurriculumName = curriculum.name;
     this.getSemesters();
+  }
+
+  onClick(module_code: string): void {
+    this.router.navigate(['/module', module_code]);
   }
 
   getSemesters(): void {
