@@ -11,7 +11,7 @@ import {ModuleContent} from './models/modulecontent.model';
 
 @Injectable()
 export class BackendService {
-  private curriculaUrl = 'http://172.17.0.1:8080/fmms/curricula';
+  private curriculaUrl = 'http://192.168.99.100:8080/fmms/curricula';
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +26,7 @@ export class BackendService {
   }
 
   getSemesters(id: number): Observable<Semester[]> {
-    const semestersUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + id + '/semesters';
+    const semestersUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + id + '/semesters';
     return this.http.get<CurriculumResponse>(semestersUrl)
       .map(data => data.semesters);
   }

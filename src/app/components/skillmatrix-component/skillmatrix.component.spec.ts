@@ -1,93 +1,56 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {DebugElement} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {ModuleContent} from '../../models/modulecontent.model';
-import {Subscriber} from 'rxjs/Subscriber';
-import {BackendService} from '../../backend.service';
+import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {SkillMatrixComponent} from "./skillmatrix.component";
-
-const modulemodel = {
-  'module_code': 'IOT',
-  'module_name': 'Internet of Things',
-  'credits': 5,
-  'architecturallayers': [{'Architectural_layer_id': 0, 'Architectural_layer_name': 'User Interaction', 'Architectural_layer_description': 'something'},
-    {'Architectural_layer_id': 1, 'Architectural_layer_name': 'Business Processes', 'Architectural_layer_description': 'something'},
-    {'Architectural_layer_id': 2, 'Architectural_layer_name': 'Infrastructure', 'Architectural_layer_description': 'something'},
-    {'Architectural_layer_id': 3, 'Architectural_layer_name': 'software', 'Architectural_layer_description': 'something'}],
-  'lifecycleactivities': [{'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 1, 'lifecycle_activity_name': 'Analyze', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}],
-  'learning_goals':  [
-    {
-      'name': 'LG 1',
-      'description': 'apply control structures, function invocation and memory management in C ',
-      'type': 'personal',
-      'skillmatrix': [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
-        {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 1}]
-    },
-    {
-      'name': 'LG 2',
-      'description': 'apply object orientation and memory management in C++ managed and unmanaged',
-      'type': 'personal',
-      'skillmatrix': [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1}]
-    },
-    {
-      'name': 'LG 3',
-      'description': 'apply C++11 and C++14 extensions of C++',
-      'type': 'personal',
-      'skillmatrix': [{'lifecycle_activity': 3, 'architectural_layer': 1, 'level': 2}]
-    },
-    {
-      'name': 'LG 4',
-      'description': 'do group stuff',
-      'type': 'group',
-      'skillmatrix': [{'lifecycle_activity': 0, 'architectural_layer': 0, 'level': 3}]
-    }
-  ]
-};
+import {SkillMatrixComponent} from './skillmatrix.component';
 
 describe('Testing skillmatrix component', () => {
-  let component: SkillMatrixComponent;
-  let fixture: ComponentFixture<SkillMatrixComponent>;
-  let de:      DebugElement;
-  let el:      HTMLElement;
-  let backendService;
-
-  const backendServiceStub = {
-    getModule(modulecode: string): Observable<ModuleContent[]> {
-      return Observable.create((observer: Subscriber<any>) => {
-        observer.next(modulemodel);
-        observer.complete();
-      });
-    }
-  };
-
+  let component: TestHostComponent;
+  let testhostfixture: ComponentFixture<TestHostComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SkillMatrixComponent ],
-      providers: [ {provide: BackendService, useValue: backendServiceStub} ]
+      declarations: [ SkillMatrixComponent, TestHostComponent ]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SkillMatrixComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    backendService = fixture.debugElement.injector.get(BackendService);
+    testhostfixture = TestBed.createComponent(TestHostComponent);
+    component = testhostfixture.componentInstance;
+    testhostfixture.detectChanges();
   });
 
-  it('should have 5 rows', () => {
+  it('testing checkForValue method. Should return a null, 1 and a 2', () => {
+    const fixture = TestBed.createComponent(SkillMatrixComponent);
+    const skillmatrixcomponent = fixture.componentInstance;
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('tr'));
-    expect(de.childNodes.length).toBe(4);
+    skillmatrixcomponent.studentskills = [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
+      {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 2}];
+    expect(skillmatrixcomponent.checkForValue(1, 2)).toBe(null);
+    expect(skillmatrixcomponent.checkForValue(3, 1)).toBe(1);
+    expect(skillmatrixcomponent.checkForValue(3, 2)).toBe(2);
   });
-  it('should have 5 columns', () => {
-    fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('tr'));
-    expect(de.nativeElement.query(By.css('td'))).toBe(4);
+  it('the skillmatrix should have 5 rows', () => {
+    expect(testhostfixture.debugElement.queryAll(By.css('tr')).length).toBe(5);
   });
+  it('should have 5 columns (this tests counts th, so dont mess with them!)', () => {
+    expect(testhostfixture.debugElement.queryAll(By.css('th')).length).toBe(5);
+  });
+  // this component enables testing the skillmatrix component because it needs input to function!
+  @Component({
+    selector: `host-component`,
+    template: `<app-skill-matrix [architecturallayers]="architecturallayers" [lifecycleactivities]="lifecycleactivities" [studentskills]="studentskills"></app-skill-matrix>`
+  })
+  class TestHostComponent {
+    architecturallayers = [{'Architectural_layer_id': 0, 'Architectural_layer_name': 'User Interaction', 'Architectural_layer_description': 'something'},
+      {'Architectural_layer_id': 1, 'Architectural_layer_name': 'Business Processes', 'Architectural_layer_description': 'something'},
+      {'Architectural_layer_id': 2, 'Architectural_layer_name': 'Infrastructure', 'Architectural_layer_description': 'something'},
+      {'Architectural_layer_id': 3, 'Architectural_layer_name': 'software', 'Architectural_layer_description': 'something'}];
+    lifecycleactivities = [{'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
+      {'lifecycle_activity_id': 1, 'lifecycle_activity_name': 'Analyze', 'lifecycle_activity_description': 'something'},
+      {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
+      {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}];
+    studentskills = [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
+      {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 2}];
+  }
 });
 
