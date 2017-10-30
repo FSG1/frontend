@@ -22,7 +22,7 @@
   <h2 class="text-secondary">Semester {{ semester.semester }}:</h2>
   <div class="col-lg-1 hoverable semesterGridContent" *ngFor="let module of semester.modules">
     <a (click)="onClick(module.code)">
-      <h4 class="modcode">{{ module.code }}</h4>
+      <h4>{{ module.code }}</h4>
       <p class="text-secondary">Credits {{ module.credits }}</p>
     </a>
   </div>
