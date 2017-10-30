@@ -9,10 +9,11 @@ import {StudentSkill} from "../../models/studentskill";
   selector: 'app-module',
   templateUrl: './module.component.html',
 })
-export class ModuleComponent implements OnInit{
+export class ModuleComponent implements OnInit {
   architecturallayers: ArchitecturalLayer[];
   lifecycleactivities: LifecycleActivity[];
   studentskills: StudentSkill[];
+  Learngoal: LearningGoal= { name: null, description: null, type: 'personal', skillmatrix: null, assesment_types: ['oral', 'written exam'], weight: 0.5};
 
   ngOnInit(): void {
     this.architecturallayers = [{'Architectural_layer_id': 1, 'Architectural_layer_name': 'User Interaction', 'Architectural_layer_description': 'something'},
