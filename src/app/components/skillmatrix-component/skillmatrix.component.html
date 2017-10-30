@@ -7,7 +7,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let al of architecturallayers; let i = index" [attr.data-index]="i">
-      <td scope="row">{{al.Architectural_layer_name}}</td><td *ngFor="let lca of lifecycleactivities; let j = index" [attr.data-index]="i">{{checkForValue(i,j)}}</td>
+      <td scope="row">{{al.Architectural_layer_name}}</td><td class="skillevel" *ngFor="let lca of lifecycleactivities; let j = index" [attr.data-index]="i">{{checkForValue(i,j)}}</td>
     </tr>
   </tbody>
 </table>
