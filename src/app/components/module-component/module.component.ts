@@ -13,16 +13,19 @@ export class ModuleComponent implements OnInit {
   moduleContent: ModuleContent;
   selectedModule: string;
   selectedLearningGoalName: string;
+  moduleCurriculum: number;
 
   constructor(private route: ActivatedRoute, private backendService: BackendService) {
     this.selectedLearningGoalName = '';
     this.route.params.subscribe(
-     params => {this.selectedModule = params['code'];
+     params => {
+       this.selectedModule = params['code'];
+       this.moduleCurriculum = params['curriculum'];
      });
   }
 
   ngOnInit(): void {
-    this.backendService.getModuleContent(this.selectedModule).subscribe(moduleContent => this.moduleContent = moduleContent);
+    this.backendService.getModuleContent(this.moduleCurriculum, this.selectedModule).subscribe(moduleContent => this.moduleContent = moduleContent);
   }
 
   onSelect(learningGoal: LearningGoal): void {

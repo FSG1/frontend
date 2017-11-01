@@ -1,5 +1,5 @@
 export interface Module {
-  code: string;
-  name: string;
+  module_code: string;
+  module_name: string;
   credits: number;
 }

@@ -26,7 +26,7 @@ export class ModuleOverviewComponent implements AfterContentInit {
   }
 
   onClick(module_code: string): void {
-    this.router.navigate(['/module', module_code]);
+    this.router.navigate(['/curriculum/',this.selectedCurriculum.id,'modules', module_code]);
   }
 
   getSemesters(): void {
