@@ -22,6 +22,11 @@
   }
 }
 
+.module-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .container {
   margin-top: 20px;
 
@@ -59,6 +64,7 @@
 
     .prior-type {
       font-size: 16px;
+      text-transform: capitalize;
     }
 
     .prior-remark {

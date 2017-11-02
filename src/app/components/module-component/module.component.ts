@@ -41,6 +41,8 @@ export class ModuleComponent implements OnInit, OnDestroy{
   private contentReceive(data: ModuleContent) {
     const personal = [];
     const group = [];
+    if (data.learning_goals === null) data.learning_goals = [];
+
     data.learning_goals.forEach(function(lg) {
       lg.expanded = false;
       if (lg.type === 'group') {
