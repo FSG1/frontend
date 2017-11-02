@@ -1,5 +1,79 @@
-
 <div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-4 colContent">
+      <p class="big">Module:</p>
+    </div>
+    <div class="col-sm-8 colContent">
+      <p>{{ moduleContent.module_name }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2 colContent">
+      <p class="big">Semester</p>
+    </div>
+    <div class="col-sm-2 colContent">
+      <p>{{ moduleContent.semester }}</p>
+    </div>
+    <div class="col-sm-4 colContent">
+      <p class="big">Credits (ECTS)</p>
+    </div>
+    <div class="col-sm-4 colContent">
+      <p>{{ moduleContent.credits }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2 colContent">
+      <p class="big">Lectures/ week</p>
+    </div>
+    <div class="col-sm-2 colContent">
+      <p>{{ moduleContent.lectures_in_week }}</p>
+    </div>
+    <div class="col-sm-2 colContent">
+      <p class="big">Practical hours/week</p>
+    </div>
+    <div class="col-sm-2 colContent">
+      <p>{{ moduleContent.practical_hours_week }}</p>
+    </div>
+    <div class="col-sm-2 colContent">
+      <p class="big">Total Effort</p>
+    </div>
+    <div class="col-sm-2 colContent">
+      <p>{{ moduleContent.total_effort }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2 colContent">
+      <p class="big">Lecturers</p>
+    </div>
+    <div class="col-sm-10 colContent">
+      <p>{{ moduleContent.lecturers }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2 colContent">
+      <p class="big">Credentials</p>
+    </div>
+    <div class="col-sm-10 colContent">
+      <p>{{ moduleContent.crecentials }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p class="big">Introduction and motivation</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p>{{ moduleContent.introductorytext }}</p>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-sm-12 colContent">
       <p class="big">Learning goals:</p>
@@ -41,4 +115,53 @@
       </div>
     </div>
   </div>
+
+  <app-exam-lg [learninggoal]="moduleContent.qualifications"></app-exam-lg>
+
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p class="big">Topics</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 colContent" *ngFor="let topic of moduleContent?.topics">
+      <p>- {{ topic }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p class="big">Teaching material</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p>{{ moduleContent.teaching_material }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p class="big">prior knowledge</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 colContent" *ngFor="let prioKnowledgeReference of moduleContent?.prior_knowledge_references">
+      <p>module: {{ prioKnowledgeReference.module_code }}</p>
+      <p>type: {{ prioKnowledgeReference.type }}</p>
+      <p>remark: {{ prioKnowledgeReference.remark }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p class="big">Additional information (on grading, assessments, retakes, pracical parts, ...)</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 colContent">
+      <p>{{ moduleContent.additional_information }}</p>
+    </div>
+  </div>
+
 </div>
