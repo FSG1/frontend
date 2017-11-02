@@ -5,7 +5,7 @@
       <p class="big">Learning goals:</p>
     </div>
   </div>
-  <div *ngFor="let learninggoal of moduleContent?.learning_goals">
+  <div *ngFor="let learninggoal of moduleContent?.learning_goals" >
     <div class="row" *ngIf="learninggoal.type === 'personal'">
       <div class="col-sm-1 colContent hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
@@ -16,7 +16,7 @@
     </div>
     <div class="row" *ngIf="learninggoal.type === 'personal'">
       <div class="col-sm-12">
-        <app-skill-matrix [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-skill-matrix class="test-personal" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@
       <p class="big">Group learning goals:</p>
     </div>
   </div>
-  <div *ngFor="let learninggoal of moduleContent?.learning_goals">
+  <div  *ngFor="let learninggoal of moduleContent?.learning_goals">
     <div class="row" *ngIf="learninggoal.type === 'group'">
       <div class="col-sm-1 colContent hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
@@ -37,7 +37,7 @@
     </div>
     <div class="row" *ngIf="learninggoal.type === 'group'">
       <div class="col-sm-12">
-        <app-skill-matrix [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-skill-matrix class="test-group" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
       </div>
     </div>
   </div>
