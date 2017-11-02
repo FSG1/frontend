@@ -80,7 +80,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="personalGoals.length > 0">
+  <div class="row" *ngIf="personalGoals?.length > 0">
     <div class="col-11 colHeader">
       <p class="big">Learning goals:</p>
     </div>
@@ -90,7 +90,7 @@
   </div>
 
   <div *ngFor="let learninggoal of personalGoals">
-    <div class="row">
+    <div class="row personal-goal">
       <div class="col-1 colHeader hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
       </div>
@@ -109,7 +109,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="groupGoals.length > 0">
+  <div class="row" *ngIf="groupGoals?.length > 0">
     <div class="col-11 colHeader">
       <p class="big">Group learning goals:</p>
     </div>
@@ -119,7 +119,7 @@
   </div>
 
   <div *ngFor="let learninggoal of groupGoals">
-    <div class="row">
+    <div class="row group-goal">
       <div class="col-1 colHeader hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
       </div>
@@ -174,7 +174,7 @@
         <span class="prior-type">
           {{prioKnowledgeReference.type}}
         </span>
-        <span class="prior-remark" *ngIf="prioKnowledgeReference.remarks !== null && prioKnowledgeReference.remarks.length > 0">
+        <span class="prior-remark" *ngIf="prioKnowledgeReference.remarks?.length > 0">
           {{prioKnowledgeReference.remarks}}
         </span>
       </a>

@@ -64,7 +64,7 @@ export class ModuleOverviewComponent implements AfterContentInit, OnDestroy {
 
   ngAfterContentInit(): void {
     this.routeSubscription = this.route.params.subscribe(params => {
-      if (params['curriculum']) {
+      if (params && params['curriculum']) {
         const curriculum = params['curriculum'];
         if (curriculum !== null && curriculum > 0) {
           this.selectedCurriculumId = curriculum;

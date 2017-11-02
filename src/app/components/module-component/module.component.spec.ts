@@ -6,9 +6,13 @@ import {ModuleContent} from '../../models/modulecontent.model';
 import {Subscriber} from 'rxjs/Subscriber';
 import {BackendService} from '../../backend.service';
 import {By} from '@angular/platform-browser';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
+import {APP_BASE_HREF, LocationStrategy} from "@angular/common";
+import {AppRoutingModule} from "../../app.routing";
+import {ModuleOverviewComponent} from "../module-overview-component/module-overview.component";
+import {ErrorComponent} from "../../../util/error/error.component";
 
 
 const modulemodel = {
@@ -87,9 +91,12 @@ describe('Testing module component', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent ],
+      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent, ModuleOverviewComponent, ErrorComponent ],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
-               { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }]
+               { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
+      imports: [
+        AppRoutingModule
+      ]
     })
       .compileComponents();
   }));
@@ -105,12 +112,12 @@ describe('Testing module component', () => {
     it('Should be three personal learning goals', () => {
       component.moduleContent = modulemodel;
       fixture.detectChanges();
-      expect(fixture.debugElement.queryAll(By.css('.test-personal')).length).toBe(3);
+      expect(fixture.debugElement.queryAll(By.css('.personal-goal')).length).toBe(3);
     });
     it('Should be one group learning goal', () => {
       component.moduleContent = modulemodel;
       fixture.detectChanges();
-      expect(fixture.debugElement.queryAll(By.css('.test-group')).length).toBe(1);
+      expect(fixture.debugElement.queryAll(By.css('.group-goal')).length).toBe(1);
     });
 });
 

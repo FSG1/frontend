@@ -11,7 +11,7 @@ import {Subscription} from "rxjs/Subscription";
   templateUrl: './module.component.html',
   styleUrls: ['./module.component.scss']
 })
-export class ModuleComponent implements OnInit, OnDestroy{
+export class ModuleComponent implements OnInit, OnDestroy {
   moduleContent: ModuleContent;
   selectedModule: string;
   moduleCurriculum: number;
@@ -20,7 +20,7 @@ export class ModuleComponent implements OnInit, OnDestroy{
 
   routeSubscription: Subscription;
 
-  constructor(private route: ActivatedRoute, private backendService: BackendService) {
+  constructor(private backendService: BackendService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {

@@ -8,7 +8,8 @@ import {Semester} from '../../models/semester.model';
 import {Curriculum} from '../../models/curriculum.model';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import {AppRoutingModule} from "../../app.routing";
 
 const curricula = [
   { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
@@ -61,7 +62,10 @@ describe('ModuleOverviewComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ModuleOverviewComponent ],
       providers: [ {provide: BackendService, useValue: backendServiceStube},
-                   {provide: Router }]
+                   {provide: Router }, {provide: ActivatedRoute, useValue: { 'params': Observable.from([{curriculum: 1}]) }}],
+      imports: [
+        RouterModule
+      ]
     })
       .compileComponents();
 

@@ -15,4 +15,4 @@ before_script:
 install:
   - npm install
 script:
-  - npm run test -- --single-run
+  - npm run test -- --single-run -sm=false
