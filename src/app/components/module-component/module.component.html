@@ -74,8 +74,11 @@
   </div>
 
   <div class="row" *ngIf="personalGoals.length > 0">
-    <div class="col-12 colHeader">
+    <div class="col-11 colHeader">
       <p class="big">Learning goals:</p>
+    </div>
+    <div class="col-1 colHeader justify-content-center">
+      <p class="big">Weight:</p>
     </div>
   </div>
 
@@ -84,8 +87,11 @@
       <div class="col-1 colHeader hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
       </div>
-      <div class="col-11 colContent">
+      <div class="col-10 colContent">
         <p>{{ learninggoal.description }}</p>
+      </div>
+      <div class="col-1 colContent justify-content-center">
+        <p>{{ learninggoal.weight | percent }}</p>
       </div>
     </div>
     <div class="row">
@@ -97,8 +103,11 @@
   </div>
 
   <div class="row" *ngIf="groupGoals.length > 0">
-    <div class="col-12 colHeader">
+    <div class="col-11 colHeader">
       <p class="big">Group learning goals:</p>
+    </div>
+    <div class="col-1 colHeader justify-content-center">
+      <p class="big">Weight:</p>
     </div>
   </div>
 
@@ -107,8 +116,11 @@
       <div class="col-1 colHeader hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
       </div>
-      <div class="col-11 colContent">
+      <div class="col-10 colContent">
         <p>{{ learninggoal.description }}</p>
+      </div>
+      <div class="col-1 colContent justify-content-center">
+        <p>{{ learninggoal.weight | percent }}</p>
       </div>
     </div>
     <div class="row">

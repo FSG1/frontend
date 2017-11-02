@@ -1,11 +1,15 @@
-<div id="examheader">learning goal Assesment</div>
-<div class="crow"><div class="rowheader">Assesment Type</div><div class="rowinfo" *ngFor="let at of lg?.assesment_types">{{at}}</div></div>
-<div class="crow"><div class="rowheader">% of final grade</div><div class="rowinfo">{{fractureToPercentage(lg?.weight)}}%</div></div>
 
+<div class="exam-info">
+  <div class="row">
+    <div class="col-4">
+      Assessment Type
+    </div>
 
+    <div class="col-8">
+      <span class="type" *ngFor="let at of lg?.assesment_types">
+        {{at}}
+      </span>
+    </div>
+  </div>
 
-
-
-
-
-
+</div>
