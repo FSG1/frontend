@@ -14,6 +14,8 @@ export class ModuleComponent implements OnInit {
   selectedModule: string;
   selectedLearningGoalName: string;
   moduleCurriculum: number;
+  personalGoals: LearningGoal[];
+  groupGoals: LearningGoal[];
 
   constructor(private route: ActivatedRoute, private backendService: BackendService) {
     this.selectedLearningGoalName = '';
@@ -25,7 +27,38 @@ export class ModuleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.backendService.getModuleContent(this.moduleCurriculum, this.selectedModule).subscribe(moduleContent => this.moduleContent = moduleContent);
+    this.backendService.getModuleContent(this.moduleCurriculum, this.selectedModule)
+      .subscribe(moduleContent => this.contentReceive(moduleContent));
+  }
+
+  private contentReceive(data: ModuleContent) {
+    const personal = [];
+    const group = [];
+    data.learning_goals.forEach(function(lg) {
+      if (lg.type === 'group') {
+        group.push(lg);
+      } else {
+        personal.push(lg);
+      }
+    });
+
+    // Regex extract number from learning goals name
+    const regex = /LG\s(\d+)/;
+
+    // Sorts learning goals ascending according to their number
+    const sortFunc = function(lg1: LearningGoal, lg2: LearningGoal): number {
+      let matches = lg1.name.match(regex);
+      const a = matches[1];
+
+      matches = lg2.name.match(regex);
+      const b = matches[1];
+
+      return Number(a) - Number(b);
+    };
+
+    this.moduleContent = data;
+    this.personalGoals = personal.sort(sortFunc);
+    this.groupGoals = group.sort(sortFunc);
   }
 
   onSelect(learningGoal: LearningGoal): void {

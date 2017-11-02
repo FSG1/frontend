@@ -63,23 +63,24 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-12 colHeader">
+    <div class="col-12 colHeader">
       <p class="big">Introduction and motivation</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 colContent">
+    <div class="col-12 colContent">
       <p>{{ moduleContent?.introductorytext }}</p>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-12 colHeader">
+  <div class="row" *ngIf="personalGoals.length > 0">
+    <div class="col-12 colHeader">
       <p class="big">Learning goals:</p>
     </div>
   </div>
-  <div *ngFor="let learninggoal of moduleContent?.learning_goals" >
-    <div class="row" *ngIf="learninggoal.type === 'personal'">
+
+  <div *ngFor="let learninggoal of personalGoals">
+    <div class="row">
       <div class="col-sm-1 colHeader hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
       </div>
@@ -88,19 +89,20 @@
       </div>
     </div>
     <div class="row" *ngIf="learninggoal.type === 'personal'">
-      <div class="col-sm-12">
+      <div class="col-12">
         <app-skill-matrix class="test-personal" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
         <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-12 colContent">
+  <div class="row" *ngIf="groupGoals.length > 0">
+    <div class="col-12 colContent">
       <p class="big">Group learning goals:</p>
     </div>
   </div>
-  <div  *ngFor="let learninggoal of moduleContent?.learning_goals">
+
+  <div *ngFor="let learninggoal of groupGoals">
     <div class="row" *ngIf="learninggoal.type === 'group'">
       <div class="col-sm-1 colHeader hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
@@ -109,8 +111,8 @@
         <p>{{ learninggoal.description }}</p>
       </div>
     </div>
-    <div class="row" *ngIf="learninggoal.type === 'group'">
-      <div class="col-sm-12">
+    <div class="row">
+      <div class="col-12">
         <app-skill-matrix class="test-group" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
         <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [lg]="learninggoal"></app-exam-lg>
       </div>
@@ -118,29 +120,29 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-12 colHeader">
+    <div class="col-12 colHeader">
       <p class="big">Topics</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 colContent" *ngFor="let topic of moduleContent?.topics">
+    <div class="col-12 colContent" *ngFor="let topic of moduleContent?.topics">
       <p>- {{ topic }}</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-12 colHeader">
+    <div class="col-12 colHeader">
       <p class="big">Teaching material</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 colContent">
+    <div class="col-12 colContent">
       <p>{{ moduleContent?.teaching_material }}</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-12 colHeader">
+    <div class="col-12 colHeader">
       <p class="big">prior knowledge</p>
     </div>
   </div>
@@ -153,12 +155,12 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-12 colHeader">
+    <div class="col-12 colHeader">
       <p class="big">Additional information (on grading, assessments, retakes, pracical parts, ...)</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 colContent">
+    <div class="col-12 colContent">
       <p>{{ moduleContent?.additional_information }}</p>
     </div>
   </div>
