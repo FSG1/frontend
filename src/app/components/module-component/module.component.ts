@@ -1,34 +1,43 @@
-import {Component, OnInit} from '@angular/core';
+///<reference path="../../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LearningGoal} from '../../models/learninggoal';
 import {ActivatedRoute} from '@angular/router';
 import {ModuleContent} from '../../models/modulecontent.model';
 import {BackendService} from '../../backend.service';
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-module',
   templateUrl: './module.component.html',
   styleUrls: ['./module.component.scss']
 })
-export class ModuleComponent implements OnInit {
+export class ModuleComponent implements OnInit, OnDestroy{
   moduleContent: ModuleContent;
   selectedModule: string;
   selectedLearningGoalName: string;
   moduleCurriculum: number;
-  personalGoals: LearningGoal[];
-  groupGoals: LearningGoal[];
+  personalGoals: LearningGoal[] = [];
+  groupGoals: LearningGoal[] = [];
+
+  routeSubscription: Subscription;
 
   constructor(private route: ActivatedRoute, private backendService: BackendService) {
     this.selectedLearningGoalName = '';
-    this.route.params.subscribe(
-     params => {
-       this.selectedModule = params['code'];
-       this.moduleCurriculum = params['curriculum'];
-     });
   }
 
   ngOnInit(): void {
-    this.backendService.getModuleContent(this.moduleCurriculum, this.selectedModule)
-      .subscribe(moduleContent => this.contentReceive(moduleContent));
+    this.routeSubscription = this.route.params.subscribe(
+      params => {
+        this.selectedModule = params['code'];
+        this.moduleCurriculum = params['curriculum'];
+
+        this.backendService.getModuleContent(this.moduleCurriculum, this.selectedModule)
+          .subscribe(moduleContent => this.contentReceive(moduleContent));
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
   }
 
   private contentReceive(data: ModuleContent) {
