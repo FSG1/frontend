@@ -6,13 +6,15 @@
   vertical-align: middle;
 }
 
-
+.hoverable {
+  cursor: pointer;
+}
 
 .colHeader {
   text-align: left;
   border: 2px solid #e0e0e0;
   border-radius: 5px;
-  background-color: grey;
+  background-color: lighten(grey, 20%);
   vertical-align: middle;
 
   .big {

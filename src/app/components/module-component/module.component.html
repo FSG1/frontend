@@ -90,20 +90,20 @@
     </div>
     <div class="row">
       <div class="col-12 learninggoal">
-        <app-skill-matrix class="test-personal" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
-        <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [lg]="learninggoal"></app-exam-lg>
+        <app-skill-matrix [hidden]="!learninggoal.expanded" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-exam-lg [hidden]="!learninggoal.expanded" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
   </div>
 
   <div class="row" *ngIf="groupGoals.length > 0">
-    <div class="col-12 colContent">
+    <div class="col-12 colHeader">
       <p class="big">Group learning goals:</p>
     </div>
   </div>
 
   <div *ngFor="let learninggoal of groupGoals">
-    <div class="row" *ngIf="learninggoal.type === 'group'">
+    <div class="row">
       <div class="col-1 colHeader hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
       </div>
@@ -113,8 +113,8 @@
     </div>
     <div class="row">
       <div class="col-12 learninggoal">
-        <app-skill-matrix class="test-group" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
-        <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [lg]="learninggoal"></app-exam-lg>
+        <app-skill-matrix [hidden]="!learninggoal.expanded" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-exam-lg [hidden]="!learninggoal.expanded" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
   </div>

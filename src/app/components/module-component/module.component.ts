@@ -14,7 +14,6 @@ import {Subscription} from "rxjs/Subscription";
 export class ModuleComponent implements OnInit, OnDestroy{
   moduleContent: ModuleContent;
   selectedModule: string;
-  selectedLearningGoalName: string;
   moduleCurriculum: number;
   personalGoals: LearningGoal[] = [];
   groupGoals: LearningGoal[] = [];
@@ -22,7 +21,6 @@ export class ModuleComponent implements OnInit, OnDestroy{
   routeSubscription: Subscription;
 
   constructor(private route: ActivatedRoute, private backendService: BackendService) {
-    this.selectedLearningGoalName = '';
   }
 
   ngOnInit(): void {
@@ -44,6 +42,7 @@ export class ModuleComponent implements OnInit, OnDestroy{
     const personal = [];
     const group = [];
     data.learning_goals.forEach(function(lg) {
+      lg.expanded = false;
       if (lg.type === 'group') {
         group.push(lg);
       } else {
@@ -71,13 +70,11 @@ export class ModuleComponent implements OnInit, OnDestroy{
   }
 
   onSelect(learningGoal: LearningGoal): void {
-    if (this.selectedLearningGoalName === '') {
-      this.selectedLearningGoalName = learningGoal.name;
-    }else if (this.selectedLearningGoalName === learningGoal.name) {
-      this.selectedLearningGoalName = '';
-    }else {
-      this.selectedLearningGoalName = learningGoal.name;
+    if (learningGoal.expanded == null) {
+      learningGoal.expanded = false;
     }
+
+    learningGoal.expanded = !learningGoal.expanded;
   }
 }
 

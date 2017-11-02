@@ -7,4 +7,6 @@ export interface LearningGoal {
   skillmatrix: StudentSkill[];
   assesment_types: string[];
   weight: number;
+
+  expanded?: boolean;
 }
