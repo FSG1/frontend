@@ -13,7 +13,7 @@ export interface ModuleContent {
   practical_hours_week: number;
   total_effort: number;
   lecturers: string[];
-  crecentials: string;
+  credentials: string;
   introductorytext: string;
   qualifications: StudentSkill[];
   topics: string[];

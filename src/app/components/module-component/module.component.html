@@ -59,7 +59,7 @@
       <p class="big">Credentials</p>
     </div>
     <div class="col-sm-10 colContent">
-      <p>{{ moduleContent?.crecentials }}</p>
+      <p>{{ moduleContent?.credentials }}</p>
     </div>
   </div>
 
@@ -90,8 +90,8 @@
     </div>
     <div class="row" *ngIf="learninggoal.type === 'personal'">
       <div class="col-sm-12">
-        <app-skill-matrix [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
-        <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [learninggoal]="learninggoal"></app-exam-lg>
+        <app-skill-matrix class="test-personal" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
   </div>
@@ -112,8 +112,8 @@
     </div>
     <div class="row" *ngIf="learninggoal.type === 'group'">
       <div class="col-sm-12">
-        <app-skill-matrix [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
-        <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [learninggoal]="learninggoal"></app-exam-lg>
+        <app-skill-matrix class="test-group" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
   </div>

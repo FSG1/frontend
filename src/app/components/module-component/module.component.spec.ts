@@ -6,7 +6,7 @@ import {ModuleContent} from '../../models/modulecontent.model';
 import {Subscriber} from 'rxjs/Subscriber';
 import {BackendService} from '../../backend.service';
 import {By} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
 
@@ -15,6 +15,18 @@ const modulemodel = {
   'module_code': 'IOT',
   'module_name': 'Internet of Things',
   'credits': 5,
+  'semester': 7,
+  'lectures_in_week': 2,
+  'practical_hours_week': 2,
+  'total_effort': 60,
+  'lecturers': ['Thijs Dorssers'],
+  'credentials': 'bla bla',
+  'introductorytext': 'bla IOT',
+  'qualifications': [],
+  'topics': ['bla1', 'bla2'],
+  'teaching_material': 'brain',
+  'prior_knowledge_references': [{'module_code': 1, 'module_name': 'JAVA!', 'type': 'strict', 'remark': 'nothing'}],
+  'additional_information': 'nothing',
   'architectural_layers': [{'architectural_layer_id': 0, 'architectural_layer_name': 'User Interaction', 'architectural_layer_description': 'something'},
     {'architectural_layer_id': 1, 'architectural_layer_name': 'Business Processes', 'architectural_layer_description': 'something'},
     {'architectural_layer_id': 2, 'architectural_layer_name': 'Infrastructure', 'architectural_layer_description': 'something'},
