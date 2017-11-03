@@ -9,8 +9,4 @@ import {LearningGoal} from '../../models/learninggoal';
 })
 export class ExamLGComponent {
   @Input() lg: LearningGoal;
-
-  fractureToPercentage(fracture: number): number {
-    return (fracture * 100);
-  }
 }

@@ -3,31 +3,33 @@ $header-text-size: 1vw;
 $header-border:1px solid darkgrey;
 
 
-#examheader{
-  border: $header-border;
-  background-color:$header-color;
-  font-size: $header-text-size;
+.exam-info {
+  margin-bottom: 20px;
 }
 
+.col-4 {
+  text-align: left;
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  background-color: lighten(grey, 20%);
 
-
-.rowheader{
-  border:$header-border;
-  background-color:$header-color;
-  display: flex;
-  width:15vw;
-  font-size: $header-text-size;
+  padding-top: 7.5px;
+  padding-bottom: 7.5px;
 }
 
-.crow{
-  display: flex;
-}
-
-.rowinfo{
+.col-8 {
   text-align: left;
   border: 2px solid #e0e0e0;
   border-radius: 5px;
   background-color: #fafafa;
-  vertical-align: middle;
-  flex:1;
+  display: flex;
+  align-items: center;
+}
+
+.type {
+  margin-right: 10px;
+}
+
+.row {
+  margin: 0;
 }

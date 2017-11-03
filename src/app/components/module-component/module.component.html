@@ -1,167 +1,193 @@
-<div class="container-fluid">
+<div class="container">
 
   <div class="row">
-    <div class="col-sm-4 colHeader">
+    <div class="col-12 justify-content-center">
+      <a [routerLink]="['/moduleoverview', moduleCurriculum]" class="btn btn-primary">Back to Overview</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2 colHeader">
       <p class="big">Module:</p>
     </div>
-    <div class="col-sm-8 colContent">
+    <div class="col-10 colContent module-name">
       <p>{{ moduleContent?.module_name }}</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-2 colHeader">
+    <div class="col-2 colHeader">
       <p class="big">Semester</p>
     </div>
-    <div class="col-sm-2 colContent">
+    <div class="col-2 colContent">
       <p>{{ moduleContent?.semester }}</p>
     </div>
-    <div class="col-sm-4 colHeader">
+    <div class="col-4 colHeader">
       <p class="big">Credits (ECTS)</p>
     </div>
-    <div class="col-sm-4 colContent">
+    <div class="col-4 colContent">
       <p>{{ moduleContent?.credits }}</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-2 colHeader">
-      <p class="big">Lectures/ week</p>
+    <div class="col-2 colHeader">
+      <p class="big">Lectures / week</p>
     </div>
-    <div class="col-sm-2 colContent">
+    <div class="col-2 colContent">
       <p>{{ moduleContent?.lectures_in_week }}</p>
     </div>
-    <div class="col-sm-2 colHeader">
-      <p class="big">Practical hours/week</p>
+    <div class="col-2 colHeader">
+      <p class="big">Practical hours / week</p>
     </div>
-    <div class="col-sm-2 colContent">
+    <div class="col-2 colContent">
       <p>{{ moduleContent?.practical_hours_week }}</p>
     </div>
-    <div class="col-sm-2 colHeader">
+    <div class="col-2 colHeader">
       <p class="big">Total Effort</p>
     </div>
-    <div class="col-sm-2 colContent">
-      <p>{{ moduleContent?.total_effort }}</p>
+    <div class="col-2 colContent">
+      <p>{{ moduleContent?.total_effort}} hours</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-2 colHeader">
+    <div class="col-2 colHeader">
       <p class="big">Lecturers</p>
     </div>
-    <div class="col-sm-10 colContent">
-      <p>{{ moduleContent?.lecturers }}</p>
+    <div class="col-10 colContent">
+      <p>{{ moduleContent?.lecturers?.join(', ') }}</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-2 colHeader">
+    <div class="col-2 colHeader">
       <p class="big">Credentials</p>
     </div>
-    <div class="col-sm-10 colContent">
+    <div class="col-10 colContent">
       <p>{{ moduleContent?.credentials }}</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-12 colHeader">
+    <div class="col-12 colHeader">
       <p class="big">Introduction and motivation</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 colContent">
+    <div class="col-12 colContent">
       <p>{{ moduleContent?.introductorytext }}</p>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-12 colHeader">
+  <div class="row" *ngIf="personalGoals?.length > 0">
+    <div class="col-11 colHeader">
       <p class="big">Learning goals:</p>
     </div>
+    <div class="col-1 colHeader justify-content-center">
+      <p class="big">Weight:</p>
+    </div>
   </div>
-  <div *ngFor="let learninggoal of moduleContent?.learning_goals" >
-    <div class="row" *ngIf="learninggoal.type === 'personal'">
-      <div class="col-sm-1 colHeader hoverable" (click)="onSelect(learninggoal)">
+
+  <div *ngFor="let learninggoal of personalGoals">
+    <div class="row personal-goal">
+      <div class="col-1 colHeader hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
       </div>
-      <div class="col-sm-11 colContent">
+      <div class="col-10 colContent">
         <p>{{ learninggoal.description }}</p>
       </div>
+      <div class="col-1 colContent justify-content-center">
+        <p>{{ learninggoal.weight | percent }}</p>
+      </div>
     </div>
-    <div class="row" *ngIf="learninggoal.type === 'personal'">
-      <div class="col-sm-12">
-        <app-skill-matrix class="test-personal" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
-        <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [lg]="learninggoal"></app-exam-lg>
+    <div class="row">
+      <div class="col-12 learninggoal">
+        <app-skill-matrix [hidden]="!learninggoal.expanded" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-exam-lg [hidden]="!learninggoal.expanded" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-12 colContent">
+  <div class="row" *ngIf="groupGoals?.length > 0">
+    <div class="col-11 colHeader">
       <p class="big">Group learning goals:</p>
     </div>
+    <div class="col-1 colHeader justify-content-center">
+      <p class="big">Weight:</p>
+    </div>
   </div>
-  <div  *ngFor="let learninggoal of moduleContent?.learning_goals">
-    <div class="row" *ngIf="learninggoal.type === 'group'">
-      <div class="col-sm-1 colHeader hoverable" (click)="onSelect(learninggoal)">
+
+  <div *ngFor="let learninggoal of groupGoals">
+    <div class="row group-goal">
+      <div class="col-1 colHeader hoverable" (click)="onSelect(learninggoal)">
         <p class="big">{{ learninggoal.name }}</p>
       </div>
-      <div class="col-sm-11 colContent">
+      <div class="col-10 colContent">
         <p>{{ learninggoal.description }}</p>
       </div>
+      <div class="col-1 colContent justify-content-center">
+        <p>{{ learninggoal.weight | percent }}</p>
+      </div>
     </div>
-    <div class="row" *ngIf="learninggoal.type === 'group'">
-      <div class="col-sm-12">
-        <app-skill-matrix class="test-group" [hidden]="learninggoal.name != selectedLearningGoalName" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
-        <app-exam-lg [hidden]="learninggoal.name != selectedLearningGoalName" [lg]="learninggoal"></app-exam-lg>
+    <div class="row">
+      <div class="col-12 learninggoal">
+        <app-skill-matrix [hidden]="!learninggoal.expanded" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-exam-lg [hidden]="!learninggoal.expanded" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
   </div>
 
-
-
-  <div class="row">
-    <div class="col-sm-12 colHeader">
+  <div class="row" *ngIf="moduleContent?.topics?.length > 0">
+    <div class="col-12 colHeader">
       <p class="big">Topics</p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12 colContent" *ngFor="let topic of moduleContent?.topics">
+  <div class="row" *ngIf="moduleContent?.topics?.length > 0">
+    <div class="col-12 colContent" *ngFor="let topic of moduleContent.topics">
       <p>- {{ topic }}</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-12 colHeader">
-      <p class="big">Teaching material</p>
+    <div class="col-12 colHeader">
+      <p class="big">Teaching Material</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 colContent">
+    <div class="col-12 colContent">
       <p>{{ moduleContent?.teaching_material }}</p>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-12 colHeader">
-      <p class="big">prior knowledge</p>
+  <div class="row" *ngIf="moduleContent?.prior_knowledge_references?.length > 0">
+    <div class="col-12 colHeader">
+      <p class="big">Prior Knowledge</p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-4 colContent" *ngFor="let prioKnowledgeReference of moduleContent?.prior_knowledge_references">
-      <p>module: {{ prioKnowledgeReference.module_code }}</p>
-      <p>type: {{ prioKnowledgeReference.type }}</p>
-      <p>remark: {{ prioKnowledgeReference.remark }}</p>
+  <div class="row" *ngIf="moduleContent?.prior_knowledge_references?.length > 0">
+    <div class="col-4 colContent prior-module" *ngFor="let prioKnowledgeReference of moduleContent.prior_knowledge_references">
+      <a [routerLink]="['/curriculum', moduleCurriculum, 'modules', prioKnowledgeReference.module_code]">
+        <span class="prior-code">
+          {{prioKnowledgeReference.module_code}}
+        </span>
+        <span class="prior-type">
+          {{prioKnowledgeReference.type}}
+        </span>
+        <span class="prior-remark" *ngIf="prioKnowledgeReference.remarks?.length > 0">
+          {{prioKnowledgeReference.remarks}}
+        </span>
+      </a>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-12 colHeader">
+    <div class="col-12 colHeader">
       <p class="big">Additional information (on grading, assessments, retakes, pracical parts, ...)</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 colContent">
+    <div class="col-12 colContent">
       <p>{{ moduleContent?.additional_information }}</p>
     </div>
   </div>

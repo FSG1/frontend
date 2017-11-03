@@ -19,14 +19,8 @@ describe('Testing skillmatrix component', () => {
     component = testhostfixture.componentInstance;
     testhostfixture.detectChanges();
   });
-  it('testing fractureToPercentage method. Should return the value times hundred', () => {
-    const fixture = TestBed.createComponent(ExamLGComponent);
-    const examlg = fixture.componentInstance;
-    expect(examlg.fractureToPercentage(0.1)).toBe(10);
-    expect(examlg.fractureToPercentage(0.52)).toBe(52);
-  });
   it('should exist 3 fields with variable information', () => {
-    expect(testhostfixture.debugElement.queryAll(By.css('.rowinfo')).length).toBe(3);
+    expect(testhostfixture.debugElement.queryAll(By.css('.type')).length).toBe(2);
   });
 
   // this component enables testing the examlg component because it needs input to function!
