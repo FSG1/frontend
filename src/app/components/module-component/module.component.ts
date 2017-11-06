@@ -24,8 +24,12 @@ export class ModuleComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.moduleContent = null;
+    this.selectedModule = null;
+    this.moduleCurriculum = null;
     this.routeSubscription = this.route.params.subscribe(
       params => {
+        this.moduleContent = null;
         this.selectedModule = params['code'];
         this.moduleCurriculum = params['curriculum'];
 
@@ -41,7 +45,9 @@ export class ModuleComponent implements OnInit, OnDestroy {
   private contentReceive(data: ModuleContent) {
     const personal = [];
     const group = [];
-    if (data.learning_goals === null) data.learning_goals = [];
+    if (data.learning_goals === null) {
+      data.learning_goals = [];
+    }
 
     data.learning_goals.forEach(function(lg) {
       lg.expanded = false;

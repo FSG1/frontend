@@ -103,7 +103,7 @@
     </div>
     <div class="row">
       <div class="col-12 learninggoal">
-        <app-skill-matrix [hidden]="!learninggoal.expanded" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-skill-matrix [hidden]="!learninggoal.expanded" [architecturallayers]="moduleContent?.architectural_layers" [lifecycleactivities]="moduleContent?.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
         <app-exam-lg [hidden]="!learninggoal.expanded" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
@@ -132,7 +132,7 @@
     </div>
     <div class="row">
       <div class="col-12 learninggoal">
-        <app-skill-matrix [hidden]="!learninggoal.expanded" [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
+        <app-skill-matrix [hidden]="!learninggoal.expanded" [architecturallayers]="moduleContent?.architectural_layers" [lifecycleactivities]="moduleContent?.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
         <app-exam-lg [hidden]="!learninggoal.expanded" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
@@ -145,7 +145,7 @@
   </div>
   <div class="row">
     <div class="col-12 learninggoal">
-      <app-skill-matrix [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="moduleContent.qualifications"></app-skill-matrix>
+      <app-skill-matrix [architecturallayers]="moduleContent?.architectural_layers" [lifecycleactivities]="moduleContent?.lifecycle_activities" [studentskills]="moduleContent?.qualifications"></app-skill-matrix>
     </div>
   </div>
 
