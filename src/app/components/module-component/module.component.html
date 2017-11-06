@@ -138,6 +138,17 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12 colHeader">
+      <p class="big">Qualifications After Module</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 learninggoal">
+      <app-skill-matrix [architecturallayers]="moduleContent.architectural_layers" [lifecycleactivities]="moduleContent.lifecycle_activities" [studentskills]="moduleContent.qualifications"></app-skill-matrix>
+    </div>
+  </div>
+
   <div class="row" *ngIf="moduleContent?.topics?.length > 0">
     <div class="col-12 colHeader">
       <p class="big">Topics</p>
