@@ -90,7 +90,7 @@ describe('ModuleOverviewComponent', () => {
     component.onSelect(curriculum);
     fixture.detectChanges();
     // get the first semester element
-    el = de.query(By.css('h2')).nativeElement;
+    el = de.query(By.css('.semester h2')).nativeElement;
     expect(el.innerText).toBe('Semester 1:');
   });
   it('After selecting dropdown item, modules should be displayed', () => {
