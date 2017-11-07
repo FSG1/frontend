@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="row semesterGrid">
+  <div class="row semesterGrid justify-content-center">
     <div class="col-2 hoverable semesterGridContent" *ngFor="let module of completesemester.modules">
       <a class="test-amount-modules" (click)="onClick(module.module_code)">
         <h4>{{ module.module_code }}</h4>
@@ -32,5 +32,3 @@
       <p class="text-secondary">Credits {{ module.credits }}</p>
     </a>
   </div>-->
-
-
