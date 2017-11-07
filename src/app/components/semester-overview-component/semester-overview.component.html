@@ -6,23 +6,23 @@
 
 <div class="container">
 
-<div class="row justify-content-center">
-  <div class="col-3">
-    <a [routerLink]="['/moduleoverview', curriculumid]" class="btn btn-primary">Back to Overview</a>
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <a [routerLink]="['/moduleoverview', curriculumid]" class="btn btn-primary">Back to Overview</a>
+    </div>
   </div>
-</div>
 
-<div class="row semesterGrid">
-  <div class="col-2 hoverable semesterGridContent" *ngFor="let module of completesemester.modules">
-    <a class="test-amount-modules" (click)="onClick(module.module_code)">
-      <h4>{{ module.module_code }}</h4>
-      <p class="text-secondary">Credits {{ module.credits }}</p>
-    </a>
+  <div class="row semesterGrid">
+    <div class="col-2 hoverable semesterGridContent" *ngFor="let module of completesemester.modules">
+      <a class="test-amount-modules" (click)="onClick(module.module_code)">
+        <h4>{{ module.module_code }}</h4>
+        <p class="text-secondary">Credits {{ module.credits }}</p>
+      </a>
+    </div>
   </div>
-</div>
 
-<h1 class="text-center">Qualifications</h1>
-<app-skill-matrix [architecturallayers]="completesemester?.architectural_layers" [lifecycleactivities]="completesemester?.lifecycle_activities" [studentskills]="completesemester?.qualifications"></app-skill-matrix>
+  <h3 class="text-center">Qualifications</h3>
+  <app-skill-matrix [architecturallayers]="completesemester?.architectural_layers" [lifecycleactivities]="completesemester?.lifecycle_activities" [studentskills]="completesemester?.qualifications"></app-skill-matrix>
 
 </div>
 <!--
