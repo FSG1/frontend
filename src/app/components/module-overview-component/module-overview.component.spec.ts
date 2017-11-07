@@ -60,7 +60,7 @@ describe('ModuleOverviewComponent', () => {
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleOverviewComponent ],
+      declarations: [ ModuleOverviewComponent,  ],
       providers: [ {provide: BackendService, useValue: backendServiceStube},
                    {provide: Router }, {provide: ActivatedRoute, useValue: { 'params': Observable.from([{curriculum: 1}]) }}],
       imports: [

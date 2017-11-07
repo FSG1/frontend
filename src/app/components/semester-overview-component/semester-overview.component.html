@@ -1,6 +1,6 @@
 <div class="jumbotron jumbotron-fluid head">
   <div class="container text-center">
-    <h2>{{ curriculumname }} semester {{ semester}}</h2>
+    <h2 class="test-title">{{ curriculumname }} semester {{ semester}}</h2>
   </div>
 </div>
 
@@ -14,7 +14,7 @@
 
 <div class="row semesterGrid">
   <div class="col-lg-1 hoverable semesterGridContent" *ngFor="let module of completesemester.modules">
-    <a (click)="onClick(module.module_code)">
+    <a class="test-amount-modules" (click)="onClick(module.module_code)">
       <h4>{{ module.module_code }}</h4>
       <p class="text-secondary">Credits {{ module.credits }}</p>
     </a>
