@@ -9,10 +9,10 @@ import {By} from '@angular/platform-browser';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
-import {APP_BASE_HREF, LocationStrategy} from "@angular/common";
-import {AppRoutingModule} from "../../app.routing";
-import {ModuleOverviewComponent} from "../module-overview-component/module-overview.component";
-import {ErrorComponent} from "../../../util/error/error.component";
+import {APP_BASE_HREF, LocationStrategy} from '@angular/common';
+import {AppRoutingModule} from '../../app.routing';
+import {ModuleOverviewComponent} from '../module-overview-component/module-overview.component';
+import {ErrorComponent} from '../../../util/error/error.component';
 
 
 const modulemodel = {

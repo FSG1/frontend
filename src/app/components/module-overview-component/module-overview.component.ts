@@ -34,9 +34,11 @@ export class ModuleOverviewComponent implements AfterContentInit, OnDestroy {
     this.selectedCurriculumId = curriculum.id;
     this.getSemesters(curriculum.id);
   }
-
+  clickSemester(semester: number): void {
+    this.router.navigate(['/curriculum/', this.selectedCurriculum.id, this.selectedCurriculum.name, 'semesters', semester ]);
+  }
   onClick(module_code: string): void {
-    this.router.navigate(['/curriculum/',this.selectedCurriculum.id,'modules', module_code]);
+    this.router.navigate(['/curriculum/', this.selectedCurriculum.id, 'modules', module_code]);
   }
 
   getSemesters(curriculumId: number): void {

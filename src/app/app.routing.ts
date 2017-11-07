@@ -19,7 +19,7 @@ const routes: Routes = [
     component: ModuleComponent
   },
   {
-    path: 'curriculum/:curriculum/semesters/:semester',
+    path: 'curriculum/:curriculum/:name/semesters/:semester',
     component: SemesterOverviewComponent
   },
   {
