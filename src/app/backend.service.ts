@@ -8,12 +8,17 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {CurriculumResponse} from './backend-responses/CurriculumResponse';
 import {ModuleContent} from './models/modulecontent.model';
+import {CompleteSemester} from './models/complete_semester.model';
 
 @Injectable()
 export class BackendService {
-  private curriculaUrl = 'http://172.17.0.1:8080/fmms/curricula';
 
   constructor(private http: HttpClient) {
+  }
+  // endpoint does not exist yet
+  getSemester(curriculum: number, semester: number): Observable<CompleteSemester>{
+    const completeSemesterUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + curriculum + '/semesters/' + semester;
+    return null;
   }
 
   getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
@@ -22,7 +27,8 @@ export class BackendService {
   }
 
   getCurricula(): Observable<Curriculum[]> {
-    return this.http.get<Curriculum[]>(this.curriculaUrl);
+    const curriculaUrl = 'http://172.17.0.1:8080/fmms/curricula';
+    return this.http.get<Curriculum[]>(curriculaUrl);
   }
 
   getSemesters(id: number): Observable<Semester[]> {
