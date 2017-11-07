@@ -77,7 +77,7 @@ describe('Testing module component', () => {
     expect(fixture.debugElement.queryAll(By.css('.test-amount-modules')).length).toBe(7);
   });
   it('should have a title of: some name semester 4', () => {
-    expect(fixture.debugElement.queryAll(By.css('.test-title')).length).toBe('some name semester 4');
+    expect(fixture.debugElement.query(By.css('.test-title')).nativeElement.innerText).toBe('some name semester 4');
   });
 // test-amount-modules
 });
