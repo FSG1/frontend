@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="moduleContent?.lectures_in_week || moduleContent?.practical_hours_week || moduleContent?.total_effort > 0">
     <div class="col-2 colHeader">
       <p class="big">Lectures / week</p>
     </div>
@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="moduleContent?.lecturers?.length > 0">
     <div class="col-2 colHeader">
       <p class="big">Lecturers</p>
     </div>
@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="moduleContent?.credentials?.length > 0">
     <div class="col-2 colHeader">
       <p class="big">Credentials</p>
     </div>
@@ -69,12 +69,12 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="moduleContent?.introductorytext?.length > 0">
     <div class="col-12 colHeader">
       <p class="big">Introduction and motivation</p>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="moduleContent?.introductorytext?.length > 0">
     <div class="col-12 colContent">
       <p>{{ moduleContent?.introductorytext }}</p>
     </div>
@@ -160,12 +160,12 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="moduleContent?.teaching_material?.length > 0">
     <div class="col-12 colHeader">
       <p class="big">Teaching Material</p>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="moduleContent?.teaching_material?.length > 0">
     <div class="col-12 colContent">
       <p>{{ moduleContent?.teaching_material }}</p>
     </div>
@@ -192,12 +192,12 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="moduleContent?.additional_information?.length > 0">
     <div class="col-12 colHeader">
       <p class="big">Additional information (on grading, assessments, retakes, pracical parts, ...)</p>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="moduleContent?.additional_information?.length > 0">
     <div class="col-12 colContent">
       <p>{{ moduleContent?.additional_information }}</p>
     </div>
