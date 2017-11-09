@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Semester} from '../../models/semester.model';
 import {BackendService} from '../../backend.service';
 import {Curriculum} from '../../models/curriculum.model';
@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './module-overview.component.html',
   styleUrls: ['./module-overview.component.scss'],
 })
-export class ModuleOverviewComponent implements AfterContentInit, OnDestroy {
+export class ModuleOverviewComponent implements OnInit, OnDestroy {
   semesters: Semester[];
   curricula: Curriculum[];
 
@@ -47,7 +47,7 @@ export class ModuleOverviewComponent implements AfterContentInit, OnDestroy {
 
         if (this.selectedCurriculumId > 0) {
           curricula.forEach(cur => {
-            if (cur.id === this.selectedCurriculumId) {
+            if (cur.id == this.selectedCurriculumId) {
               this.selectedCurriculum = cur;
               this.selectedCurriculumName = cur.name;
 
@@ -58,7 +58,7 @@ export class ModuleOverviewComponent implements AfterContentInit, OnDestroy {
       });
   }
 
-  ngAfterContentInit(): void {
+  ngOnInit(): void {
     this.routeSubscription = this.route.params.subscribe(params => {
       if (params && params['curriculum']) {
         const curriculum = params['curriculum'];
@@ -66,7 +66,6 @@ export class ModuleOverviewComponent implements AfterContentInit, OnDestroy {
           this.selectedCurriculumId = curriculum;
         }
       }
-
       this.getCurriculum();
     });
   }

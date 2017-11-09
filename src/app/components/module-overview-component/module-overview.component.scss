@@ -13,6 +13,11 @@ a {
   color: white;
 }
 
+.dropdown-menu .dropdown-item a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .semester {
   display: flex;
   margin-left: 0;
