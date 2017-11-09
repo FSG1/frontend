@@ -7,7 +7,9 @@
 
   <ul class="dropdown-menu">
     <li class="dropdown-item" *ngFor="let curriculum of curricula" >
-      <a (click)="onSelect(curriculum)">{{curriculum.code}}</a>
+      <a [routerLink]="['/moduleoverview', curriculum.id]">
+        {{curriculum.name}}
+      </a>
     </li>
   </ul>
 </div>
