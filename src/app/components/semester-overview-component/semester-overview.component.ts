@@ -13,7 +13,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class SemesterOverviewComponent implements AfterContentInit, OnDestroy {
   completesemester: CompleteSemester;
-  curriculumname: string;
+
   curriculumid: number;
   semester: number;
 
@@ -24,10 +24,8 @@ export class SemesterOverviewComponent implements AfterContentInit, OnDestroy {
   ngAfterContentInit(): void {
     this.routeSubscription = this.route.params.subscribe(
       params => {
-        this.curriculumname = params['name'];
         this.curriculumid = params['curriculum'];
         this.semester = params['semester'];
-        // this.completesemester = mocksemester as CompleteSemester;
         this.backendService.getSemester(this.curriculumid, this.semester)
           .subscribe(completesemester => this.completesemester = completesemester);
       });
@@ -35,7 +33,9 @@ export class SemesterOverviewComponent implements AfterContentInit, OnDestroy {
   onClick(module_code: string): void {
     this.router.navigate(['/curriculum/', this.curriculumid, 'modules', module_code]);
   }
+
   ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
   }
 
 }

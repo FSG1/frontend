@@ -50,9 +50,19 @@ describe('Testing module component', () => {
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleComponent, SkillMatrixComponent, ModuleOverviewComponent, SemesterOverviewComponent, ErrorComponent, ExamLGComponent ],
-      providers: [ {provide: BackendService, useValue: backendServiceStub} ,
-        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'name': 'some name', 'curriculum': 1, 'semester': 4 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
+      declarations: [
+        ModuleComponent,
+        SkillMatrixComponent,
+        ModuleOverviewComponent,
+        SemesterOverviewComponent,
+        ErrorComponent,
+        ExamLGComponent
+      ],
+      providers: [
+        {provide: BackendService, useValue: backendServiceStub},
+        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{'curriculum': 1, 'semester': 4 }]) } },
+        {provide: APP_BASE_HREF, useValue: '/'}
+      ],
       imports: [
         AppRoutingModule
       ]
@@ -70,13 +80,12 @@ describe('Testing module component', () => {
   it('Should assign its route parameters', () => {
     expect(component.semester).toBe(4);
     expect(component.curriculumid).toBe(1);
-    expect(component.curriculumname).toBe('some name');
   });
   it('Should load 7 modules.', () => {
     expect(fixture.debugElement.queryAll(By.css('.test-amount-modules')).length).toBe(7);
   });
   it('should have a title of: some name semester 4', () => {
-    expect(fixture.debugElement.query(By.css('.test-title')).nativeElement.innerText).toBe('some name semester 4');
+    expect(fixture.debugElement.query(By.css('.test-title')).nativeElement.innerText).toBe('NAME semester 4');
   });
 // test-amount-modules
 });
