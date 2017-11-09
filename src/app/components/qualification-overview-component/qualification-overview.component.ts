@@ -13,7 +13,7 @@ import {QualificationsOverview} from '../../models/qualificiationfiltermodels/qu
 })
 export class QualificationOverviewComponent implements AfterContentInit {
   filter: FilterQualifications;
-  table: QualificationsOverview;
+  table: QualificationsOverview[];
   selectedcurriculum: Curriculum;
   selectearchitecurallayer: ArchitecturalLayer;
   selectedlifecycle: LifecycleActivity;
@@ -22,12 +22,21 @@ export class QualificationOverviewComponent implements AfterContentInit {
 
   selectCurriculum(curriculum: Curriculum): void {
     this.selectedcurriculum = curriculum;
+    if(this.readyToLoadTable()) {
+      this.loadTable();
+    }
   }
   selectedLifecycle(lifecycle: LifecycleActivity): void {
     this.selectedlifecycle = lifecycle;
+    if(this.readyToLoadTable()) {
+      this.loadTable();
+    }
   }
   selectedArchitecturalLayer(architecturallayer: ArchitecturalLayer): void {
     this.selectearchitecurallayer = architecturallayer;
+    if(this.readyToLoadTable()) {
+      this.loadTable();
+    }
   }
   readyToLoadTable(): boolean {
     if (this.readytoload) {
@@ -39,7 +48,8 @@ export class QualificationOverviewComponent implements AfterContentInit {
     return false;
   }
   loadTable(): void {
-
+    this.backendService.getQualificationTable(this.selectedcurriculum.id, this.selectearchitecurallayer.architectural_layer_id, this.selectedlifecycle.lifecycle_activity_id)
+      .subscribe(table => this.table = table);
   }
 
   ngAfterContentInit(): void {

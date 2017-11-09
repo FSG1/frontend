@@ -11,6 +11,7 @@ import {ModuleContent} from './models/modulecontent.model';
 import {CompleteSemester} from './models/complete_semester.model';
 import {Subscriber} from 'rxjs/Subscriber';
 import {FilterQualifications} from './models/qualificiationfiltermodels/filter_qualifications.model';
+import {QualificationsOverview} from './models/qualificiationfiltermodels/qualifications_overview.model';
 
 // Only here until endpoint is implemented
 const mocksemester = {
@@ -48,6 +49,16 @@ const filterqualifications = {
     {'architectural_layer_id': 2, 'architectural_layer_name': 'Infrastructure', 'architectural_layer_description': 'something'},
     {'architectural_layer_id': 3, 'architectural_layer_name': 'software', 'architectural_layer_description': 'something'}],
 };
+const mockqualificationtable = [{
+  'skills_level': 1,
+  'qualifications_overview_semesters': null
+}, {
+  'skills_level': 2,
+  'qualifications_overview_semesters': null
+}, {
+  'skills_level': 3,
+  'qualifications_overview_semesters': null
+}];
 
 
 // WINDOWS IP:192.168.99.100
@@ -72,6 +83,14 @@ export class BackendService {
     const filterqualificationsUrl = 'http://192.168.99.100:8080/fmms/qualifications';
     return Observable.create((observer: Subscriber<any>) => {
       observer.next(filterqualifications);
+      observer.complete();
+    });
+  }
+  // endpoint does not exist yet
+  getQualificationTable(curriculum: number, architecturallayer: number, activity: number): Observable<QualificationsOverview[]> {
+    const qualificationtableUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + curriculum + '/architecturallayer/' + architecturallayer + '/activity/' + activity;
+    return Observable.create((observer: Subscriber<any>) => {
+      observer.next(mockqualificationtable);
       observer.complete();
     });
   }
