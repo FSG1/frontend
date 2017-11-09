@@ -8,8 +8,14 @@ import {Semester} from '../../models/semester.model';
 import {Curriculum} from '../../models/curriculum.model';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
-import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import {AppRoutingModule} from "../../app.routing";
+import {ActivatedRoute} from '@angular/router';
+import {AppRoutingModule} from '../../app.routing';
+import {ModuleComponent} from '../module-component/module.component';
+import {ExamLGComponent} from '../examlg-component/examlg.component';
+import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
+import {ErrorComponent} from '../../../util/error/error.component';
+import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
+import {APP_BASE_HREF} from '@angular/common';
 
 const curricula = [
   { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
@@ -60,11 +66,21 @@ describe('ModuleOverviewComponent', () => {
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleOverviewComponent,  ],
-      providers: [ {provide: BackendService, useValue: backendServiceStube},
-                   {provide: Router }, {provide: ActivatedRoute, useValue: { 'params': Observable.from([{curriculum: 1}]) }}],
+      declarations: [
+        ModuleComponent,
+        ExamLGComponent,
+        SkillMatrixComponent,
+        ModuleOverviewComponent,
+        ErrorComponent,
+        SemesterOverviewComponent
+      ],
+      providers: [
+        {provide: BackendService, useValue: backendServiceStube},
+        {provide: ActivatedRoute, useValue: { 'params': Observable.from([{curriculum: 1}]) }},
+        {provide: APP_BASE_HREF, useValue: '/'}
+      ],
       imports: [
-        RouterModule
+        AppRoutingModule
       ]
     })
       .compileComponents();
@@ -91,7 +107,7 @@ describe('ModuleOverviewComponent', () => {
     fixture.detectChanges();
     // get the first semester element
     el = de.query(By.css('.semester h2')).nativeElement;
-    expect(el.innerText).toBe('Semester 1:');
+    expect(el.innerText).toBe('Semester 1');
   });
   it('After selecting dropdown item, modules should be displayed', () => {
     fixture.detectChanges();

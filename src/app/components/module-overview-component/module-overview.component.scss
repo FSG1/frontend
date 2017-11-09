@@ -1,11 +1,12 @@
 $darkGrey: darken(grey, 10%);
+$fontys: #636;
 
 a {
   display: block;
 }
 
 .head {
-  background-color: #663366;
+  background-color: $fontys;
 }
 
 .head h2 {
@@ -14,17 +15,35 @@ a {
 
 .semester {
   display: flex;
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 0;
+  margin-right: 0;
+
 
   .col-1 {
     padding: 0;
-    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      border: 2px solid #e0e0e0;
+      border-radius: 5px;
+      background-color: #fafafa;
+      padding: 5px 7px;
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
   }
 
   h2 {
-    margin-top: 2%;
     color: $darkGrey;
+    font-size: 26px;
   }
 }
 
@@ -53,7 +72,7 @@ hr {
     flex-basis: 100%;
 
     h4 {
-      color: #663366;
+      color: $fontys;
       font-weight: 400;
     }
 
