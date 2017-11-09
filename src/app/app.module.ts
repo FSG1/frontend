@@ -15,6 +15,7 @@ import { BackendService } from './backend.service';
 import {ModuleComponent} from './components/module-component/module.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {ExamLGComponent} from './components/examlg-component/examlg.component';
+import {SemesterOverviewComponent} from './components/semester-overview-component/semester-overview.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {ExamLGComponent} from './components/examlg-component/examlg.component';
     ModuleOverviewComponent,
     ModuleComponent,
     ExamLGComponent,
-    SkillMatrixComponent
+    SkillMatrixComponent,
+    SemesterOverviewComponent
   ],
   imports: [
     BrowserModule,

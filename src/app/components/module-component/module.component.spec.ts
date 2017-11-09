@@ -9,10 +9,11 @@ import {By} from '@angular/platform-browser';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
-import {APP_BASE_HREF, LocationStrategy} from "@angular/common";
-import {AppRoutingModule} from "../../app.routing";
-import {ModuleOverviewComponent} from "../module-overview-component/module-overview.component";
-import {ErrorComponent} from "../../../util/error/error.component";
+import {APP_BASE_HREF, LocationStrategy} from '@angular/common';
+import {AppRoutingModule} from '../../app.routing';
+import {ModuleOverviewComponent} from '../module-overview-component/module-overview.component';
+import {ErrorComponent} from '../../../util/error/error.component';
+import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
 
 
 const modulemodel = {
@@ -91,7 +92,7 @@ describe('Testing module component', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent, ModuleOverviewComponent, ErrorComponent ],
+      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent, ModuleOverviewComponent, ErrorComponent, SemesterOverviewComponent ],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
                { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
       imports: [

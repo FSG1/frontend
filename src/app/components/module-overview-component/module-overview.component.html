@@ -21,15 +21,18 @@
 </div>
 
 <div class="row semester" *ngFor="let semester of semesters">
-  <div class="col-1 vcenter">
+  <div class="col-1">
     <h2>
-      Semester {{ semester.semester }}:
+      Semester {{ semester.semester }}
     </h2>
+    <a [routerLink]="['/curriculum/', selectedCurriculum.id, 'semesters', semester.semester]" class="hoverable">
+      <span>Qualifications</span>
+    </a>
   </div>
 
   <div class="col-11 modules" style="">
     <div class="hoverable module" *ngFor="let module of semester.modules">
-      <a (click)="onClick(module.module_code)">
+      <a [routerLink]="['/curriculum/',  selectedCurriculum.id, 'modules', module.module_code]">
         <h4>{{ module.module_code }}</h4>
         <p class="module-name">{{module.module_name}}</p>
         <p class="module-credits">Credits {{ module.credits }}</p>
@@ -39,4 +42,3 @@
 
   <hr>
 </div>
-

@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ErrorComponent} from '../util/error/error.component';
 import {ModuleComponent} from './components/module-component/module.component';
 import {ModuleOverviewComponent} from './components/module-overview-component/module-overview.component';
+import {SemesterOverviewComponent} from './components/semester-overview-component/semester-overview.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'curriculum/:curriculum/modules/:code',
     component: ModuleComponent
+  },
+  {
+    path: 'curriculum/:curriculum/semesters/:semester',
+    component: SemesterOverviewComponent
   },
   {
     path: '',

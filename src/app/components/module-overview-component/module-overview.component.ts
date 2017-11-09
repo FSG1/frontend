@@ -2,8 +2,8 @@ import {AfterContentInit, Component, OnDestroy} from '@angular/core';
 import {Semester} from '../../models/semester.model';
 import {BackendService} from '../../backend.service';
 import {Curriculum} from '../../models/curriculum.model';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from "rxjs/Subscription";
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-module-overview',
@@ -20,7 +20,7 @@ export class ModuleOverviewComponent implements AfterContentInit, OnDestroy {
   routeSubscription: Subscription;
   selectedCurriculumId: number = -1;
 
-  constructor(private backendService: BackendService, private router: Router, private route: ActivatedRoute) {
+  constructor(private backendService: BackendService, private route: ActivatedRoute) {
     this.curricula = [];
   }
 
@@ -35,10 +35,6 @@ export class ModuleOverviewComponent implements AfterContentInit, OnDestroy {
     this.getSemesters(curriculum.id);
   }
 
-  onClick(module_code: string): void {
-    this.router.navigate(['/curriculum/',this.selectedCurriculum.id,'modules', module_code]);
-  }
-
   getSemesters(curriculumId: number): void {
       this.backendService.getSemesters(curriculumId)
         .subscribe(semesters => this.semesters = semesters);
@@ -51,7 +47,7 @@ export class ModuleOverviewComponent implements AfterContentInit, OnDestroy {
 
         if (this.selectedCurriculumId > 0) {
           curricula.forEach(cur => {
-            if (cur.id == this.selectedCurriculumId) {
+            if (cur.id === this.selectedCurriculumId) {
               this.selectedCurriculum = cur;
               this.selectedCurriculumName = cur.name;
 
