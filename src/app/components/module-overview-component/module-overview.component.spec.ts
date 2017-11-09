@@ -90,7 +90,7 @@ describe('ModuleOverviewComponent', () => {
     component.onSelect(curriculum);
     fixture.detectChanges();
     // get the first semester element
-    el = de.query(By.css('.text-secondary')).nativeElement;
+    el = de.query(By.css('.semester h2')).nativeElement;
     expect(el.innerText).toBe('Semester 1:');
   });
   it('After selecting dropdown item, modules should be displayed', () => {
@@ -99,7 +99,7 @@ describe('ModuleOverviewComponent', () => {
     component.onSelect(curriculum);
     fixture.detectChanges();
     // get the first module element
-    el = de.query(By.css('p')).nativeElement;
+    el = de.query(By.css('p.module-credits')).nativeElement;
     expect(el.innerText).toBe('Credits 5');
   });
 });
