@@ -85,6 +85,10 @@ hr {
       margin-bottom: 5px;
       color: $darkGrey;
     }
+
+    &.project {
+      background-color: darken(#fafafa, 5%);
+    }
   }
 }
 
