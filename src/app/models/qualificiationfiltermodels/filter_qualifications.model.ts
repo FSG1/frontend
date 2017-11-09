@@ -3,7 +3,7 @@ import {LifecycleActivity} from '../lifecycleactivity';
 import {ArchitecturalLayer} from '../architecturallayer';
 
 export interface FilterQualifications {
-  curriculums: Curriculum[];
+  curricula: Curriculum[];
   lifecycle_activities: LifecycleActivity[];
   architectural_layers: ArchitecturalLayer[];
 }

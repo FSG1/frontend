@@ -13,6 +13,7 @@ import {Subscriber} from 'rxjs/Subscriber';
 
 // Only here until endpoint is implemented
 const mocksemester = {
+  'curriculum_name': 'software business',
   'modules': [
     {'module_code': 'JAV1',        'module_name': 'Programming in Java 1',       'credits': 5 },
     {'module_code': 'DBS1',         'module_name': 'Databases',       'credits': 5 },
@@ -44,7 +45,7 @@ export class BackendService {
   }
   // endpoint does not exist yet
   getSemester(curriculum: number, semester: number): Observable<CompleteSemester>{
-    const completeSemesterUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + curriculum + '/semesters/' + semester;
+    const completeSemesterUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + curriculum + '/semesters/' + semester;
     return Observable.create((observer: Subscriber<any>) => {
       observer.next(mocksemester);
       observer.complete();
@@ -52,17 +53,17 @@ export class BackendService {
   }
 
   getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
-    const moduleContentUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + curriculum + '/modules/' + code;
+    const moduleContentUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + curriculum + '/modules/' + code;
     return this.http.get<ModuleContent>(moduleContentUrl);
   }
 
   getCurricula(): Observable<Curriculum[]> {
-    const curriculaUrl = 'http://172.17.0.1:8080/fmms/curricula';
+    const curriculaUrl = 'http://192.168.99.100:8080/fmms/curricula';
     return this.http.get<Curriculum[]>(curriculaUrl);
   }
 
   getSemesters(id: number): Observable<Semester[]> {
-    const semestersUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + id + '/semesters';
+    const semestersUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + id + '/semesters';
     return this.http.get<CurriculumResponse>(semestersUrl)
       .map(data => data.semesters);
   }

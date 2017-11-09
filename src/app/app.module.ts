@@ -16,6 +16,7 @@ import {ModuleComponent} from './components/module-component/module.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {ExamLGComponent} from './components/examlg-component/examlg.component';
 import {SemesterOverviewComponent} from './components/semester-overview-component/semester-overview.component';
+import {QualificationOverviewComponent} from './components/qualification-overview-component/qualification-overview.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {SemesterOverviewComponent} from './components/semester-overview-componen
     ModuleComponent,
     ExamLGComponent,
     SkillMatrixComponent,
-    SemesterOverviewComponent
+    SemesterOverviewComponent,
+    QualificationOverviewComponent
   ],
   imports: [
     BrowserModule,
