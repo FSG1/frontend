@@ -15,7 +15,6 @@ import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {By} from '@angular/platform-browser';
 
 const mocksemester = {
-  'semester': 1,
   'modules': [
     {'module_code': 'JAV1',        'module_name': 'Programming in Java 1',       'credits': 5 },
     {'module_code': 'DBS1',         'module_name': 'Databases',       'credits': 5 },

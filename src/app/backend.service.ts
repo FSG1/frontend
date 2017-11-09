@@ -13,7 +13,6 @@ import {Subscriber} from 'rxjs/Subscriber';
 
 // Only here until endpoint is implemented
 const mocksemester = {
-  'semester': 1,
   'modules': [
     {'module_code': 'JAV1',        'module_name': 'Programming in Java 1',       'credits': 5 },
     {'module_code': 'DBS1',         'module_name': 'Databases',       'credits': 5 },
@@ -35,6 +34,8 @@ const mocksemester = {
     {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}]
 };
 
+// WINDOWS IP:192.168.99.100
+// LINUX IP: 172.17.0.1
 
 @Injectable()
 export class BackendService {
