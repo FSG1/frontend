@@ -10,6 +10,7 @@ import {CurriculumResponse} from './backend-responses/CurriculumResponse';
 import {ModuleContent} from './models/modulecontent.model';
 import {CompleteSemester} from './models/complete_semester.model';
 import {Subscriber} from 'rxjs/Subscriber';
+import {FilterQualifications} from './models/qualificiationfiltermodels/filter_qualifications.model';
 
 // Only here until endpoint is implemented
 const mocksemester = {
@@ -34,6 +35,20 @@ const mocksemester = {
     {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
     {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}]
 };
+const filterqualifications = {
+  'curricula': [
+    { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
+    { 'name': 'Business Informatics', 'code': 'BI', 'id': 2}],
+  'lifecycle_activities': [{'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
+    {'lifecycle_activity_id': 1, 'lifecycle_activity_name': 'Analyze', 'lifecycle_activity_description': 'something'},
+    {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
+    {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}],
+  'architectural_layers': [{'architectural_layer_id': 0, 'architectural_layer_name': 'User Interaction', 'architectural_layer_description': 'something'},
+    {'architectural_layer_id': 1, 'architectural_layer_name': 'Business Processes', 'Architectural_layer_description': 'something'},
+    {'architectural_layer_id': 2, 'architectural_layer_name': 'Infrastructure', 'architectural_layer_description': 'something'},
+    {'architectural_layer_id': 3, 'architectural_layer_name': 'software', 'architectural_layer_description': 'something'}],
+};
+
 
 // WINDOWS IP:192.168.99.100
 // LINUX IP: 172.17.0.1
@@ -44,10 +59,19 @@ export class BackendService {
   constructor(private http: HttpClient) {
   }
   // endpoint does not exist yet
-  getSemester(curriculum: number, semester: number): Observable<CompleteSemester>{
+  getSemester(curriculum: number, semester: number): Observable<CompleteSemester> {
     const completeSemesterUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + curriculum + '/semesters/' + semester;
     return Observable.create((observer: Subscriber<any>) => {
       observer.next(mocksemester);
+      observer.complete();
+    });
+  }
+
+  // endpoint does not exist yet
+  getQualifications(): Observable<FilterQualifications> {
+    const filterqualificationsUrl = 'http://192.168.99.100:8080/fmms/qualifications';
+    return Observable.create((observer: Subscriber<any>) => {
+      observer.next(filterqualifications);
       observer.complete();
     });
   }

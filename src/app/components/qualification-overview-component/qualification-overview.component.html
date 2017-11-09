@@ -1,1 +1,54 @@
-mama mia dit is de pizzaria
+<div class="filter">
+
+  <div class="text-center" dropdown>
+    <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+      Curriculum
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li class="dropdown-item" *ngFor="let curriculum of filter.curricula" >
+        <a (click)="selectCurriculum(curriculum)">{{curriculum.name}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="text-center" dropdown>
+    <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+      Lifecycle activities
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li class="dropdown-item" *ngFor="let lifecycle of filter.lifecycle_activities" >
+        <a (click)="selectedLifecycle(lifecycle)">{{lifecycle.lifecycle_activity_name}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="text-center" dropdown>
+    <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+      Architectural layers
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li class="dropdown-item" *ngFor="let architecturallayer of filter.architectural_layers" >
+        <a (click)="selectedArchitecturalLayer(architecturallayer)">{{architecturallayer.architectural_layer_name}}</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<div *ngIf="readyToLoadTable()">
+
+  <div class="jumbotron jumbotron-fluid head">
+    <div  class="container text-center">
+      <h2>
+        Filtered on {{selectedcurriculum.name}}, {{selectedlifecycle.lifecycle_activity_name}} and {{selectearchitecurallayer.architectural_layer_name}}
+      </h2>
+    </div>
+  </div>
+
+</div>
