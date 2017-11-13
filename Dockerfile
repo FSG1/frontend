@@ -17,4 +17,4 @@ STOPSIGNAL SIGTERM
 ENTRYPOINT ["ng"]
 
 # Execute ng to listen on all adresses
-CMD ["serve", "--host=0.0.0.0", "--env=$(APPLICATION_ENV)"]
+CMD ["serve", "--host=0.0.0.0", "echo --env=$APPLICATION_ENV"]
