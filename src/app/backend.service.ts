@@ -51,14 +51,47 @@ const filterqualifications = {
 };
 const mockqualificationtable = [{
   'skills_level': 1,
-  'qualifications_overview_semesters': null
+  'qualifications_overview_semesters': [
+    {'semester': 1,
+     'qualifications_modules': [
+     {
+      'module_code': 'BUA',
+      'module_name': 'Business informatics',
+      'credits': 4,
+      'learning_goals': null
+     }, {
+       'module_code': 'JAV1',
+       'module_name': 'Java 1',
+       'credits': 5,
+       'learning_goals': null
+     }, {
+       'module_code': 'DBS',
+       'module_name': 'Databases',
+       'credits': 5,
+       'learning_goals': null
+     }]
+    },
+    {'semester': 3,
+     'qualifications_modules': null},
+    {'semester': 7,
+     'qualifications_modules': null}]
 }, {
   'skills_level': 2,
-  'qualifications_overview_semesters': null
+  'qualifications_overview_semesters': [
+    {'semester': 2,
+      'qualifications_modules': null
+    },
+    {'semester': 4,
+      'qualifications_modules': null}]
 }, {
   'skills_level': 3,
-  'qualifications_overview_semesters': null
+  'qualifications_overview_semesters': [
+    {'semester': 8,
+      'qualifications_modules': null
+    }]
 }];
+
+
 
 
 // WINDOWS IP:192.168.99.100
