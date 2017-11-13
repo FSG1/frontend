@@ -73,7 +73,7 @@ const mockqualificationtable = [{
           'learning_goals': [
             {
               'name': 'lg3',
-              'description': 'blablabla'
+              'description': 'heel mooi'
             }, {
               'name': 'lg4',
               'description': 'blablabla'
@@ -129,7 +129,7 @@ const mockqualificationtable = [{
         'credits': 15,
         'learning_goals': [
           {
-            'name': 'lg12',
+            'name': 'lg4',
             'description': 'blablabla'
           }]
       }]

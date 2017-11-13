@@ -8,6 +8,7 @@ import {QualificationsOverview} from '../../models/qualificiationfiltermodels/qu
 import {QualificationsModule} from '../../models/qualificiationfiltermodels/qualifications_module';
 import {forEach} from '@angular/router/src/utils/collection';
 import {QualificationsOverviewSemester} from "../../models/qualificiationfiltermodels/qualifications_overview_semester.model";
+import {QualificationsLearningGoal} from '../../models/qualificiationfiltermodels/qualifications_learning_goal.model';
 
 @Component({
   selector: 'app-qualification-overview',
@@ -108,25 +109,24 @@ export class QualificationOverviewComponent implements AfterContentInit {
     return -1;
   }
   getModule(spot: number): QualificationsModule {
-    let lowerboundary: number;
-    lowerboundary = 0;
-    let upperboundary: number;
-    upperboundary = 0;
-    for (let i = 0; i < this.table.length; i++) {
-      const overview = this.table[i];
-      for (let j = 0; j < overview.qualification_overview_semesters.length; j++) {
-        const semester = overview.qualification_overview_semesters[j];
-        for (let k = 0; k < semester.qualifications_modules.length; k++) {
-          upperboundary = semester.qualifications_modules[k].learning_goals.length;
-          if (spot >= lowerboundary && spot < upperboundary) {
-            return semester.qualifications_modules[k];
-          }
-          lowerboundary = upperboundary;
-        }
-      }
-    }
+    let count: number;
+    let mod: QualificationsModule;
+    count = 0;
+    this.table.forEach(overview => {
+      overview.qualification_overview_semesters.forEach( semester => {
+        semester.qualifications_modules.forEach( module => {
+          module.learning_goals.forEach( lg => {
+            if (count === spot) {
+              mod = module;
+            }
+            count++;
+          });
+        });
+      });
+    });
 
-    return null;
+    return mod;
+
   }
   getModuleCode(spot: number): string {
     const module = this.getModule(spot);
@@ -136,25 +136,29 @@ export class QualificationOverviewComponent implements AfterContentInit {
     return this.getModule(spot).module_code;
   }
   getModuleCredits(spot: number): number {
-    let lowerboundary: number;
-    lowerboundary = 0;
-    let upperboundary: number;
-    upperboundary = 0;
-    for (let i = 0; i < this.table.length; i++) {
-      const overview = this.table[i];
-      for (let j = 0; j < overview.qualification_overview_semesters.length; j++) {
-        const semester = overview.qualification_overview_semesters[j];
-        for (let k = 0; k < semester.qualifications_modules.length; k++) {
-          upperboundary = semester.qualifications_modules[k].learning_goals.length;
-          if (spot >= lowerboundary && spot < upperboundary) {
-            return semester.qualifications_modules[k].credits;
-          }
-          lowerboundary = upperboundary;
-        }
-      }
+    const module = this.getModule(spot);
+    if(module === null) {
+      return -1;
     }
-
-    return -1;
+    return this.getModule(spot).credits;
+  }
+  getLearningGoal(spot: number): string {
+    let count: number;
+    let qlg: QualificationsLearningGoal;
+    count = 0;
+    this.table.forEach(overview => {
+      overview.qualification_overview_semesters.forEach( semester => {
+        semester.qualifications_modules.forEach( module => {
+          module.learning_goals.forEach( lg => {
+            if (count === spot) {
+              qlg = lg;
+            }
+            count++;
+          });
+        });
+      });
+    });
+    return qlg.description;
   }
   ngAfterContentInit(): void {
     this.readytoload = false;
