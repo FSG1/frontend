@@ -10,6 +10,7 @@ import {CurriculumResponse} from './backend-responses/CurriculumResponse';
 import {ModuleContent} from './models/modulecontent.model';
 import {CompleteSemester} from './models/complete_semester.model';
 import {Subscriber} from 'rxjs/Subscriber';
+import {environment} from '../environments/environment';
 
 // Only here until endpoint is implemented
 const mocksemester = {
@@ -22,16 +23,22 @@ const mocksemester = {
     {'module_code': 'PRJ1',        'module_name': 'Project 1',       'credits': 10 },
     {'module_code': 'COM1',        'module_name': 'Communication 1',       'credits': 2 }
   ],
-  'qualifications': [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
-    {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 2}],
-  'architectural_layers': [{'architectural_layer_id': 0, 'architectural_layer_name': 'User Interaction', 'architectural_layer_description': 'something'},
+  'qualifications': [
+    {'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
+    {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 2}
+  ],
+  'architectural_layers': [
+    {'architectural_layer_id': 0, 'architectural_layer_name': 'User Interaction', 'architectural_layer_description': 'something'},
     {'architectural_layer_id': 1, 'architectural_layer_name': 'Business Processes', 'Architectural_layer_description': 'something'},
     {'architectural_layer_id': 2, 'architectural_layer_name': 'Infrastructure', 'architectural_layer_description': 'something'},
-    {'architectural_layer_id': 3, 'architectural_layer_name': 'software', 'architectural_layer_description': 'something'}],
-  'lifecycle_activities': [{'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
+    {'architectural_layer_id': 3, 'architectural_layer_name': 'software', 'architectural_layer_description': 'something'}
+  ],
+  'lifecycle_activities': [
+    {'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
     {'lifecycle_activity_id': 1, 'lifecycle_activity_name': 'Analyze', 'lifecycle_activity_description': 'something'},
     {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}]
+    {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}
+  ]
 };
 
 // WINDOWS IP:192.168.99.100
@@ -44,7 +51,7 @@ export class BackendService {
   }
   // endpoint does not exist yet
   getSemester(curriculum: number, semester: number): Observable<CompleteSemester>{
-    const completeSemesterUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + curriculum + '/semesters/' + semester;
+    const completeSemesterUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/semesters/' + semester;
     return Observable.create((observer: Subscriber<any>) => {
       observer.next(mocksemester);
       observer.complete();
@@ -52,17 +59,17 @@ export class BackendService {
   }
 
   getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
-    const moduleContentUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + curriculum + '/modules/' + code;
+    const moduleContentUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/modules/' + code;
     return this.http.get<ModuleContent>(moduleContentUrl);
   }
 
   getCurricula(): Observable<Curriculum[]> {
-    const curriculaUrl = 'http://172.17.0.1:8080/fmms/curricula';
+    const curriculaUrl = this.getBaseUrl() + 'curricula';
     return this.http.get<Curriculum[]>(curriculaUrl);
   }
 
   getSemesters(id: number): Observable<Semester[]> {
-    const semestersUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + id + '/semesters';
+    const semestersUrl = this.getBaseUrl() + 'curriculum/' + id + '/semesters';
     return this.http.get<CurriculumResponse>(semestersUrl)
       .map(data => data.semesters);
   }
@@ -70,5 +77,16 @@ export class BackendService {
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
+  }
+
+  private getBaseUrl(): string {
+    return environment.backend.scheme
+      + '://'
+      + environment.backend.host
+      + ':'
+      + environment.backend.port
+      + '/'
+      + environment.backend.base
+      + '/';
   }
 }
