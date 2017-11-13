@@ -18,7 +18,6 @@ export class BackendService {
 
   constructor(private http: HttpClient) {
   }
-  // endpoint does not exist yet
   getSemester(curriculum: number, semester: number): Observable<CompleteSemester>{
     const completeSemesterUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + curriculum + '/semesters/' + semester;
     return this.http.get<CompleteSemester>(completeSemesterUrl);
