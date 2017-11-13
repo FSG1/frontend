@@ -5,6 +5,9 @@ import {LifecycleActivity} from '../../models/lifecycleactivity';
 import {ArchitecturalLayer} from '../../models/architecturallayer';
 import {BackendService} from '../../backend.service';
 import {QualificationsOverview} from '../../models/qualificiationfiltermodels/qualifications_overview.model';
+import {QualificationsModule} from '../../models/qualificiationfiltermodels/qualifications_module';
+import {forEach} from '@angular/router/src/utils/collection';
+import {QualificationsOverviewSemester} from "../../models/qualificiationfiltermodels/qualifications_overview_semester.model";
 
 @Component({
   selector: 'app-qualification-overview',
@@ -19,6 +22,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
   selectedlifecycle: LifecycleActivity;
   constructor(private backendService: BackendService, ) {}
   readytoload: boolean;
+  tablesize: number[];
 
   selectCurriculum(curriculum: Curriculum): void {
     this.selectedcurriculum = curriculum;
@@ -50,6 +54,26 @@ export class QualificationOverviewComponent implements AfterContentInit {
   loadTable(): void {
     this.backendService.getQualificationTable(this.selectedcurriculum.id, this.selectearchitecurallayer.architectural_layer_id, this.selectedlifecycle.lifecycle_activity_id)
       .subscribe(table => this.table = table);
+    this.countTotalLearningGoals(this.table);
+  }
+  countLearningGoalsSkillLevel(qualificationsmodules: QualificationsOverviewSemester[]): number {
+    let returnvalue: number;
+    returnvalue = 0;
+    qualificationsmodules.forEach(item => {
+      item.qualifications_modules.forEach(modules => {returnvalue += modules.learning_goals.length; });
+    });
+    returnvalue += 5;
+    return returnvalue;
+  }
+  countTotalLearningGoals(overview: QualificationsOverview[]): void {
+    let returnvalue: number;
+    returnvalue = 0;
+    overview.forEach( tabl => {returnvalue += this.countLearningGoalsSkillLevel(tabl.qualification_overview_semesters); });
+    this.tablesize = Array(returnvalue).fill(0).map((x, i) => i);
+  }
+  getSkillLevel(spot: number): number {
+    // table.forEach();
+    // TODO
   }
 
   ngAfterContentInit(): void {

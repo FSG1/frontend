@@ -51,7 +51,19 @@
     </div>
   </div>
 
-  <div *ngFor="let level of table">
-    {{level.skills_level}}
-  </div>
-</div>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Skills level</th>
+        <th>Semester</th>
+        <th>Educational unit</th>
+        <th>Credits</th>
+        <th>Learning goals</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let number of tablesize"><td></td></tr>
+    </tbody>
+  </table>

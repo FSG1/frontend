@@ -51,46 +51,129 @@ const filterqualifications = {
 };
 const mockqualificationtable = [{
   'skills_level': 1,
-  'qualifications_overview_semesters': [
+  'qualification_overview_semesters': [
     {'semester': 1,
-     'qualifications_modules': [
-     {
-      'module_code': 'BUA',
-      'module_name': 'Business informatics',
-      'credits': 4,
-      'learning_goals': null
-     }, {
-       'module_code': 'JAV1',
-       'module_name': 'Java 1',
-       'credits': 5,
-       'learning_goals': null
-     }, {
-       'module_code': 'DBS',
-       'module_name': 'Databases',
-       'credits': 5,
-       'learning_goals': null
-     }]
+      'qualifications_modules': [
+        {
+          'module_code': 'BUA',
+          'module_name': 'Business informatics',
+          'credits': 4,
+          'learning_goals': [
+            {
+              'name': 'lg1',
+              'description': 'blablabla'
+            }, {
+              'name': 'lg2',
+              'description': 'blablabla'
+            }]
+        }, {
+          'module_code': 'JAV1',
+          'module_name': 'Java 1',
+          'credits': 5,
+          'learning_goals': [
+            {
+              'name': 'lg4',
+              'description': 'blablabla'
+            }, {
+              'name': 'lg5',
+              'description': 'blablabla'
+            }, {
+              'name': 'lg6',
+              'description': 'blablabla'
+            }]
+        }, {
+          'module_code': 'DBS',
+          'module_name': 'Databases',
+          'credits': 5,
+          'learning_goals': [
+            {
+              'name': 'lg8',
+              'description': 'blablabla'
+            }]
+        }]
     },
     {'semester': 3,
-     'qualifications_modules': null},
+      'qualifications_modules': [
+        {
+          'module_code': 'BUMA',
+          'module_name': 'Business management',
+          'credits': 5,
+          'learning_goals': [
+            {
+              'name': 'lg4',
+              'description': 'blablabla'
+            }, {
+              'name': 'lg5',
+              'description': 'blablabla'
+            }, {
+              'name': 'lg6',
+              'description': 'blablabla'
+            }]
+        }, {
+          'module_code': 'COM3',
+          'module_name': 'Communicatie 3',
+          'credits': 1,
+          'learning_goals': [
+            {
+              'name': 'lg4',
+              'description': 'blablabla'
+            }, {
+              'name': 'lg6',
+              'description': 'blablabla'
+            }]
+        }]},
     {'semester': 7,
-     'qualifications_modules': null}]
-}, {
+      'qualifications_modules': [{
+        'module_code': 'SOFA',
+        'module_name': 'Software factorio',
+        'credits': 15,
+        'learning_goals': [
+          {
+            'name': 'lg4',
+            'description': 'blablabla'
+          }]
+      }]
+    }]},  {
   'skills_level': 2,
-  'qualifications_overview_semesters': [
+  'qualification_overview_semesters': [
     {'semester': 2,
-      'qualifications_modules': null
+      'qualifications_modules': [
+        {
+          'module_code': 'etc',
+          'module_name': 'etc',
+          'credits': 15,
+          'learning_goals': [
+            {
+              'name': 'lg4',
+              'description': 'blablabla'
+            }, {
+              'name': 'lg5',
+              'description': 'blablabla'
+            }, {
+              'name': 'lg6',
+              'description': 'blablabla'
+            }]
+        }]
     },
     {'semester': 4,
-      'qualifications_modules': null}]
-}, {
-  'skills_level': 3,
-  'qualifications_overview_semesters': [
-    {'semester': 8,
-      'qualifications_modules': null
-    }]
+      'qualifications_modules': [{
+        'module_code': 'etc',
+        'module_name': 'etc',
+        'credits': 1,
+        'learning_goals': [
+          {
+            'name': 'lg4',
+            'description': 'blablabla'
+          }, {
+            'name': 'lg5',
+            'description': 'blablabla'
+          }, {
+            'name': 'lg6',
+            'description': 'blablabla'
+          }]
+      }
+      ]}]
 }];
-
 
 
 
