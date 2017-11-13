@@ -56,13 +56,12 @@ export class QualificationOverviewComponent implements AfterContentInit {
       .subscribe(table => this.table = table);
     this.countTotalLearningGoals(this.table);
   }
-  countLearningGoalsSkillLevel(qualificationsmodules: QualificationsOverviewSemester[]): number {
+  countLearningGoalsSkillLevel(semesters: QualificationsOverviewSemester[]): number {
     let returnvalue: number;
     returnvalue = 0;
-    qualificationsmodules.forEach(item => {
+    semesters.forEach(item => {
       item.qualifications_modules.forEach(modules => {returnvalue += modules.learning_goals.length; });
     });
-    returnvalue += 5;
     return returnvalue;
   }
   countTotalLearningGoals(overview: QualificationsOverview[]): void {
@@ -72,10 +71,91 @@ export class QualificationOverviewComponent implements AfterContentInit {
     this.tablesize = Array(returnvalue).fill(0).map((x, i) => i);
   }
   getSkillLevel(spot: number): number {
-    // table.forEach();
-    // TODO
-  }
+    let level: number;
+    let lowerboundary: number;
+    lowerboundary = 0;
+    let upperboundary: number;
+    upperboundary = 0;
+    for (let i = 0; i < this.table.length; i++) {
+      level = this.table[i].skills_level;
+      upperboundary += this.countLearningGoalsSkillLevel(this.table[i].qualification_overview_semesters);
+      // have to test if boundary works
+      if (spot >= lowerboundary && spot < upperboundary) {
+        return level;
+    }
+      lowerboundary = upperboundary;
 
+    }
+  return -1;
+  }
+  getSemester(spot: number): number {
+    let lowerboundary: number;
+    lowerboundary = 0;
+    let upperboundary: number;
+    upperboundary = 0;
+
+    for (let i = 0; i < this.table.length; i++) {
+      for (let j = 0; j < this.table[i].qualification_overview_semesters.length; j++) {
+        this.table[i].qualification_overview_semesters[j].qualifications_modules.forEach( modules => {
+          upperboundary += modules.learning_goals.length;
+        });
+        if (spot >= lowerboundary && spot < upperboundary) {
+          return this.table[i].qualification_overview_semesters[j].semester;
+        }
+        lowerboundary = upperboundary;
+      }
+    }
+    return -1;
+  }
+  getModule(spot: number): QualificationsModule {
+    let lowerboundary: number;
+    lowerboundary = 0;
+    let upperboundary: number;
+    upperboundary = 0;
+    for (let i = 0; i < this.table.length; i++) {
+      const overview = this.table[i];
+      for (let j = 0; j < overview.qualification_overview_semesters.length; j++) {
+        const semester = overview.qualification_overview_semesters[j];
+        for (let k = 0; k < semester.qualifications_modules.length; k++) {
+          upperboundary = semester.qualifications_modules[k].learning_goals.length;
+          if (spot >= lowerboundary && spot < upperboundary) {
+            return semester.qualifications_modules[k];
+          }
+          lowerboundary = upperboundary;
+        }
+      }
+    }
+
+    return null;
+  }
+  getModuleCode(spot: number): string {
+    const module = this.getModule(spot);
+    if(module === null) {
+      return '-1';
+    }
+    return this.getModule(spot).module_code;
+  }
+  getModuleCredits(spot: number): number {
+    let lowerboundary: number;
+    lowerboundary = 0;
+    let upperboundary: number;
+    upperboundary = 0;
+    for (let i = 0; i < this.table.length; i++) {
+      const overview = this.table[i];
+      for (let j = 0; j < overview.qualification_overview_semesters.length; j++) {
+        const semester = overview.qualification_overview_semesters[j];
+        for (let k = 0; k < semester.qualifications_modules.length; k++) {
+          upperboundary = semester.qualifications_modules[k].learning_goals.length;
+          if (spot >= lowerboundary && spot < upperboundary) {
+            return semester.qualifications_modules[k].credits;
+          }
+          lowerboundary = upperboundary;
+        }
+      }
+    }
+
+    return -1;
+  }
   ngAfterContentInit(): void {
     this.readytoload = false;
     this.backendService.getQualifications()

@@ -72,13 +72,13 @@ const mockqualificationtable = [{
           'credits': 5,
           'learning_goals': [
             {
+              'name': 'lg3',
+              'description': 'blablabla'
+            }, {
               'name': 'lg4',
               'description': 'blablabla'
             }, {
               'name': 'lg5',
-              'description': 'blablabla'
-            }, {
-              'name': 'lg6',
               'description': 'blablabla'
             }]
         }, {
@@ -87,7 +87,7 @@ const mockqualificationtable = [{
           'credits': 5,
           'learning_goals': [
             {
-              'name': 'lg8',
+              'name': 'lg6',
               'description': 'blablabla'
             }]
         }]
@@ -100,13 +100,13 @@ const mockqualificationtable = [{
           'credits': 5,
           'learning_goals': [
             {
-              'name': 'lg4',
+              'name': 'lg7',
               'description': 'blablabla'
             }, {
-              'name': 'lg5',
+              'name': 'lg8',
               'description': 'blablabla'
             }, {
-              'name': 'lg6',
+              'name': 'lg9',
               'description': 'blablabla'
             }]
         }, {
@@ -115,10 +115,10 @@ const mockqualificationtable = [{
           'credits': 1,
           'learning_goals': [
             {
-              'name': 'lg4',
+              'name': 'lg10',
               'description': 'blablabla'
             }, {
-              'name': 'lg6',
+              'name': 'lg11',
               'description': 'blablabla'
             }]
         }]},
@@ -129,7 +129,7 @@ const mockqualificationtable = [{
         'credits': 15,
         'learning_goals': [
           {
-            'name': 'lg4',
+            'name': 'lg12',
             'description': 'blablabla'
           }]
       }]
