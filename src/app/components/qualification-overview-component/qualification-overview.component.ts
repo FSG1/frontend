@@ -16,6 +16,9 @@ import {QualificationsLearningGoal} from '../../models/qualificiationfiltermodel
   styleUrls: ['./qualification-overview.component.scss']
 })
 export class QualificationOverviewComponent implements AfterContentInit {
+  selected
+
+
   filter: FilterQualifications;
   table: QualificationsOverview[];
   selectedcurriculum: Curriculum;
@@ -31,7 +34,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
 
   selectCurriculum(curriculum: Curriculum): void {
     this.selectedcurriculum = curriculum;
-    if(this.readyToLoadTable()) {
+    if (this.readyToLoadTable()) {
       this.loadTable();
     }
   }
@@ -242,7 +245,8 @@ export class QualificationOverviewComponent implements AfterContentInit {
     this.lastloadedskilllevel = -1;
     this.lastloadedsemester = -1;
     this.lastloadedmodulecode = '-1';
-    this.lastloadedmodulecodefc = '-1'
+    this.lastloadedmodulecodefc = '-1';
+
     this.backendService.getQualifications()
       .subscribe(filter => this.filter = filter);
   }

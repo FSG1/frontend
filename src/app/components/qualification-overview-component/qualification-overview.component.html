@@ -2,7 +2,12 @@
 
   <div class="text-center" dropdown>
     <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+      <ng-container *ngIf="selectedcurriculum==null;else slc">
       Curriculum
+      </ng-container>
+      <ng-template #slc>
+        {{selectedcurriculum.name}}
+      </ng-template>
       <span class="caret"></span>
     </button>
 
@@ -15,7 +20,12 @@
 
   <div class="text-center" dropdown>
     <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+      <ng-container *ngIf="selectedlifecycle==null;else sllc">
       Lifecycle activities
+      </ng-container>
+      <ng-template #sllc>
+        {{selectedlifecycle.lifecycle_activity_name}}
+      </ng-template>
       <span class="caret"></span>
     </button>
 
@@ -28,7 +38,12 @@
 
   <div class="text-center" dropdown>
     <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+      <ng-container *ngIf="selectearchitecurallayer==null;else slac">
       Architectural layers
+      </ng-container>
+      <ng-template #slac>
+        {{selectearchitecurallayer.architectural_layer_name}}
+      </ng-template>
       <span class="caret"></span>
     </button>
 
