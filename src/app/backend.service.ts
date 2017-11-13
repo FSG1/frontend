@@ -45,10 +45,7 @@ export class BackendService {
   // endpoint does not exist yet
   getSemester(curriculum: number, semester: number): Observable<CompleteSemester>{
     const completeSemesterUrl = 'http://172.17.0.1:8080/fmms/curriculum/' + curriculum + '/semesters/' + semester;
-    return Observable.create((observer: Subscriber<any>) => {
-      observer.next(mocksemester);
-      observer.complete();
-    });
+    return this.http.get<CompleteSemester>(completeSemesterUrl);
   }
 
   getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
