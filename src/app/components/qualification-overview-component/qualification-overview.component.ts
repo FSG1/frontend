@@ -24,6 +24,10 @@ export class QualificationOverviewComponent implements AfterContentInit {
   constructor(private backendService: BackendService, ) {}
   readytoload: boolean;
   tablesize: number[];
+  lastloadedskilllevel: number;
+  lastloadedsemester: number;
+  lastloadedmodulecode: string;
+  lastloadedmodulecodefc: string;
 
   selectCurriculum(curriculum: Curriculum): void {
     this.selectedcurriculum = curriculum;
@@ -80,14 +84,37 @@ export class QualificationOverviewComponent implements AfterContentInit {
     for (let i = 0; i < this.table.length; i++) {
       level = this.table[i].skills_level;
       upperboundary += this.countLearningGoalsSkillLevel(this.table[i].qualification_overview_semesters);
-      // have to test if boundary works
       if (spot >= lowerboundary && spot < upperboundary) {
         return level;
+
     }
       lowerboundary = upperboundary;
 
     }
   return -1;
+  }
+  getSkillLevelRowSpan(spot: number): number {
+    const skillevel = this.getSkillLevel(spot);
+    let rowspan: number;
+    rowspan = 0;
+    for (const tab of this.table){
+      if (tab.skills_level === skillevel) {
+        tab.qualification_overview_semesters.forEach( semester => {
+          semester.qualifications_modules.forEach( modules => {
+            rowspan += modules.learning_goals.length;
+          });
+        });
+      }
+    }
+    return rowspan;
+  }
+  levelLoaded(spot: number): boolean {
+    const skillevel = this.getSkillLevel(spot);
+    if (this.lastloadedskilllevel === skillevel) {
+      return false;
+    }
+    this.lastloadedskilllevel = skillevel;
+    return true;
   }
   getSemester(spot: number): number {
     let lowerboundary: number;
@@ -108,6 +135,29 @@ export class QualificationOverviewComponent implements AfterContentInit {
     }
     return -1;
   }
+  getSemesterRowSpan(spot: number) {
+    const selectedsemester = this.getSemester(spot);
+    let rowspan: number;
+    rowspan = 0;
+    this.table.forEach( overview => {
+      overview.qualification_overview_semesters.forEach( semester => {
+        semester.qualifications_modules.forEach( module => {
+            if(semester.semester === selectedsemester) {
+              rowspan += module.learning_goals.length;
+            }
+          });
+        });
+      });
+   return rowspan;
+  }
+  semesterLoaded(spot: number): boolean {
+    const semester = this.getSemester(spot);
+    if (this.lastloadedsemester === semester) {
+      return false;
+    }
+    this.lastloadedsemester = semester;
+    return true;
+  }
   getModule(spot: number): QualificationsModule {
     let count: number;
     let mod: QualificationsModule;
@@ -127,6 +177,32 @@ export class QualificationOverviewComponent implements AfterContentInit {
 
     return mod;
 
+  }
+  moduleLoaded(spot: number): boolean {
+    const mdlcode = this.getModuleCode(spot);
+    if (this.lastloadedmodulecode !== mdlcode) {
+      this.lastloadedmodulecode = mdlcode;
+      return true;
+    } else if (this.lastloadedmodulecodefc !== mdlcode) {
+      this.lastloadedmodulecodefc = mdlcode;
+      return true;
+    }
+    return false;
+  }
+  getModuleRowSpan(spot: number) {
+    const mdlcode = this.getModuleCode(spot);
+    let rowspan: number;
+    rowspan = 0;
+    this.table.forEach( overview => {
+      overview.qualification_overview_semesters.forEach( semester => {
+        semester.qualifications_modules.forEach( module => {
+          if (module.module_code === mdlcode) {
+            rowspan += module.learning_goals.length;
+          }
+        });
+      });
+    });
+    return rowspan;
   }
   getModuleCode(spot: number): string {
     const module = this.getModule(spot);
@@ -160,8 +236,13 @@ export class QualificationOverviewComponent implements AfterContentInit {
     });
     return qlg.description;
   }
+
   ngAfterContentInit(): void {
     this.readytoload = false;
+    this.lastloadedskilllevel = -1;
+    this.lastloadedsemester = -1;
+    this.lastloadedmodulecode = '-1';
+    this.lastloadedmodulecodefc = '-1'
     this.backendService.getQualifications()
       .subscribe(filter => this.filter = filter);
   }

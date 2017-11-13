@@ -157,7 +157,7 @@ const mockqualificationtable = [{
     },
     {'semester': 4,
       'qualifications_modules': [{
-        'module_code': 'etc',
+        'module_code': 'etc2',
         'module_name': 'etc',
         'credits': 1,
         'learning_goals': [

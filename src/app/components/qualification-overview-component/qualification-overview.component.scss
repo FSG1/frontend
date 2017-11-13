@@ -8,3 +8,14 @@ $fontys: #636;
   background-color: $fontys;
   color:white;
 }
+
+$border: 1px solid black;
+table{
+  border: $border;
+  td{
+    border: $border;
+  }
+  th{
+    border: $border;
+  }
+}
