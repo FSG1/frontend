@@ -7,7 +7,6 @@ import {SemesterOverviewComponent} from './components/semester-overview-componen
 import {QualificationOverviewComponent} from './components/qualification-overview-component/qualification-overview.component';
 import {environment} from '../environments/environment';
 
-
 const routes: Routes = [
   {
     path: 'moduleoverview',

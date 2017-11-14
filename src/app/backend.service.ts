@@ -154,13 +154,6 @@ const mockqualificationtable = [{
       ]}]
 }];
 
-
-
-
-
-// WINDOWS IP:192.168.99.100
-// LINUX IP: 172.17.0.1
-
 @Injectable()
 export class BackendService {
 

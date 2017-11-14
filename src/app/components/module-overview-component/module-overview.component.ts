@@ -47,7 +47,7 @@ export class ModuleOverviewComponent implements OnInit, OnDestroy {
 
         if (this.selectedCurriculumId > 0) {
           curricula.forEach(cur => {
-            if (cur.id == this.selectedCurriculumId) {
+            if (cur.id === this.selectedCurriculumId) {
               this.selectedCurriculum = cur;
               this.selectedCurriculumName = cur.name;
 
