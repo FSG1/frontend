@@ -1,10 +1,10 @@
 
 export const environment = {
-  production: false,
+  production: true,
   backend: {
     scheme: 'http',
-    host: '172.17.0.1',
-    port: 8080,
+    host: '85.214.120.66',
+    port: 28080,
     base: 'fmms'
   }
 };

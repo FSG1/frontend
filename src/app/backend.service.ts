@@ -12,6 +12,7 @@ import {CompleteSemester} from './models/complete_semester.model';
 import {Subscriber} from 'rxjs/Subscriber';
 import {FilterQualifications} from './models/qualificiationfiltermodels/filter_qualifications.model';
 import {QualificationsOverview} from './models/qualificiationfiltermodels/qualifications_overview.model';
+import {environment} from '../environments/environment';
 
 // Only here until endpoint is implemented
 const filterqualifications = {
@@ -155,6 +156,8 @@ const mockqualificationtable = [{
 
 
 
+
+
 // WINDOWS IP:192.168.99.100
 // LINUX IP: 172.17.0.1
 
@@ -163,15 +166,16 @@ export class BackendService {
 
   constructor(private http: HttpClient) {
   }
+
   // endpoint does not exist yet
   getSemester(curriculum: number, semester: number): Observable<CompleteSemester> {
-    const completeSemesterUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + curriculum + '/semesters/' + semester;
+    const completeSemesterUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/semesters/' + semester;
     return this.http.get<CompleteSemester>(completeSemesterUrl);
   }
 
   // endpoint does not exist yet
   getQualifications(): Observable<FilterQualifications> {
-    const filterqualificationsUrl = 'http://192.168.99.100:8080/fmms/qualifications';
+    const filterqualificationsUrl = this.getBaseUrl() + 'qualifications';
     return Observable.create((observer: Subscriber<any>) => {
       observer.next(filterqualifications);
       observer.complete();
@@ -179,25 +183,24 @@ export class BackendService {
   }
   // endpoint does not exist yet
   getQualificationTable(curriculum: number, architecturallayer: number, activity: number): Observable<QualificationsOverview[]> {
-    const qualificationtableUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + curriculum + '/architecturallayer/' + architecturallayer + '/activity/' + activity;
+    const qualificationtableUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/architecturallayer/' + architecturallayer + '/activity/' + activity;
     return Observable.create((observer: Subscriber<any>) => {
       observer.next(mockqualificationtable);
       observer.complete();
     });
   }
-
   getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
-    const moduleContentUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + curriculum + '/modules/' + code;
+    const moduleContentUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/modules/' + code;
     return this.http.get<ModuleContent>(moduleContentUrl);
   }
 
   getCurricula(): Observable<Curriculum[]> {
-    const curriculaUrl = 'http://192.168.99.100:8080/fmms/curricula';
+    const curriculaUrl = this.getBaseUrl() + 'curricula';
     return this.http.get<Curriculum[]>(curriculaUrl);
   }
 
   getSemesters(id: number): Observable<Semester[]> {
-    const semestersUrl = 'http://192.168.99.100:8080/fmms/curriculum/' + id + '/semesters';
+    const semestersUrl = this.getBaseUrl() + 'curriculum/' + id + '/semesters';
     return this.http.get<CurriculumResponse>(semestersUrl)
       .map(data => data.semesters);
   }
@@ -205,5 +208,16 @@ export class BackendService {
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
+  }
+
+  private getBaseUrl(): string {
+    return environment.backend.scheme
+      + '://'
+      + environment.backend.host
+      + ':'
+      + environment.backend.port
+      + '/'
+      + environment.backend.base
+      + '/';
   }
 }

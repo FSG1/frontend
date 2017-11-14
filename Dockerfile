@@ -2,6 +2,8 @@ FROM teracy/angular-cli
 
 LABEL maintainer="Tobias Derksen <tobias.derksen@student.fontys.nl>"
 
+ENV APPLICATION_ENV=develop
+
 RUN mkdir -p /usr/src/fmms
 COPY . /usr/src/fmms
 
@@ -12,7 +14,7 @@ EXPOSE 4200
 
 STOPSIGNAL SIGTERM
 
-ENTRYPOINT ["ng"]
+ENTRYPOINT ["ng", "serve", "--host=0.0.0.0"]
 
 # Execute ng to listen on all adresses
-CMD ["serve", "--host=0.0.0.0"]
+CMD ["--env=dev"]

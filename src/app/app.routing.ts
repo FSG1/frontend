@@ -5,6 +5,8 @@ import {ModuleComponent} from './components/module-component/module.component';
 import {ModuleOverviewComponent} from './components/module-overview-component/module-overview.component';
 import {SemesterOverviewComponent} from './components/semester-overview-component/semester-overview.component';
 import {QualificationOverviewComponent} from './components/qualification-overview-component/qualification-overview.component';
+import {environment} from '../environments/environment';
+
 
 const routes: Routes = [
   {
@@ -43,7 +45,7 @@ Disable tracing in production
  */
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {enableTracing: true})
+    RouterModule.forRoot(routes, {enableTracing: (!environment.production)})
   ],
   exports: [
     RouterModule

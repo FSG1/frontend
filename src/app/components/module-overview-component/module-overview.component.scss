@@ -13,6 +13,11 @@ a {
   color: white;
 }
 
+.dropdown-menu .dropdown-item a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .semester {
   display: flex;
   margin-left: 0;
@@ -79,6 +84,14 @@ hr {
     .module-name, .module-credits {
       margin-bottom: 5px;
       color: $darkGrey;
+    }
+
+    &.project {
+      background-color: darken(#fafafa, 5%);
+    }
+
+    a {
+      height: 100%;
     }
   }
 }

@@ -7,7 +7,9 @@
 
   <ul class="dropdown-menu">
     <li class="dropdown-item" *ngFor="let curriculum of curricula" >
-      <a (click)="onSelect(curriculum)">{{curriculum.code}}</a>
+      <a [routerLink]="['/moduleoverview', curriculum.id]">
+        {{curriculum.name}}
+      </a>
     </li>
   </ul>
 </div>
@@ -30,8 +32,8 @@
     </a>
   </div>
 
-  <div class="col-11 modules" style="">
-    <div class="hoverable module" *ngFor="let module of semester.modules">
+  <div class="col-11 modules">
+    <div class="hoverable module" *ngFor="let module of semester.modules" [ngClass]="{project: module.is_project == true}">
       <a [routerLink]="['/curriculum/',  selectedCurriculum.id, 'modules', module.module_code]">
         <h4>{{ module.module_code }}</h4>
         <p class="module-name">{{module.module_name}}</p>
