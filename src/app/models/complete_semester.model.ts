@@ -4,6 +4,7 @@ import {LifecycleActivity} from './lifecycleactivity';
 import {ArchitecturalLayer} from './architecturallayer';
 
 export interface CompleteSemester {
+  curriculum_name: string;
   modules: Module[];
   qualifications: StudentSkill[];
   lifecycle_activities: LifecycleActivity[];
