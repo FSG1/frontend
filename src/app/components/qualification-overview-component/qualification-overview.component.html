@@ -1,15 +1,7 @@
-<div class="jumbotron jumbotron-fluid head">
-  <div  class="container text-center">
-    <h2>
-      Filtered on {{selectedcurriculum?.name}}, {{selectedlifecycle?.lifecycle_activity_name}} and {{selectearchitecurallayer?.architectural_layer_name}}
-    </h2>
-  </div>
-</div>
-
 <div class="filter">
 
   <div class="text-center" dropdown>
-    <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+    <button dropdownToggle class="btn btn-dark dropdown-toggle test-slc" type="button" data-toggle="dropdown">
       <ng-container *ngIf="selectedcurriculum==null;else slc">
       Curriculum
       </ng-container>
@@ -27,7 +19,7 @@
   </div>
 
   <div class="text-center" dropdown>
-    <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+    <button dropdownToggle class="btn btn-dark dropdown-toggle test-sllc" type="button" data-toggle="dropdown">
       <ng-container *ngIf="selectedlifecycle==null;else sllc">
       Lifecycle activities
       </ng-container>
@@ -45,7 +37,7 @@
   </div>
 
   <div class="text-center" dropdown>
-    <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+    <button dropdownToggle class="btn btn-dark dropdown-toggle test-slac" type="button" data-toggle="dropdown">
       <ng-container *ngIf="selectearchitecurallayer==null;else slac">
       Architectural layers
       </ng-container>
@@ -66,6 +58,14 @@
 
 <div *ngIf="readyToLoadTable()">
 
+  <div class="jumbotron jumbotron-fluid head">
+    <div  class="container text-center">
+      <h2>
+        Filtered on {{selectedcurriculum?.name}}, {{selectedlifecycle?.lifecycle_activity_name}} and {{selectearchitecurallayer?.architectural_layer_name}}
+      </h2>
+    </div>
+  </div>
+
   <table class="table">
     <thead>
       <tr class="font-weight-bold">
@@ -78,11 +78,14 @@
     </thead>
     <tbody class="font-weight-light">
       <tr *ngFor="let number of tablesize">
-        <td class="rgba-grey-light" *ngIf="levelLoaded(number)" [attr.rowspan]='getSkillLevelRowSpan(number)'>{{getSkillLevel(number)}}</td>
-        <td class="rgba-red-light" *ngIf="semesterLoaded(number)" [attr.rowspan]="getSemesterRowSpan(number)">{{getSemester(number)}}</td>
-        <td class="rgba-orange-light" *ngIf="moduleLoaded(number)" [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCode(number)}}</td>
-        <td class="rgba-yellow-slight" *ngIf="moduleLoaded(number)" [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCredits(number)}}</td>
-        <td>{{getLearningGoal(number)}}</td>
+        <td class="rgba-grey-light test-skillevel" *ngIf="levelLoaded(number)" [attr.rowspan]='getSkillLevelRowSpan(number)'>{{getSkillLevel(number)}}</td>
+        <td class="rgba-red-light test-semester" *ngIf="semesterLoaded(number)" [attr.rowspan]="getSemesterRowSpan(number)">{{getSemester(number)}}</td>
+        <ng-container *ngIf="moduleLoaded(number)">
+        <td class="rgba-orange-light test-module"  [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCode(number)}}</td>
+        <td class="rgba-yellow-slight" [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCredits(number)}}</td>
+        </ng-container>
+        <td class="test-lg">{{getLearningGoal(number)}}</td>
       </tr>
     </tbody>
   </table>
+</div>

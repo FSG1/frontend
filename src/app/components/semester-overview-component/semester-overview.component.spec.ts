@@ -13,6 +13,7 @@ import {APP_BASE_HREF} from '@angular/common';
 import {ErrorComponent} from '../../../util/error/error.component';
 import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {By} from '@angular/platform-browser';
+import {QualificationOverviewComponent} from '../qualification-overview-component/qualification-overview.component';
 
 const mocksemester = {
   'curriculum_name': 'software business',
@@ -37,7 +38,7 @@ const mocksemester = {
     {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}]
 };
 
-describe('Testing module component', () => {
+describe('Testing semester overview component', () => {
   let component: SemesterOverviewComponent;
   let fixture: ComponentFixture<SemesterOverviewComponent>;
   let backendService;
@@ -57,7 +58,8 @@ describe('Testing module component', () => {
         ModuleOverviewComponent,
         SemesterOverviewComponent,
         ErrorComponent,
-        ExamLGComponent
+        ExamLGComponent,
+        QualificationOverviewComponent
       ],
       providers: [
         {provide: BackendService, useValue: backendServiceStub},
@@ -86,7 +88,7 @@ describe('Testing module component', () => {
     expect(fixture.debugElement.queryAll(By.css('.test-amount-modules')).length).toBe(7);
   });
   it('should have a title of: some name semester 4', () => {
-    expect(fixture.debugElement.query(By.css('.test-title')).nativeElement.innerText).toBe('NAME semester 4');
+    expect(fixture.debugElement.query(By.css('.test-title')).nativeElement.innerText).toBe('software business semester 4');
   });
 // test-amount-modules
 });

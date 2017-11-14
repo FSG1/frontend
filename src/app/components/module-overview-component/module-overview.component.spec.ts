@@ -16,6 +16,7 @@ import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.compone
 import {ErrorComponent} from '../../../util/error/error.component';
 import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
 import {APP_BASE_HREF} from '@angular/common';
+import {QualificationOverviewComponent} from '../qualification-overview-component/qualification-overview.component';
 
 const curricula = [
   { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
@@ -72,7 +73,8 @@ describe('ModuleOverviewComponent', () => {
         SkillMatrixComponent,
         ModuleOverviewComponent,
         ErrorComponent,
-        SemesterOverviewComponent
+        SemesterOverviewComponent,
+        QualificationOverviewComponent
       ],
       providers: [
         {provide: BackendService, useValue: backendServiceStube},

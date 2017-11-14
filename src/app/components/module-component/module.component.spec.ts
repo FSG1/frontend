@@ -14,6 +14,7 @@ import {AppRoutingModule} from '../../app.routing';
 import {ModuleOverviewComponent} from '../module-overview-component/module-overview.component';
 import {ErrorComponent} from '../../../util/error/error.component';
 import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
+import {QualificationOverviewComponent} from '../qualification-overview-component/qualification-overview.component';
 
 
 const modulemodel = {
@@ -92,7 +93,7 @@ describe('Testing module component', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent, ModuleOverviewComponent, ErrorComponent, SemesterOverviewComponent ],
+      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent, ModuleOverviewComponent, ErrorComponent, SemesterOverviewComponent, QualificationOverviewComponent  ],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
                { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
       imports: [
