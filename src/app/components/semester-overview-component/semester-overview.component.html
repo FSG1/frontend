@@ -6,12 +6,6 @@
 
 <div class="container">
 
-  <div class="row justify-content-center">
-    <div class="col-3">
-      <a [routerLink]="['/moduleoverview', curriculumid]" class="btn btn-primary">Back to Overview</a>
-    </div>
-  </div>
-
   <div class="row semesterGrid justify-content-center">
     <div class="col-2 hoverable semesterGridContent" *ngFor="let module of completesemester?.modules">
       <a class="test-amount-modules" [routerLink]="['/curriculum/', curriculumid, 'modules', module.module_code]">
@@ -29,10 +23,3 @@
   <app-skill-matrix [architecturallayers]="completesemester?.architectural_layers" [lifecycleactivities]="completesemester?.lifecycle_activities" [studentskills]="completesemester?.qualifications"></app-skill-matrix>
 
 </div>
-<!--
-  <div class="col-lg-1 hoverable semesterGridContent" *ngFor="let module of completesemester.modules">
-    <a (click)="onClick(module.module_code)">
-      <h4>{{ module.module_code }}</h4>
-      <p class="text-secondary">Credits {{ module.credits }}</p>
-    </a>
-  </div>-->
