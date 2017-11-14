@@ -15,6 +15,7 @@ import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {By} from '@angular/platform-browser';
 
 const mocksemester = {
+  'curriculum_name': 'Business Informatics',
   'modules': [
     {'module_code': 'JAV1',        'module_name': 'Programming in Java 1',       'credits': 5 },
     {'module_code': 'DBS1',         'module_name': 'Databases',       'credits': 5 },
@@ -24,16 +25,22 @@ const mocksemester = {
     {'module_code': 'PRJ1',        'module_name': 'Project 1',       'credits': 10 },
     {'module_code': 'COM1',        'module_name': 'Communication 1',       'credits': 2 }
   ],
-  'qualifications': [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
-    {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 2}],
-  'architectural_layers': [{'architectural_layer_id': 0, 'architectural_layer_name': 'User Interaction', 'architectural_layer_description': 'something'},
+  'qualifications': [
+    {'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
+    {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 2}
+  ],
+  'architectural_layers': [
+    {'architectural_layer_id': 0, 'architectural_layer_name': 'User Interaction', 'architectural_layer_description': 'something'},
     {'architectural_layer_id': 1, 'architectural_layer_name': 'Business Processes', 'Architectural_layer_description': 'something'},
     {'architectural_layer_id': 2, 'architectural_layer_name': 'Infrastructure', 'architectural_layer_description': 'something'},
-    {'architectural_layer_id': 3, 'architectural_layer_name': 'software', 'architectural_layer_description': 'something'}],
-  'lifecycle_activities': [{'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
+    {'architectural_layer_id': 3, 'architectural_layer_name': 'software', 'architectural_layer_description': 'something'}
+  ],
+  'lifecycle_activities': [
+    {'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
     {'lifecycle_activity_id': 1, 'lifecycle_activity_name': 'Analyze', 'lifecycle_activity_description': 'something'},
     {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}]
+    {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}
+  ]
 };
 
 describe('Testing module component', () => {
@@ -85,7 +92,7 @@ describe('Testing module component', () => {
     expect(fixture.debugElement.queryAll(By.css('.test-amount-modules')).length).toBe(7);
   });
   it('should have a title of: some name semester 4', () => {
-    expect(fixture.debugElement.query(By.css('.test-title')).nativeElement.innerText).toBe('NAME semester 4');
+    expect(fixture.debugElement.query(By.css('.test-title')).nativeElement.innerText).toBe('Business Informatics - Semester 4');
   });
 // test-amount-modules
 });
