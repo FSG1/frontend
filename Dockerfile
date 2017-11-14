@@ -14,7 +14,7 @@ EXPOSE 4200
 
 STOPSIGNAL SIGTERM
 
-ENTRYPOINT ["ng"]
+ENTRYPOINT ["ng", "serve", "--host=0.0.0.0"]
 
 # Execute ng to listen on all adresses
-CMD ["serve", "--host=0.0.0.0", "echo --env=$APPLICATION_ENV"]
+CMD ["--env=dev"]
