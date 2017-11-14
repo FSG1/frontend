@@ -1,7 +1,7 @@
 <div class="jumbotron jumbotron-fluid head">
   <div  class="container text-center">
     <h2>
-      Filtered on {{selectedcurriculum.name}}, {{selectedlifecycle.lifecycle_activity_name}} and {{selectearchitecurallayer.architectural_layer_name}}
+      Filtered on {{selectedcurriculum?.name}}, {{selectedlifecycle?.lifecycle_activity_name}} and {{selectearchitecurallayer?.architectural_layer_name}}
     </h2>
   </div>
 </div>
@@ -14,7 +14,7 @@
       Curriculum
       </ng-container>
       <ng-template #slc>
-        {{selectedcurriculum.name}}
+        {{selectedcurriculum?.name}}
       </ng-template>
       <span class="caret"></span>
     </button>
@@ -32,7 +32,7 @@
       Lifecycle activities
       </ng-container>
       <ng-template #sllc>
-        {{selectedlifecycle.lifecycle_activity_name}}
+        {{selectedlifecycle?.lifecycle_activity_name}}
       </ng-template>
       <span class="caret"></span>
     </button>
@@ -50,7 +50,7 @@
       Architectural layers
       </ng-container>
       <ng-template #slac>
-        {{selectearchitecurallayer.architectural_layer_name}}
+        {{selectearchitecurallayer?.architectural_layer_name}}
       </ng-template>
       <span class="caret"></span>
     </button>
