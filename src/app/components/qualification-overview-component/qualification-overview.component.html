@@ -1,3 +1,11 @@
+<div class="jumbotron jumbotron-fluid head">
+  <div  class="container text-center">
+    <h2>
+      Filtered on {{selectedcurriculum.name}}, {{selectedlifecycle.lifecycle_activity_name}} and {{selectearchitecurallayer.architectural_layer_name}}
+    </h2>
+  </div>
+</div>
+
 <div class="filter">
 
   <div class="text-center" dropdown>
@@ -58,18 +66,9 @@
 
 <div *ngIf="readyToLoadTable()">
 
-  <div class="jumbotron jumbotron-fluid head">
-    <div  class="container text-center">
-      <h2>
-        Filtered on {{selectedcurriculum.name}}, {{selectedlifecycle.lifecycle_activity_name}} and {{selectearchitecurallayer.architectural_layer_name}}
-      </h2>
-    </div>
-  </div>
-
-
-  <table>
+  <table class="table">
     <thead>
-      <tr>
+      <tr class="font-weight-bold">
         <th>Skills level</th>
         <th>Semester</th>
         <th>Educational unit</th>
@@ -77,12 +76,12 @@
         <th>Learning goals</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="font-weight-light">
       <tr *ngFor="let number of tablesize">
-        <td *ngIf="levelLoaded(number)" [attr.rowspan]='getSkillLevelRowSpan(number)'>{{getSkillLevel(number)}}</td>
-        <td *ngIf="semesterLoaded(number)" [attr.rowspan]="getSemesterRowSpan(number)">{{getSemester(number)}}</td>
-        <td *ngIf="moduleLoaded(number)" [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCode(number)}}</td>
-        <td *ngIf="moduleLoaded(number)" [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCredits(number)}}</td>
+        <td class="rgba-grey-light" *ngIf="levelLoaded(number)" [attr.rowspan]='getSkillLevelRowSpan(number)'>{{getSkillLevel(number)}}</td>
+        <td class="rgba-red-light" *ngIf="semesterLoaded(number)" [attr.rowspan]="getSemesterRowSpan(number)">{{getSemester(number)}}</td>
+        <td class="rgba-orange-light" *ngIf="moduleLoaded(number)" [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCode(number)}}</td>
+        <td class="rgba-yellow-slight" *ngIf="moduleLoaded(number)" [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCredits(number)}}</td>
         <td>{{getLearningGoal(number)}}</td>
       </tr>
     </tbody>

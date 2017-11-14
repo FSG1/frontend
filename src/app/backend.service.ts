@@ -61,7 +61,7 @@ const mockqualificationtable = [{
           'learning_goals': [
             {
               'name': 'lg1',
-              'description': 'blablabla'
+              'description': 'loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsumloremIpsum loremIpsumloremIpsumloremIpsum loremIpsumloremIpsumlorem IpsumloremIpsum loremIpsumloremIpsumloremIpsum'
             }, {
               'name': 'lg2',
               'description': 'blablabla'
