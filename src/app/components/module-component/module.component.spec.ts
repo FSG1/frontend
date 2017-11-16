@@ -15,6 +15,7 @@ import {ModuleOverviewComponent} from '../module-overview-component/module-overv
 import {ErrorComponent} from '../../../util/error/error.component';
 import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
 import {QualificationOverviewComponent} from '../qualification-overview-component/qualification-overview.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 
 const modulemodel = {
@@ -93,12 +94,10 @@ describe('Testing module component', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent, ModuleOverviewComponent, ErrorComponent, SemesterOverviewComponent, QualificationOverviewComponent  ],
+      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
                { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
-      imports: [
-        AppRoutingModule
-      ]
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   }));

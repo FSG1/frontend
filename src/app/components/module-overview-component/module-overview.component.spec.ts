@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModuleOverviewComponent } from './module-overview.component';
 import {BackendService} from '../../backend.service';
 import {By} from '@angular/platform-browser';
-import {DebugElement} from '@angular/core';
+import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 import {Semester} from '../../models/semester.model';
 import {Curriculum} from '../../models/curriculum.model';
 import {Observable} from 'rxjs/Observable';
@@ -17,6 +17,7 @@ import {ErrorComponent} from '../../../util/error/error.component';
 import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
 import {APP_BASE_HREF} from '@angular/common';
 import {QualificationOverviewComponent} from '../qualification-overview-component/qualification-overview.component';
+import {MockComponent} from '../../../util/mock-component';
 
 const curricula = [
   { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
@@ -68,22 +69,14 @@ describe('ModuleOverviewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ModuleComponent,
-        ExamLGComponent,
-        SkillMatrixComponent,
-        ModuleOverviewComponent,
-        ErrorComponent,
-        SemesterOverviewComponent,
-        QualificationOverviewComponent
+        ModuleOverviewComponent
       ],
       providers: [
         {provide: BackendService, useValue: backendServiceStube},
         {provide: ActivatedRoute, useValue: { 'params': Observable.from([{curriculum: 1}]) }},
         {provide: APP_BASE_HREF, useValue: '/'}
       ],
-      imports: [
-        AppRoutingModule
-      ]
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
 

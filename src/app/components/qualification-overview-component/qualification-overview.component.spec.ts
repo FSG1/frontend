@@ -1,4 +1,4 @@
-import {DebugElement} from '@angular/core';
+import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 import {QualificationOverviewComponent} from './qualification-overview.component';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FilterQualifications} from '../../models/qualificiationfiltermodels/filter_qualifications.model';
@@ -179,12 +179,10 @@ describe('Testing Qualification overview component after initialization', () => 
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent, ModuleOverviewComponent, ErrorComponent, SemesterOverviewComponent, QualificationOverviewComponent  ],
+      declarations: [QualificationOverviewComponent  ],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
         { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
-      imports: [
-        AppRoutingModule
-      ]
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   }));

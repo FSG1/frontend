@@ -14,6 +14,7 @@ import {ErrorComponent} from '../../../util/error/error.component';
 import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {By} from '@angular/platform-browser';
 import {QualificationOverviewComponent} from '../qualification-overview-component/qualification-overview.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 const mocksemester = {
   'curriculum_name': 'Business Informatics',
@@ -59,22 +60,14 @@ describe('Testing semester overview component', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ModuleComponent,
-        SkillMatrixComponent,
-        ModuleOverviewComponent,
-        SemesterOverviewComponent,
-        ErrorComponent,
-        ExamLGComponent,
-        QualificationOverviewComponent
+        SemesterOverviewComponent
       ],
       providers: [
         {provide: BackendService, useValue: backendServiceStub},
         { provide: ActivatedRoute, useValue: { 'params': Observable.from([{'curriculum': 1, 'semester': 4 }]) } },
         {provide: APP_BASE_HREF, useValue: '/'}
       ],
-      imports: [
-        AppRoutingModule
-      ]
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   }));
