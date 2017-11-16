@@ -4,6 +4,7 @@ import {ErrorComponent} from '../util/error/error.component';
 import {ModuleComponent} from './components/module-component/module.component';
 import {ModuleOverviewComponent} from './components/module-overview-component/module-overview.component';
 import {SemesterOverviewComponent} from './components/semester-overview-component/semester-overview.component';
+import {QualificationOverviewComponent} from './components/qualification-overview-component/qualification-overview.component';
 import {environment} from '../environments/environment';
 
 const routes: Routes = [
@@ -22,6 +23,9 @@ const routes: Routes = [
   {
     path: 'curriculum/:curriculum/semesters/:semester',
     component: SemesterOverviewComponent
+  }, {
+    path: 'qualifications',
+    component: QualificationOverviewComponent
   },
   {
     path: '',

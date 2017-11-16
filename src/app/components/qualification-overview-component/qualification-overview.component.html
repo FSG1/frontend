@@ -1,0 +1,91 @@
+<div class="filter">
+
+  <div class="text-center" dropdown>
+    <button dropdownToggle class="btn btn-dark dropdown-toggle test-slc" type="button" data-toggle="dropdown">
+      <ng-container *ngIf="selectedcurriculum==null;else slc">
+      Curriculum
+      </ng-container>
+      <ng-template #slc>
+        {{selectedcurriculum?.name}}
+      </ng-template>
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li class="dropdown-item" *ngFor="let curriculum of filter.curricula" >
+        <a (click)="selectCurriculum(curriculum)">{{curriculum.name}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="text-center" dropdown>
+    <button dropdownToggle class="btn btn-dark dropdown-toggle test-sllc" type="button" data-toggle="dropdown">
+      <ng-container *ngIf="selectedlifecycle==null;else sllc">
+      Lifecycle activities
+      </ng-container>
+      <ng-template #sllc>
+        {{selectedlifecycle?.lifecycle_activity_name}}
+      </ng-template>
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li class="dropdown-item" *ngFor="let lifecycle of filter.lifecycle_activities" >
+        <a (click)="selectedLifecycle(lifecycle)">{{lifecycle.lifecycle_activity_name}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="text-center" dropdown>
+    <button dropdownToggle class="btn btn-dark dropdown-toggle test-slac" type="button" data-toggle="dropdown">
+      <ng-container *ngIf="selectearchitecurallayer==null;else slac">
+      Architectural layers
+      </ng-container>
+      <ng-template #slac>
+        {{selectearchitecurallayer?.architectural_layer_name}}
+      </ng-template>
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li class="dropdown-item" *ngFor="let architecturallayer of filter.architectural_layers" >
+        <a (click)="selectedArchitecturalLayer(architecturallayer)">{{architecturallayer.architectural_layer_name}}</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<div *ngIf="readyToLoadTable()">
+
+  <div class="jumbotron jumbotron-fluid head">
+    <div  class="container text-center">
+      <h2>
+        Filtered on {{selectedcurriculum?.name}}, {{selectedlifecycle?.lifecycle_activity_name}} and {{selectearchitecurallayer?.architectural_layer_name}}
+      </h2>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr class="font-weight-bold">
+        <th>Skills level</th>
+        <th>Semester</th>
+        <th>Educational unit</th>
+        <th>Credits</th>
+        <th>Learning goals</th>
+      </tr>
+    </thead>
+    <tbody class="font-weight-light">
+      <tr *ngFor="let number of tablesize">
+        <td class="rgba-grey-light test-skillevel" *ngIf="levelLoaded(number)" [attr.rowspan]='getSkillLevelRowSpan(number)'>{{getSkillLevel(number)}}</td>
+        <td class="rgba-red-light test-semester" *ngIf="semesterLoaded(number)" [attr.rowspan]="getSemesterRowSpan(number)">{{getSemester(number)}}</td>
+        <ng-container *ngIf="moduleLoaded(number)">
+        <td class="rgba-orange-light test-module"  [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCode(number)}}</td>
+        <td class="rgba-yellow-slight" [attr.rowspan]="getModuleRowSpan(number)">{{getModuleCredits(number)}}</td>
+        </ng-container>
+        <td class="test-lg">{{getLearningGoal(number)}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

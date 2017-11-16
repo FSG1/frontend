@@ -1,0 +1,33 @@
+.filter{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+$fontys: #636;
+
+.head {
+  background-color: $fontys;
+  color:white;
+}
+
+table {
+  margin: auto;
+  margin-bottom: 20px;
+  width: 80%;
+  border: 2px solid black;
+  td {
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid black;
+    font-size: medium;
+    word-wrap: break-word;
+  }
+  th {
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid black;
+    font-size: medium;
+  }
+}
+
