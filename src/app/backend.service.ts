@@ -196,13 +196,16 @@ export class BackendService {
   }
 
   private getBaseUrl(): string {
-    return environment.backend.scheme
-      + '://'
-      + environment.backend.host
-      + ':'
-      + environment.backend.port
-      + '/'
-      + environment.backend.base
-      + '/';
+    let url = environment.backend.scheme
+          + '://'
+          + environment.backend.host;
+
+    if (environment.backend.port !== null && environment.backend.port > 0) {
+      url += ':' + environment.backend.port;
+    }
+
+    url += '/' + environment.backend.base + '/';
+
+    return url;
   }
 }
