@@ -97,8 +97,7 @@ describe('ModuleOverviewComponent', () => {
   });
   it('After selecting dropdown item, semester 1 should be displayed', () => {
     fixture.detectChanges();
-    const curriculum = { 'name': 'Software Engineering', 'code': 'SE', 'id': 1};
-    component.onSelect(curriculum);
+    component.selectedCurriculumId = 1;
     fixture.detectChanges();
     // get the first semester element
     el = de.query(By.css('.semester h2')).nativeElement;
@@ -106,8 +105,7 @@ describe('ModuleOverviewComponent', () => {
   });
   it('After selecting dropdown item, modules should be displayed', () => {
     fixture.detectChanges();
-    const curriculum = { 'name': 'Software Engineering', 'code': 'SE', 'id': 1};
-    component.onSelect(curriculum);
+    component.selectedCurriculumId = 1;
     fixture.detectChanges();
     // get the first module element
     el = de.query(By.css('p.module-credits')).nativeElement;
