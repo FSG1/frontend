@@ -181,7 +181,8 @@ describe('Testing Qualification overview component after initialization', () => 
     TestBed.configureTestingModule({
       declarations: [QualificationOverviewComponent  ],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
-        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
+        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } },
+        { provide: APP_BASE_HREF, useValue: '/'}],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
@@ -297,11 +298,9 @@ describe('Testing Qualification overview component before initialization', () =>
     expect(component.tablesize).toBe(undefined);
   });
   it('component should not load if not all buttons are pressed', () => {
-    expect(component.readyToLoadTable()).toBe(false);
     expect(component.selectedcurriculum).toBe(undefined);
     component.selectCurriculum(curriculumdummy);
     fixture.detectChanges();
     expect(component.selectedcurriculum.name).toBe('Software Engineering');
-    expect(component.readyToLoadTable()).toBe(false);
   });
 });

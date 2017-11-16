@@ -39,7 +39,7 @@
   <div class="text-center" dropdown>
     <button dropdownToggle class="btn btn-dark dropdown-toggle test-slac" type="button" data-toggle="dropdown">
       <ng-container *ngIf="selectedarchitecturallayer==null;else slac">
-      Architectural layers
+        Architectural layers
       </ng-container>
       <ng-template #slac>
         {{selectedarchitecturallayer?.architectural_layer_name}}

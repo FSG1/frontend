@@ -34,6 +34,14 @@ export class QualificationOverviewComponent implements AfterContentInit {
   routeSubscription: Subscription;
   routedwparams: boolean;
 
+  readyToLoadTable(): boolean {
+    if (this.routedwparams == null) {
+      return false;
+    } else {
+      return this.routedwparams;
+    }
+  }
+
   // these three methods are used for selecting filter
   selectCurriculum(curriculum: Curriculum): void {
     this.selectedcurriculum = curriculum;
