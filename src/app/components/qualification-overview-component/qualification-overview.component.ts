@@ -51,21 +51,11 @@ export class QualificationOverviewComponent implements AfterContentInit {
     this.selectedlifecycle = lifecycle;
     this.loadRoute();
   }
-  selectedArchitecturalLayer(architecturallayer: ArchitecturalLayer): void {
+  selectArchitecturalLayer(architecturallayer: ArchitecturalLayer): void {
     this.selectedarchitecturallayer = architecturallayer;
-    this.readyToLoadTable();
+    this.loadRoute();
   }
-  // this method checks if all filters have been entered
-  readyToLoadTable(): boolean {
-    if (this.readytoload) {
-      return this.readytoload;
-    } else if (this.selectedcurriculum != null && this.selectedarchitecturallayer != null && this.selectedlifecycle) {
-      this.readytoload = true;
-      this.loadTable();
-      return this.readytoload;
-    }
-    return false;
-  }
+
   // this method is used to load table
   loadRoute(): void {
      if (this.selectedcurriculum != null && this.selectedarchitecturallayer != null && this.selectedlifecycle) {
@@ -269,6 +259,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
   }
 
   initializeFromParams(curriculum: number, lca: number, al: number): void {
+    if(!this.filter) return;
     this.filter.curricula.forEach( c => {
       if (c.id == curriculum ) {
         this.selectedcurriculum = c;
