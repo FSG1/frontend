@@ -28,13 +28,6 @@ export class ModuleOverviewComponent implements OnInit, OnDestroy {
     this.routeSubscription.unsubscribe();
   }
 
-  onSelect(curriculum: Curriculum): void {
-    this.selectedCurriculum = curriculum;
-    this.selectedCurriculumName = curriculum.name;
-    this.selectedCurriculumId = curriculum.id;
-    this.getSemesters(curriculum.id);
-  }
-
   getSemesters(curriculumId: number): void {
       this.backendService.getSemesters(curriculumId)
         .subscribe(semesters => this.semesters = semesters);
