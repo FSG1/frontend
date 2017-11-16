@@ -167,18 +167,12 @@ export class BackendService {
   // endpoint does not exist yet
   getQualifications(): Observable<FilterQualifications> {
     const filterqualificationsUrl = this.getBaseUrl() + 'qualifications';
-    return Observable.create((observer: Subscriber<any>) => {
-      observer.next(filterqualifications);
-      observer.complete();
-    });
+    return this.http.get<FilterQualifications>(filterqualificationsUrl);
   }
   // endpoint does not exist yet
   getQualificationTable(curriculum: number, architecturallayer: number, activity: number): Observable<QualificationsOverview[]> {
     const qualificationtableUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/architecturallayer/' + architecturallayer + '/activity/' + activity;
-    return Observable.create((observer: Subscriber<any>) => {
-      observer.next(mockqualificationtable);
-      observer.complete();
-    });
+    return this.http.get<QualificationsOverview[]>(qualificationtableUrl);
   }
   getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
     const moduleContentUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/modules/' + code;

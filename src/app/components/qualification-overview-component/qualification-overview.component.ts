@@ -6,8 +6,6 @@ import {ArchitecturalLayer} from '../../models/architecturallayer';
 import {BackendService} from '../../backend.service';
 import {QualificationsOverview} from '../../models/qualificiationfiltermodels/qualifications_overview.model';
 import {QualificationsModule} from '../../models/qualificiationfiltermodels/qualifications_module';
-import {forEach} from '@angular/router/src/utils/collection';
-import {QualificationsOverviewSemester} from "../../models/qualificiationfiltermodels/qualifications_overview_semester.model";
 import {QualificationsLearningGoal} from '../../models/qualificiationfiltermodels/qualifications_learning_goal.model';
 
 @Component({
@@ -20,7 +18,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
   filter: FilterQualifications;
   table: QualificationsOverview[];
   selectedcurriculum: Curriculum;
-  selectearchitecurallayer: ArchitecturalLayer;
+  selectedarchitecurallayer: ArchitecturalLayer;
   selectedlifecycle: LifecycleActivity;
   constructor(private backendService: BackendService, ) {}
   // this variable changes to true as soon as all filters are selected.
@@ -43,14 +41,14 @@ export class QualificationOverviewComponent implements AfterContentInit {
     this.readyToLoadTable();
   }
   selectedArchitecturalLayer(architecturallayer: ArchitecturalLayer): void {
-    this.selectearchitecurallayer = architecturallayer;
+    this.selectedarchitecurallayer = architecturallayer;
     this.readyToLoadTable();
   }
   // this method checks if all filters have been entered
   readyToLoadTable(): boolean {
     if (this.readytoload) {
       return this.readytoload;
-    } else if (this.selectedcurriculum != null && this.selectearchitecurallayer != null && this.selectedlifecycle) {
+    } else if (this.selectedcurriculum != null && this.selectedarchitecurallayer != null && this.selectedlifecycle) {
       this.readytoload = true;
       this.loadTable();
       return this.readytoload;
@@ -59,18 +57,21 @@ export class QualificationOverviewComponent implements AfterContentInit {
   }
   // this method is used to load table
   loadTable(): void {
-    this.backendService.getQualificationTable(this.selectedcurriculum.id, this.selectearchitecurallayer.architectural_layer_id, this.selectedlifecycle.lifecycle_activity_id)
-      .subscribe(table => this.table = table);
-    this.countTotalLearningGoals(this.table);
+    this.backendService.getQualificationTable(this.selectedcurriculum.id, this.selectedarchitecurallayer.architectural_layer_id, this.selectedlifecycle.lifecycle_activity_id)
+      .subscribe(table => {
+         this.table = table;
+         return this.countTotalLearningGoals(this.table);
+      });
+
   }
 
   // this method calculates the size(rows) of the table
   countTotalLearningGoals(overview: QualificationsOverview[]): void {
     let returnvalue: number;
     returnvalue = 0;
-    this.table.forEach(overview => {
-      overview.qualification_overview_semesters.forEach( semester => {
-        semester.qualifications_modules.forEach( module => {
+    overview.forEach(qualificationOverview => {
+      qualificationOverview.qualifications_overview_semesters.forEach(qualificationOverviewSemester => {
+        qualificationOverviewSemester.qualifications_modules.forEach(module => {
           returnvalue += module.learning_goals.length;
         });
       });
@@ -83,7 +84,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
     let level: QualificationsOverview;
     count = 0;
     this.table.forEach(overview => {
-      overview.qualification_overview_semesters.forEach( semester => {
+      overview.qualifications_overview_semesters.forEach( semester => {
         semester.qualifications_modules.forEach( module => {
           module.learning_goals.forEach( lg => {
             if (count === spot) {
@@ -102,7 +103,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
     rowspan = 0;
     for (const tab of this.table){
       if (tab.skills_level === skillevel) {
-        tab.qualification_overview_semesters.forEach( semester => {
+        tab.qualifications_overview_semesters.forEach( semester => {
           semester.qualifications_modules.forEach( modules => {
             rowspan += modules.learning_goals.length;
           });
@@ -128,12 +129,12 @@ export class QualificationOverviewComponent implements AfterContentInit {
     upperboundary = 0;
 
     for (let i = 0; i < this.table.length; i++) {
-      for (let j = 0; j < this.table[i].qualification_overview_semesters.length; j++) {
-        this.table[i].qualification_overview_semesters[j].qualifications_modules.forEach( modules => {
+      for (let j = 0; j < this.table[i].qualifications_overview_semesters.length; j++) {
+        this.table[i].qualifications_overview_semesters[j].qualifications_modules.forEach( modules => {
           upperboundary += modules.learning_goals.length;
         });
         if (spot >= lowerboundary && spot < upperboundary) {
-          return this.table[i].qualification_overview_semesters[j].semester;
+          return this.table[i].qualifications_overview_semesters[j].semester;
         }
         lowerboundary = upperboundary;
       }
@@ -146,7 +147,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
     let rowspan: number;
     rowspan = 0;
     this.table.forEach( overview => {
-      overview.qualification_overview_semesters.forEach( semester => {
+      overview.qualifications_overview_semesters.forEach( semester => {
         semester.qualifications_modules.forEach( module => {
             if (semester.semester === selectedsemester && level === overview.skills_level) {
               rowspan += module.learning_goals.length;
@@ -173,7 +174,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
     let mod: QualificationsModule;
     count = 0;
     this.table.forEach(overview => {
-      overview.qualification_overview_semesters.forEach( semester => {
+      overview.qualifications_overview_semesters.forEach( semester => {
         semester.qualifications_modules.forEach( module => {
           module.learning_goals.forEach( lg => {
             if (count === spot) {
@@ -207,7 +208,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
     rowspan = 0;
     const level = this.getSkillLevel(spot);
     this.table.forEach( overview => {
-      overview.qualification_overview_semesters.forEach( semester => {
+      overview.qualifications_overview_semesters.forEach( semester => {
         semester.qualifications_modules.forEach( module => {
           if (module.module_code === mdlcode && level === overview.skills_level) {
             rowspan += module.learning_goals.length;
@@ -237,7 +238,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
     let qlg: QualificationsLearningGoal;
     count = 0;
     this.table.forEach(overview => {
-      overview.qualification_overview_semesters.forEach( semester => {
+      overview.qualifications_overview_semesters.forEach( semester => {
         semester.qualifications_modules.forEach( module => {
           module.learning_goals.forEach( lg => {
             if (count === spot) {
@@ -260,6 +261,10 @@ export class QualificationOverviewComponent implements AfterContentInit {
     this.lastloadedmodulecode = '-1';
 
     this.backendService.getQualifications()
-      .subscribe(filter => this.filter = filter);
+      .subscribe(filter => {
+        this.filter = filter;
+        console.log(this.filter);
+        return;
+      });
   }
 }

@@ -32,7 +32,7 @@ const filterqualifications = {
 };
 const mockqualificationtable = [{
   'skills_level': 1,
-  'qualification_overview_semesters': [
+  'qualifications_overview_semesters': [
     {'semester': 1,
       'qualifications_modules': [
         {
@@ -116,7 +116,7 @@ const mockqualificationtable = [{
       }]
     }]},  {
   'skills_level': 2,
-  'qualification_overview_semesters': [
+  'qualifications_overview_semesters': [
     {'semester': 2,
       'qualifications_modules': [
         {
