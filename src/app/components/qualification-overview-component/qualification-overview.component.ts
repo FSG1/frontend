@@ -262,9 +262,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
 
     this.backendService.getQualifications()
       .subscribe(filter => {
-        this.filter = filter;
-        console.log(this.filter);
-        return;
+        return this.filter = filter;
       });
   }
 }
