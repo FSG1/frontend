@@ -1,4 +1,4 @@
-import {AfterContentInit, Component} from '@angular/core';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
 import {FilterQualifications} from '../../models/qualificiationfiltermodels/filter_qualifications.model';
 import {Curriculum} from '../../models/curriculum.model';
 import {LifecycleActivity} from '../../models/lifecycleactivity';
@@ -7,6 +7,8 @@ import {BackendService} from '../../backend.service';
 import {QualificationsOverview} from '../../models/qualificiationfiltermodels/qualifications_overview.model';
 import {QualificationsModule} from '../../models/qualificiationfiltermodels/qualifications_module';
 import {QualificationsLearningGoal} from '../../models/qualificiationfiltermodels/qualifications_learning_goal.model';
+import {Subscription} from 'rxjs/Subscription';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-qualification-overview',
@@ -14,13 +16,12 @@ import {QualificationsLearningGoal} from '../../models/qualificiationfiltermodel
   styleUrls: ['./qualification-overview.component.scss']
 })
 export class QualificationOverviewComponent implements AfterContentInit {
-
   filter: FilterQualifications;
   table: QualificationsOverview[];
   selectedcurriculum: Curriculum;
   selectedarchitecturallayer: ArchitecturalLayer;
   selectedlifecycle: LifecycleActivity;
-  constructor(private backendService: BackendService, ) {}
+  constructor(private backendService: BackendService,private router: Router, private route: ActivatedRoute) {}
   // this variable changes to true as soon as all filters are selected.
   readytoload: boolean;
   // this variable is made to create a table of size x
@@ -30,15 +31,17 @@ export class QualificationOverviewComponent implements AfterContentInit {
   lastloadedsemester: number;
   lastloadedmodulecode: string;
   skilllevelchanged: boolean;
+  routeSubscription: Subscription;
+  routedwparams: boolean;
 
   // these three methods are used for selecting filter
   selectCurriculum(curriculum: Curriculum): void {
     this.selectedcurriculum = curriculum;
-    this.readyToLoadTable();
+    this.loadRoute();
   }
-  selectedLifecycle(lifecycle: LifecycleActivity): void {
+  selectLifecycle(lifecycle: LifecycleActivity): void {
     this.selectedlifecycle = lifecycle;
-    this.readyToLoadTable();
+    this.loadRoute();
   }
   selectedArchitecturalLayer(architecturallayer: ArchitecturalLayer): void {
     this.selectedarchitecturallayer = architecturallayer;
@@ -56,6 +59,11 @@ export class QualificationOverviewComponent implements AfterContentInit {
     return false;
   }
   // this method is used to load table
+  loadRoute(): void {
+     if (this.selectedcurriculum != null && this.selectedarchitecturallayer != null && this.selectedlifecycle) {
+      this.router.navigateByUrl('/qualifications/curriculum/' + this.selectedcurriculum.id + '/lifecycle_activity/' + this.selectedlifecycle.lifecycle_activity_id + '/architectural_layer/' + this.selectedarchitecturallayer.architectural_layer_id);
+    }
+  }
   loadTable(): void {
     this.backendService.getQualificationTable(this.selectedcurriculum.id, this.selectedarchitecturallayer.architectural_layer_id, this.selectedlifecycle.lifecycle_activity_id)
       .subscribe(table => {
@@ -220,7 +228,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
   }
   getModuleCode(spot: number): string {
     const module = this.getModule(spot);
-    if(module === null) {
+    if (module === null) {
       return '-1';
     }
     return this.getModule(spot).module_code;
@@ -252,6 +260,25 @@ export class QualificationOverviewComponent implements AfterContentInit {
     return qlg.description;
   }
 
+  initializeFromParams(curriculum: number, lca: number, al: number): void {
+    this.filter.curricula.forEach( c => {
+      if (c.id == curriculum ) {
+        this.selectedcurriculum = c;
+      }
+    });
+    this.filter.architectural_layers.forEach( a => {
+      if (a.architectural_layer_id == al ) {
+        this.selectedarchitecturallayer = a;
+      }
+    });
+    this.filter.lifecycle_activities.forEach( l => {
+      if (l.lifecycle_activity_id == lca ) {
+        this.selectedlifecycle = l;
+      }
+    });
+    this.loadTable();
+  }
+
   ngAfterContentInit(): void {
     this.readytoload = false;
     this.skilllevelchanged = false;
@@ -259,10 +286,24 @@ export class QualificationOverviewComponent implements AfterContentInit {
     this.lastloadedskilllevel = -1;
     this.lastloadedsemester = -1;
     this.lastloadedmodulecode = '-1';
-
     this.backendService.getQualifications()
       .subscribe(filter => {
         return this.filter = filter;
       });
+    this.routeSubscription = this.route.params.subscribe(params => {
+      if (params && params['curriculum'] &&  params['lifecycle_activity'] &&  params['architectural_layer']) {
+        this.routedwparams = true;
+        const curriculum = params['curriculum'];
+        const lifecycle_activity = params['lifecycle_activity'];
+        const architectural_layer = params['architectural_layer'];
+
+        this.initializeFromParams(curriculum, lifecycle_activity, architectural_layer);
+      } else {
+        this.routedwparams = false;
+      }
+    });
   }
+
+
+
 }

@@ -196,8 +196,8 @@ describe('Testing Qualification overview component after initialization', () => 
     const lifecycledummy = {'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'};
     const architecturaldummy = {'architectural_layer_id': 1, 'architectural_layer_name': 'Business Processes', 'architectural_layer_description': 'something'};
     component.selectCurriculum(curriculumdummy);
-    component.selectedLifecycle(lifecycledummy);
-    component.selectedArchitecturalLayer(architecturaldummy);
+    component.selectLifecycle(lifecycledummy);
+    component.selectArchitecturalLayer(architecturaldummy);
     fixture.detectChanges();
   });
   it('filter buttons should change their name if a selection is made', () => {
