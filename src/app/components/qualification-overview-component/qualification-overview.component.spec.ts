@@ -7,7 +7,7 @@ import {Subscriber} from 'rxjs/Subscriber';
 import {QualificationsOverview} from '../../models/qualificiationfiltermodels/qualifications_overview.model';
 import {ModuleOverviewComponent} from '../module-overview-component/module-overview.component';
 import {ErrorComponent} from '../../../util/error/error.component';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AppRoutingModule} from '../../app.routing';
 import {ModuleComponent} from '../module-component/module.component';
 import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
@@ -16,6 +16,7 @@ import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {APP_BASE_HREF} from '@angular/common';
 import {BackendService} from '../../backend.service';
 import {By} from '@angular/platform-browser';
+import {RouterTestingModule} from '@angular/router/testing';
 
 const filterqualifications = {
   'curricula': [
@@ -181,9 +182,10 @@ describe('Testing Qualification overview component after initialization', () => 
     TestBed.configureTestingModule({
       declarations: [QualificationOverviewComponent  ],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
-        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } },
+        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'curriculum': 1, 'lifecycle_activity': 1, 'architectural_layer': 1 }]) } },
         { provide: APP_BASE_HREF, useValue: '/'}],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      imports: [ RouterTestingModule.withRoutes([]) ]
     })
       .compileComponents();
   }));
