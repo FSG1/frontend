@@ -18,7 +18,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
   filter: FilterQualifications;
   table: QualificationsOverview[];
   selectedcurriculum: Curriculum;
-  selectedarchitecurallayer: ArchitecturalLayer;
+  selectedarchitecturallayer: ArchitecturalLayer;
   selectedlifecycle: LifecycleActivity;
   constructor(private backendService: BackendService, ) {}
   // this variable changes to true as soon as all filters are selected.
@@ -41,14 +41,14 @@ export class QualificationOverviewComponent implements AfterContentInit {
     this.readyToLoadTable();
   }
   selectedArchitecturalLayer(architecturallayer: ArchitecturalLayer): void {
-    this.selectedarchitecurallayer = architecturallayer;
+    this.selectedarchitecturallayer = architecturallayer;
     this.readyToLoadTable();
   }
   // this method checks if all filters have been entered
   readyToLoadTable(): boolean {
     if (this.readytoload) {
       return this.readytoload;
-    } else if (this.selectedcurriculum != null && this.selectedarchitecurallayer != null && this.selectedlifecycle) {
+    } else if (this.selectedcurriculum != null && this.selectedarchitecturallayer != null && this.selectedlifecycle) {
       this.readytoload = true;
       this.loadTable();
       return this.readytoload;
@@ -57,7 +57,7 @@ export class QualificationOverviewComponent implements AfterContentInit {
   }
   // this method is used to load table
   loadTable(): void {
-    this.backendService.getQualificationTable(this.selectedcurriculum.id, this.selectedarchitecurallayer.architectural_layer_id, this.selectedlifecycle.lifecycle_activity_id)
+    this.backendService.getQualificationTable(this.selectedcurriculum.id, this.selectedarchitecturallayer.architectural_layer_id, this.selectedlifecycle.lifecycle_activity_id)
       .subscribe(table => {
          this.table = table;
          return this.countTotalLearningGoals(this.table);

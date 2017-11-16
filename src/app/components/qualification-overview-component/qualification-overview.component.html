@@ -38,11 +38,11 @@
 
   <div class="text-center" dropdown>
     <button dropdownToggle class="btn btn-dark dropdown-toggle test-slac" type="button" data-toggle="dropdown">
-      <ng-container *ngIf="selectedarchitecurallayer==null;else slac">
+      <ng-container *ngIf="selectedarchitecturallayer==null;else slac">
       Architectural layers
       </ng-container>
       <ng-template #slac>
-        {{selectedarchitecurallayer?.architectural_layer_name}}
+        {{selectedarchitecturallayer?.architectural_layer_name}}
       </ng-template>
       <span class="caret"></span>
     </button>
@@ -62,7 +62,7 @@
     <div  class="container text-center">
       <h2>
         Filtered on {{selectedcurriculum?.name}}, {{selectedlifecycle?.lifecycle_activity_name}} and
-        {{selectedarchitecurallayer?.architectural_layer_name}}
+        {{selectedarchitecturallayer?.architectural_layer_name}}
       </h2>
     </div>
   </div>
