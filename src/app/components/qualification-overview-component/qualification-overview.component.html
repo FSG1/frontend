@@ -12,7 +12,7 @@
     </button>
 
     <ul class="dropdown-menu">
-      <li class="dropdown-item" *ngFor="let curriculum of filter.curricula" >
+      <li class="dropdown-item" *ngFor="let curriculum of filter?.curricula" >
         <a (click)="selectCurriculum(curriculum)">{{curriculum.name}}</a>
       </li>
     </ul>
@@ -30,7 +30,7 @@
     </button>
 
     <ul class="dropdown-menu">
-      <li class="dropdown-item" *ngFor="let lifecycle of filter.lifecycle_activities" >
+      <li class="dropdown-item" *ngFor="let lifecycle of filter?.lifecycle_activities" >
         <a (click)="selectedLifecycle(lifecycle)">{{lifecycle.lifecycle_activity_name}}</a>
       </li>
     </ul>
@@ -38,17 +38,17 @@
 
   <div class="text-center" dropdown>
     <button dropdownToggle class="btn btn-dark dropdown-toggle test-slac" type="button" data-toggle="dropdown">
-      <ng-container *ngIf="selectearchitecurallayer==null;else slac">
+      <ng-container *ngIf="selectedarchitecturallayer==null;else slac">
       Architectural layers
       </ng-container>
       <ng-template #slac>
-        {{selectearchitecurallayer?.architectural_layer_name}}
+        {{selectedarchitecturallayer?.architectural_layer_name}}
       </ng-template>
       <span class="caret"></span>
     </button>
 
     <ul class="dropdown-menu">
-      <li class="dropdown-item" *ngFor="let architecturallayer of filter.architectural_layers" >
+      <li class="dropdown-item" *ngFor="let architecturallayer of filter?.architectural_layers" >
         <a (click)="selectedArchitecturalLayer(architecturallayer)">{{architecturallayer.architectural_layer_name}}</a>
       </li>
     </ul>
@@ -61,7 +61,8 @@
   <div class="jumbotron jumbotron-fluid head">
     <div  class="container text-center">
       <h2>
-        Filtered on {{selectedcurriculum?.name}}, {{selectedlifecycle?.lifecycle_activity_name}} and {{selectearchitecurallayer?.architectural_layer_name}}
+        Filtered on {{selectedcurriculum?.name}}, {{selectedlifecycle?.lifecycle_activity_name}} and
+        {{selectedarchitecturallayer?.architectural_layer_name}}
       </h2>
     </div>
   </div>
@@ -72,7 +73,7 @@
         <th>Skills level</th>
         <th>Semester</th>
         <th>Educational unit</th>
-        <th>Credits</th>
+        <th>Credits (ECTS)</th>
         <th>Learning goals</th>
       </tr>
     </thead>
