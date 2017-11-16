@@ -7,7 +7,7 @@ import {Subscriber} from 'rxjs/Subscriber';
 import {QualificationsOverview} from '../../models/qualificiationfiltermodels/qualifications_overview.model';
 import {ModuleOverviewComponent} from '../module-overview-component/module-overview.component';
 import {ErrorComponent} from '../../../util/error/error.component';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AppRoutingModule} from '../../app.routing';
 import {ModuleComponent} from '../module-component/module.component';
 import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
@@ -16,6 +16,7 @@ import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {APP_BASE_HREF} from '@angular/common';
 import {BackendService} from '../../backend.service';
 import {By} from '@angular/platform-browser';
+import {RouterTestingModule} from '@angular/router/testing';
 
 const filterqualifications = {
   'curricula': [
@@ -181,8 +182,10 @@ describe('Testing Qualification overview component after initialization', () => 
     TestBed.configureTestingModule({
       declarations: [QualificationOverviewComponent  ],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
-        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
-      schemas: [ NO_ERRORS_SCHEMA ]
+        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'curriculum': 1, 'lifecycle_activity': 1, 'architectural_layer': 1 }]) } },
+        { provide: APP_BASE_HREF, useValue: '/'}],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      imports: [ RouterTestingModule.withRoutes([]) ]
     })
       .compileComponents();
   }));
@@ -196,8 +199,8 @@ describe('Testing Qualification overview component after initialization', () => 
     const lifecycledummy = {'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'};
     const architecturaldummy = {'architectural_layer_id': 1, 'architectural_layer_name': 'Business Processes', 'architectural_layer_description': 'something'};
     component.selectCurriculum(curriculumdummy);
-    component.selectedLifecycle(lifecycledummy);
-    component.selectedArchitecturalLayer(architecturaldummy);
+    component.selectLifecycle(lifecycledummy);
+    component.selectArchitecturalLayer(architecturaldummy);
     fixture.detectChanges();
   });
   it('filter buttons should change their name if a selection is made', () => {
@@ -297,11 +300,9 @@ describe('Testing Qualification overview component before initialization', () =>
     expect(component.tablesize).toBe(undefined);
   });
   it('component should not load if not all buttons are pressed', () => {
-    expect(component.readyToLoadTable()).toBe(false);
     expect(component.selectedcurriculum).toBe(undefined);
     component.selectCurriculum(curriculumdummy);
     fixture.detectChanges();
     expect(component.selectedcurriculum.name).toBe('Software Engineering');
-    expect(component.readyToLoadTable()).toBe(false);
   });
 });

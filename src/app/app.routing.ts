@@ -26,6 +26,9 @@ const routes: Routes = [
   }, {
     path: 'qualifications',
     component: QualificationOverviewComponent
+  }, {
+    path: 'qualifications/curriculum/:curriculum/lifecycle_activity/:lifecycle_activity/architectural_layer/:architectural_layer',
+    component: QualificationOverviewComponent
   },
   {
     path: '',

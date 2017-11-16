@@ -31,7 +31,7 @@
 
     <ul class="dropdown-menu">
       <li class="dropdown-item" *ngFor="let lifecycle of filter?.lifecycle_activities" >
-        <a (click)="selectedLifecycle(lifecycle)">{{lifecycle.lifecycle_activity_name}}</a>
+        <a (click)="selectLifecycle(lifecycle)">{{lifecycle.lifecycle_activity_name}}</a>
       </li>
     </ul>
   </div>
@@ -39,7 +39,7 @@
   <div class="text-center" dropdown>
     <button dropdownToggle class="btn btn-dark dropdown-toggle test-slac" type="button" data-toggle="dropdown">
       <ng-container *ngIf="selectedarchitecturallayer==null;else slac">
-      Architectural layers
+        Architectural layers
       </ng-container>
       <ng-template #slac>
         {{selectedarchitecturallayer?.architectural_layer_name}}
@@ -49,7 +49,7 @@
 
     <ul class="dropdown-menu">
       <li class="dropdown-item" *ngFor="let architecturallayer of filter?.architectural_layers" >
-        <a (click)="selectedArchitecturalLayer(architecturallayer)">{{architecturallayer.architectural_layer_name}}</a>
+        <a (click)="selectArchitecturalLayer(architecturallayer)">{{architecturallayer.architectural_layer_name}}</a>
       </li>
     </ul>
   </div>

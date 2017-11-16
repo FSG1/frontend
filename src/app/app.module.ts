@@ -38,7 +38,7 @@ import {QualificationOverviewComponent} from './components/qualification-overvie
     MDBBootstrapModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ BackendService ],
+  providers: [BackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
