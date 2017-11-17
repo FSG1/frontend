@@ -23,13 +23,14 @@ const routes: Routes = [
   {
     path: 'curriculum/:curriculum/semesters/:semester',
     component: SemesterOverviewComponent
-  }, {
+  },
+  {
     path: 'qualifications',
     component: QualificationOverviewComponent
-  }, {
-    path: 'qualifications/curriculum/:curriculum/lifecycle_activity/:lifecycle_activity/architectural_layer/:architectural_layer',
-    component: QualificationOverviewComponent
   },
+  {path: 'qualifications/:curriculum', component: QualificationOverviewComponent},
+  {path: 'qualifications/:curriculum/:lifecycle_activity', component: QualificationOverviewComponent},
+  {path: 'qualifications/:curriculum/:lifecycle_activity/:architectural_layer', component: QualificationOverviewComponent},
   {
     path: '',
     redirectTo: '/moduleoverview',
