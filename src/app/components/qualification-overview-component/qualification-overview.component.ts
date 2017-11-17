@@ -126,6 +126,8 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
         .subscribe(table => {
           this.table = table;
           return this.countTotalLearningGoals(this.table);
+        }, () => {
+          this.dataStructure = null;
         });
     }
   }
