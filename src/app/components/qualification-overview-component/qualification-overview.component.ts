@@ -28,9 +28,7 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
   curricula: Curriculum[];
   lifecycle_activities: LifecycleActivity[];
   architectural_layers: ArchitecturalLayer[];
-
   dataStructure: TableStructure[];
-  table: QualificationsOverview[];
   selectedCurriculum: number = 0;
   selectedArchitecturalLayer: number = 0;
   selectedLifecycleActivity: number = 0;
@@ -123,12 +121,8 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
   loadTable(): void {
     if (this.selectedCurriculum > 0 && this.selectedLifecycleActivity > 0 && this.selectedArchitecturalLayer > 0) {
       this.backendService.getQualificationTable(this.selectedCurriculum, this.selectedArchitecturalLayer, this.selectedLifecycleActivity)
-        .subscribe(table => {
-          this.table = table;
-          return this.countTotalLearningGoals(this.table);
-        }, () => {
-          this.dataStructure = null;
-        });
+        .subscribe(table => this.countTotalLearningGoals(table),
+        () => this.dataStructure = null);
     }
   }
 
