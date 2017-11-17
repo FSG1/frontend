@@ -194,7 +194,6 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
 
   // the following five methods calculates the value and rowspan of the educational unit and credits part of the table.
   getModule(spot: number): QualificationsModule {
-    console.log(spot);
     return this.dataStructure[spot].module;
   }
 
