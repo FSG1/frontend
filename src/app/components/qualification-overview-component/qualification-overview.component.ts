@@ -1,5 +1,5 @@
-import {AfterContentInit, Component, OnInit} from '@angular/core';
-import {FilterQualifications} from '../../models/qualificiationfiltermodels/filter_qualifications.model';
+///<reference path="../../models/qualificiationfiltermodels/qualifications_module.ts"/>
+import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Curriculum} from '../../models/curriculum.model';
 import {LifecycleActivity} from '../../models/lifecycleactivity';
 import {ArchitecturalLayer} from '../../models/architecturallayer';
@@ -8,301 +8,203 @@ import {QualificationsOverview} from '../../models/qualificiationfiltermodels/qu
 import {QualificationsModule} from '../../models/qualificiationfiltermodels/qualifications_module';
 import {QualificationsLearningGoal} from '../../models/qualificiationfiltermodels/qualifications_learning_goal.model';
 import {Subscription} from 'rxjs/Subscription';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
+import {QualificationsOverviewSemester} from "../../models/qualificiationfiltermodels/qualifications_overview_semester.model";
+
+interface TableStructure {
+  index: number,
+  overview: QualificationsOverview,
+  semester: QualificationsOverviewSemester,
+  module: QualificationsModule,
+  lg: QualificationsLearningGoal
+}
 
 @Component({
   selector: 'app-qualification-overview',
   templateUrl: './qualification-overview.component.html',
   styleUrls: ['./qualification-overview.component.scss']
 })
-export class QualificationOverviewComponent implements AfterContentInit {
-  filter: FilterQualifications;
-  table: QualificationsOverview[];
-  selectedcurriculum: Curriculum;
-  selectedarchitecturallayer: ArchitecturalLayer;
-  selectedlifecycle: LifecycleActivity;
-  constructor(private backendService: BackendService,private router: Router, private route: ActivatedRoute) {}
-  // this variable changes to true as soon as all filters are selected.
-  readytoload: boolean;
-  // this variable is made to create a table of size x
-  tablesize: number[];
-  // these variables are used to check if something is loaded or not
-  lastloadedskilllevel: number;
-  lastloadedsemester: number;
-  lastloadedmodulecode: string;
-  skilllevelchanged: boolean;
-  routeSubscription: Subscription;
-  routedwparams: boolean;
+export class QualificationOverviewComponent implements AfterContentInit, OnInit, OnDestroy {
+  curricula: Curriculum[];
+  lifecycle_activities: LifecycleActivity[];
+  architectural_layers: ArchitecturalLayer[];
+  dataStructure: TableStructure[];
+  selectedCurriculum: number = 0;
+  selectedArchitecturalLayer: number = 0;
+  selectedLifecycleActivity: number = 0;
 
-  readyToLoadTable(): boolean {
-    if (this.routedwparams == null) {
-      return false;
-    } else {
-      return this.routedwparams;
-    }
+  private routeSubscription: Subscription;
+
+  constructor(private backendService: BackendService, private route: ActivatedRoute) {
+    this.curricula = [];
+    this.lifecycle_activities = [];
+    this.architectural_layers = [];
+    this.dataStructure = [];
   }
 
-  // these three methods are used for selecting filter
-  selectCurriculum(curriculum: Curriculum): void {
-    this.selectedcurriculum = curriculum;
-    this.loadRoute();
-  }
-  selectLifecycle(lifecycle: LifecycleActivity): void {
-    this.selectedlifecycle = lifecycle;
-    this.loadRoute();
-  }
-  selectArchitecturalLayer(architecturallayer: ArchitecturalLayer): void {
-    this.selectedarchitecturallayer = architecturallayer;
-    this.loadRoute();
-  }
-
-  // this method is used to load table
-  loadRoute(): void {
-     if (this.selectedcurriculum != null && this.selectedarchitecturallayer != null && this.selectedlifecycle) {
-      this.router.navigateByUrl('/qualifications/curriculum/' + this.selectedcurriculum.id + '/lifecycle_activity/' + this.selectedlifecycle.lifecycle_activity_id + '/architectural_layer/' + this.selectedarchitecturallayer.architectural_layer_id);
-    }
-  }
-  loadTable(): void {
-    this.backendService.getQualificationTable(this.selectedcurriculum.id, this.selectedarchitecturallayer.architectural_layer_id, this.selectedlifecycle.lifecycle_activity_id)
-      .subscribe(table => {
-         this.table = table;
-         return this.countTotalLearningGoals(this.table);
+  ngOnInit() {
+    this.backendService.getQualifications()
+      .subscribe(filter => {
+        this.curricula = filter.curricula;
+        this.lifecycle_activities = filter.lifecycle_activities;
+        this.architectural_layers = filter.architectural_layers;
       });
-
   }
 
-  // this method calculates the size(rows) of the table
-  countTotalLearningGoals(overview: QualificationsOverview[]): void {
-    let returnvalue: number;
-    returnvalue = 0;
-    overview.forEach(qualificationOverview => {
-      qualificationOverview.qualifications_overview_semesters.forEach(qualificationOverviewSemester => {
-        qualificationOverviewSemester.qualifications_modules.forEach(module => {
-          returnvalue += module.learning_goals.length;
-        });
-      });
-    });
-    this.tablesize = Array(returnvalue).fill(0).map((x, i) => i);
-  }
-  // the following three methods calculates the value and rowspan of the skill level part of the table.
-  getSkillLevel(spot: number): number {
-    let count: number;
-    let level: QualificationsOverview;
-    count = 0;
-    this.table.forEach(overview => {
-      overview.qualifications_overview_semesters.forEach( semester => {
-        semester.qualifications_modules.forEach( module => {
-          module.learning_goals.forEach( lg => {
-            if (count === spot) {
-              level = overview;
-            }
-            count++;
-          });
-        });
-      });
-    });
-  return level.skills_level;
-  }
-  getSkillLevelRowSpan(spot: number): number {
-    const skillevel = this.getSkillLevel(spot);
-    let rowspan: number;
-    rowspan = 0;
-    for (const tab of this.table){
-      if (tab.skills_level === skillevel) {
-        tab.qualifications_overview_semesters.forEach( semester => {
-          semester.qualifications_modules.forEach( modules => {
-            rowspan += modules.learning_goals.length;
-          });
-        });
-      }
+  ngOnDestroy() {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
     }
-    return rowspan;
-  }
-  levelLoaded(spot: number): boolean {
-    const skillevel = this.getSkillLevel(spot);
-    if (this.lastloadedskilllevel === skillevel) {
-      return false;
-    }
-    this.skilllevelchanged = true;
-    this.lastloadedskilllevel = skillevel;
-    return true;
-  }
-  // the following three methods calculates the value and rowspan of the semester level part of the table.
-  getSemester(spot: number): number {
-    let lowerboundary: number;
-    lowerboundary = 0;
-    let upperboundary: number;
-    upperboundary = 0;
-
-    for (let i = 0; i < this.table.length; i++) {
-      for (let j = 0; j < this.table[i].qualifications_overview_semesters.length; j++) {
-        this.table[i].qualifications_overview_semesters[j].qualifications_modules.forEach( modules => {
-          upperboundary += modules.learning_goals.length;
-        });
-        if (spot >= lowerboundary && spot < upperboundary) {
-          return this.table[i].qualifications_overview_semesters[j].semester;
-        }
-        lowerboundary = upperboundary;
-      }
-    }
-    return -1;
-  }
-  getSemesterRowSpan(spot: number) {
-    const selectedsemester = this.getSemester(spot);
-    const level = this.getSkillLevel(spot);
-    let rowspan: number;
-    rowspan = 0;
-    this.table.forEach( overview => {
-      overview.qualifications_overview_semesters.forEach( semester => {
-        semester.qualifications_modules.forEach( module => {
-            if (semester.semester === selectedsemester && level === overview.skills_level) {
-              rowspan += module.learning_goals.length;
-            }
-          });
-        });
-      });
-   return rowspan;
-  }
-  semesterLoaded(spot: number): boolean {
-    const semester = this.getSemester(spot);
-    if (this.skilllevelchanged && this.lastloadedsemester === semester) {
-      return true;
-    }
-    if (this.lastloadedsemester === semester ) {
-      return false;
-    }
-    this.lastloadedsemester = semester;
-    return true;
-  }
-  // the following five methods calculates the value and rowspan of the educational unit and credits part of the table.
-  getModule(spot: number): QualificationsModule {
-    let count: number;
-    let mod: QualificationsModule;
-    count = 0;
-    this.table.forEach(overview => {
-      overview.qualifications_overview_semesters.forEach( semester => {
-        semester.qualifications_modules.forEach( module => {
-          module.learning_goals.forEach( lg => {
-            if (count === spot) {
-              mod = module;
-            }
-            count++;
-          });
-        });
-      });
-    });
-
-    return mod;
-
-  }
-  moduleLoaded(spot: number): boolean {
-    const mdlcode = this.getModuleCode(spot);
-    if (this.skilllevelchanged && this.lastloadedmodulecode === mdlcode) {
-      this.skilllevelchanged = false;
-      return true;
-    }
-    if (this.lastloadedmodulecode === mdlcode) {
-      return false;
-    }
-    this.skilllevelchanged = false;
-    this.lastloadedmodulecode = mdlcode;
-    return true;
-  }
-  getModuleRowSpan(spot: number) {
-    const mdlcode = this.getModuleCode(spot);
-    let rowspan: number;
-    rowspan = 0;
-    const level = this.getSkillLevel(spot);
-    this.table.forEach( overview => {
-      overview.qualifications_overview_semesters.forEach( semester => {
-        semester.qualifications_modules.forEach( module => {
-          if (module.module_code === mdlcode && level === overview.skills_level) {
-            rowspan += module.learning_goals.length;
-          }
-        });
-      });
-    });
-    return rowspan;
-  }
-  getModuleCode(spot: number): string {
-    const module = this.getModule(spot);
-    if (module === null) {
-      return '-1';
-    }
-    return this.getModule(spot).module_code;
-  }
-  getModuleCredits(spot: number): number {
-    const module = this.getModule(spot);
-    if(module === null) {
-      return -1;
-    }
-    return this.getModule(spot).credits;
-  }
-  // gets the correct learning goal for the correct spot.
-  getLearningGoal(spot: number): string {
-    let count: number;
-    let qlg: QualificationsLearningGoal;
-    count = 0;
-    this.table.forEach(overview => {
-      overview.qualifications_overview_semesters.forEach( semester => {
-        semester.qualifications_modules.forEach( module => {
-          module.learning_goals.forEach( lg => {
-            if (count === spot) {
-              qlg = lg;
-            }
-            count++;
-          });
-        });
-      });
-    });
-    return qlg.description;
-  }
-
-  initializeFromParams(curriculum: number, lca: number, al: number): void {
-    if(!this.filter) return;
-    this.filter.curricula.forEach( c => {
-      if (c.id == curriculum ) {
-        this.selectedcurriculum = c;
-      }
-    });
-    this.filter.architectural_layers.forEach( a => {
-      if (a.architectural_layer_id == al ) {
-        this.selectedarchitecturallayer = a;
-      }
-    });
-    this.filter.lifecycle_activities.forEach( l => {
-      if (l.lifecycle_activity_id == lca ) {
-        this.selectedlifecycle = l;
-      }
-    });
-    this.loadTable();
   }
 
   ngAfterContentInit(): void {
-    this.readytoload = false;
-    this.skilllevelchanged = false;
-    // -1 means something is not loaded. initializing the variables here
-    this.lastloadedskilllevel = -1;
-    this.lastloadedsemester = -1;
-    this.lastloadedmodulecode = '-1';
-    this.backendService.getQualifications()
-      .subscribe(filter => {
-        return this.filter = filter;
-      });
     this.routeSubscription = this.route.params.subscribe(params => {
-      if (params && params['curriculum'] &&  params['lifecycle_activity'] &&  params['architectural_layer']) {
-        this.routedwparams = true;
-        const curriculum = params['curriculum'];
-        const lifecycle_activity = params['lifecycle_activity'];
-        const architectural_layer = params['architectural_layer'];
-
-        this.initializeFromParams(curriculum, lifecycle_activity, architectural_layer);
-      } else {
-        this.routedwparams = false;
+      if (params["curriculum"]) {
+        this.selectedCurriculum = params["curriculum"];
       }
+
+      if (params["lifecycle_activity"]) {
+        this.selectedLifecycleActivity = params["lifecycle_activity"];
+      }
+
+      if (params["architectural_layer"]) {
+        this.selectedArchitecturalLayer = params["architectural_layer"];
+      }
+      this.loadTable();
     });
   }
 
+  get selectedCurriculumName(): string {
+    if (this.selectedCurriculum > 0) {
+      let selected = Number(this.selectedCurriculum);
+      let name = this.curricula
+        .filter(function (row) {return row.id === selected;})
+        .map(function (row) { return row.name})
+        .shift();
 
+      if (name) {
+        return name;
+      }
+    }
+    return "Curriculum";
+  }
 
+  get selectedActivityName(): string {
+    if (this.selectedLifecycleActivity > 0) {
+      let selected = Number(this.selectedLifecycleActivity);
+      let name = this.lifecycle_activities
+        .filter(function (row) {return row.lifecycle_activity_id === selected;})
+        .map(function (row) { return row.lifecycle_activity_name})
+        .shift();
+
+      if (name) {
+        return name;
+      }
+    }
+    return "Lifecycle Activity";
+  }
+
+  get selectedArchitecturalLayerName(): string {
+    if (this.selectedArchitecturalLayer > 0) {
+      let selected = Number(this.selectedArchitecturalLayer);
+      let name = this.architectural_layers
+        .filter(function (row) {return row.architectural_layer_id === selected;})
+        .map(function (row) { return row.architectural_layer_name})
+        .shift();
+
+      if (name) {
+        return name;
+      }
+    }
+    return "Architectural Layer";
+  }
+
+  loadTable(): void {
+    if (this.selectedCurriculum > 0 && this.selectedLifecycleActivity > 0 && this.selectedArchitecturalLayer > 0) {
+      this.backendService.getQualificationTable(this.selectedCurriculum, this.selectedArchitecturalLayer, this.selectedLifecycleActivity)
+        .subscribe(table => this.countTotalLearningGoals(table),
+        () => this.dataStructure = []);
+    }
+  }
+
+  // Create a datastructure which makes it easy to show a table
+  countTotalLearningGoals(overview: QualificationsOverview[]): void {
+    let ds: TableStructure[] = [];
+    let i = 0;
+    overview.forEach(function (overview) {
+      overview.qualifications_overview_semesters.forEach(function(semester) {
+        semester.qualifications_modules.forEach(function (module) {
+          module.learning_goals.forEach(function (lg) {
+            ds[i] = {
+              index: i,
+              overview: overview,
+              semester: semester,
+              module: module,
+              lg: lg
+            };
+            i++;
+          });
+        });
+      });
+    });
+    this.dataStructure = ds;
+  }
+
+  // the following three methods calculates the value and rowspan of the skill level part of the table.
+  getSkillLevel(spot: number): number {
+    return this.dataStructure[spot].overview.skills_level;
+  }
+
+  getSkillLevelRowSpan(spot: number): number {
+    return this.dataStructure[spot].overview.qualifications_overview_semesters.map(function(semester) {
+      return semester.qualifications_modules.map(function (module) {
+        return module.learning_goals.length;
+      }).reduce((acc, val) => (acc + val), 0);
+    }).reduce((acc, val) => (acc + val), 0);
+  }
+
+  levelLoaded(spot: number): boolean {
+    if (spot === 0) return true;
+
+    let cur = this.dataStructure[spot];
+    let previous = this.dataStructure[spot - 1];
+
+    return !(cur.overview.skills_level === previous.overview.skills_level);
+  }
+
+  getSemesterRowSpan(spot: number) {
+    return this.dataStructure[spot].semester.qualifications_modules.map(function (module) {
+      return module.learning_goals.length;
+    }).reduce((acc, val) => (acc + val), 0);
+  }
+
+  semesterLoaded(spot: number): boolean {
+    if (spot === 0) return true;
+
+    let cur = this.dataStructure[spot];
+    let previous = this.dataStructure[spot - 1];
+
+    return !(
+      cur.overview.skills_level === previous.overview.skills_level && cur.semester.semester === previous.semester.semester
+    );
+  }
+
+  // the following five methods calculates the value and rowspan of the educational unit and credits part of the table.
+  getModule(spot: number): QualificationsModule {
+    return this.dataStructure[spot].module;
+  }
+
+  moduleLoaded(spot: number): boolean {
+    if (spot === 0) return true;
+    let cur = this.dataStructure[spot];
+    let previous = this.dataStructure[spot - 1];
+
+    return !(
+      cur.overview.skills_level === previous.overview.skills_level && cur.semester.semester === previous.semester.semester && cur.module.module_code === previous.module.module_code
+    );
+  }
+
+  getModuleRowSpan(spot: number) {
+    return this.getModule(spot).learning_goals.length;
+  }
 }
