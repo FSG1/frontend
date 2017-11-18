@@ -39,6 +39,7 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
     this.curricula = [];
     this.lifecycle_activities = [];
     this.architectural_layers = [];
+    this.dataStructure = [];
   }
 
   ngOnInit() {
@@ -122,7 +123,7 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
     if (this.selectedCurriculum > 0 && this.selectedLifecycleActivity > 0 && this.selectedArchitecturalLayer > 0) {
       this.backendService.getQualificationTable(this.selectedCurriculum, this.selectedArchitecturalLayer, this.selectedLifecycleActivity)
         .subscribe(table => this.countTotalLearningGoals(table),
-        () => this.dataStructure = null);
+        () => this.dataStructure = []);
     }
   }
 
