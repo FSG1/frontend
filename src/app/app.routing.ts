@@ -48,7 +48,7 @@ Disable tracing in production
  */
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {enableTracing: (!environment.production)})
+    RouterModule.forRoot(routes, {enableTracing: (!environment.production) && false})
   ],
   exports: [
     RouterModule
