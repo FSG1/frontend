@@ -62,8 +62,7 @@
       <tr class="font-weight-bold">
         <th class="rgba-grey-light">Skills level</th>
         <th class="rgba-red-light">Semester</th>
-        <th class="rgba-orange-light">Educational unit</th>
-        <th class="rgba-yellow-slight">Credits (ECTS)</th>
+        <th class="rgba-orange-light">Educational unit (ECs)</th>
         <th>Learning goals</th>
       </tr>
     </thead>
@@ -79,10 +78,7 @@
 
         <ng-container *ngIf="moduleLoaded(entry.index)">
           <td class="rgba-orange-light hoverable test-module" [routerLink]="['/curriculum/', selectedCurriculum, 'modules', entry.module.module_code]" [attr.rowspan]="getModuleRowSpan(entry.index)">
-            {{entry.module.module_code}}
-          </td>
-          <td class="rgba-yellow-slight" [attr.rowspan]="getModuleRowSpan(entry.index)">
-            {{entry.module.credits}}
+            {{entry.module.module_code}} ({{entry.module.credits}})
           </td>
         </ng-container>
 
