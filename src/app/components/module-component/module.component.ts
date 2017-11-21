@@ -18,12 +18,12 @@ export class ModuleComponent implements OnInit, OnDestroy {
   moduleCurriculum: number;
   personalGoals: LearningGoal[] = [];
   groupGoals: LearningGoal[] = [];
-  assessmentInformation: AssesmentPart[];
+  assesmentInformation: AssesmentPart[];
 
   routeSubscription: Subscription;
 
   constructor(private backendService: BackendService, private route: ActivatedRoute) {
-    this.assessmentInformation = [
+    this.assesmentInformation = [
       {
         'subcode': 'sofa1',
         'description': 'research some stuff',
