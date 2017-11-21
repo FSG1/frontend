@@ -156,20 +156,20 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <table>
+      <table class="table table-bordered table-sm table-striped">
         <tr>
           <th>Progresscode</th>
           <th>Description</th>
           <th>Percentage</th>
           <th>Minimal grade</th>
-          <th>Remarks</th>
+          <th *ngIf="numberRemarks > 0">Remarks</th>
         </tr>
         <tr class="assessmentInformation" *ngFor="let examinfo of moduleContent?.assesment_parts">
           <td>{{examinfo.subcode}}</td>
           <td>{{examinfo.description}}</td>
           <td>{{examinfo.percentage | percent}}</td>
           <td>{{examinfo.minimal_grade}}</td>
-          <td>{{examinfo.remark}}</td>
+          <td *ngIf="numberRemarks > 0">{{examinfo.remark}}</td>
         </tr>
       </table>
     </div>

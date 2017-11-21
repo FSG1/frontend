@@ -18,7 +18,7 @@ export class ModuleComponent implements OnInit, OnDestroy {
   moduleCurriculum: number;
   personalGoals: LearningGoal[] = [];
   groupGoals: LearningGoal[] = [];
-  assesmentInformation: AssesmentPart[];
+  numberRemarks: number;
 
   routeSubscription: Subscription;
 
@@ -38,6 +38,12 @@ export class ModuleComponent implements OnInit, OnDestroy {
         this.backendService.getModuleContent(this.moduleCurriculum, this.selectedModule)
           .subscribe(moduleContent => this.contentReceive(moduleContent));
       });
+
+    this.moduleContent.assesment_parts.forEach( part => {
+      if (part.remark.length > 0) {
+        this.numberRemarks++;
+      }
+    });
   }
 
   ngOnDestroy(): void {

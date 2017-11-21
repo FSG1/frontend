@@ -32,6 +32,16 @@
   font-size: 20px;
 }
 
+.table {
+  margin-top: 20px;
+  th {
+    text-align:center;
+  }
+  td {
+    text-align: center;
+  }
+}
+
 .container {
   margin-top: 20px;
 
@@ -77,28 +87,6 @@
     .prior-remark {
       font-size: 14px;
       font-style: italic;
-    }
-  }
-
-  table {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-
-    margin: auto auto 20px;
-    width: 100%;
-    border: 2px solid black;
-    td {
-      text-align: center;
-      vertical-align: middle;
-      border: 1px solid black;
-      font-size: medium;
-      word-wrap: break-word;
-    }
-    th {
-      background-color: lightgrey;
-      text-align: center;
-      vertical-align: middle;
-      border: 1px solid black;
-      font-size: medium;
     }
   }
 }
