@@ -18,7 +18,8 @@ export class NavComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.router.events.filter((event) => (event instanceof NavigationEnd)).subscribe((event) => {
-      const url = (event as NavigationEnd).url;
+      console.log(event);
+      const url = (event as NavigationEnd).urlAfterRedirects;
       this.curriculumView = false;
       this.qualificationsView = false;
 
