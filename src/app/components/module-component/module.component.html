@@ -149,6 +149,32 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12 colHeader">
+      <p class="big">Exam information</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table>
+        <tr>
+          <th>Subcode</th>
+          <th>Description</th>
+          <th>Percentage</th>
+          <th>Minimal grade</th>
+          <th>Remarks</th>
+        </tr>
+        <tr *ngFor="let examinfo of assessmentInformation">
+          <td>{{examinfo.subcode}}</td>
+          <td>{{examinfo.description}}</td>
+          <td>{{examinfo.percentage | percent}}</td>
+          <td>{{examinfo.minimal_grade}}</td>
+          <td>{{examinfo.remark}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
   <div class="row" *ngIf="moduleContent?.topics?.length > 0">
     <div class="col-12 colHeader">
       <p class="big">Topics</p>
