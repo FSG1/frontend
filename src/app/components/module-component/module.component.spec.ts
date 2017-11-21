@@ -17,22 +17,6 @@ import {SemesterOverviewComponent} from '../semester-overview-component/semester
 import {QualificationOverviewComponent} from '../qualification-overview-component/qualification-overview.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 
-const assessmentInformation = [
-  {
-    'subcode': 'sofa1',
-    'description': 'research some stuff',
-    'percentage': 0.1,
-    'minimal_grade': 5.5,
-    'remark': 'nice'
-  },
-  {
-    'subcode': 'sofa2',
-    'description': 'something',
-    'percentage': 0.9,
-    'minimal_grade': 5.5,
-    'remark': 'not nice'
-  }];
-
 const modulemodel = {
   'code': 'IOT',
   'name': 'Internet of Things',
@@ -99,8 +83,14 @@ const modulemodel = {
       'percentage': 0.1,
       'minimal_grade': 5.5,
       'remark': 'nice'
-    }
-  ]
+    },
+    {
+      'subcode': 'sofa2',
+      'description': 'something',
+      'percentage': 0.9,
+      'minimal_grade': 5.5,
+      'remark': 'not nice'
+    }]
 };
 
 describe('Testing module component', () => {
@@ -145,7 +135,7 @@ describe('Testing module component', () => {
       expect(fixture.debugElement.queryAll(By.css('.group-goal')).length).toBe(1);
     });
     it('Should be 2 assessment informations', () => {
-      component.assesmentInformation = assessmentInformation;
+      component.moduleContent = modulemodel;
       fixture.detectChanges();
       expect(fixture.debugElement.queryAll(By.css('.assessmentInformation')).length).toBe(2);
     })

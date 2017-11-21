@@ -164,7 +164,7 @@
           <th>Minimal grade</th>
           <th>Remarks</th>
         </tr>
-        <tr class="assessmentInformation" *ngFor="let examinfo of assesmentInformation">
+        <tr class="assessmentInformation" *ngFor="let examinfo of moduleContent?.assesment_parts">
           <td>{{examinfo.subcode}}</td>
           <td>{{examinfo.description}}</td>
           <td>{{examinfo.percentage | percent}}</td>

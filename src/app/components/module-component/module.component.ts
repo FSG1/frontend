@@ -23,21 +23,6 @@ export class ModuleComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription;
 
   constructor(private backendService: BackendService, private route: ActivatedRoute) {
-    this.assesmentInformation = [
-      {
-        'subcode': 'sofa1',
-        'description': 'research some stuff',
-        'percentage': 0.1,
-        'minimal_grade': 5.5,
-        'remark': 'nice'
-      },
-      {
-        'subcode': 'sofa2',
-        'description': 'something',
-        'percentage': 0.9,
-        'minimal_grade': 5.5,
-        'remark': 'not nice'
-      }];
   }
 
   ngOnInit(): void {
