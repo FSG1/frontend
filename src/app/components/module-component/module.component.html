@@ -158,13 +158,13 @@
     <div class="col-12">
       <table>
         <tr>
-          <th>Subcode</th>
+          <th>Progresscode</th>
           <th>Description</th>
           <th>Percentage</th>
           <th>Minimal grade</th>
           <th>Remarks</th>
         </tr>
-        <tr *ngFor="let examinfo of assessmentInformation">
+        <tr class="assessmentInformation" *ngFor="let examinfo of assesmentInformation">
           <td>{{examinfo.subcode}}</td>
           <td>{{examinfo.description}}</td>
           <td>{{examinfo.percentage | percent}}</td>
