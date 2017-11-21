@@ -23,8 +23,8 @@
 
     <ul class="dropdown-menu">
       <li class="dropdown-item" *ngFor="let lifecycle of lifecycle_activities" >
-        <a [routerLink]="['/qualifications', selectedCurriculum, lifecycle.lifecycle_activity_id, selectedArchitecturalLayer]">
-          {{lifecycle.lifecycle_activity_name}}
+        <a [routerLink]="['/qualifications', selectedCurriculum, lifecycle.id, selectedArchitecturalLayer]">
+          {{lifecycle.name}}
         </a>
       </li>
     </ul>
@@ -38,8 +38,8 @@
 
     <ul class="dropdown-menu">
       <li class="dropdown-item" *ngFor="let architecturallayer of architectural_layers" >
-        <a [routerLink]="['/qualifications', selectedCurriculum, selectedLifecycleActivity, architecturallayer.architectural_layer_id]">
-          {{architecturallayer.architectural_layer_name}}
+        <a [routerLink]="['/qualifications', selectedCurriculum, selectedLifecycleActivity, architecturallayer.id]">
+          {{architecturallayer.name}}
         </a>
       </li>
     </ul>
@@ -77,8 +77,8 @@
         </td>
 
         <ng-container *ngIf="moduleLoaded(entry.index)">
-          <td class="rgba-orange-light hoverable test-module" [routerLink]="['/curriculum/', selectedCurriculum, 'modules', entry.module.module_code]" [attr.rowspan]="getModuleRowSpan(entry.index)">
-            {{entry.module.module_code}} ({{entry.module.credits}})
+          <td class="rgba-orange-light hoverable test-module" [routerLink]="['/curriculum/', selectedCurriculum, 'modules', entry.module.code]" [attr.rowspan]="getModuleRowSpan(entry.index)">
+            {{entry.module.code}} ({{entry.module.credits}})
           </td>
         </ng-container>
 

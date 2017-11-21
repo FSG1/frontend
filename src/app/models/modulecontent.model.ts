@@ -3,10 +3,11 @@ import {ArchitecturalLayer} from './architecturallayer';
 import {LifecycleActivity} from './lifecycleactivity';
 import {StudentSkill} from './studentskill';
 import {PriorKnowledgeReferenceModel} from './prior_knowledge_reference.model';
+import {AssesmentPart} from './assesment_part';
 
 export interface ModuleContent {
-  module_code: string;
-  module_name: string;
+  code: string;
+  name: string;
   credits: number;
   semester: number;
   lectures_in_week: number;
@@ -17,10 +18,11 @@ export interface ModuleContent {
   introductorytext: string;
   qualifications: StudentSkill[];
   topics: string[];
-  teaching_material: string;
+  teaching_material: string[];
   prior_knowledge_references: PriorKnowledgeReferenceModel[];
   additional_information: string;
   architectural_layers: ArchitecturalLayer[];
   lifecycle_activities: LifecycleActivity[];
   learning_goals: LearningGoal[];
+  assesment_parts: AssesmentPart[];
 }

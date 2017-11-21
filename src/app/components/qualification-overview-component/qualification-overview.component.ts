@@ -93,8 +93,8 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
     if (this.selectedLifecycleActivity > 0) {
       let selected = Number(this.selectedLifecycleActivity);
       let name = this.lifecycle_activities
-        .filter(function (row) {return row.lifecycle_activity_id === selected;})
-        .map(function (row) { return row.lifecycle_activity_name})
+        .filter(function (row) {return row.id === selected;})
+        .map(function (row) { return row.name})
         .shift();
 
       if (name) {
@@ -108,8 +108,8 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
     if (this.selectedArchitecturalLayer > 0) {
       let selected = Number(this.selectedArchitecturalLayer);
       let name = this.architectural_layers
-        .filter(function (row) {return row.architectural_layer_id === selected;})
-        .map(function (row) { return row.architectural_layer_name})
+        .filter(function (row) {return row.id === selected;})
+        .map(function (row) { return row.name})
         .shift();
 
       if (name) {
@@ -200,7 +200,7 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
     let previous = this.dataStructure[spot - 1];
 
     return !(
-      cur.overview.skills_level === previous.overview.skills_level && cur.semester.semester === previous.semester.semester && cur.module.module_code === previous.module.module_code
+      cur.overview.skills_level === previous.overview.skills_level && cur.semester.semester === previous.semester.semester && cur.module.code === previous.module.code
     );
   }
 

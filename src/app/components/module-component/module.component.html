@@ -5,7 +5,7 @@
       <p class="big">Module:</p>
     </div>
     <div class="col-10 colContent module-name">
-      <p>{{ moduleContent?.module_name }}</p>
+      <p>{{ moduleContent?.name }}</p>
     </div>
   </div>
 
@@ -134,7 +134,6 @@
     <div class="row">
       <div class="col-12 learninggoal">
         <app-skill-matrix [hidden]="!learninggoal.expanded" [architecturallayers]="moduleContent?.architectural_layers" [lifecycleactivities]="moduleContent?.lifecycle_activities" [studentskills]="learninggoal.skillmatrix"></app-skill-matrix>
-        <app-exam-lg [hidden]="!learninggoal.expanded" [lg]="learninggoal"></app-exam-lg>
       </div>
     </div>
   </div>
@@ -168,7 +167,7 @@
   </div>
   <div class="row" *ngIf="moduleContent?.teaching_material?.length > 0">
     <div class="col-12 colContent">
-      <p>{{ moduleContent?.teaching_material }}</p>
+      <p *ngFor="let material of moduleContent.teaching_material">- {{material}}</p>
     </div>
   </div>
 
@@ -179,9 +178,9 @@
   </div>
   <div class="row" *ngIf="moduleContent?.prior_knowledge_references?.length > 0">
     <div class="col-4 colContent prior-module" *ngFor="let prioKnowledgeReference of moduleContent.prior_knowledge_references">
-      <a [routerLink]="['/curriculum', moduleCurriculum, 'modules', prioKnowledgeReference.module_code]">
+      <a [routerLink]="['/curriculum', moduleCurriculum, 'modules', prioKnowledgeReference.code]">
         <span class="prior-code">
-          {{prioKnowledgeReference.module_code}}
+          {{prioKnowledgeReference.code}}
         </span>
         <span class="prior-type">
           {{prioKnowledgeReference.type}}

@@ -8,9 +8,9 @@
 
   <div class="row semesterGrid justify-content-center">
     <div class="col-2 hoverable semesterGridContent" *ngFor="let module of completesemester?.modules">
-      <a class="test-amount-modules" [routerLink]="['/curriculum/', curriculumid, 'modules', module.module_code]">
+      <a class="test-amount-modules" [routerLink]="['/curriculum/', curriculumid, 'modules', module.code]">
         <h4>
-          {{ module.module_code }}
+          {{ module.code }}
         </h4>
         <p class="text-secondary">
           Credits {{ module.credits }}

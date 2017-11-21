@@ -1,6 +1,6 @@
 export interface PriorKnowledgeReferenceModel {
-  module_code: number;
-  module_name: string;
+  code: number;
+  name: string;
   type: string;
   remarks?: string;
 }
