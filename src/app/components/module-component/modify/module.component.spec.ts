@@ -2,19 +2,19 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {ModuleComponent} from './module.component';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
-import {ModuleContent} from '../../models/modulecontent.model';
+import {ModuleContent} from '../../../models/modulecontent.model';
 import {Subscriber} from 'rxjs/Subscriber';
-import {BackendService} from '../../backend.service';
+import {BackendService} from '../../../backend.service';
 import {By} from '@angular/platform-browser';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import {ExamLGComponent} from '../examlg-component/examlg.component';
-import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
+import {ExamLGComponent} from '../../examlg-component/examlg.component';
+import {SkillMatrixComponent} from '../../skillmatrix-component/skillmatrix.component';
 import {APP_BASE_HREF, LocationStrategy} from '@angular/common';
-import {AppRoutingModule} from '../../app.routing';
-import {ModuleOverviewComponent} from '../module-overview-component/module-overview.component';
-import {ErrorComponent} from '../../../util/error/error.component';
-import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
-import {QualificationOverviewComponent} from '../qualification-overview-component/qualification-overview.component';
+import {AppRoutingModule} from '../../../app.routing';
+import {ModuleOverviewComponent} from '../../module-overview-component/module-overview.component';
+import {ErrorComponent} from '../../../../util/error/error.component';
+import {SemesterOverviewComponent} from '../../semester-overview-component/semester-overview.component';
+import {QualificationOverviewComponent} from '../../qualification-overview-component/qualification-overview.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 const modulemodel = {

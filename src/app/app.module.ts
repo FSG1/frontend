@@ -12,11 +12,13 @@ import { SkillMatrixComponent } from './components/skillmatrix-component/skillma
 import { HttpModule } from '@angular/http';
 
 import { BackendService } from './backend.service';
-import {ModuleComponent} from './components/module-component/module.component';
+import {ModuleComponent} from './components/module-component/modify/module.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {ExamLGComponent} from './components/examlg-component/examlg.component';
 import {SemesterOverviewComponent} from './components/semester-overview-component/semester-overview.component';
 import {QualificationOverviewComponent} from './components/qualification-overview-component/qualification-overview.component';
+import {ModuleEditComponent} from './components/module-component/display/module-edit.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,10 +28,12 @@ import {QualificationOverviewComponent} from './components/qualification-overvie
     ExamLGComponent,
     SkillMatrixComponent,
     SemesterOverviewComponent,
-    QualificationOverviewComponent
+    QualificationOverviewComponent,
+    ModuleEditComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     HttpModule,

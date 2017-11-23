@@ -38,7 +38,7 @@ const outputmockup = {
   'additional_information': 'vey nice course',
   'all_lecturers': [{
     'id': 1,
-    'name': 'Dorssers, F',
+    'name': 'Dorssers, T',
   }, {
     'id': 2,
     'name': 'Van Odenhoven, F',
@@ -48,7 +48,7 @@ const outputmockup = {
   }],
   'active_lecturers': [{
     'id': 1,
-    'name': 'Dorssers, F',
+    'name': 'Dorssers, T',
   }, {
     'id': 2,
     'name': 'Van Odenhoven, F',
@@ -65,7 +65,7 @@ export class BackendService {
     return this.http.get<CompleteSemester>(completeSemesterUrl);
   }
   // endpoint doesn't exist yet
-  getModule(modulecode: string): Observable<EditableModuleOutput> {
+  getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
    const editablemoduleoutputurl = this.getBaseUrl() + 'module/' + modulecode;
     return Observable.create((observer: Subscriber<any>) => {
       observer.next(outputmockup);

@@ -1,6 +1,7 @@
 import {TeachingMaterial} from '../teaching_material';
+import {EditableModuleOutput} from './editable_module_output';
 
-export interface EditableModuleInput {
+export class EditableModuleInput {
   code: string;
   name: string;
   credits: number;
@@ -12,4 +13,20 @@ export interface EditableModuleInput {
   additional_information: string;
   lecturers: number[];
   credentials: string;
+  public constructor(output: EditableModuleOutput) {
+    this.code = output.code;
+    this.name = output.name;
+    this.credits = output.credits;
+    this.lectures_in_week = output.lectures_in_week;
+    this.practical_hours_week = output.practical_hours_week;
+    this.introductorytext = output.introductorytext;
+    this.topics = output.topics;
+    this.teaching_material = output.teaching_material;
+    this.additional_information = output.additional_information;
+    this.credentials = output.credentials;
+    this.lecturers = new Array();
+    for (let i = 0; i < output.active_lecturers.length; i++) {
+      this.lecturers[i] = output.active_lecturers[i].id;
+    }
+  }
 }

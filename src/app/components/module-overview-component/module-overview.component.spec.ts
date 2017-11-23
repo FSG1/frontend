@@ -10,7 +10,7 @@ import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
 import {ActivatedRoute} from '@angular/router';
 import {AppRoutingModule} from '../../app.routing';
-import {ModuleComponent} from '../module-component/module.component';
+import {ModuleComponent} from '../module-component/modify/module.component';
 import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
 import {ErrorComponent} from '../../../util/error/error.component';

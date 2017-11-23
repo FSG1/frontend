@@ -1,0 +1,66 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-2 colHeader">
+      <p class="big">Module:</p>
+    </div>
+    <div class="col-10 colContent module-name">
+      test {{output.name}}
+      <input [(ngModel)]="output.name" placeholder="name">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2 colHeader">
+      <p class="big">Module code:</p>
+    </div>
+    <div class="col-10 colContent module-name">
+      <p>{{ output?.code }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2 colHeader">
+      <p class="big">Semester</p>
+    </div>
+    <div class="col-2 colContent">
+      <p>{{ output?.semester }}</p>
+    </div>
+    <div class="col-4 colHeader">
+      <p class="big">Credits (ECTS)</p>
+    </div>
+    <div class="col-4 colContent">
+      <p>{{ output?.credits }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2 colHeader">
+      <p class="big">Lectures / week</p>
+    </div>
+    <div class="col-2 colContent">
+      <p>{{ output?.lectures_in_week }}</p>
+    </div>
+    <div class="col-2 colHeader">
+      <p class="big">Practical hours / week</p>
+    </div>
+    <div class="col-2 colContent">
+      <p>{{ output?.practical_hours_week }}</p>
+    </div>
+    <div class="col-2 colHeader">
+      <p class="big">Total effort</p>
+    </div>
+    <div class="col-2 colContent">
+      <p>{{ calculateTotalEffort()}} hours</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2 colHeader">
+      <p class="big">Lecturers</p>
+    </div>
+    <div class="col-10 colContent">
+      <p *ngFor="let lecturer of output.active_lecturers">{{ lecturer.name }} </p>
+    </div>
+  </div>
+
+</div>

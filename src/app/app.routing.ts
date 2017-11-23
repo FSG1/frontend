@@ -1,11 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ErrorComponent} from '../util/error/error.component';
-import {ModuleComponent} from './components/module-component/module.component';
+import {ModuleComponent} from './components/module-component/modify/module.component';
 import {ModuleOverviewComponent} from './components/module-overview-component/module-overview.component';
 import {SemesterOverviewComponent} from './components/semester-overview-component/semester-overview.component';
 import {QualificationOverviewComponent} from './components/qualification-overview-component/qualification-overview.component';
 import {environment} from '../environments/environment';
+import {ModuleEditComponent} from './components/module-component/display/module-edit.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,9 @@ const routes: Routes = [
   {
     path: 'curriculum/:curriculum/semesters/:semester',
     component: SemesterOverviewComponent
+  }, {
+    path: 'modifymodule/:module_code',
+    component: ModuleEditComponent
   },
   {
     path: 'qualifications',
