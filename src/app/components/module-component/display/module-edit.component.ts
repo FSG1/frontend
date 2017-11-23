@@ -5,6 +5,7 @@ import {EditableModuleInput} from '../../../models/editmodels/editable_module_in
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Lecturer} from '../../../models/lecturer';
+import {TeachingMaterial} from '../../../models/teaching_material';
 
 @Component({
   selector: 'app-editable-module',
@@ -18,15 +19,20 @@ export class ModuleEditComponent implements OnInit {
   input: EditableModuleInput;
   modulecode: string;
 
+  //#region selection variables
   selectedLecturer: Lecturer;
-
+  selectedTopic: string;
   private routeSubscription: Subscription;
-
+  selectedTeachingMaterial: string;
+  selectedTeachingMaterialType: string;
+  defaultType = 'Teaching Material';
+  //#endregion
   ngOnInit(): void {
     this.selectedLecturer = {
       'name': 'Lecturers',
       'id': -1
     };
+    this.selectedTeachingMaterialType = this.defaultType;
     this.routeSubscription = this.route.params.subscribe(
       params => {
         if (params['module_code']) {
@@ -38,6 +44,7 @@ export class ModuleEditComponent implements OnInit {
             });
           }});
   }
+  //#region lecturers
   removeLecturer(lect: Lecturer): void {
     this.output.active_lecturers = this.output.active_lecturers.filter( lec => lec.id !== lect.id);
   }
@@ -52,13 +59,55 @@ export class ModuleEditComponent implements OnInit {
           found = false;
         }
       });
-      if(found) {
+      if (found) {
         this.output.active_lecturers.push(this.selectedLecturer);
       }
     }
   }
+  //#endregion lecturers
+  //#region topics
+  removeTopic(topic: string): void {
+    this.output.topics = this.output.topics.filter( top => top != topic);
+  }
+  addTopic(): void {
+    if (this.selectedTopic.trim().length) {
+      let found = true;
+      this.output.topics.forEach( t => {
+        if (t === this.selectedTopic) {
+          found = false;
+        }
+      });
+      if (found) {
+        this.output.topics.push(this.selectedTopic);
+        this.selectedTopic = '';
+      }
+    }
+  }
+  //#endregion
+  //#region teaching_materials
+  removeTeachingMaterial(material: string): void {
+    this.output.teaching_material = this.output.teaching_material.filter( tm => tm.name != material);
+  }
+  selectTeachingMaterialType(type: string): void {
+    this.selectedTeachingMaterialType = type;
+  }
+  addTeachingMaterials(): void {
+    if (this.selectedTeachingMaterial.trim().length && this.selectedTeachingMaterialType != this.defaultType) {
+      let found = true;
+      this.output.teaching_material.forEach( tm => {
+        if (tm.name === this.selectedTeachingMaterial) {
+          found = false;
+        }
+      });
+      if (found) {
+        this.output.teaching_material.push(new TeachingMaterial(this.selectedTeachingMaterial, this.selectedTeachingMaterialType));
+        this.selectedTeachingMaterial = '';
+      }
+    }
+  }
+  //#endregion
   // TODO send save data
-  Save(): void {
+  save(): void {
     this.input = new EditableModuleInput(this.output);
   }
   calculateTotalEffort(): number {

@@ -44,7 +44,7 @@
   </div>
 
   <div class="row">
-    <div class="col-2 colHeader">
+    <div class="col-12 colHeader">
       <p class="big">Lecturers</p>
     </div>
   </div>
@@ -59,7 +59,6 @@
     <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
       {{selectedLecturer.name}}
     </button>
-
     <ul class="dropdown-menu">
       <li class="dropdown-item" *ngFor="let lect of output.all_lecturers" >
         <a (click)="selectLecturer(lect)">
@@ -70,7 +69,6 @@
   <button type="button" class="btn btn-dark" (click)="addLecturer()">Add</button>
 </div>
 </div>
-
   <div class="row">
     <div class="col-12 colHeader">
       <p class="big">Credentials</p>
@@ -88,6 +86,53 @@
   <input style="width: 100vw;"  [(ngModel)]="output.introductorytext" placeholder="Introductory text">
 </div>
 
+<div class="row">
+  <div class="col-12 colHeader">
+    <p class="big">Topics</p>
+  </div>
+</div>
+<div class="row">
+  <table style="float:left; display:inline-block; width: 30%;">
+    <tr *ngFor="let topic of output.topics">
+      <td>{{ topic }} </td><td><button (click)="removeTopic(topic)">X</button></td>
+    </tr>
+  </table>
+  <div style="float:left; display:inline; width: 30%;" dropdown>
+    <input  [(ngModel)]="selectedTopic" placeholder="New topic">
+    <button type="button" class="btn btn-dark" (click)="addTopic()">Add</button>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-12 colHeader">
+      <p class="big">Teaching Material</p>
+    </div>
+  </div>
+  <div class="row">
+    <table style="float:left; display:inline-block; width: 30%;">
+      <tr *ngFor="let tm of output.teaching_material">
+        <td>{{ tm.name }} </td><td><button (click)="removeTeachingMaterial(tm.name)">X</button></td>
+      </tr>
+    </table>
+    <div style="float:left; display:inline; width: 70%;" dropdown>
+      <input  [(ngModel)]="selectedTeachingMaterial" placeholder="New teaching material">
+
+      <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+        {{selectedTeachingMaterialType}}
+      </button>
+      <ul class="dropdown-menu">
+        <li class="dropdown-item" *ngFor="let type of output.teaching_material_types" >
+          <a (click)="selectTeachingMaterialType(type)">
+            {{type}}
+          </a>
+        </li>
+      </ul>
+
+      <button type="button" class="btn btn-dark" (click)="addTeachingMaterials()">Add</button>
+    </div>
+  </div>
+  
+  <button type="button" class="btn btn-dark" (click)="save()">Save</button>
 </div>
 
 
