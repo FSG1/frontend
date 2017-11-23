@@ -4,18 +4,13 @@
     <div class="col-2 colHeader">
       <p class="big">Module:</p>
     </div>
-    <div class="col-10 colContent module-name">
-      test {{output.name}}
-      <input [(ngModel)]="output.name" placeholder="name">
-    </div>
+      <input [(ngModel)]="output.name" placeholder="Module name">
   </div>
   <div class="row">
     <div class="col-2 colHeader">
       <p class="big">Module code:</p>
     </div>
-    <div class="col-10 colContent module-name">
-      <p>{{ output?.code }}</p>
-    </div>
+      <input [(ngModel)]="output.code" placeholder="Module code">
   </div>
 
   <div class="row">
@@ -28,24 +23,18 @@
     <div class="col-4 colHeader">
       <p class="big">Credits (ECTS)</p>
     </div>
-    <div class="col-4 colContent">
-      <p>{{ output?.credits }}</p>
-    </div>
+      <input [(ngModel)]="output.credits" placeholder="Module credits">
   </div>
 
   <div class="row">
     <div class="col-2 colHeader">
       <p class="big">Lectures / week</p>
     </div>
-    <div class="col-2 colContent">
-      <p>{{ output?.lectures_in_week }}</p>
-    </div>
+      <input [(ngModel)]="output.lectures_in_week" placeholder="Lectures in a week">
     <div class="col-2 colHeader">
       <p class="big">Practical hours / week</p>
     </div>
-    <div class="col-2 colContent">
-      <p>{{ output?.practical_hours_week }}</p>
-    </div>
+      <input [(ngModel)]="output.practical_hours_week" placeholder="practical hours in a week">
     <div class="col-2 colHeader">
       <p class="big">Total effort</p>
     </div>
@@ -58,9 +47,48 @@
     <div class="col-2 colHeader">
       <p class="big">Lecturers</p>
     </div>
-    <div class="col-10 colContent">
-      <p *ngFor="let lecturer of output.active_lecturers">{{ lecturer.name }} </p>
-    </div>
   </div>
 
+<div class="row">
+<table style="float:left; display:inline-block; width: 30%;">
+  <tr *ngFor="let lecturer of output.active_lecturers">
+    <td>{{ lecturer.name }} </td><td><button (click)="removeLecturer(lecturer)">X</button></td>
+  </tr>
+</table>
+  <div style="float:left; display:inline; width: 30%;" dropdown>
+    <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+      {{selectedLecturer.name}}
+    </button>
+
+    <ul class="dropdown-menu">
+      <li class="dropdown-item" *ngFor="let lect of output.all_lecturers" >
+        <a (click)="selectLecturer(lect)">
+          {{lect.name}}
+        </a>
+      </li>
+    </ul>
+  <button type="button" class="btn btn-dark" (click)="addLecturer()">Add</button>
 </div>
+</div>
+
+  <div class="row">
+    <div class="col-12 colHeader">
+      <p class="big">Credentials</p>
+    </div>
+  </div>
+  <div class="row">
+    <input style="width: 100vw;" [(ngModel)]="output.credentials" placeholder="Credentials">
+  </div>
+<div class="row">
+  <div class="col-12 colHeader">
+    <p class="big">Introduction and motivation</p>
+  </div>
+</div>
+<div class="row">
+  <input style="width: 100vw;"  [(ngModel)]="output.introductorytext" placeholder="Introductory text">
+</div>
+
+</div>
+
+
+

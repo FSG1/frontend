@@ -9,7 +9,7 @@ import {ModuleOverviewComponent} from '../module-overview-component/module-overv
 import {ErrorComponent} from '../../../util/error/error.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppRoutingModule} from '../../app.routing';
-import {ModuleComponent} from '../module-component/modify/module.component';
+import {ModuleComponent} from '../module-component/view/module.component';
 import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
 import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
 import {ExamLGComponent} from '../examlg-component/examlg.component';

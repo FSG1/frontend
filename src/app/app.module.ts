@@ -12,7 +12,7 @@ import { SkillMatrixComponent } from './components/skillmatrix-component/skillma
 import { HttpModule } from '@angular/http';
 
 import { BackendService } from './backend.service';
-import {ModuleComponent} from './components/module-component/modify/module.component';
+import {ModuleComponent} from './components/module-component/view/module.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {ExamLGComponent} from './components/examlg-component/examlg.component';
 import {SemesterOverviewComponent} from './components/semester-overview-component/semester-overview.component';
