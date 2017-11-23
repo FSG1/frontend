@@ -109,6 +109,7 @@ export class ModuleEditComponent implements OnInit {
   // TODO send save data
   save(): void {
     this.input = new EditableModuleInput(this.output);
+    this.backendService.updateEditableModule(this.modulecode, this.input);
   }
   calculateTotalEffort(): number {
     return this.output.credits * 28;

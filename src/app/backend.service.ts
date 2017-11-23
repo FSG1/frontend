@@ -14,6 +14,7 @@ import {FilterQualifications} from './models/qualificiationfiltermodels/filter_q
 import {QualificationsOverview} from './models/qualificiationfiltermodels/qualifications_overview.model';
 import {environment} from '../environments/environment';
 import {EditableModuleOutput} from './models/editmodels/editable_module_output';
+import {EditableModuleInput} from './models/editmodels/editable_module_input';
 
 const outputmockup = {
   'code': 'DBS',
@@ -71,6 +72,10 @@ export class BackendService {
       observer.next(outputmockup);
       observer.complete();
     });
+  }
+  // endpoint does not exist yet
+  updateEditableModule(modulecode: string, input: EditableModuleInput): void {
+    const editablemoduleinputurl = this.getBaseUrl() + 'module/' + modulecode;
   }
   getQualifications(): Observable<FilterQualifications> {
     const filterqualificationsUrl = this.getBaseUrl() + 'qualifications';
