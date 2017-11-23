@@ -2,13 +2,13 @@
   <thead class="thead-light">
     <tr>
       <th scope="col"></th>
-      <th scope="col" *ngFor="let lca of lifecycleactivities">{{lca.lifecycle_activity_name}}</th>
+      <th scope="col" *ngFor="let lca of lifecycleactivities">{{lca.name}}</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let al of architecturallayers; let i = index" [attr.data-index]="i">
       <td scope="row">
-        {{al.architectural_layer_name}}
+        {{al.name}}
       </td>
       <td class="skillevel" *ngFor="let lca of lifecycleactivities; let j = index" [attr.data-index]="i">
         {{checkForValue(i,j)}}

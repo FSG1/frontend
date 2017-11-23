@@ -34,9 +34,9 @@
 
   <div class="col-11 modules">
     <div class="hoverable module" *ngFor="let module of semester.modules" [ngClass]="{project: module.is_project == true}">
-      <a [routerLink]="['/curriculum/',  selectedCurriculum.id, 'modules', module.module_code]">
-        <h4>{{ module.module_code }}</h4>
-        <p class="module-name">{{module.module_name}}</p>
+      <a [routerLink]="['/curriculum/',  selectedCurriculum.id, 'modules', module.code]">
+        <h4>{{ module.code }}</h4>
+        <p class="module-name">{{module.name}}</p>
         <p class="module-credits">Credits {{ module.credits }}</p>
       </a>
     </div>

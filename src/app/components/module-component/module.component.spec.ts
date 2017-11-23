@@ -17,10 +17,9 @@ import {SemesterOverviewComponent} from '../semester-overview-component/semester
 import {QualificationOverviewComponent} from '../qualification-overview-component/qualification-overview.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 
-
 const modulemodel = {
-  'module_code': 'IOT',
-  'module_name': 'Internet of Things',
+  'code': 'IOT',
+  'name': 'Internet of Things',
   'credits': 5,
   'semester': 7,
   'lectures_in_week': 2,
@@ -31,17 +30,17 @@ const modulemodel = {
   'introductorytext': 'bla IOT',
   'qualifications': [],
   'topics': ['bla1', 'bla2'],
-  'teaching_material': 'brain',
-  'prior_knowledge_references': [{'module_code': 1, 'module_name': 'JAVA!', 'type': 'strict', 'remark': 'nothing'}],
+  'teaching_material': ['brain', 'something'],
+  'prior_knowledge_references': [{'code': 1, 'name': 'JAVA!', 'type': 'strict', 'remark': 'nothing'}],
   'additional_information': 'nothing',
-  'architectural_layers': [{'architectural_layer_id': 0, 'architectural_layer_name': 'User Interaction', 'architectural_layer_description': 'something'},
-    {'architectural_layer_id': 1, 'architectural_layer_name': 'Business Processes', 'architectural_layer_description': 'something'},
-    {'architectural_layer_id': 2, 'architectural_layer_name': 'Infrastructure', 'architectural_layer_description': 'something'},
-    {'architectural_layer_id': 3, 'architectural_layer_name': 'software', 'architectural_layer_description': 'something'}],
-  'lifecycle_activities': [{'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 1, 'lifecycle_activity_name': 'Analyze', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}],
+  'architectural_layers': [{'id': 0, 'name': 'User Interaction', 'description': 'something'},
+    {'id': 1, 'name': 'Business Processes', 'description': 'something'},
+    {'id': 2, 'name': 'Infrastructure', 'description': 'something'},
+    {'id': 3, 'name': 'software', 'description': 'something'}],
+  'lifecycle_activities': [{'id': 0, 'name': 'Manage', 'description': 'something'},
+    {'id': 1, 'name': 'Analyze', 'description': 'something'},
+    {'id': 2, 'name': 'Advice', 'description': 'something'},
+    {'id': 3, 'name': 'Design', 'description': 'something'}],
   'learning_goals':  [
     {
       'name': 'LG 1',
@@ -76,7 +75,22 @@ const modulemodel = {
       'assesment_types': null,
       'weight': null
     }
-  ]
+  ],
+  'assesment_parts': [
+    {
+      'subcode': 'sofa1',
+      'description': 'research some stuff',
+      'percentage': 0.1,
+      'minimal_grade': 5.5,
+      'remark': 'nice'
+    },
+    {
+      'subcode': 'sofa2',
+      'description': 'something',
+      'percentage': 0.9,
+      'minimal_grade': 5.5,
+      'remark': 'not nice'
+    }]
 };
 
 describe('Testing module component', () => {
@@ -120,5 +134,9 @@ describe('Testing module component', () => {
       fixture.detectChanges();
       expect(fixture.debugElement.queryAll(By.css('.group-goal')).length).toBe(1);
     });
+    it('Should be 2 assessment informations', () => {
+      component.moduleContent = modulemodel;
+      fixture.detectChanges();
+      expect(fixture.debugElement.queryAll(By.css('.assessmentInformation')).length).toBe(2);
+    })
 });
-

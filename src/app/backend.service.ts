@@ -160,7 +160,7 @@ export class BackendService {
   constructor(private http: HttpClient) {
   }
   getSemester(curriculum: number, semester: number): Observable<CompleteSemester> {
-    const completeSemesterUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/semesters/' + semester;
+    const completeSemesterUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/semester/' + semester;
     return this.http.get<CompleteSemester>(completeSemesterUrl);
   }
 
@@ -175,7 +175,7 @@ export class BackendService {
     return this.http.get<QualificationsOverview[]>(qualificationtableUrl);
   }
   getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
-    const moduleContentUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/modules/' + code;
+    const moduleContentUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/module/' + code;
     return this.http.get<ModuleContent>(moduleContentUrl);
   }
 
