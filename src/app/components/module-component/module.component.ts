@@ -36,14 +36,15 @@ export class ModuleComponent implements OnInit, OnDestroy {
         this.moduleCurriculum = params['curriculum'];
 
         this.backendService.getModuleContent(this.moduleCurriculum, this.selectedModule)
-          .subscribe(moduleContent => this.contentReceive(moduleContent));
+          .subscribe(moduleContent => {
+            this.contentReceive(moduleContent);
+            this.moduleContent.assesment_parts.forEach( part => {
+              if (part.remark.length > 0) {
+                this.numberRemarks++;
+              }
+            });
+          });
       });
-
-    this.moduleContent.assesment_parts.forEach( part => {
-      if (part.remark.length > 0) {
-        this.numberRemarks++;
-      }
-    });
   }
 
   ngOnDestroy(): void {
