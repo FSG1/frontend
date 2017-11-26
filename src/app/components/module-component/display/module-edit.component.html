@@ -1,123 +1,119 @@
-<div class="container">
+<div class="container border-dark">
 
-  <div class="row">
-    <div class="col-2 colHeader">
-      <p class="big">Module:</p>
+  <div class="row md-form justify-content-center" style="padding-top: 20px;">
+    <div class="col-5">
+      <input mdbActive id="moduleName" class="form-control-sm" type="text" [(ngModel)]="output.name">
+      <label for="moduleName" class="">Module name</label>
     </div>
-      <input [(ngModel)]="output.name" placeholder="Module name">
-  </div>
-  <div class="row">
-    <div class="col-2 colHeader">
-      <p class="big">Module code:</p>
-    </div>
-      <input [(ngModel)]="output.code" placeholder="Module code">
-  </div>
-
-  <div class="row">
-    <div class="col-2 colHeader">
-      <p class="big">Semester</p>
-    </div>
-    <div class="col-2 colContent">
-      <p>{{ output?.semester }}</p>
-    </div>
-    <div class="col-4 colHeader">
-      <p class="big">Credits (ECTS)</p>
-    </div>
-      <input [(ngModel)]="output.credits" placeholder="Module credits">
-  </div>
-
-  <div class="row">
-    <div class="col-2 colHeader">
-      <p class="big">Lectures / week</p>
-    </div>
-      <input [(ngModel)]="output.lectures_in_week" placeholder="Lectures in a week">
-    <div class="col-2 colHeader">
-      <p class="big">Practical hours / week</p>
-    </div>
-      <input [(ngModel)]="output.practical_hours_week" placeholder="practical hours in a week">
-    <div class="col-2 colHeader">
-      <p class="big">Total effort</p>
-    </div>
-    <div class="col-2 colContent">
-      <p>{{ calculateTotalEffort()}} hours</p>
+    <div class="col-5">
+      <input mdbActive id="moduleCode" class="form-control-sm" type="text" [(ngModel)]="output.code">
+      <label for="moduleCode">Module code</label>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12 colHeader">
-      <p class="big">Lecturers</p>
+  <div class="row md-form justify-content-center align-items-center">
+    <div class="col-2">
+      <input mdbActive id="semester" class="form-control-sm" type="text" (value)="output?.semester">
+      <label for="semester">Semester</label>
+    </div>
+    <div class="col-2">
+      <input mdbActive id="credits" class="form-control-sm" type="text" [(ngModel)]="output.credits">
+      <label for="credits">Credits (ECTS)</label>
+    </div>
+    <div class="col-2">
+      <input mdbActive id="lecturers-in-week" class="form-control-sm" type="text" [(ngModel)]="output.lectures_in_week">
+      <label for="lecturers-in-week">Lectures / week</label>
+    </div>
+    <div class="col-2">
+      <input mdbActive id="practical-hours" class="form-control-sm" type="text" [(ngModel)]="output.practical_hours_week">
+      <label for="practical-hours">Practical hours / week</label>
+    </div>
+    <div class="col-2">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Total effort</h4>
+          <p class="card-text text-center">{{ calculateTotalEffort()}} hours</p>
+        </div>
+      </div>
     </div>
   </div>
 
-<div class="row">
-<table style="float:left; display:inline-block; width: 30%;">
-  <tr *ngFor="let lecturer of output.active_lecturers">
-    <td>{{ lecturer.name }} </td><td><button (click)="removeLecturer(lecturer)">X</button></td>
-  </tr>
-</table>
-  <div style="float:left; display:inline; width: 30%;" dropdown>
-    <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
-      {{selectedLecturer.name}}
-    </button>
-    <ul class="dropdown-menu">
-      <li class="dropdown-item" *ngFor="let lect of output.all_lecturers" >
-        <a (click)="selectLecturer(lect)">
-          {{lect.name}}
-        </a>
-      </li>
-    </ul>
-  <button type="button" class="btn btn-dark" (click)="addLecturer()">Add</button>
-</div>
-</div>
-  <div class="row">
-    <div class="col-12 colHeader">
-      <p class="big">Credentials</p>
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <table id="lecturers" class="table table-sm table-striped">
+        <tr>
+          <th colspan="2">Lecturers</th>
+        </tr>
+        <tr *ngFor="let lecturer of output.active_lecturers">
+          <td>{{ lecturer.name }}</td>
+          <td><button class="btn-outline-danger hoverable" (click)="removeLecturer(lecturer)">X</button></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-5">
+      <div dropdown>
+        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          {{selectedLecturer.name}}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" *ngFor="let lect of output.all_lecturers" >
+            <a (click)="selectLecturer(lect)">
+              {{lect.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <button type="button" class="btn btn-sm btn-dark" (click)="addLecturer()">Add</button>
     </div>
   </div>
-  <div class="row">
-    <input style="width: 100vw;" [(ngModel)]="output.credentials" placeholder="Credentials">
-  </div>
-<div class="row">
-  <div class="col-12 colHeader">
-    <p class="big">Introduction and motivation</p>
-  </div>
-</div>
-<div class="row">
-  <input style="width: 100vw;"  [(ngModel)]="output.introductorytext" placeholder="Introductory text">
-</div>
 
-<div class="row">
-  <div class="col-12 colHeader">
-    <p class="big">Topics</p>
-  </div>
-</div>
-<div class="row">
-  <table style="float:left; display:inline-block; width: 30%;">
-    <tr *ngFor="let topic of output.topics">
-      <td>{{ topic }} </td><td><button (click)="removeTopic(topic)">X</button></td>
-    </tr>
-  </table>
-  <div style="float:left; display:inline; width: 30%;" dropdown>
-    <input  [(ngModel)]="selectedTopic" placeholder="New topic">
-    <button type="button" class="btn btn-dark" (click)="addTopic()">Add</button>
-  </div>
-</div>
-
-  <div class="row">
-    <div class="col-12 colHeader">
-      <p class="big">Teaching Material</p>
+  <div class="row justify-content-center">
+    <div class="col-10 md-form">
+      <input mdbActive id="credentials" class="form-control-sm" type="text" [(ngModel)]="output.credentials">
+      <label for="credentials">Credentials</label>
     </div>
   </div>
-  <div class="row">
-    <table style="float:left; display:inline-block; width: 30%;">
-      <tr *ngFor="let tm of output.teaching_material">
-        <td>{{ tm.name }} </td><td><button (click)="removeTeachingMaterial(tm.name)">X</button></td>
+
+  <div class="row justify-content-center">
+    <div class="col-10 md-form">
+      <input mdbActive id="introduction" class="form-control" type="text" [(ngModel)]="output.introductorytext">
+      <label for="introduction">Introduction and motivation</label>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-5">
+    <table class="table table-sm table-striped">
+      <tr>
+        <th colspan="2">Topics</th>
       </tr>
-    </table>
-    <div style="float:left; display:inline; width: 70%;" dropdown>
-      <input  [(ngModel)]="selectedTeachingMaterial" placeholder="New teaching material">
+      <tr *ngFor="let topic of output.topics">
+        <td>{{ topic }} </td>
+        <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
+      </tr>
+      </table>
+    </div>
+    <div class="col-5 md-form form-sm">
+      <input class="form-control" type="text" mdbActive [(ngModel)]="selectedTopic" placeholder="New topic">
+      <button type="button" class="btn btn-sm btn-dark" (click)="addTopic()">Add</button>
+    </div>
+  </div>
 
-      <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <table class="table table-sm table-striped">
+        <tr>
+          <th colspan="2">Teaching material</th>
+        </tr>
+        <tr *ngFor="let tm of output.teaching_material">
+          <td>{{ tm.name }} </td>
+          <td><button class="btn-outline-danger" (click)="removeTeachingMaterial(tm.name)">X</button></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-5 md-form form-sm">
+      <input mdbActive type="text" class="form-control" [(ngModel)]="selectedTeachingMaterial" placeholder="New teaching material">
+      <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
         {{selectedTeachingMaterialType}}
       </button>
       <ul class="dropdown-menu">
@@ -127,13 +123,17 @@
           </a>
         </li>
       </ul>
-
-      <button type="button" class="btn btn-dark" (click)="addTeachingMaterials()">Add</button>
+      <button type="button" class="btn btn-sm btn-dark" (click)="addTeachingMaterials()">Add</button>
     </div>
   </div>
 
-  <button type="button" class="btn btn-dark" (click)="save()">Save</button>
+  <div class="row justify-content-center" style="padding-bottom: 40px">
+    <div class="col-2">
+      <button type="button" class="btn btn-dark" (click)="save()">Save</button>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-danger">Cancel</button>
+    </div>
+  </div>
+
 </div>
-
-
-
