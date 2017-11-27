@@ -9,8 +9,6 @@ import { ModuleOverviewComponent } from './components/module-overview-component/
 import { HttpClientModule } from '@angular/common/http';
 import { SkillMatrixComponent } from './components/skillmatrix-component/skillmatrix.component';
 
-import { HttpModule } from '@angular/http';
-
 import { BackendService } from './backend.service';
 import {ModuleComponent} from './components/module-component/view/module.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -36,13 +34,12 @@ import {FormsModule} from '@angular/forms';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpModule,
     UtilModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [BackendService],
+  providers: [BackendService, AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
