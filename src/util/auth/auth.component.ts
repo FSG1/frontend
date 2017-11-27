@@ -27,6 +27,9 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       if (data.logout) {
+        localStorage.removeItem('fmms-username');
+        localStorage.removeItem('fmms-password');
+        this.app.setCredentials('', '');
         this.router.navigate(['/']);
       } else {
         const u = localStorage.getItem('fmms-username');
