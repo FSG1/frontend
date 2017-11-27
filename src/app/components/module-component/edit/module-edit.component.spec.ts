@@ -12,6 +12,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {By} from '@angular/platform-browser';
 
 const outputmockup = {
+  'id': 1,
   'code': 'DBS',
   'name': 'Databases',
   'credits': 5,
@@ -49,7 +50,8 @@ const outputmockup = {
     'id': 2,
     'name': 'Van Odenhoven, F',
   }],
-  'credentials': 'vey nice course'
+  'credentials': 'vey nice course',
+  'project_flag': false
 };
 
 describe('Testing module edit component', () => {
@@ -152,5 +154,30 @@ describe('Testing module edit component', () => {
     component.removeTopic(topic);
     fixture.detectChanges();
     expect(de.queryAll(By.css('.test-topics')).length).toBe(3);
+  });
+  it('testing everything to do with teaching material', () => {
+    const material = 'spaghetti';
+    const type = ['book', 'website', 'physical'];
+    expect(de.queryAll(By.css('.test-teaching-material')).length).toBe(3);
+    // testing if you can add the default
+    component.addTeachingMaterials();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-teaching-material')).length).toBe(3);
+    // only adds if both a type and teaching material is selected
+    component.selectedTeachingMaterial = material;
+    component.addTeachingMaterials();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-teaching-material')).length).toBe(3);
+    component.selectTeachingMaterialType('physical');
+    component.addTeachingMaterials();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-teaching-material')).length).toBe(4);
+    // not existing material
+    component.removeTeachingMaterial('physical');
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-teaching-material')).length).toBe(4);
+    component.removeTeachingMaterial(material);
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-teaching-material')).length).toBe(3);
   });
 });

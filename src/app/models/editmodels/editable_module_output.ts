@@ -17,4 +17,5 @@ export interface EditableModuleOutput {
   all_lecturers: Lecturer[];
   active_lecturers: Lecturer[];
   credentials: string;
+  project_flag: boolean;
 }
