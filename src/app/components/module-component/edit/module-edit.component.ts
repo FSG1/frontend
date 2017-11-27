@@ -16,7 +16,6 @@ import {AppComponent} from '../../../app.component';
   styleUrls: ['./module-edit.component.scss']
 })
 export class ModuleEditComponent extends RestrictedComponent implements OnInit {
-
   constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router) {
     super(app, router);
   }
@@ -31,8 +30,8 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
   selectedTeachingMaterial: string;
   selectedTeachingMaterialType: string;
   defaultType = 'Teaching Material';
-
   //#endregion
+  
   ngOnInit(): void {
     this.selectedLecturer = {
       'name': 'Lecturers',
