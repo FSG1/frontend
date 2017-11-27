@@ -44,7 +44,7 @@
         <tr>
           <th colspan="2">Lecturers</th>
         </tr>
-        <tr *ngFor="let lecturer of output.active_lecturers">
+        <tr class="test-lecturers" *ngFor="let lecturer of output.active_lecturers">
           <td>{{ lecturer.name }}</td>
           <td><button class="btn-outline-danger hoverable" (click)="removeLecturer(lecturer)">X</button></td>
         </tr>

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, ComponentFixtureAutoDetect, TestBed} from '@angular/core/testing';
 import {ModuleEditComponent} from './module-edit.component';
 import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
@@ -9,6 +9,7 @@ import {BackendService} from '../../../backend.service';
 import {ActivatedRoute} from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
 import {RouterTestingModule} from '@angular/router/testing';
+import {By} from '@angular/platform-browser';
 
 const outputmockup = {
   'code': 'DBS',
@@ -71,10 +72,11 @@ describe('Testing module edit component', () => {
   //#region beforeEach
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ModuleEditComponent  ],
+      declarations: [ModuleEditComponent],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
         { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'module_code': 'DBS1'}]) } },
-        { provide: APP_BASE_HREF, useValue: '/'}],
+        { provide: APP_BASE_HREF, useValue: '/'},
+        { provide: ComponentFixtureAutoDetect, useValue: true }],
       schemas: [ NO_ERRORS_SCHEMA ],
       imports: [ RouterTestingModule.withRoutes([]) ]
     })
@@ -89,7 +91,34 @@ describe('Testing module edit component', () => {
     fixture.detectChanges();
   });
   //#endregion
-  it('testing setup of tests', () => {
-    expect(true).toBe(true);
+  it('Testing everything of lecturers', () => {
+    expect(de.queryAll(By.css('.test-lecturers')).length).toBe(2);
+    const vdh = {
+      'id': 5,
+      'name': 'Van der Ham, R',
+    };
+    // testing if you can add lecturer without adding
+    fixture.detectChanges();
+    component.addLecturer();
+    expect(de.queryAll(By.css('.test-lecturers')).length).toBe(2);
+    // testing if anything gets removed if we remove non added lecturer.
+    component.removeLecturer(vdh);
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-lecturers')).length).toBe(2);
+    // testing if you can add lecturer with adding
+    expect(component.selectedLecturer.id).toBe(-1);
+    component.selectLecturer(vdh);
+    expect(component.selectedLecturer.id).toBe(5);
+    component.addLecturer();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-lecturers')).length).toBe(3);
+    // testing if we can add existing lecturer
+    component.addLecturer();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-lecturers')).length).toBe(3);
+    // testing removing;
+    component.removeLecturer(vdh);
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-lecturers')).length).toBe(2);
   });
 });
