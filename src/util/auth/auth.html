@@ -1,0 +1,28 @@
+<div class="container auth-container">
+  <div class="row justify-content-center" *ngIf="message?.length > 0">
+    <div class="col-6">
+      <div class="alert alert-warning">
+        <strong>Warning:</strong>&nbsp;{{message}}
+      </div>
+    </div>
+  </div>
+  <div class="row md-form justify-content-center">
+    <div class="col-6">
+      <input mdbActive id="username" class="form-control-sm" type="text" [(ngModel)]="username">
+      <label for="username">Username</label>
+    </div>
+  </div>
+
+  <div class="row md-form justify-content-center">
+    <div class="col-6">
+      <input mdbActive id="password" class="form-control-sm" type="password" [(ngModel)]="password">
+      <label for="Password">Password</label>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-success" (click)="login()">Login</button>
+    </div>
+  </div>
+</div>
