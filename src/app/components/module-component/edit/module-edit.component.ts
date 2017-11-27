@@ -15,9 +15,8 @@ import {AppComponent} from '../../../app.component';
   templateUrl: './module-edit.component.html',
   styleUrls: ['./module-edit.component.scss']
 })
-export class ModuleEditComponent extends RestrictedComponent implements OnInit {
-  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router) {
-    super(app, router);
+export class ModuleEditComponent implements OnInit {
+  constructor(private backendService: BackendService, private route: ActivatedRoute,router: Router) {
   }
   output: EditableModuleOutput;
   input: EditableModuleInput;
@@ -31,7 +30,7 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
   selectedTeachingMaterialType: string;
   defaultType = 'Teaching Material';
   //#endregion
-  
+
   ngOnInit(): void {
     this.selectedLecturer = {
       'name': 'Lecturers',
@@ -118,5 +117,11 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
   }
   calculateTotalEffort(): number {
     return this.output.credits * 28;
+  }
+  canSave(): boolean {
+    if (!isNullOrUndefined(this.output.credits) && !isNullOrUndefined(this.output.lectures_in_week) && !isNullOrUndefined(this.output.practical_hours_week) && this.output.code.length > 0 && this.output.name.length > 0 && this.output.active_lecturers.length > 0 && this.output.topics.length > 0) {
+      return true;
+    }
+    return false;
   }
 }
