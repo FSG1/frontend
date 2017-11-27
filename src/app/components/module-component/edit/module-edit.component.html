@@ -87,7 +87,7 @@
       <tr>
         <th colspan="2">Topics</th>
       </tr>
-      <tr *ngFor="let topic of output.topics">
+      <tr class="test-topics" *ngFor="let topic of output.topics">
         <td>{{ topic }} </td>
         <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
       </tr>

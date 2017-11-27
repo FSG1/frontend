@@ -2,6 +2,7 @@ import {TeachingMaterial} from '../teaching_material';
 import {EditableModuleOutput} from './editable_module_output';
 
 export class EditableModuleInput {
+  id: number;
   code: string;
   name: string;
   credits: number;
@@ -14,6 +15,7 @@ export class EditableModuleInput {
   lecturers: number[];
   credentials: string;
   public constructor(output: EditableModuleOutput) {
+    this.id = output.id;
     this.code = output.code.toUpperCase();
     this.name = output.name;
     this.credits = output.credits;

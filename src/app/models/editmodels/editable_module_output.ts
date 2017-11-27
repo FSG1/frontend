@@ -2,6 +2,7 @@ import {TeachingMaterial} from '../teaching_material';
 import {Lecturer} from '../lecturer';
 
 export interface EditableModuleOutput {
+  id: number;
   code: string;
   name: string;
   credits: number;

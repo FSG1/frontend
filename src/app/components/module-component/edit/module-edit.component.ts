@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Lecturer} from '../../../models/lecturer';
 import {TeachingMaterial} from '../../../models/teaching_material';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-editable-module',
@@ -70,7 +71,7 @@ export class ModuleEditComponent implements OnInit {
     this.output.topics = this.output.topics.filter( top => top != topic);
   }
   addTopic(): void {
-    if (this.selectedTopic.trim().length) {
+    if ( !isNullOrUndefined(this.selectedTopic) && this.selectedTopic.trim().length) {
       let found = true;
       this.output.topics.forEach( t => {
         if (t === this.selectedTopic) {
@@ -92,7 +93,7 @@ export class ModuleEditComponent implements OnInit {
     this.selectedTeachingMaterialType = type;
   }
   addTeachingMaterials(): void {
-    if (this.selectedTeachingMaterial.trim().length && this.selectedTeachingMaterialType != this.defaultType) {
+    if (!isNullOrUndefined(this.selectedTeachingMaterial) && this.selectedTeachingMaterial.trim().length && this.selectedTeachingMaterialType != this.defaultType) {
       let found = true;
       this.output.teaching_material.forEach( tm => {
         if (tm.name === this.selectedTeachingMaterial) {

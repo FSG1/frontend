@@ -121,4 +121,36 @@ describe('Testing module edit component', () => {
     fixture.detectChanges();
     expect(de.queryAll(By.css('.test-lecturers')).length).toBe(2);
   });
+  it('Testing everything to do with topics', () => {
+    expect(de.queryAll(By.css('.test-topics')).length).toBe(3);
+    const topic = 'lmao';
+    // testing if we can add empty or default
+    component.addTopic();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-topics')).length).toBe(3);
+    component.selectedTopic = '';
+    component.addTopic();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-topics')).length).toBe(3);
+    // should block if one tries to add only spaces
+    component.selectedTopic = '  ';
+    component.addTopic();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-topics')).length).toBe(3);
+    component.selectedTopic = topic;
+    component.addTopic();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-topics')).length).toBe(4);
+    // shouldn't add double
+    component.selectedTopic = topic;
+    component.addTopic();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-topics')).length).toBe(4);
+    component.removeTopic('empty');
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-topics')).length).toBe(4);
+    component.removeTopic(topic);
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-topics')).length).toBe(3);
+  });
 });
