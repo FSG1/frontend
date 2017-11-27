@@ -10,12 +10,8 @@ import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {ExamLGComponent} from '../../examlg-component/examlg.component';
 import {SkillMatrixComponent} from '../../skillmatrix-component/skillmatrix.component';
 import {APP_BASE_HREF, LocationStrategy} from '@angular/common';
-import {AppRoutingModule} from '../../../app.routing';
-import {ModuleOverviewComponent} from '../../module-overview-component/module-overview.component';
-import {ErrorComponent} from '../../../../util/error/error.component';
-import {SemesterOverviewComponent} from '../../semester-overview-component/semester-overview.component';
-import {QualificationOverviewComponent} from '../../qualification-overview-component/qualification-overview.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {AppComponent} from '../../../app.component';
 
 const modulemodel = {
   'code': 'IOT',
@@ -109,8 +105,12 @@ describe('Testing module component', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent],
-      providers: [ {provide: BackendService, useValue: backendServiceStub} ,
-               { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
+      providers: [
+        {provide: BackendService, useValue: backendServiceStub},
+        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } },
+        {provide: APP_BASE_HREF, useValue: '/'},
+        {provide: AppComponent, useValue: new AppComponent()}
+      ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
