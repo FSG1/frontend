@@ -14,7 +14,7 @@ export class EditableModuleInput {
   lecturers: number[];
   credentials: string;
   public constructor(output: EditableModuleOutput) {
-    this.code = output.code;
+    this.code = output.code.toUpperCase();
     this.name = output.name;
     this.credits = output.credits;
     this.lectures_in_week = output.lectures_in_week;
