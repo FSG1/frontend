@@ -1,12 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand disabled">FMMS</a>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light bg-light" [containerInside]="false">
+    <a class="logo navbar-brand disabled" href="#">
+      <strong>FMMS</strong>
+    </a>
+
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" [ngClass]="{'active': curriculumView == true}">
+      <li class="nav-item waves-light" [ngClass]="{'active': curriculumView == true}" mdbRippleRadius>
         <a class="nav-link" routerLink="/moduleoverview">Curriculum overview</a>
       </li>
-      <li class="nav-item" [ngClass]="{'active': qualificationsView == true}">
+      <li class="nav-item waves-light" [ngClass]="{'active': qualificationsView == true}" mdbRippleRadius>
         <a class="nav-link" routerLink="/qualifications">Qualification overview</a>
       </li>
     </ul>
-</nav>
+
+    <ul class="navbar-nav nav-flex-icons">
+      <li class="nav-item btn-group" dropdown>
+          <button dropdownToggle class="btn dropdown-toggle waves-light" type="button" data-toggle="dropdown" mdbRippleRadius>
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <ul class="dropdown-menu hamburger">
+            <li class="dropdown-item" *ngIf="!app.isLoggedIn">
+              <a [routerLink]="['/login']">Login</a>
+            </li>
+            <li class="dropdown-item" *ngIf="app.isLoggedIn">
+              <a [routerLink]="['/logout']">Logout</a>
+            </li>
+          </ul>
+      </li>
+    </ul>
+</mdb-navbar>
