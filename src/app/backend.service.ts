@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import { Semester } from './models/semester.model';
 import { Curriculum } from './models/curriculum.model';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import 'rxjs/add/operator/map';
 import {CurriculumResponse} from './backend-responses/CurriculumResponse';
@@ -15,6 +15,7 @@ import {QualificationsOverview} from './models/qualificiationfiltermodels/qualif
 import {environment} from '../environments/environment';
 import {EditableModuleOutput} from './models/editmodels/editable_module_output';
 import {EditableModuleInput} from './models/editmodels/editable_module_input';
+import {AppComponent} from "./app.component";
 
 const outputmockup = {
   'code': 'DBS',
@@ -59,35 +60,44 @@ const outputmockup = {
 
 @Injectable()
 export class BackendService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private app: AppComponent) {
   }
+
   getSemester(curriculum: number, semester: number): Observable<CompleteSemester> {
-    const completeSemesterUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/semester/' + semester;
-    return this.http.get<CompleteSemester>(completeSemesterUrl);
+    return this.get<CompleteSemester>('curriculum/' + curriculum + '/semester/' + semester);
   }
+
   // endpoint doesn't exist yet
   getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
-   const editablemoduleoutputurl = this.getBaseUrl() + 'module/' + modulecode;
     return Observable.create((observer: Subscriber<any>) => {
       observer.next(outputmockup);
       observer.complete();
     });
+    // return this.get<EditableModuleOutput>('module/' + modulecode);
   }
+
   // endpoint does not exist yet
   updateEditableModule(modulecode: string, input: EditableModuleInput): void {
     const editablemoduleinputurl = this.getBaseUrl() + 'module/' + modulecode;
+    // Please use this.post
   }
+
   getQualifications(): Observable<FilterQualifications> {
-    const filterqualificationsUrl = this.getBaseUrl() + 'qualifications';
-    return this.http.get<FilterQualifications>(filterqualificationsUrl);
+    return this.get<FilterQualifications>('qualifications');
   }
+
   getQualificationTable(curriculum: number, architecturallayer: number, activity: number): Observable<QualificationsOverview[]> {
-    const qualificationtableUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/architecturallayer/' + architecturallayer + '/activity/' + activity;
-    return this.http.get<QualificationsOverview[]>(qualificationtableUrl);
+    const qualificationtableUrl = 'curriculum/'
+      + curriculum
+      + '/architecturallayer/'
+      + architecturallayer
+      + '/activity/'
+      + activity;
+    return this.get<QualificationsOverview[]>(qualificationtableUrl);
   }
+
   getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
-    const moduleContentUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/module/' + code;
-    return this.http.get<ModuleContent>(moduleContentUrl);
+    return this.get<ModuleContent>('curriculum/' + curriculum + '/module/' + code);
   }
 
   getCurricula(): Observable<Curriculum[]> {
@@ -96,14 +106,44 @@ export class BackendService {
   }
 
   getSemesters(id: number): Observable<Semester[]> {
-    const semestersUrl = this.getBaseUrl() + 'curriculum/' + id + '/semesters';
-    return this.http.get<CurriculumResponse>(semestersUrl)
+    return this.get<CurriculumResponse>('curriculum/' + id + '/semesters')
       .map(data => data.semesters);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+  // Test if authentication works or not
+  testAuth(username: string, password: string): Observable<boolean> {
+    return Observable.create((observer) => {
+      const encoded = btoa(username + ':' + password);
+      const headers = new HttpHeaders().set('Authorization', 'Basic ' + encoded);
+
+      this.http.get(this.getBaseUrl() + 'restricted/auth', {headers: headers})
+        .subscribe(() => {
+          observer.next(true);
+        },
+          () => {
+            observer.next(false);
+        });
+    });
+  }
+
+  private get<T>(url: string): Observable<T> {
+    return this.http.get<T>(this.getBaseUrl() + url, this.getOptions());
+  }
+
+  private post<T>(url: string, params: any): Observable<T> {
+    return this.http.post<T>(this.getBaseUrl() + url, params, this.getOptions());
+  }
+
+  private getOptions(): object {
+    const options = {
+      headers: new HttpHeaders()
+    };
+    if (this.app.isLoggedIn) {
+      const credentials = this.app.username + ':' + this.app.password;
+      const encoded = btoa(credentials);
+      options.headers.append('Authorization', 'Basic ' + encoded);
+    }
+    return options;
   }
 
   private getBaseUrl(): string {
