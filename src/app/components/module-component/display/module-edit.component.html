@@ -17,15 +17,15 @@
       <label for="semester">Semester</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="credits" class="form-control-sm" type="text" [(ngModel)]="output.credits">
+      <input mdbActive id="credits" type="number" min="0" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
       <label for="credits">Credits (ECTS)</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="lecturers-in-week" class="form-control-sm" type="text" [(ngModel)]="output.lectures_in_week">
+      <input mdbActive id="lecturers-in-week" class="form-control-sm" type="number" min="0" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  [(ngModel)]="output.lectures_in_week">
       <label for="lecturers-in-week">Lectures / week</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="practical-hours" class="form-control-sm" type="text" [(ngModel)]="output.practical_hours_week">
+      <input mdbActive id="practical-hours" class="form-control-sm" type="number" min="0" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.practical_hours_week">
       <label for="practical-hours">Practical hours / week</label>
     </div>
     <div class="col-2">
