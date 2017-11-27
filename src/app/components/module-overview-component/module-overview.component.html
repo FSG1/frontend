@@ -1,18 +1,21 @@
 
-<div class="text-center" dropdown>
-  <button dropdownToggle class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
-    Curriculum
-    <span class="caret"></span>
-  </button>
+<div class="col-12 justify-content-center d-flex">
+  <div class="btn-group" dropdown>
+    <button dropdownToggle class="btn btn-dark dropdown-toggle waves-light" type="button" data-toggle="dropdown" mdbRippleRadius>
+      Curriculum
+      <span class="caret"></span>
+    </button>
 
-  <ul class="dropdown-menu">
-    <li class="dropdown-item" *ngFor="let curriculum of curricula" >
-      <a [routerLink]="['/moduleoverview', curriculum.id]">
-        {{curriculum.name}}
-      </a>
-    </li>
-  </ul>
+    <ul class="dropdown-menu dropdown-primary">
+      <li class="dropdown-item" *ngFor="let curriculum of curricula" >
+        <a [routerLink]="['/moduleoverview', curriculum.id]">
+          {{curriculum.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
+
 
 <div class="jumbotron jumbotron-fluid head" *ngIf="selectedCurriculum != null">
   <div class="container text-center">

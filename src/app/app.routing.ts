@@ -6,7 +6,8 @@ import {ModuleOverviewComponent} from './components/module-overview-component/mo
 import {SemesterOverviewComponent} from './components/semester-overview-component/semester-overview.component';
 import {QualificationOverviewComponent} from './components/qualification-overview-component/qualification-overview.component';
 import {environment} from '../environments/environment';
-import {ModuleEditComponent} from './components/module-component/edit/module-edit.component';
+import {ModuleEditComponent} from './components/module-component/display/module-edit.component';
+import {AuthComponent} from '../util/auth/auth.component';
 
 const routes: Routes = [
   {
@@ -24,9 +25,24 @@ const routes: Routes = [
   {
     path: 'curriculum/:curriculum/semesters/:semester',
     component: SemesterOverviewComponent
-  }, {
+  },
+  {
     path: 'modifymodule/:module_code',
     component: ModuleEditComponent
+  },
+  {
+    path: 'login',
+    component: AuthComponent,
+    data: {
+      logout: false
+    }
+  },
+  {
+    path: 'logout',
+    component: AuthComponent,
+    data: {
+      logout: true
+    }
   },
   {
     path: 'qualifications',

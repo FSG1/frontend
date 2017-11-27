@@ -33,4 +33,10 @@ export class NavComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  logout() {
+    localStorage.removeItem('fmms-username');
+    localStorage.removeItem('fmms-password');
+    this.app.setCredentials('', '');
+  }
 }
