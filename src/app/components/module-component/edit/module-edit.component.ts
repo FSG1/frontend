@@ -2,20 +2,24 @@ import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../../backend.service';
 import {EditableModuleOutput} from '../../../models/editmodels/editable_module_output';
 import {EditableModuleInput} from '../../../models/editmodels/editable_module_input';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Lecturer} from '../../../models/lecturer';
 import {TeachingMaterial} from '../../../models/teaching_material';
 import {isNullOrUndefined} from 'util';
+import {RestrictedComponent} from '../../../../util/RestrictedComponent';
+import {AppComponent} from '../../../app.component';
 
 @Component({
   selector: 'app-editable-module',
   templateUrl: './module-edit.component.html',
   styleUrls: ['./module-edit.component.scss']
 })
-export class ModuleEditComponent implements OnInit {
+export class ModuleEditComponent extends RestrictedComponent implements OnInit {
 
-  constructor(private backendService: BackendService, private route: ActivatedRoute) {}
+  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router) {
+    super(app, router);
+  }
   output: EditableModuleOutput;
   input: EditableModuleInput;
   modulecode: string;
@@ -27,6 +31,7 @@ export class ModuleEditComponent implements OnInit {
   selectedTeachingMaterial: string;
   selectedTeachingMaterialType: string;
   defaultType = 'Teaching Material';
+
   //#endregion
   ngOnInit(): void {
     this.selectedLecturer = {
