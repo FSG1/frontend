@@ -10,6 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
 import {RouterTestingModule} from '@angular/router/testing';
 import {By} from '@angular/platform-browser';
+import {AppComponent} from '../../../app.component';
 
 const outputmockup = {
   'id': 1,
@@ -59,7 +60,6 @@ describe('Testing module edit component', () => {
   let component: ModuleEditComponent;
   let fixture: ComponentFixture<ModuleEditComponent>;
   let de: DebugElement;
-  let el: HTMLElement;
   let backendService;
   const backendServiceStub = {
     getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
@@ -78,7 +78,9 @@ describe('Testing module edit component', () => {
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
         { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'module_code': 'DBS1'}]) } },
         { provide: APP_BASE_HREF, useValue: '/'},
-        { provide: ComponentFixtureAutoDetect, useValue: true }],
+        { provide: ComponentFixtureAutoDetect, useValue: true },
+        { provide: AppComponent, useValue: new AppComponent() }
+      ],
       schemas: [ NO_ERRORS_SCHEMA ],
       imports: [ RouterTestingModule.withRoutes([]) ]
     })
