@@ -2,6 +2,7 @@ import {TeachingMaterial} from '../teaching_material';
 import {EditableModuleOutput} from './editable_module_output';
 
 export class EditableModuleInput {
+  id: number;
   code: string;
   name: string;
   credits: number;
@@ -13,8 +14,10 @@ export class EditableModuleInput {
   additional_information: string;
   lecturers: number[];
   credentials: string;
+  project_flag: boolean;
   public constructor(output: EditableModuleOutput) {
-    this.code = output.code;
+    this.id = output.id;
+    this.code = output.code.toUpperCase();
     this.name = output.name;
     this.credits = output.credits;
     this.lectures_in_week = output.lectures_in_week;
@@ -24,6 +27,7 @@ export class EditableModuleInput {
     this.teaching_material = output.teaching_material;
     this.additional_information = output.additional_information;
     this.credentials = output.credentials;
+    this.project_flag = output.project_flag;
     this.lecturers = new Array();
     for (let i = 0; i < output.active_lecturers.length; i++) {
       this.lecturers[i] = output.active_lecturers[i].id;

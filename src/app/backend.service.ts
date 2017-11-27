@@ -18,6 +18,7 @@ import {EditableModuleInput} from './models/editmodels/editable_module_input';
 import {AppComponent} from "./app.component";
 
 const outputmockup = {
+  'id': 1,
   'code': 'DBS',
   'name': 'Databases',
   'credits': 5,
@@ -55,7 +56,8 @@ const outputmockup = {
     'id': 2,
     'name': 'Van Odenhoven, F',
   }],
-  'credentials': 'vey nice course'
+  'credentials': 'vey nice course',
+  'project_flag': false
 };
 
 @Injectable()

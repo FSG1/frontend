@@ -6,15 +6,18 @@
       <label for="moduleName" class="">Module name</label>
     </div>
     <div class="col-5">
-      <input mdbActive id="moduleCode" class="form-control-sm" type="text" [(ngModel)]="output.code">
+      <input mdbActive id="moduleCode" class="form-control-sm" type="text" style="text-transform: uppercase;" [(ngModel)]="output.code">
       <label for="moduleCode">Module code</label>
     </div>
   </div>
 
   <div class="row md-form justify-content-center align-items-center">
     <div class="col-2">
-      <input mdbActive id="semester" class="form-control-sm" type="text" (value)="output?.semester">
-      <label for="semester">Semester</label>
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text text-center">Semester {{output.semester}}</p>
+        </div>
+      </div>
     </div>
     <div class="col-2">
       <input mdbActive id="credits" type="number" min="0" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
@@ -44,7 +47,7 @@
         <tr>
           <th colspan="2">Lecturers</th>
         </tr>
-        <tr *ngFor="let lecturer of output.active_lecturers">
+        <tr class="test-lecturers" *ngFor="let lecturer of output.active_lecturers">
           <td>{{ lecturer.name }}</td>
           <td><button class="btn-outline-danger hoverable" (click)="removeLecturer(lecturer)">X</button></td>
         </tr>
@@ -82,12 +85,18 @@
   </div>
 
   <div class="row justify-content-center">
+    <div class="col-10 md-form">
+      <b> This project is a module:</b> <input style="margin-left:10px;" name="isproject" [(ngModel)]="output.project_flag" type="checkbox"/>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
     <div class="col-5">
     <table class="table table-sm table-striped">
       <tr>
         <th colspan="2">Topics</th>
       </tr>
-      <tr *ngFor="let topic of output.topics">
+      <tr class="test-topics" *ngFor="let topic of output.topics">
         <td>{{ topic }} </td>
         <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
       </tr>
@@ -105,7 +114,7 @@
         <tr>
           <th colspan="2">Teaching material</th>
         </tr>
-        <tr *ngFor="let tm of output.teaching_material">
+        <tr class="test-teaching-material" *ngFor="let tm of output.teaching_material">
           <td>{{ tm.name }} </td>
           <td><button class="btn-outline-danger" (click)="removeTeachingMaterial(tm.name)">X</button></td>
         </tr>
