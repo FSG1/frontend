@@ -241,12 +241,12 @@ describe('Testing Qualification overview component before initialization', () =>
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleComponent, ExamLGComponent, SkillMatrixComponent, ModuleOverviewComponent, ErrorComponent, SemesterOverviewComponent, QualificationOverviewComponent  ],
+      declarations: [QualificationOverviewComponent  ],
       providers: [ {provide: BackendService, useValue: backendServiceStub} ,
-        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }, {provide: APP_BASE_HREF, useValue: '/'}],
-      imports: [
-        AppRoutingModule
-      ]
+        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'curriculum': 1, 'lifecycle_activity': 1, 'architectural_layer': 1 }]) } },
+        { provide: APP_BASE_HREF, useValue: '/'}],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      imports: [ RouterTestingModule.withRoutes([]) ]
     })
       .compileComponents();
   }));

@@ -61,6 +61,7 @@ const outputmockup = {
 export class BackendService {
   constructor(private http: HttpClient) {
   }
+  //#region endpoints
   getSemester(curriculum: number, semester: number): Observable<CompleteSemester> {
     const completeSemesterUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/semester/' + semester;
     return this.http.get<CompleteSemester>(completeSemesterUrl);
@@ -100,7 +101,7 @@ export class BackendService {
     return this.http.get<CurriculumResponse>(semestersUrl)
       .map(data => data.semesters);
   }
-
+  //#endregion
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
