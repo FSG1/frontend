@@ -54,7 +54,7 @@
       </table>
     </div>
     <div class="col-5">
-      <div dropdown>
+      <div class="btn-group" dropdown>
         <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
           {{selectedLecturer.name}}
         </button>
@@ -122,16 +122,18 @@
     </div>
     <div class="col-5 md-form form-sm">
       <input mdbActive (keyup.enter)="addTeachingMaterials()" type="text" class="form-control" [(ngModel)]="selectedTeachingMaterial" placeholder="New teaching material">
-      <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
-        {{selectedTeachingMaterialType}}
-      </button>
-      <ul class="dropdown-menu">
-        <li class="dropdown-item" *ngFor="let type of output.teaching_material_types" >
-          <a (click)="selectTeachingMaterialType(type)">
-            {{type}}
-          </a>
-        </li>
-      </ul>
+      <div class="btn-group" dropdown>
+        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          {{selectedTeachingMaterialType}}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" *ngFor="let type of output.teaching_material_types" >
+            <a (click)="selectTeachingMaterialType(type)">
+              {{type}}
+            </a>
+          </li>
+        </ul>
+      </div>
       <button type="button" class="btn btn-sm btn-dark" (click)="addTeachingMaterials()">Add</button>
     </div>
   </div>
