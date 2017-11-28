@@ -118,7 +118,7 @@ export class BackendService {
       const encoded = btoa(username + ':' + password);
       const headers = new HttpHeaders().set('Authorization', 'Basic ' + encoded);
 
-      this.http.get(this.getBaseUrl() + 'restricted/auth', {headers: headers})
+      this.http.post(this.getBaseUrl() + 'auth', {}, {headers: headers})
         .subscribe(() => {
           observer.next(true);
         },
