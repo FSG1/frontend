@@ -5,14 +5,7 @@ import {FilterQualifications} from '../../models/qualificiationfiltermodels/filt
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
 import {QualificationsOverview} from '../../models/qualificiationfiltermodels/qualifications_overview.model';
-import {ModuleOverviewComponent} from '../module-overview-component/module-overview.component';
-import {ErrorComponent} from '../../../util/error/error.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AppRoutingModule} from '../../app.routing';
-import {ModuleComponent} from '../module-component/view/module.component';
-import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
-import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
-import {ExamLGComponent} from '../examlg-component/examlg.component';
 import {APP_BASE_HREF} from '@angular/common';
 import {BackendService} from '../../backend.service';
 import {By} from '@angular/platform-browser';
@@ -201,66 +194,29 @@ describe('Testing Qualification overview component after initialization', () => 
 
     fixture.detectChanges();
   });
-  it('filter buttons should change their name if a selection is made', () => {
-  });
   it('testing if the size of the table is correctly loaded', () => {
+    expect(component.dataStructure.length).toBe(18);
   });
   it('testing skill level part', () => {
+    expect(component.getSkillLevel(4)).toBe(1);
+    expect(component.getSkillLevelRowSpan(1)).toBe(12);
+    expect(de.queryAll(By.css('.test-skillevel')).length).toBe(2);
   });
   it('testing semester part', () => {
+    expect(component.getSemesterRowSpan(3)).toBe(6);
+    expect(component.semesterLoaded(0)).toBe(true);
+    expect(component.semesterLoaded(2)).toBe(false);
+    expect(de.queryAll(By.css('.test-semester')).length).toBe(5);
   });
   it('testing module part', () => {
+    expect(component.moduleLoaded(0)).toBe(true);
+    expect(component.moduleLoaded(1)).toBe(false);
+    expect(component.getModuleRowSpan(1)).toBe(2);
+    expect(de.queryAll(By.css('.test-module')).length).toBe(5);
   });
   it('testing lg part', () => {
+    expect(de.queryAll(By.css('.test-lg')).length).toBe(18);
   });
 });
 
-describe('Testing Qualification overview component before initialization', () => {
-  let component: QualificationOverviewComponent;
-  let fixture: ComponentFixture<QualificationOverviewComponent>;
-  let de: DebugElement;
-  let el: HTMLElement;
-  let backendService;
-  const curriculumdummy = { 'name': 'Software Engineering', 'code': 'SE', 'id': 1};
-  const lifecycledummy = {'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'};
-  const architecturaldummy = {'architectural_layer_id': 1, 'architectural_layer_name': 'Business Processes', 'architectural_layer_description': 'something'};
 
-  const backendServiceStub = {
-    getQualifications(): Observable<FilterQualifications> {
-      return Observable.create((observer: Subscriber<any>) => {
-        observer.next(filterqualifications);
-        observer.complete();
-      });
-    },
-    getQualificationTable(curriculum: number, architecturallayer: number, activity: number): Observable<QualificationsOverview[]> {
-      return Observable.create((observer: Subscriber<any>) => {
-        observer.next(mockqualificationtable);
-        observer.complete();
-      });
-    }
-  };
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [QualificationOverviewComponent  ],
-      providers: [ {provide: BackendService, useValue: backendServiceStub} ,
-        { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'curriculum': 1, 'lifecycle_activity': 1, 'architectural_layer': 1 }]) } },
-        { provide: APP_BASE_HREF, useValue: '/'}],
-      schemas: [ NO_ERRORS_SCHEMA ],
-      imports: [ RouterTestingModule.withRoutes([]) ]
-    })
-      .compileComponents();
-  }));
-  beforeEach(() => {
-    fixture = TestBed.createComponent(QualificationOverviewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    backendService = fixture.debugElement.injector.get(BackendService);
-    de = fixture.debugElement;
-    fixture.detectChanges();
-  });
-  it('Tablesize should not be undefined', () => {
-  });
-  it('component should not load if not all buttons are pressed', () => {
-
-  });
-});
