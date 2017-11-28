@@ -138,6 +138,13 @@
     </div>
   </div>
 
+  <div class="row justify-content-center">
+    <div class="col-10 md-form form-sm">
+      <textarea mdbActive id="additionalInformation" class="md-textarea" type="text" [(ngModel)]="output.additional_information"></textarea>
+      <label for="additionalInformation">Additional information</label>
+    </div>
+  </div>
+
   <div class="row justify-content-center" style="padding-bottom: 40px">
     <div class="col-2">
       <button type="button" [disabled]="!canSave()" class="btn btn-dark" (click)="save()">Save</button>
