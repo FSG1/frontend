@@ -48,7 +48,7 @@
           <th colspan="2">* Lecturers</th>
         </tr>
         <tr class="test-lecturers" *ngFor="let lecturer of output.active_lecturers">
-          <td>{{ lecturer.name }}</td>
+          <td contenteditable="true" [ngModel]="lecturer.name">{{ lecturer.name }}</td>
           <td><button class="btn-outline-danger hoverable" (click)="removeLecturer(lecturer)">X</button></td>
         </tr>
       </table>
@@ -97,7 +97,7 @@
         <th colspan="2">* Topics</th>
       </tr>
       <tr class="test-topics" *ngFor="let topic of output.topics">
-        <td>{{ topic }} </td>
+        <td contenteditable="true" [ngModel]="topic">{{ topic }}</td>
         <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
       </tr>
       </table>
@@ -115,7 +115,7 @@
           <th colspan="2">Teaching material</th>
         </tr>
         <tr class="test-teaching-material" *ngFor="let tm of output.teaching_material">
-          <td>{{ tm.name }} </td>
+          <td contenteditable="true" [ngModel]="tm.name">{{ tm.name }}</td>
           <td><button class="btn-outline-danger" (click)="removeTeachingMaterial(tm.name)">X</button></td>
         </tr>
       </table>
