@@ -71,17 +71,12 @@ export class BackendService {
 
   // endpoint doesn't exist yet
   getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
-    return Observable.create((observer: Subscriber<any>) => {
-      observer.next(outputmockup);
-      observer.complete();
-    });
-    // return this.get<EditableModuleOutput>('module/' + modulecode);
+    return this.get<EditableModuleOutput>('module/' + modulecode);
   }
 
   // endpoint does not exist yet
   updateEditableModule(modulecode: string, input: EditableModuleInput): void {
-    const editablemoduleinputurl = this.getBaseUrl() + 'module/' + modulecode;
-    // Please use this.post
+    this.post('module/' + modulecode, input);
   }
 
   getQualifications(): Observable<FilterQualifications> {
