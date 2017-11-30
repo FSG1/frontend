@@ -3,11 +3,11 @@
   <div class="row md-form justify-content-center" style="padding-top: 20px;">
     <div class="col-5">
       <input mdbActive id="moduleName" class="form-control-sm" type="text" [(ngModel)]="output.name">
-      <label for="moduleName" class="">* Module name</label>
+      <label [ngClass]="{'active' : output.name}" for="moduleName" class="">* Module name</label>
     </div>
     <div class="col-5">
       <input mdbActive id="moduleCode" class="form-control-sm" type="text" style="text-transform: uppercase;" [(ngModel)]="output.code">
-      <label for="moduleCode">* Module code</label>
+      <label [ngClass]="{'active' : output.code}" for="moduleCode">* Module code</label>
     </div>
   </div>
 
@@ -21,15 +21,15 @@
     </div>
     <div class="col-2">
       <input mdbActive id="credits" type="number" min="0" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
-      <label for="credits">* Credits (ECTS)</label>
+      <label [ngClass]="{'active' : output.credits}" for="credits">* Credits (ECTS)</label>
     </div>
     <div class="col-2">
       <input mdbActive id="lecturers-in-week" class="form-control-sm" type="number" min="0" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  [(ngModel)]="output.lectures_in_week">
-      <label for="lecturers-in-week">* Lectures / week</label>
+      <label [ngClass]="{'active' : output.lectures_in_week}" for="lecturers-in-week">* Lectures / week</label>
     </div>
     <div class="col-2">
       <input mdbActive id="practical-hours" class="form-control-sm" type="number" min="0" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.practical_hours_week">
-      <label for="practical-hours">* Practical hours / week</label>
+      <label [ngClass]="{'active' : output.practical_hours_week}" for="practical-hours">* Practical hours / week</label>
     </div>
     <div class="col-2">
       <div class="card">
@@ -48,7 +48,7 @@
           <th colspan="2">* Lecturers</th>
         </tr>
         <tr class="test-lecturers" *ngFor="let lecturer of output?.active_lecturers">
-          <td contenteditable="true">{{ lecturer.name }}</td>
+          <td>{{ lecturer.name }}</td>
           <td><button class="btn-outline-danger hoverable" (click)="removeLecturer(lecturer)">X</button></td>
         </tr>
       </table>
@@ -73,14 +73,14 @@
   <div class="row justify-content-center">
     <div class="col-10 md-form">
       <input mdbActive id="credentials" class="form-control-sm" type="text" [(ngModel)]="output.credentials">
-      <label for="credentials">Credentials</label>
+      <label [ngClass]="{'active' : output.credentials}" for="credentials">Credentials</label>
     </div>
   </div>
 
   <div class="row justify-content-center">
     <div class="col-10 md-form">
       <textarea mdbActive id="introduction" class="md-textarea" type="text" [(ngModel)]="output.introductorytext"></textarea>
-      <label for="introduction">Introduction and motivation</label>
+      <label [ngClass]="{'active' : output.introductorytext}" for="introduction">Introduction and motivation</label>
     </div>
   </div>
 
@@ -97,7 +97,7 @@
         <th colspan="2">* Topics</th>
       </tr>
       <tr class="test-topics" *ngFor="let topic of output.topics">
-        <td contenteditable="true">{{ topic }}</td>
+        <td>{{ topic }}</td>
         <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
       </tr>
       </table>
@@ -115,7 +115,7 @@
           <th colspan="2">Teaching material</th>
         </tr>
         <tr class="test-teaching-material" *ngFor="let tm of output?.teaching_material">
-          <td contenteditable="true" [textContent]="tm.name" (input)="tm.name=$event.target.textContent">{{ tm.name }}</td>
+          <td [textContent]="tm.name" (input)="tm.name=$event.target.textContent">{{ tm.name }}</td>
           <td><button class="btn-outline-danger" (click)="removeTeachingMaterial(tm.name)">X</button></td>
         </tr>
       </table>
@@ -141,13 +141,13 @@
   <div class="row justify-content-center">
     <div class="col-10 md-form form-sm">
       <textarea mdbActive id="additionalInformation" class="md-textarea" type="text" [(ngModel)]="output.additional_information"></textarea>
-      <label for="additionalInformation">Additional information</label>
+      <label [ngClass]="{'active' : output.additional_information}" for="additionalInformation">Additional information</label>
     </div>
   </div>
 
   <div class="row justify-content-center" style="padding-bottom: 40px">
     <div class="col-2">
-      <button type="button" class="btn btn-dark" (click)="save()">Save</button>
+      <button type="button" [disabled]="!canSave()" class="btn btn-dark" (click)="save()">Save</button>
     </div>
     <div class="col-2">
       <button type="button" class="btn btn-danger">Cancel</button>
