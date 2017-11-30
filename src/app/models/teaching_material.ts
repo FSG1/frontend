@@ -3,6 +3,6 @@ export class TeachingMaterial {
   type: string;
   constructor(name: string, type: string) {
     this.name = name;
-    this.type = name;
+    this.type = type;
   }
 }

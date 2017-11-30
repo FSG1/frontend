@@ -97,6 +97,7 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
   }
   selectTeachingMaterialType(type: string): void {
     this.selectedTeachingMaterialType = type;
+    console.log(type);
   }
   addTeachingMaterials(): void {
     if (!isNullOrUndefined(this.selectedTeachingMaterial) && this.selectedTeachingMaterial.trim().length && this.selectedTeachingMaterialType != this.defaultType) {
@@ -107,6 +108,7 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
         }
       });
       if (found) {
+        console.log(this.selectedTeachingMaterialType);
         this.output.teaching_material.push(new TeachingMaterial(this.selectedTeachingMaterial, this.selectedTeachingMaterialType));
         this.selectedTeachingMaterial = '';
       }
