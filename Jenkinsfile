@@ -35,13 +35,13 @@ pipeline {
 
         stage('Docker') {
             steps {
-                sh 'docker build -t 172.16.0.10:5000/frontend:latest .'
+                sh 'docker build -t 172.16.0.10:5000/frontend:${env.BRANCH_NAME} .'
             }
         }
 
         stage('Push') {
             steps {
-                sh 'docker push 172.16.0.10:5000/frontend:latest'
+                sh 'docker push 172.16.0.10:5000/frontend:${env.BRANCH_NAME}'
             }
         }
     }
