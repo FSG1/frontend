@@ -20,15 +20,15 @@
       </div>
     </div>
     <div class="col-2">
-      <input mdbActive id="credits" type="number" min="0" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
+      <input mdbActive id="credits" type="number" min="0" max="20" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
       <label [ngClass]="{'active' : output.credits}" for="credits">* Credits (ECTS)</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="lecturers-in-week" class="form-control-sm" type="number" min="0" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  [(ngModel)]="output.lectures_in_week">
+      <input mdbActive id="lecturers-in-week" class="form-control-sm" type="number" min="0" max="5" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  [(ngModel)]="output.lectures_in_week">
       <label [ngClass]="{'active' : output.lectures_in_week}" for="lecturers-in-week">* Lectures / week</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="practical-hours" class="form-control-sm" type="number" min="0" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.practical_hours_week">
+      <input mdbActive id="practical-hours" class="form-control-sm" type="number" min="0" max="50" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.practical_hours_week">
       <label [ngClass]="{'active' : output.practical_hours_week}" for="practical-hours">* Practical hours / week</label>
     </div>
     <div class="col-2">
@@ -72,14 +72,14 @@
 
   <div class="row justify-content-center">
     <div class="col-10 md-form">
-      <input mdbActive id="credentials" class="form-control-sm" type="text" [(ngModel)]="output.credentials">
+      <input maxlength="80" mdbActive id="credentials" class="form-control-sm" type="text" [(ngModel)]="output.credentials">
       <label [ngClass]="{'active' : output.credentials}" for="credentials">Credentials</label>
     </div>
   </div>
 
   <div class="row justify-content-center">
     <div class="col-10 md-form">
-      <textarea mdbActive id="introduction" class="md-textarea" type="text" [(ngModel)]="output.introductorytext"></textarea>
+      <textarea maxlength="240" mdbActive id="introduction" class="md-textarea" type="text" [(ngModel)]="output.introductorytext"></textarea>
       <label [ngClass]="{'active' : output.introductorytext}" for="introduction">Introduction and motivation</label>
     </div>
   </div>
@@ -103,7 +103,7 @@
       </table>
     </div>
     <div class="col-5 md-form form-sm">
-      <input (keyup.enter)="addTopic()" class="form-control" type="text" mdbActive [(ngModel)]="selectedTopic" placeholder="New topic">
+      <input maxlength="20" (keyup.enter)="addTopic()" class="form-control" type="text" mdbActive [(ngModel)]="selectedTopic" placeholder="New topic">
       <button type="button" class="btn btn-sm btn-dark" (click)="addTopic()">Add</button>
     </div>
   </div>
@@ -121,7 +121,7 @@
       </table>
     </div>
     <div class="col-5 md-form form-sm">
-      <input mdbActive (keyup.enter)="addTeachingMaterials()" type="text" class="form-control" [(ngModel)]="selectedTeachingMaterial" placeholder="New teaching material">
+      <input maxlength="20" mdbActive (keyup.enter)="addTeachingMaterials()" type="text" class="form-control" [(ngModel)]="selectedTeachingMaterial" placeholder="New teaching material">
       <div class="btn-group" dropdown>
         <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
           {{selectedTeachingMaterialType}}
@@ -140,7 +140,7 @@
 
   <div class="row justify-content-center">
     <div class="col-10 md-form form-sm">
-      <textarea mdbActive id="additionalInformation" class="md-textarea" type="text" [(ngModel)]="output.additional_information"></textarea>
+      <textarea maxlength="240" mdbActive id="additionalInformation" class="md-textarea" type="text" [(ngModel)]="output.additional_information"></textarea>
       <label [ngClass]="{'active' : output.additional_information}" for="additionalInformation">Additional information</label>
     </div>
   </div>
