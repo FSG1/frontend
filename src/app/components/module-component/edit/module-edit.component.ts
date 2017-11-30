@@ -9,6 +9,7 @@ import {TeachingMaterial} from '../../../models/teaching_material';
 import {isNullOrUndefined} from 'util';
 import {RestrictedComponent} from '../../../../util/RestrictedComponent';
 import {AppComponent} from '../../../app.component';
+import {AssesmentPart} from '../../../models/assesment_part';
 
 @Component({
   selector: 'app-editable-module',
@@ -28,6 +29,7 @@ export class ModuleEditComponent implements OnInit {
   private routeSubscription: Subscription;
   selectedTeachingMaterial: string;
   selectedTeachingMaterialType: string;
+  selectedAssesmentPart: AssesmentPart;
   defaultType = 'Teaching Material';
   //#endregion
 
@@ -106,6 +108,21 @@ export class ModuleEditComponent implements OnInit {
       if (found) {
         this.output.teaching_material.push(new TeachingMaterial(this.selectedTeachingMaterial, this.selectedTeachingMaterialType));
         this.selectedTeachingMaterial = '';
+      }
+    }
+  }
+  // endregion
+  // assesmentParts region
+  addAssesmentPart(): void {
+    if (!isNullOrUndefined(this.selectedAssesmentPart)) {
+      let found = true;
+      this.output.assesment_parts.forEach(a => {
+        if (a.subcode === this.selectedAssesmentPart.subcode) {
+          found = false;
+        }
+      });
+      if (found) {
+        this.output.assesment_parts.push(this.selectedAssesmentPart);
       }
     }
   }
