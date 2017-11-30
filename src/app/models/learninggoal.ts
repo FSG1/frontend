@@ -5,5 +5,6 @@ export interface LearningGoal {
   description: string;
   type: string;
   skillmatrix: StudentSkill[];
+  weight: number;
   expanded?: boolean;
 }

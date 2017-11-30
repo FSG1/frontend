@@ -3,180 +3,54 @@ import {Injectable} from '@angular/core';
 import { Semester } from './models/semester.model';
 import { Curriculum } from './models/curriculum.model';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import 'rxjs/add/operator/map';
 import {CurriculumResponse} from './backend-responses/CurriculumResponse';
 import {ModuleContent} from './models/modulecontent.model';
 import {CompleteSemester} from './models/complete_semester.model';
-import {Subscriber} from 'rxjs/Subscriber';
 import {FilterQualifications} from './models/qualificiationfiltermodels/filter_qualifications.model';
 import {QualificationsOverview} from './models/qualificiationfiltermodels/qualifications_overview.model';
 import {environment} from '../environments/environment';
-
-// Only here until endpoint is implemented
-const filterqualifications = {
-  'curricula': [
-    { 'name': 'Software Engineering', 'code': 'SE', 'id': 1},
-    { 'name': 'Business Informatics', 'code': 'BI', 'id': 2}],
-  'lifecycle_activities': [{'lifecycle_activity_id': 0, 'lifecycle_activity_name': 'Manage', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 1, 'lifecycle_activity_name': 'Analyze', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 2, 'lifecycle_activity_name': 'Advice', 'lifecycle_activity_description': 'something'},
-    {'lifecycle_activity_id': 3, 'lifecycle_activity_name': 'Design', 'lifecycle_activity_description': 'something'}],
-  'architectural_layers': [{'architectural_layer_id': 0, 'architectural_layer_name': 'User Interaction', 'architectural_layer_description': 'something'},
-    {'architectural_layer_id': 1, 'architectural_layer_name': 'Business Processes', 'architectural_layer_description': 'something'},
-    {'architectural_layer_id': 2, 'architectural_layer_name': 'Infrastructure', 'architectural_layer_description': 'something'},
-    {'architectural_layer_id': 3, 'architectural_layer_name': 'software', 'architectural_layer_description': 'something'}],
-};
-const mockqualificationtable = [{
-  'skills_level': 1,
-  'qualification_overview_semesters': [
-    {'semester': 1,
-      'qualifications_modules': [
-        {
-          'module_code': 'BUA',
-          'module_name': 'Business informatics',
-          'credits': 4,
-          'learning_goals': [
-            {
-              'name': 'lg1',
-              'description': 'loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsumloremIpsum loremIpsumloremIpsumloremIpsum loremIpsumloremIpsumlorem IpsumloremIpsum loremIpsumloremIpsumloremIpsum'
-            }, {
-              'name': 'lg2',
-              'description': 'blablabla'
-            }]
-        }, {
-          'module_code': 'JAV1',
-          'module_name': 'Java 1',
-          'credits': 5,
-          'learning_goals': [
-            {
-              'name': 'lg3',
-              'description': 'heel mooi'
-            }, {
-              'name': 'lg4',
-              'description': 'blablabla'
-            }, {
-              'name': 'lg5',
-              'description': 'blablabla'
-            }]
-        }, {
-          'module_code': 'DBS',
-          'module_name': 'Databases',
-          'credits': 5,
-          'learning_goals': [
-            {
-              'name': 'lg6',
-              'description': 'blablabla'
-            }]
-        }]
-    },
-    {'semester': 3,
-      'qualifications_modules': [
-        {
-          'module_code': 'BUMA',
-          'module_name': 'Business management',
-          'credits': 5,
-          'learning_goals': [
-            {
-              'name': 'lg7',
-              'description': 'blablabla'
-            }, {
-              'name': 'lg8',
-              'description': 'blablabla'
-            }, {
-              'name': 'lg9',
-              'description': 'blablabla'
-            }]
-        }, {
-          'module_code': 'COM3',
-          'module_name': 'Communicatie 3',
-          'credits': 1,
-          'learning_goals': [
-            {
-              'name': 'lg10',
-              'description': 'blablabla'
-            }, {
-              'name': 'lg11',
-              'description': 'blablabla'
-            }]
-        }]},
-    {'semester': 7,
-      'qualifications_modules': [{
-        'module_code': 'SOFA',
-        'module_name': 'Software factorio',
-        'credits': 15,
-        'learning_goals': [
-          {
-            'name': 'lg4',
-            'description': 'blablabla'
-          }]
-      }]
-    }]},  {
-  'skills_level': 2,
-  'qualification_overview_semesters': [
-    {'semester': 2,
-      'qualifications_modules': [
-        {
-          'module_code': 'etc',
-          'module_name': 'etc',
-          'credits': 15,
-          'learning_goals': [
-            {
-              'name': 'lg4',
-              'description': 'blablabla'
-            }, {
-              'name': 'lg5',
-              'description': 'blablabla'
-            }, {
-              'name': 'lg6',
-              'description': 'blablabla'
-            }]
-        }]
-    },
-    {'semester': 4,
-      'qualifications_modules': [{
-        'module_code': 'etc2',
-        'module_name': 'etc',
-        'credits': 1,
-        'learning_goals': [
-          {
-            'name': 'lg4',
-            'description': 'blablabla'
-          }, {
-            'name': 'lg5',
-            'description': 'blablabla'
-          }, {
-            'name': 'lg6',
-            'description': 'blablabla'
-          }]
-      }
-      ]}]
-}];
+import {EditableModuleOutput} from './models/editmodels/editable_module_output';
+import {EditableModuleInput} from './models/editmodels/editable_module_input';
+import {AppComponent} from "./app.component";
 
 @Injectable()
 export class BackendService {
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private app: AppComponent) {
   }
+
   getSemester(curriculum: number, semester: number): Observable<CompleteSemester> {
-    const completeSemesterUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/semester/' + semester;
-    return this.http.get<CompleteSemester>(completeSemesterUrl);
+    return this.get<CompleteSemester>('curriculum/' + curriculum + '/semester/' + semester);
+  }
+
+  // endpoint doesn't exist yet
+  getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
+    return this.get<EditableModuleOutput>('module/' + modulecode);
   }
 
   // endpoint does not exist yet
+  updateEditableModule(moduleid: number, input: EditableModuleInput): Observable<any> {
+    return this.post('module/' + moduleid, input);
+  }
+
   getQualifications(): Observable<FilterQualifications> {
-    const filterqualificationsUrl = this.getBaseUrl() + 'qualifications';
-    return this.http.get<FilterQualifications>(filterqualificationsUrl);
+    return this.get<FilterQualifications>('qualifications');
   }
-  // endpoint does not exist yet
+
   getQualificationTable(curriculum: number, architecturallayer: number, activity: number): Observable<QualificationsOverview[]> {
-    const qualificationtableUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/architecturallayer/' + architecturallayer + '/activity/' + activity;
-    return this.http.get<QualificationsOverview[]>(qualificationtableUrl);
+    const qualificationtableUrl = 'curriculum/'
+      + curriculum
+      + '/architecturallayer/'
+      + architecturallayer
+      + '/activity/'
+      + activity;
+    return this.get<QualificationsOverview[]>(qualificationtableUrl);
   }
+
   getModuleContent(curriculum: number, code: string): Observable<ModuleContent> {
-    const moduleContentUrl = this.getBaseUrl() + 'curriculum/' + curriculum + '/module/' + code;
-    return this.http.get<ModuleContent>(moduleContentUrl);
+    return this.get<ModuleContent>('curriculum/' + curriculum + '/module/' + code);
   }
 
   getCurricula(): Observable<Curriculum[]> {
@@ -185,14 +59,43 @@ export class BackendService {
   }
 
   getSemesters(id: number): Observable<Semester[]> {
-    const semestersUrl = this.getBaseUrl() + 'curriculum/' + id + '/semesters';
-    return this.http.get<CurriculumResponse>(semestersUrl)
+    return this.get<CurriculumResponse>('curriculum/' + id + '/semesters')
       .map(data => data.semesters);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+  // Test if authentication works or not
+  testAuth(username: string, password: string): Observable<boolean> {
+    return Observable.create((observer) => {
+      const encoded = btoa(username + ':' + password);
+      const headers = new HttpHeaders().set('Authorization', 'Basic ' + encoded);
+
+      this.http.post(this.getBaseUrl() + 'auth', {}, {headers: headers})
+        .subscribe(() => {
+          observer.next(true);
+        },
+          () => {
+            observer.next(false);
+        });
+    });
+  }
+
+  private get<T>(url: string): Observable<T> {
+    return this.http.get<T>(this.getBaseUrl() + url, this.getOptions());
+  }
+
+  private post<T>(url: string, params: any): Observable<T> {
+    return this.http.post<T>(this.getBaseUrl() + url, params, this.getOptions());
+  }
+
+  private getOptions(): object {
+    const options = {
+      headers: new HttpHeaders()
+    };
+    if (this.app.isLoggedIn) {
+      const encoded = btoa(this.app.username + ':' + this.app.password);
+      options.headers = new HttpHeaders().set('Authorization', 'Basic ' + encoded);
+    }
+    return options;
   }
 
   private getBaseUrl(): string {

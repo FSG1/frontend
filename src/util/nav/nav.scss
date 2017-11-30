@@ -6,3 +6,42 @@ li.active {
 a.nav-link {
   background-color: transparent !important;
 }
+
+.hamburger {
+  left: unset !important;
+  right: 0 !important;
+
+  li {
+    padding: 0;
+
+    a {
+      display: flex;
+      color: black !important;
+      padding: 10px;
+    }
+  }
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+
+  .fa {
+    font-size: 30px;
+    color: black;
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.75);
+    }
+  }
+}
+
+.open .btn .fa {
+  color: #636;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}

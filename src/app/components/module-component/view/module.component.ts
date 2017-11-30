@@ -1,11 +1,12 @@
-///<reference path="../../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
+///<reference path="../../../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LearningGoal} from '../../models/learninggoal';
+import {LearningGoal} from '../../../models/learninggoal';
 import {ActivatedRoute} from '@angular/router';
-import {ModuleContent} from '../../models/modulecontent.model';
-import {BackendService} from '../../backend.service';
+import {ModuleContent} from '../../../models/modulecontent.model';
+import {BackendService} from '../../../backend.service';
 import {Subscription} from 'rxjs/Subscription';
-import {AssesmentPart} from '../../models/assesment_part';
+import {AssesmentPart} from '../../../models/assesment_part';
+import {AppComponent} from "../../../app.component";
 
 @Component({
   selector: 'app-module',
@@ -22,7 +23,7 @@ export class ModuleComponent implements OnInit, OnDestroy {
 
   routeSubscription: Subscription;
 
-  constructor(private backendService: BackendService, private route: ActivatedRoute) {
+  constructor(private backendService: BackendService, private route: ActivatedRoute, public app: AppComponent) {
   }
 
   ngOnInit(): void {
