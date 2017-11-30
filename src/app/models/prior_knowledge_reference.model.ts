@@ -1,4 +1,4 @@
-export interface PriorKnowledgeReferenceModel {
+export interface PriorKnowledgeReference {
   code: number;
   name: string;
   type: string;

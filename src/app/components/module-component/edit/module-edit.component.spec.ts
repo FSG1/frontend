@@ -17,7 +17,7 @@ const outputmockup = {
   'code': 'DBS',
   'name': 'Databases',
   'credits': 5,
-  'semesters': [1, 2],
+  'semesters': [1],
   'lectures_in_week': 3,
   'practical_hours_week': 4,
   'introductorytext': 'very nice module. everyone should follow it',
@@ -52,7 +52,9 @@ const outputmockup = {
     'name': 'Van Odenhoven, F',
   }],
   'credentials': 'vey nice course',
-  'project_flag': false
+  'project_flag': false,
+  'prior_knowledge_references': null,
+  'modules': null
 };
 
 describe('Testing module edit component', () => {

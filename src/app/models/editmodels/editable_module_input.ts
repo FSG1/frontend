@@ -1,5 +1,6 @@
 import {TeachingMaterial} from '../teaching_material';
 import {EditableModuleOutput} from './editable_module_output';
+import {PriorKnowledgeReference} from '../prior_knowledge_reference.model';
 
 export class EditableModuleInput {
   id: number;
@@ -15,6 +16,7 @@ export class EditableModuleInput {
   lecturers: number[];
   credentials: string;
   project_flag: boolean;
+  prior_knowledge_references: PriorKnowledgeReference[];
   public constructor(output: EditableModuleOutput) {
     this.id = output.id;
     this.code = output.code.toUpperCase();
@@ -28,6 +30,7 @@ export class EditableModuleInput {
     this.additional_information = output.additional_information;
     this.credentials = output.credentials;
     this.project_flag = output.project_flag;
+    this.prior_knowledge_references = output.prior_knowledge_references;
     this.lecturers = new Array();
     for (let i = 0; i < output.active_lecturers.length; i++) {
       this.lecturers[i] = output.active_lecturers[i].id;

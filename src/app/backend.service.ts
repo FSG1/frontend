@@ -22,7 +22,7 @@ const outputmockup = {
   'code': 'DBS',
   'name': 'Databases',
   'credits': 5,
-  'semester': 1,
+  'semesters': [1],
   'lectures_in_week': 3,
   'practical_hours_week': 4,
   'introductorytext': 'very nice module. everyone should follow it',
@@ -57,7 +57,9 @@ const outputmockup = {
     'name': 'Van Odenhoven, F',
   }],
   'credentials': 'vey nice course',
-  'project_flag': false
+  'project_flag': false,
+  'prior_knowledge_references': null,
+  'modules': null
 };
 
 @Injectable()
@@ -71,7 +73,11 @@ export class BackendService {
 
   // endpoint doesn't exist yet
   getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
-    return this.get<EditableModuleOutput>('module/' + modulecode);
+    //return this.get<EditableModuleOutput>('module/' + modulecode);
+    return Observable.create((observer: Subscriber<any>) => {
+      observer.next(outputmockup);
+      observer.complete();
+    });
   }
 
   // endpoint does not exist yet
