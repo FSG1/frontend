@@ -34,6 +34,7 @@ export class ModuleEditComponent implements OnInit {
   //#endregion
 
   ngOnInit(): void {
+    this.selectedAssesmentPart = new AssesmentPart();
     this.selectedLecturer = {
       'name': 'Lecturers',
       'id': -1
@@ -125,6 +126,9 @@ export class ModuleEditComponent implements OnInit {
         this.output.assesment_parts.push(this.selectedAssesmentPart);
       }
     }
+  }
+  removeAssesmentPart(assesmentPart: AssesmentPart): void {
+    this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
   }
   //#endregion
   // TODO send save data

@@ -1,4 +1,4 @@
-export interface AssesmentPart {
+export class AssesmentPart {
   subcode: string;
   description: string;
   percentage: number;

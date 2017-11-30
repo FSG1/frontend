@@ -149,6 +149,9 @@
     <div class="col-10">
       <table class="table table-striped">
         <tr>
+          <th colspan="6">Exam information</th>
+        </tr>
+        <tr>
           <th>Subcode</th>
           <th>Description</th>
           <th>Percentage</th>
@@ -162,11 +165,12 @@
           <td>{{ assesmentPart.percentage }}</td>
           <td>{{ assesmentPart.minimal_grade }}</td>
           <td>{{ assesmentPart.remark }}</td>
+          <td><button class="btn-outline-danger" (click)="removeAssesmentPart(assesmentPart)">X</button></td>
         </tr>
       </table>
     </div>
   </div>
-  <div class="row md-form justify-content-center align-items-center" *ngIf="selectedAssesmentPart">
+  <div class="row md-form justify-content-center align-items-center">
     <div class="col-2">
       <input mdbActive id="subcode" type="text" class="form-control-sm" [(ngModel)]="selectedAssesmentPart.subcode">
       <label for="subcode">Subcode</label>
