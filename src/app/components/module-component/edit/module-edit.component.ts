@@ -130,6 +130,10 @@ export class ModuleEditComponent implements OnInit {
   removeAssesmentPart(assesmentPart: AssesmentPart): void {
     this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
   }
+  editAssesmentPart(assesmentPart: AssesmentPart): void {
+    this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
+    this.output.assesment_parts.push(assesmentPart);
+  }
   //#endregion
   // TODO send save data
   save(): void {
