@@ -1,7 +1,7 @@
 import {TeachingMaterial} from '../teaching_material';
 import {Lecturer} from '../lecturer';
 
-export interface EditableModuleOutput {
+export class EditableModuleOutput {
   id: number;
   code: string;
   name: string;

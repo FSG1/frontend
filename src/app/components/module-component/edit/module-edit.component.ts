@@ -15,8 +15,9 @@ import {AppComponent} from '../../../app.component';
   templateUrl: './module-edit.component.html',
   styleUrls: ['./module-edit.component.scss']
 })
-export class ModuleEditComponent implements OnInit {
-  constructor(private backendService: BackendService, private route: ActivatedRoute,router: Router) {
+export class ModuleEditComponent extends RestrictedComponent implements OnInit {
+  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router) {
+    super(app, router);
   }
   output: EditableModuleOutput;
   input: EditableModuleInput;
@@ -32,6 +33,7 @@ export class ModuleEditComponent implements OnInit {
   //#endregion
 
   ngOnInit(): void {
+    this.output = new EditableModuleOutput();
     this.selectedLecturer = {
       'name': 'Lecturers',
       'id': -1
@@ -110,10 +112,13 @@ export class ModuleEditComponent implements OnInit {
     }
   }
   //#endregion
-  // TODO send save data
+  // send save data
   save(): void {
+    console.log('before save');
     this.input = new EditableModuleInput(this.output);
+    console.log(this.output);
     this.backendService.updateEditableModule(this.output.id, this.input);
+    console.log('after save');
   }
   calculateTotalEffort(): number {
     return this.output.credits * 28;
