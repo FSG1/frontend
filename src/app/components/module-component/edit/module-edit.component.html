@@ -164,10 +164,9 @@
     </table>
   </div>
   <div class="row justify-content-center">
-    <div class="col-5 md-form form-sm">
-      <input mdbActive (keyup.enter)="addTeachingMaterials()" type="text" class="form-control" [(ngModel)]="selectedPriorKnowledgeRemark" placeholder="Remark about prior knowledge">
+    <div class="md-form form-sm">
       <div class="btn-group" dropdown>
-        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+        <button dropdownToggle class="a btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
           {{selectedPriorModule}}
         </button>
         <ul class="dropdown-menu">
@@ -179,19 +178,20 @@
         </ul>
       </div>
       <div class="btn-group" dropdown>
-      <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
-        {{selectedpriorKnowledgeType}}
-      </button>
-      <ul class="dropdown-menu">
-        <li class="dropdown-item" *ngFor="let type of priorKnowledgeTypes" >
-          <a (click)="selectPriorKnowledgeType(type)">
-            {{type}}
-          </a>
-        </li>
-      </ul>
+        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          {{selectedpriorKnowledgeType}}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" *ngFor="let type of priorKnowledgeTypes" >
+            <a (click)="selectPriorKnowledgeType(type)">
+              {{type}}
+            </a>
+          </li>
+        </ul>
       </div>
       <button type="button" class="btn btn-sm btn-dark" (click)="addPriorReference()">Add</button>
     </div>
+      <input mdbActive (keyup.enter)="addPriorReference()" type="text" class="form-control" [(ngModel)]="selectedPriorKnowledgeRemark" placeholder="(Optional) Remark about prior knowledge">
   </div>
 
   <div class="row justify-content-center" style="padding-bottom: 40px">

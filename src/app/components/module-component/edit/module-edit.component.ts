@@ -125,11 +125,10 @@ export class ModuleEditComponent implements OnInit {
     this.output.prior_knowledge_references = this.output.prior_knowledge_references.filter( pr => pr.name != prior);
   }
   addPriorReference(): void {
-    if (!isNullOrUndefined(this.selectedPriorKnowledgeRemark) && this.selectedPriorKnowledgeRemark.trim().length
-      && this.selectedPriorModule != this.defaultPriorModule &&  this.selectedpriorKnowledgeType != this.defaultPriorType) {
+    if (this.selectedPriorModule != this.defaultPriorModule &&  this.selectedpriorKnowledgeType != this.defaultPriorType) {
       let found = true;
       this.output.prior_knowledge_references.forEach( pkr => {
-        if (pkr.name === this.selectedPriorKnowledgeRemark) {
+        if (pkr.name === this.selectedPriorModule) {
           found = false;
         }
       });
@@ -141,7 +140,7 @@ export class ModuleEditComponent implements OnInit {
           }
         });
         this.output.prior_knowledge_references.push(new PriorKnowledgeReference(module, this.selectedpriorKnowledgeType, this.selectedPriorKnowledgeRemark));
-        this.selectedTeachingMaterial = '';
+        this.selectedPriorKnowledgeRemark = '';
       }
     }
   }
