@@ -15,7 +15,7 @@ import {QualificationsOverview} from './models/qualificiationfiltermodels/qualif
 import {environment} from '../environments/environment';
 import {EditableModuleOutput} from './models/editmodels/editable_module_output';
 import {EditableModuleInput} from './models/editmodels/editable_module_input';
-import {AppComponent} from "./app.component";
+import {AppComponent} from './app.component';
 
 const outputmockup = {
   'id': 1,
@@ -58,8 +58,13 @@ const outputmockup = {
   }],
   'credentials': 'vey nice course',
   'project_flag': false,
-  'prior_knowledge_references': null,
-  'modules': null
+  'prior_knowledge_references': [
+    {'code': 'mod1', 'name': 'moduleren', 'type': 'concurrent', 'remark': 'blabla'},
+    {'code': 'JAV1', 'name': 'java einz', 'type': 'prior', 'remark': 'blabla'}],
+  'modules': [{'code': 'mod1', 'name': 'moduleren', 'credits': 5, 'is_project': false},
+    {'code': 'JAV1', 'name': 'java einz', 'credits': 5, 'is_project': false},
+    {'code': 'PRO1', 'name': 'projeckt 1', 'credits': 10, 'is_project': true},
+    {'code': 'LFT', 'name': 'Lift project', 'credits': 8, 'is_project': true}]
 };
 
 @Injectable()
