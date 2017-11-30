@@ -57,7 +57,22 @@ const outputmockup = {
     'name': 'Van Odenhoven, F',
   }],
   'credentials': 'vey nice course',
-  'project_flag': false
+  'project_flag': false,
+  'assesment_parts': [
+    {
+      'subcode': 'sofa1',
+      'description': 'research some stuff',
+      'percentage': 0.1,
+      'minimal_grade': 5.5,
+      'remark': 'nice'
+    },
+    {
+      'subcode': 'sofa2',
+      'description': 'something',
+      'percentage': 0.9,
+      'minimal_grade': 5.5,
+      'remark': 'not nice'
+    }]
 };
 
 @Injectable()
