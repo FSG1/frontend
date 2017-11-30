@@ -9,6 +9,7 @@ import {TeachingMaterial} from '../../../models/teaching_material';
 import {isNullOrUndefined} from 'util';
 import {RestrictedComponent} from '../../../../util/RestrictedComponent';
 import {AppComponent} from '../../../app.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-editable-module',
@@ -16,7 +17,7 @@ import {AppComponent} from '../../../app.component';
   styleUrls: ['./module-edit.component.scss']
 })
 export class ModuleEditComponent extends RestrictedComponent implements OnInit {
-  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router) {
+  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router, private location: Location) {
     super(app, router);
   }
   output: EditableModuleOutput;
@@ -116,6 +117,7 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
   save(): void {
     this.input = new EditableModuleInput(this.output);
     this.backendService.updateEditableModule(this.output.id, this.input);
+    this.location.back();
   }
   calculateTotalEffort(): number {
     return this.output.credits * 28;
@@ -125,5 +127,8 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
       return true;
     }
     return false;
+  }
+  back(): void {
+    this.location.back();
   }
 }
