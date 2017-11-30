@@ -156,36 +156,41 @@
           <th>Remarks</th>
           <th></th>
         </tr>
-        <tr><!-- *ngFor="let examinformation of output." -->
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr *ngFor="let assesmentPart of output.assesment_parts">
+          <td>{{ assesmentPart.subcode }}</td>
+          <td>{{ assesmentPart.description }}</td>
+          <td>{{ assesmentPart.percentage }}</td>
+          <td>{{ assesmentPart.minimal_grade }}</td>
+          <td>{{ assesmentPart.remark }}</td>
         </tr>
       </table>
     </div>
   </div>
-  <div class="row md-form justify-content-center align-items-center">
+  <div class="row md-form justify-content-center align-items-center" *ngIf="selectedAssesmentPart">
     <div class="col-2">
-      <input mdbActive id="subcode" type="text" class="form-control-sm">
+      <input mdbActive id="subcode" type="text" class="form-control-sm" [(ngModel)]="selectedAssesmentPart.subcode">
       <label for="subcode">Subcode</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="description" type="text" class="form-control-sm">
+      <input mdbActive id="description" type="text" class="form-control-sm" [(ngModel)]="selectedAssesmentPart.description">
       <label for="description">Description</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="percentage" class="form-control-sm" type="number">
+      <input mdbActive id="percentage" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.percentage">
       <label for="percentage">Percentage</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="minimalGrade" class="form-control-sm" type="number">
+      <input mdbActive id="minimalGrade" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.minimal_grade">
       <label for="minimalGrade">Minimal grade</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="remarks" class="form-control-sm" type="text">
+      <input mdbActive id="remarks" class="form-control-sm" type="text" [(ngModel)]="selectedAssesmentPart.remark">
       <label for="remarks">Remarks</label>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-2">
+      <button type="button" class="btn btn-sm btn-dark" (click)="addAssesmentPart()">Add</button>
     </div>
   </div>
 
