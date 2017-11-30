@@ -2,11 +2,11 @@
 
   <div class="row md-form justify-content-center" style="padding-top: 20px;">
     <div class="col-5">
-      <input mdbActive id="moduleName" class="form-control-sm" type="text" [(ngModel)]="output.name">
+      <input maxlength="40" mdbActive id="moduleName" class="form-control-sm" type="text" [(ngModel)]="output.name">
       <label [ngClass]="{'active' : output.name}" for="moduleName" class="">* Module name</label>
     </div>
     <div class="col-5">
-      <input mdbActive id="moduleCode" class="form-control-sm" type="text" style="text-transform: uppercase;" [(ngModel)]="output.code">
+      <input maxlength="10" mdbActive id="moduleCode" class="form-control-sm" type="text" style="text-transform: uppercase;" [(ngModel)]="output.code">
       <label [ngClass]="{'active' : output.code}" for="moduleCode">* Module code</label>
     </div>
   </div>
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="col-2">
-      <input mdbActive id="credits" type="number" min="0" max="20" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
+      <input mdbActive id="credits" type="number" min="0" max="30" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
       <label [ngClass]="{'active' : output.credits}" for="credits">* Credits (ECTS)</label>
     </div>
     <div class="col-2">
@@ -103,7 +103,7 @@
       </table>
     </div>
     <div class="col-5 md-form form-sm">
-      <input maxlength="20" (keyup.enter)="addTopic()" class="form-control" type="text" mdbActive [(ngModel)]="selectedTopic" placeholder="New topic">
+      <input maxlength="80" (keyup.enter)="addTopic()" class="form-control" type="text" mdbActive [(ngModel)]="selectedTopic" placeholder="New topic">
       <button type="button" class="btn btn-sm btn-dark" (click)="addTopic()">Add</button>
     </div>
   </div>
@@ -121,7 +121,7 @@
       </table>
     </div>
     <div class="col-5 md-form form-sm">
-      <input maxlength="20" mdbActive (keyup.enter)="addTeachingMaterials()" type="text" class="form-control" [(ngModel)]="selectedTeachingMaterial" placeholder="New teaching material">
+      <input maxlength="80" mdbActive (keyup.enter)="addTeachingMaterials()" type="text" class="form-control" [(ngModel)]="selectedTeachingMaterial" placeholder="New teaching material">
       <div class="btn-group" dropdown>
         <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
           {{selectedTeachingMaterialType}}
