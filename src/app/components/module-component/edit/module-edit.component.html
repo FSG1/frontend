@@ -160,11 +160,11 @@
           <th></th>
         </tr>
         <tr *ngFor="let assesmentPart of output.assesment_parts">
-          <td>{{ assesmentPart.subcode }}</td>
-          <td>{{ assesmentPart.description }}</td>
-          <td>{{ assesmentPart.percentage }}</td>
-          <td>{{ assesmentPart.minimal_grade }}</td>
-          <td>{{ assesmentPart.remark }}</td>
+          <td contenteditable="true">{{ assesmentPart.subcode }}</td>
+          <td contenteditable="true">{{ assesmentPart.description }}</td>
+          <td contenteditable="true">{{ assesmentPart.percentage }}</td>
+          <td contenteditable="true">{{ assesmentPart.minimal_grade }}</td>
+          <td contenteditable="true">{{ assesmentPart.remark }}</td>
           <td><button class="btn-outline-danger" (click)="removeAssesmentPart(assesmentPart)">X</button></td>
         </tr>
       </table>
@@ -195,6 +195,26 @@
   <div class="row justify-content-center">
     <div class="col-2">
       <button type="button" class="btn btn-sm btn-dark" (click)="addAssesmentPart()">Add</button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <table class="table table-striped">
+        <tr>
+          <th colspan="3">Learning goals</th>
+        </tr>
+        <tr>
+          <th width="10%">Name</th>
+          <th width="80%">Description</th>
+          <th width="10%">Weight</th>
+        </tr>
+        <tr *ngFor="let learninggoal of output.learning_goals">
+          <td>{{ learninggoal.name }}</td>
+          <td>{{ learninggoal.description }}</td>
+          <td>{{ learninggoal.weight }}</td>
+        </tr>
+      </table>
     </div>
   </div>
 
