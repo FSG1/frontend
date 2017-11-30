@@ -17,7 +17,7 @@ const outputmockup = {
   'code': 'DBS',
   'name': 'Databases',
   'credits': 5,
-  'semester': 1,
+  'semesters': [1, 2],
   'lectures_in_week': 3,
   'practical_hours_week': 4,
   'introductorytext': 'very nice module. everyone should follow it',

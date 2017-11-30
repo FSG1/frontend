@@ -6,7 +6,7 @@ export interface EditableModuleOutput {
   code: string;
   name: string;
   credits: number;
-  semester: number;
+  semesters: number[];
   lectures_in_week: number;
   practical_hours_week: number;
   introductorytext: string;
