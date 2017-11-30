@@ -2,7 +2,7 @@
 
   <div class="row md-form justify-content-center" style="padding-top: 20px;">
     <div class="col-5">
-      <input maxlength="40" mdbActive id="moduleName" class="form-control-sm" type="text" [(ngModel)]="output.name">
+      <input maxlength="40" mdbActive id="moduleName" class="form-control-sm" type="text" [(ngModel)]="output.name" mdbInputValidate>
       <label [ngClass]="{'active' : output.name}" for="moduleName" class="">* Module name</label>
     </div>
     <div class="col-5">
@@ -20,15 +20,15 @@
       </div>
     </div>
     <div class="col-2">
-      <input mdbActive id="credits" type="number" min="0" max="30" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
+      <input onkeyup="if(this.value.length > 2 || this.value > 30) this.value = 30;" mdbActive id="credits" type="number" min="0" max="30" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
       <label [ngClass]="{'active' : output.credits}" for="credits">* Credits (ECTS)</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="lecturers-in-week" class="form-control-sm" type="number" min="0" max="5" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  [(ngModel)]="output.lectures_in_week">
+      <input onkeyup="if(this.value.length > 2 || this.value > 20) this.value = 20;" mdbActive id="lecturers-in-week" class="form-control-sm" type="number" min="0" max="5" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  [(ngModel)]="output.lectures_in_week">
       <label [ngClass]="{'active' : output.lectures_in_week}" for="lecturers-in-week">* Lectures / week</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="practical-hours" class="form-control-sm" type="number" min="0" max="50" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.practical_hours_week">
+      <input onkeyup="if(this.value.length > 2 || this.value > 40) this.value = 40;" mdbActive id="practical-hours" class="form-control-sm" type="number" min="0" max="50" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.practical_hours_week">
       <label [ngClass]="{'active' : output.practical_hours_week}" for="practical-hours">* Practical hours / week</label>
     </div>
     <div class="col-2">
