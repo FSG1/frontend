@@ -29,7 +29,7 @@
     </div>
     <div class="col-2">
       <input onkeyup="if(this.value.length > 2 || this.value > 40) this.value = 40;" mdbActive id="practical-hours" class="form-control-sm" type="number" min="0" max="50" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.practical_hours_week">
-      <label [ngClass]="{'active' : output.practical_hours_week}" for="practical-hours">* Practical hours / week</label>
+      <label [ngClass]="{'active' : output.practical_hours_week || output.practical_hours_week === 0}" for="practical-hours">* Practical hours / week</label>
     </div>
     <div class="col-2">
       <div class="card">
