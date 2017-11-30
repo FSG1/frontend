@@ -75,8 +75,8 @@ export class BackendService {
   }
 
   // endpoint does not exist yet
-  updateEditableModule(moduleid: number, input: EditableModuleInput): void {
-    this.post('module/' + moduleid, input).subscribe();
+  updateEditableModule(moduleid: number, input: EditableModuleInput): Observable<any> {
+    return this.post('module/' + moduleid, input);
   }
 
   getQualifications(): Observable<FilterQualifications> {
