@@ -9,8 +9,6 @@ import { ModuleOverviewComponent } from './components/module-overview-component/
 import { HttpClientModule } from '@angular/common/http';
 import { SkillMatrixComponent } from './components/skillmatrix-component/skillmatrix.component';
 
-import { HttpModule } from '@angular/http';
-
 import { BackendService } from './backend.service';
 import {ModuleComponent} from './components/module-component/module.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -32,7 +30,6 @@ import {QualificationOverviewComponent} from './components/qualification-overvie
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpModule,
     UtilModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot()
