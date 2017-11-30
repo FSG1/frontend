@@ -16,7 +16,10 @@ export class AppComponent {
   }
 
   get isLoggedIn(): boolean {
-    return this.username.length > 0 && this.password.length > 0;
+    if (this.username !== null && this.password !== null) {
+      return this.username.length > 0 && this.password.length > 0;
+    }
+    return false;
   }
   logout() {
     localStorage.removeItem('fmms-username');
