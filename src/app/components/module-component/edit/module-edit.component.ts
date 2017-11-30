@@ -114,11 +114,8 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
   //#endregion
   // send save data
   save(): void {
-    console.log('before save');
     this.input = new EditableModuleInput(this.output);
-    console.log(this.output);
     this.backendService.updateEditableModule(this.output.id, this.input);
-    console.log('after save');
   }
   calculateTotalEffort(): number {
     return this.output.credits * 28;

@@ -35,8 +35,6 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    localStorage.removeItem('fmms-username');
-    localStorage.removeItem('fmms-password');
-    this.app.setCredentials('', '');
+    this.app.logout();
   }
 }

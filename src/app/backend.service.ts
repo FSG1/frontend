@@ -76,7 +76,7 @@ export class BackendService {
 
   // endpoint does not exist yet
   updateEditableModule(moduleid: number, input: EditableModuleInput): void {
-    this.post('module/' + moduleid, input);
+    this.post('module/' + moduleid, input).subscribe();
   }
 
   getQualifications(): Observable<FilterQualifications> {
@@ -136,9 +136,8 @@ export class BackendService {
       headers: new HttpHeaders()
     };
     if (this.app.isLoggedIn) {
-      const credentials = this.app.username + ':' + this.app.password;
-      const encoded = btoa(credentials);
-      options.headers.append('Authorization', 'Basic ' + encoded);
+      const encoded = btoa(this.app.username + ':' + this.app.password);
+      options.headers = new HttpHeaders().set('Authorization', 'Basic ' + encoded);
     }
     return options;
   }
