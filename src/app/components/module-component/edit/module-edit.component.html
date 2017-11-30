@@ -21,15 +21,15 @@
     </div>
     <div class="col-2">
       <input mdbActive id="credits" type="number" min="0" max="20" class="form-control-sm" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.credits">
-      <label [ngClass]="{'active' : output.credits}" for="credits">* Credits (ECTS)</label>
+      <label [ngClass]="{'active' : output.credits || output.credits === 0}" for="credits">* Credits (ECTS)</label>
     </div>
     <div class="col-2">
       <input mdbActive id="lecturers-in-week" class="form-control-sm" type="number" min="0" max="5" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  [(ngModel)]="output.lectures_in_week">
-      <label [ngClass]="{'active' : output.lectures_in_week}" for="lecturers-in-week">* Lectures / week</label>
+      <label [ngClass]="{'active' : output.lectures_in_week || output.lectures_in_week === 0}" for="lecturers-in-week">* Lectures / week</label>
     </div>
     <div class="col-2">
       <input mdbActive id="practical-hours" class="form-control-sm" type="number" min="0" max="50" ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="output.practical_hours_week">
-      <label [ngClass]="{'active' : output.practical_hours_week}" for="practical-hours">* Practical hours / week</label>
+      <label [ngClass]="{'active' : output.practical_hours_week || output.practical_hours_week === 0}" for="practical-hours">* Practical hours / week</label>
     </div>
     <div class="col-2">
       <div class="card">
