@@ -9,56 +9,12 @@ import 'rxjs/add/operator/map';
 import {CurriculumResponse} from './backend-responses/CurriculumResponse';
 import {ModuleContent} from './models/modulecontent.model';
 import {CompleteSemester} from './models/complete_semester.model';
-import {Subscriber} from 'rxjs/Subscriber';
 import {FilterQualifications} from './models/qualificiationfiltermodels/filter_qualifications.model';
 import {QualificationsOverview} from './models/qualificiationfiltermodels/qualifications_overview.model';
 import {environment} from '../environments/environment';
 import {EditableModuleOutput} from './models/editmodels/editable_module_output';
 import {EditableModuleInput} from './models/editmodels/editable_module_input';
 import {AppComponent} from "./app.component";
-
-const outputmockup = {
-  'id': 1,
-  'code': 'DBS',
-  'name': 'Databases',
-  'credits': 5,
-  'semester': 1,
-  'lectures_in_week': 3,
-  'practical_hours_week': 4,
-  'introductorytext': 'very nice module. everyone should follow it',
-  'topics': ['drinking beer', 'sql injection', 'otherstuff'],
-  'teaching_material': [{
-    'name': 'dbs book',
-    'type': 'book'
-  }, {
-    'name': 'dbs book 2',
-    'type': 'book'
-  }, {
-    'name': 'www.something.com',
-    'type': 'website'
-  }],
-  'teaching_material_types': ['book', 'website', 'physical'],
-  'additional_information': 'vey nice course',
-  'all_lecturers': [{
-    'id': 1,
-    'name': 'Dorssers, T',
-  }, {
-    'id': 2,
-    'name': 'Van Odenhoven, F',
-  }, {
-    'id': 5,
-    'name': 'Van der Ham, R',
-  }],
-  'active_lecturers': [{
-    'id': 1,
-    'name': 'Dorssers, T',
-  }, {
-    'id': 2,
-    'name': 'Van Odenhoven, F',
-  }],
-  'credentials': 'vey nice course',
-  'project_flag': false
-};
 
 @Injectable()
 export class BackendService {
