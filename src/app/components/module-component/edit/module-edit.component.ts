@@ -16,10 +16,13 @@ import { Location } from '@angular/common';
   templateUrl: './module-edit.component.html',
   styleUrls: ['./module-edit.component.scss']
 })
-export class ModuleEditComponent extends RestrictedComponent implements OnInit {
+  export class ModuleEditComponent extends RestrictedComponent implements OnInit {
+  //export class ModuleEditComponent implements OnInit {
   constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router, private location: Location) {
     super(app, router);
   }
+  //constructor(private backendService: BackendService, private route: ActivatedRoute, router: Router, private location: Location) {
+  //}
   output: EditableModuleOutput;
   input: EditableModuleInput;
   modulecode: string;
@@ -90,6 +93,22 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
       }
     }
   }
+  topicUp(topic: string): void {
+    const index = this.output.topics.indexOf(topic);
+    if (index !== 0) {
+      const objectToGoDown = this.output.topics[index - 1];
+      this.output.topics[index - 1] = topic;
+      this.output.topics[index] = objectToGoDown;
+    }
+  }
+  topicDown(topic: string): void {
+    const index = this.output.topics.indexOf(topic);
+    if (index !== (this.output.topics.length - 1)) {
+      const objectToGoDown = this.output.topics[index + 1];
+      this.output.topics[index + 1] = topic;
+      this.output.topics[index] = objectToGoDown;
+    }
+  }
   //#endregion
   //#region teaching_materials
   removeTeachingMaterial(material: string): void {
@@ -112,6 +131,22 @@ export class ModuleEditComponent extends RestrictedComponent implements OnInit {
         this.output.teaching_material.push(new TeachingMaterial(this.selectedTeachingMaterial, this.selectedTeachingMaterialType));
         this.selectedTeachingMaterial = '';
       }
+    }
+  }
+  teachingMaterialUp(material: TeachingMaterial): void {
+    const index = this.output.teaching_material.indexOf(material);
+    if (index !== 0) {
+      const objectToGoDown = this.output.teaching_material[index - 1];
+      this.output.teaching_material[index - 1] = material;
+      this.output.teaching_material[index] = objectToGoDown;
+    }
+  }
+  teachingMaterialDown(material: TeachingMaterial): void {
+    const index = this.output.teaching_material.indexOf(material);
+    if (index !== (this.output.teaching_material.length - 1)) {
+      const objectToGoDown = this.output.teaching_material[index + 1];
+      this.output.teaching_material[index + 1] = material;
+      this.output.teaching_material[index] = objectToGoDown;
     }
   }
   //#endregion

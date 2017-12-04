@@ -94,10 +94,12 @@
     <div class="col-5">
     <table class="table table-sm table-striped">
       <tr>
-        <th colspan="2">* Topics</th>
+        <th colspan="3">* Topics</th>
       </tr>
       <tr class="test-topics" *ngFor="let topic of output.topics">
         <td>{{ topic }}</td>
+        <td><button class="btn-outline-danger" (click)="topicUp(topic)">^</button>
+          <button class="btn-outline-danger" (click)="topicDown(topic)">v</button></td>
         <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
       </tr>
       </table>
@@ -112,10 +114,12 @@
     <div class="col-5">
       <table class="table table-sm table-striped">
         <tr>
-          <th colspan="2">Teaching material</th>
+          <th colspan="3">Teaching material</th>
         </tr>
         <tr class="test-teaching-material" *ngFor="let tm of output?.teaching_material">
           <td [textContent]="tm.name" (input)="tm.name=$event.target.textContent">{{ tm.name }}</td>
+          <td><button class="btn-outline-danger" (click)="teachingMaterialUp(tm)">^</button>
+            <button class="btn-outline-danger" (click)="teachingMaterialDown(tm)">v</button></td>
           <td><button class="btn-outline-danger" (click)="removeTeachingMaterial(tm.name)">X</button></td>
         </tr>
       </table>
