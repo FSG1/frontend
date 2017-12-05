@@ -12,6 +12,7 @@ import {AppComponent} from '../../../app.component';
 import {PriorKnowledgeReference} from '../../../models/prior_knowledge_reference.model';
 import {Module} from '../../../models/module.model';
 import { Location } from '@angular/common';
+import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_module';
 
 @Component({
   selector: 'app-editable-module',
@@ -172,9 +173,9 @@ import { Location } from '@angular/common';
         }
       });
       if (found) {
-        let module: Module;
+        let module: SimpleModule;
         this.output.modules.forEach( m => {
-          if (m.name === this.selectedPriorModule){
+          if (m.name === this.selectedPriorModule) {
             module = m;
           }
         });
