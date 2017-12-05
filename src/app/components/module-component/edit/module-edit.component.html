@@ -160,11 +160,11 @@
           <th></th>
         </tr>
         <tr *ngFor="let assesmentPart of output.assesment_parts">
-          <td contenteditable="true">{{ assesmentPart.subcode }}</td>
-          <td contenteditable="true">{{ assesmentPart.description }}</td>
-          <td contenteditable="true">{{ assesmentPart.percentage }}</td>
-          <td contenteditable="true">{{ assesmentPart.minimal_grade }}</td>
-          <td contenteditable="true">{{ assesmentPart.remark }}</td>
+          <td>{{ assesmentPart.subcode }}</td>
+          <td>{{ assesmentPart.description }}</td>
+          <td>{{ assesmentPart.percentage }}</td>
+          <td>{{ assesmentPart.minimal_grade }}</td>
+          <td>{{ assesmentPart.remark }}</td>
           <td><button class="btn-outline-danger" (click)="removeAssesmentPart(assesmentPart)">X</button></td>
         </tr>
       </table>
