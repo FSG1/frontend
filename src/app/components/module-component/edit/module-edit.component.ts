@@ -35,7 +35,7 @@ export class ModuleEditComponent implements OnInit {
   selectedPriorModule: string;
   defaultPriorModule= 'Module';
   defaultPriorType= 'Type';
-  priorKnowledgeTypes = ['concurrent', 'mandatory'];
+  priorKnowledgeTypes = ['concurrent', 'mandatory', 'prior'];
   selectedpriorKnowledgeType: string;
   //#endregion
 
