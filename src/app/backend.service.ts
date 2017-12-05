@@ -15,6 +15,7 @@ import {environment} from '../environments/environment';
 import {EditableModuleOutput} from './models/editmodels/editable_module_output';
 import {EditableModuleInput} from './models/editmodels/editable_module_input';
 import {AppComponent} from "./app.component";
+import {Subscriber} from 'rxjs/Subscriber';
 
 @Injectable()
 export class BackendService {
@@ -25,9 +26,8 @@ export class BackendService {
     return this.get<CompleteSemester>('curriculum/' + curriculum + '/semester/' + semester);
   }
 
-  // endpoint doesn't exist yet
   getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
-    return this.get<EditableModuleOutput>('module/' + modulecode);
+     return this.get<EditableModuleOutput>('module/' + modulecode);
   }
 
   // endpoint does not exist yet
