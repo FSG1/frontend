@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.btn-group > .btn:first-child {
+  width: 100%;
+}
+
 .colHeader {
   text-align: left;
   border: 2px solid #e0e0e0;
@@ -32,7 +36,7 @@
   font-size: 20px;
 }
 
-.table {
+.assesmentPart {
   margin-top: 20px;
   th {
     text-align:center;

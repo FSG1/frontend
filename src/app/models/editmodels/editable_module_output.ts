@@ -3,7 +3,7 @@ import {Lecturer} from '../lecturer';
 import {PriorKnowledgeReference} from '../prior_knowledge_reference.model';
 import {Module} from '../module.model';
 
-export interface EditableModuleOutput {
+export class EditableModuleOutput {
   id: number;
   code: string;
   name: string;

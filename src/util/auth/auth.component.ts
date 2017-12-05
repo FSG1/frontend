@@ -27,33 +27,23 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       if (data.logout) {
-        localStorage.removeItem('fmms-username');
-        localStorage.removeItem('fmms-password');
-        this.app.setCredentials('', '');
+        this.app.logout();
         this.router.navigate(['/']);
-      } else {
-        const u = localStorage.getItem('fmms-username');
-        const p = localStorage.getItem('fmms-password');
-        if (u !== null && u.length > 0 && p !== null && p.length > 0) {
-          this.username = u;
-          this.password = p;
-          this.login();
-        }
+      } else if (this.app.isLoggedIn) {
+        this.username = this.app.username;
+        this.password = this.app.password;
+        this.login();
       }
     });
   }
 
   login() {
-    localStorage.removeItem('fmms-username');
-    localStorage.removeItem('fmms-password');
-    this.app.setCredentials('', '');
+    this.app.logout();
 
     if (this.username.length > 0 && this.password.length > 0) {
       this.backend.testAuth(this.username, this.password).subscribe((status) => {
         if (status) {
-          this.app.setCredentials(this.username, this.password);
-          localStorage.setItem('fmms-username', this.username);
-          localStorage.setItem('fmms-password', this.password);
+          this.app.login(this.username, this.password);
           this.location.back(); // Back to last action
         } else {
           this.message = 'Invalid username or password';

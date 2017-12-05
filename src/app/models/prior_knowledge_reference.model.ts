@@ -4,7 +4,7 @@ export class PriorKnowledgeReference {
   code: string;
   name: string;
   type: string;
-  remarks?: string;
+  remarks: string;
   public constructor (mod: Module, type: string, remarks: string) {
     this.code = mod.code;
     this.name = mod.name;

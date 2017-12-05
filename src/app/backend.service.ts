@@ -9,63 +9,14 @@ import 'rxjs/add/operator/map';
 import {CurriculumResponse} from './backend-responses/CurriculumResponse';
 import {ModuleContent} from './models/modulecontent.model';
 import {CompleteSemester} from './models/complete_semester.model';
-import {Subscriber} from 'rxjs/Subscriber';
 import {FilterQualifications} from './models/qualificiationfiltermodels/filter_qualifications.model';
 import {QualificationsOverview} from './models/qualificiationfiltermodels/qualifications_overview.model';
 import {environment} from '../environments/environment';
 import {EditableModuleOutput} from './models/editmodels/editable_module_output';
 import {EditableModuleInput} from './models/editmodels/editable_module_input';
-import {AppComponent} from './app.component';
+import {AppComponent} from "./app.component";
+import {Subscriber} from 'rxjs/Subscriber';
 
-const outputmockup = {
-  'id': 1,
-  'code': 'DBS',
-  'name': 'Databases',
-  'credits': 5,
-  'semesters': [1],
-  'lectures_in_week': 3,
-  'practical_hours_week': 4,
-  'introductorytext': 'very nice module. everyone should follow it',
-  'topics': ['drinking beer', 'sql injection', 'otherstuff'],
-  'teaching_material': [{
-    'name': 'dbs book',
-    'type': 'book'
-  }, {
-    'name': 'dbs book 2',
-    'type': 'book'
-  }, {
-    'name': 'www.something.com',
-    'type': 'website'
-  }],
-  'teaching_material_types': ['book', 'website', 'physical'],
-  'additional_information': 'vey nice course',
-  'all_lecturers': [{
-    'id': 1,
-    'name': 'Dorssers, T',
-  }, {
-    'id': 2,
-    'name': 'Van Odenhoven, F',
-  }, {
-    'id': 5,
-    'name': 'Van der Ham, R',
-  }],
-  'active_lecturers': [{
-    'id': 1,
-    'name': 'Dorssers, T',
-  }, {
-    'id': 2,
-    'name': 'Van Odenhoven, F',
-  }],
-  'credentials': 'vey nice course',
-  'project_flag': false,
-  'prior_knowledge_references': [
-    {'code': 'mod1', 'name': 'moduleren', 'type': 'concurrent', 'remarks': 'blabla'},
-    {'code': 'JAV1', 'name': 'java einz', 'type': 'prior', 'remarks': 'blabla'}],
-  'modules': [{'code': 'mod1', 'name': 'moduleren', 'credits': 5, 'is_project': false},
-    {'code': 'JAV1', 'name': 'java einz', 'credits': 5, 'is_project': false},
-    {'code': 'PRO1', 'name': 'projeckt 1', 'credits': 10, 'is_project': true},
-    {'code': 'LFT', 'name': 'Lift project', 'credits': 8, 'is_project': true}]
-};
 
 @Injectable()
 export class BackendService {
@@ -76,18 +27,13 @@ export class BackendService {
     return this.get<CompleteSemester>('curriculum/' + curriculum + '/semester/' + semester);
   }
 
-  // endpoint doesn't exist yet
   getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
-    //return this.get<EditableModuleOutput>('module/' + modulecode);
-    return Observable.create((observer: Subscriber<any>) => {
-      observer.next(outputmockup);
-      observer.complete();
-    });
+     return this.get<EditableModuleOutput>('module/' + modulecode);
   }
 
   // endpoint does not exist yet
-  updateEditableModule(moduleid: number, input: EditableModuleInput): void {
-    this.post('module/' + moduleid, input);
+  updateEditableModule(moduleid: number, input: EditableModuleInput): Observable<any> {
+    return this.post('module/' + moduleid, input);
   }
 
   getQualifications(): Observable<FilterQualifications> {
@@ -147,9 +93,8 @@ export class BackendService {
       headers: new HttpHeaders()
     };
     if (this.app.isLoggedIn) {
-      const credentials = this.app.username + ':' + this.app.password;
-      const encoded = btoa(credentials);
-      options.headers.append('Authorization', 'Basic ' + encoded);
+      const encoded = btoa(this.app.username + ':' + this.app.password);
+      options.headers = new HttpHeaders().set('Authorization', 'Basic ' + encoded);
     }
     return options;
   }
