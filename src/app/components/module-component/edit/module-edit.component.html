@@ -168,7 +168,7 @@
           <th>Reference type</th>
           <th>Remark</th>
         </tr>
-        <tr class="test-teaching-material" *ngFor="let pkr of output.prior_knowledge_references">
+        <tr *ngFor="let pkr of output.prior_knowledge_references">
           <td contenteditable="true" [textContent]="pkr.name" (input)="tm.name=$event.target.textContent">{{ pkr.name }}</td>
           <td contenteditable="true" [textContent]="pkr.type" (input)="tm.name=$event.target.textContent">{{ pkr.type }}</td>
           <td contenteditable="true" [textContent]="pkr.remarks" (input)="tm.name=$event.target.textContent">{{ pkr.remarks }}</td>
