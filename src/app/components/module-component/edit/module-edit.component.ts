@@ -17,12 +17,11 @@ import { Location } from '@angular/common';
   styleUrls: ['./module-edit.component.scss']
 })
   export class ModuleEditComponent extends RestrictedComponent implements OnInit {
-  //export class ModuleEditComponent implements OnInit {
+
   constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router, private location: Location) {
     super(app, router);
   }
-  //constructor(private backendService: BackendService, private route: ActivatedRoute, router: Router, private location: Location) {
-  //}
+
   output: EditableModuleOutput;
   input: EditableModuleInput;
   modulecode: string;
@@ -156,7 +155,7 @@ import { Location } from '@angular/common';
     this.backendService.updateEditableModule(this.output.id, this.input).subscribe(() => {
       this.location.back();
     }, (error) => {
-      console.log("Error");
+      console.log('Error');
       console.log(error);
     });
 
