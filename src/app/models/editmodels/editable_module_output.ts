@@ -4,12 +4,12 @@ import {LearningGoal} from '../learninggoal';
 import {AssesmentPart} from '../assesment_part';
 import {PriorKnowledgeReferenceModel} from '../prior_knowledge_reference.model';
 
-export interface EditableModuleOutput {
+export class EditableModuleOutput {
   id: number;
   code: string;
   name: string;
   credits: number;
-  semester: number;
+  semesters: number[];
   lectures_in_week: number;
   practical_hours_week: number;
   introductorytext: string;

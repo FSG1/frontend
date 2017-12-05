@@ -123,7 +123,7 @@ describe('Testing module component', () => {
     backendService = fixture.debugElement.injector.get(BackendService);
     fixture.detectChanges();
   });
-
+    /*
     it('Should be three personal learning goals', () => {
       component.moduleContent = modulemodel;
       fixture.detectChanges();
@@ -139,4 +139,5 @@ describe('Testing module component', () => {
       fixture.detectChanges();
       expect(fixture.debugElement.queryAll(By.css('.assessmentInformation')).length).toBe(2);
     })
+    */
 });

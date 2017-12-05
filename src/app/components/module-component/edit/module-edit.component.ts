@@ -9,6 +9,7 @@ import {TeachingMaterial} from '../../../models/teaching_material';
 import {isNullOrUndefined} from 'util';
 import {RestrictedComponent} from '../../../../util/RestrictedComponent';
 import {AppComponent} from '../../../app.component';
+import { Location } from '@angular/common';
 import {AssesmentPart} from '../../../models/assesment_part';
 
 @Component({
@@ -16,9 +17,12 @@ import {AssesmentPart} from '../../../models/assesment_part';
   templateUrl: './module-edit.component.html',
   styleUrls: ['./module-edit.component.scss']
 })
-export class ModuleEditComponent implements OnInit {
-  constructor(private backendService: BackendService, private route: ActivatedRoute,router: Router) {
+  export class ModuleEditComponent extends RestrictedComponent implements OnInit {
+
+  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router, private location: Location) {
+    super(app, router);
   }
+
   output: EditableModuleOutput;
   input: EditableModuleInput;
   modulecode: string;
@@ -34,6 +38,7 @@ export class ModuleEditComponent implements OnInit {
   //#endregion
 
   ngOnInit(): void {
+    this.output = new EditableModuleOutput();
     this.selectedAssesmentPart = new AssesmentPart();
     this.selectedLecturer = {
       'name': 'Lecturers',
@@ -90,6 +95,22 @@ export class ModuleEditComponent implements OnInit {
       }
     }
   }
+  topicUp(topic: string): void {
+    const index = this.output.topics.indexOf(topic);
+    if (index !== 0) {
+      const objectToGoDown = this.output.topics[index - 1];
+      this.output.topics[index - 1] = topic;
+      this.output.topics[index] = objectToGoDown;
+    }
+  }
+  topicDown(topic: string): void {
+    const index = this.output.topics.indexOf(topic);
+    if (index !== (this.output.topics.length - 1)) {
+      const objectToGoDown = this.output.topics[index + 1];
+      this.output.topics[index + 1] = topic;
+      this.output.topics[index] = objectToGoDown;
+    }
+  }
   //#endregion
   //#region teaching_materials
   removeTeachingMaterial(material: string): void {
@@ -97,6 +118,7 @@ export class ModuleEditComponent implements OnInit {
   }
   selectTeachingMaterialType(type: string): void {
     this.selectedTeachingMaterialType = type;
+    console.log(type);
   }
   addTeachingMaterials(): void {
     if (!isNullOrUndefined(this.selectedTeachingMaterial) && this.selectedTeachingMaterial.trim().length && this.selectedTeachingMaterialType != this.defaultType) {
@@ -107,9 +129,26 @@ export class ModuleEditComponent implements OnInit {
         }
       });
       if (found) {
+        console.log(this.selectedTeachingMaterialType);
         this.output.teaching_material.push(new TeachingMaterial(this.selectedTeachingMaterial, this.selectedTeachingMaterialType));
         this.selectedTeachingMaterial = '';
       }
+    }
+  }
+  teachingMaterialUp(material: TeachingMaterial): void {
+    const index = this.output.teaching_material.indexOf(material);
+    if (index !== 0) {
+      const objectToGoDown = this.output.teaching_material[index - 1];
+      this.output.teaching_material[index - 1] = material;
+      this.output.teaching_material[index] = objectToGoDown;
+    }
+  }
+  teachingMaterialDown(material: TeachingMaterial): void {
+    const index = this.output.teaching_material.indexOf(material);
+    if (index !== (this.output.teaching_material.length - 1)) {
+      const objectToGoDown = this.output.teaching_material[index + 1];
+      this.output.teaching_material[index + 1] = material;
+      this.output.teaching_material[index] = objectToGoDown;
     }
   }
   // endregion
@@ -135,10 +174,16 @@ export class ModuleEditComponent implements OnInit {
     this.output.assesment_parts.push(assesmentPart);
   }
   //#endregion
-  // TODO send save data
+  // send save data
   save(): void {
     this.input = new EditableModuleInput(this.output);
-    this.backendService.updateEditableModule(this.modulecode, this.input);
+    this.backendService.updateEditableModule(this.output.id, this.input).subscribe(() => {
+      this.location.back();
+    }, (error) => {
+      console.log('Error');
+      console.log(error);
+    });
+
   }
   calculateTotalEffort(): number {
     return this.output.credits * 28;
@@ -148,5 +193,8 @@ export class ModuleEditComponent implements OnInit {
       return true;
     }
     return false;
+  }
+  back(): void {
+    this.location.back();
   }
 }

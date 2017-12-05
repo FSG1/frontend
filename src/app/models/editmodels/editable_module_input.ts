@@ -28,7 +28,7 @@ export class EditableModuleInput {
     this.additional_information = output.additional_information;
     this.credentials = output.credentials;
     this.project_flag = output.project_flag;
-    this.lecturers = new Array();
+    this.lecturers = [];
     for (let i = 0; i < output.active_lecturers.length; i++) {
       this.lecturers[i] = output.active_lecturers[i].id;
     }
