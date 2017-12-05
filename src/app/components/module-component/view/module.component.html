@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row justify-content-end" *ngIf="app.isLoggedIn">
-    <div class="col-2">
+    <div class="col-2 btn-group btn-block">
       <button class="btn btn-primary" [routerLink]="['/modifymodule', selectedModule]">Edit</button>
     </div>
   </div>
@@ -10,8 +10,14 @@
     <div class="col-2 colHeader">
       <p class="big">Module:</p>
     </div>
-    <div class="col-10 colContent module-name">
+    <div class="col-4 colContent module-name">
       <p>{{ moduleContent?.name }}</p>
+    </div>
+  <div class="col-2 colHeader">
+    <p class="big">ProgRESS code:</p>
+  </div>
+    <div class="col-4 colContent module-code">
+      <p>{{moduleContent?.code}}</p>
     </div>
   </div>
 
