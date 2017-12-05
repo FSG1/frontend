@@ -12,27 +12,33 @@ import {AuthComponent} from '../util/auth/auth.component';
 const routes: Routes = [
   {
     path: 'moduleoverview',
-    component: ModuleOverviewComponent
+    component: ModuleOverviewComponent,
+    pathMatch: 'full'
   },
   {
     path: 'moduleoverview/:curriculum',
-    component: ModuleOverviewComponent
+    component: ModuleOverviewComponent,
+    pathMatch: 'full'
   },
   {
     path: 'curriculum/:curriculum/modules/:code',
-    component: ModuleComponent
+    component: ModuleComponent,
+    pathMatch: 'full'
   },
   {
     path: 'curriculum/:curriculum/semesters/:semester',
-    component: SemesterOverviewComponent
+    component: SemesterOverviewComponent,
+    pathMatch: 'full'
   },
   {
     path: 'modifymodule/:module_code',
-    component: ModuleEditComponent
+    component: ModuleEditComponent,
+    pathMatch: 'full'
   },
   {
     path: 'login',
     component: AuthComponent,
+    pathMatch: 'full',
     data: {
       logout: false
     }
@@ -40,17 +46,31 @@ const routes: Routes = [
   {
     path: 'logout',
     component: AuthComponent,
+    pathMatch: 'full',
     data: {
       logout: true
     }
   },
   {
     path: 'qualifications',
-    component: QualificationOverviewComponent
+    component: QualificationOverviewComponent,
+    pathMatch: 'full'
   },
-  {path: 'qualifications/:curriculum', component: QualificationOverviewComponent},
-  {path: 'qualifications/:curriculum/:lifecycle_activity', component: QualificationOverviewComponent},
-  {path: 'qualifications/:curriculum/:lifecycle_activity/:architectural_layer', component: QualificationOverviewComponent},
+  {
+    path: 'qualifications/:curriculum',
+    component: QualificationOverviewComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'qualifications/:curriculum/:lifecycle_activity',
+    component: QualificationOverviewComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'qualifications/:curriculum/:lifecycle_activity/:architectural_layer',
+    component: QualificationOverviewComponent,
+    pathMatch: 'full'
+  },
   {
     path: '',
     redirectTo: '/moduleoverview',
