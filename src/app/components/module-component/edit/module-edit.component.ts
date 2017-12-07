@@ -11,6 +11,99 @@ import {RestrictedComponent} from '../../../../util/RestrictedComponent';
 import {AppComponent} from '../../../app.component';
 import { Location } from '@angular/common';
 
+const outputmockup = {
+  'id': 1,
+  'code': 'DBS',
+  'name': 'Databases',
+  'credits': 5,
+  'semesters': [1],
+  'lectures_in_week': 3,
+  'practical_hours_week': 4,
+  'introductorytext': 'very nice module. everyone should follow it',
+  'topics': ['drinking beer', 'sql injection', 'otherstuff'],
+  'teaching_material': [{
+    'name': 'dbs book',
+    'type': 'book'
+  }, {
+    'name': 'dbs book 2',
+    'type': 'book'
+  }, {
+    'name': 'www.something.com',
+    'type': 'website'
+  }],
+  'teaching_material_types': ['book', 'website', 'physical'],
+  'additional_information': 'vey nice course',
+  'all_lecturers': [{
+    'id': 1,
+    'name': 'Dorssers, T',
+  }, {
+    'id': 2,
+    'name': 'Van Odenhoven, F',
+  }, {
+    'id': 5,
+    'name': 'Van der Ham, R',
+  }],
+  'active_lecturers': [{
+    'id': 1,
+    'name': 'Dorssers, T',
+  }, {
+    'id': 2,
+    'name': 'Van Odenhoven, F',
+  }],
+  'credentials': 'vey nice course',
+  'project_flag': false,
+  'learning_goals': [
+  {
+    'name': 'LG 1',
+    'description': 'apply control structures, function invocation and memory management in C ',
+    'type': 'personal',
+    'skillmatrix': [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
+      {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 1}],
+    'assesment_types': null,
+    'weight': null
+  },
+  {
+    'name': 'LG 2',
+    'description': 'apply object orientation and memory management in C++ managed and unmanaged',
+    'type': 'personal',
+    'skillmatrix': [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1}],
+    'assesment_types': null,
+    'weight': null
+  },
+  {
+    'name': 'LG 3',
+    'description': 'apply C++11 and C++14 extensions of C++',
+    'type': 'personal',
+    'skillmatrix': [{'lifecycle_activity': 3, 'architectural_layer': 1, 'level': 2}],
+    'assesment_types': null,
+    'weight': null
+  },
+  {
+    'name': 'LG 4',
+    'description': 'do group stuff',
+    'type': 'group',
+    'skillmatrix': [{'lifecycle_activity': 0, 'architectural_layer': 0, 'level': 3}],
+    'assesment_types': null,
+    'weight': null
+  }],
+  'prior_knowledge_references': [],
+  'assesment_parts': [
+    {
+      'subcode': 'sofa1',
+      'description': 'research some stuff',
+      'percentage': 0.1,
+      'minimal_grade': 5.5,
+      'remark': 'nice'
+    },
+    {
+      'subcode': 'sofa2',
+      'description': 'something',
+      'percentage': 0.9,
+      'minimal_grade': 5.5,
+      'remark': 'not nice'
+    }]
+};
+
 @Component({
   selector: 'app-editable-module',
   templateUrl: './module-edit.component.html',
@@ -46,11 +139,13 @@ import { Location } from '@angular/common';
       params => {
         if (params['module_code']) {
           this.modulecode = params['module_code'];
-
+          this.output = outputmockup;
+          /*
           this.backendService.getEditableModule(this.modulecode)
             .subscribe(emo => {
               this.output = emo;
             });
+          */
           }});
   }
   //#region lecturers
