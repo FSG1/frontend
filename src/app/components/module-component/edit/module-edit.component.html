@@ -86,22 +86,23 @@
 
   <div class="row justify-content-center">
     <div class="col-10 md-form">
-      <b> This module is a project:</b> <input style="margin-left:10px;" name="isproject" [(ngModel)]="output.project_flag" type="checkbox"/>
+      <b> This module is a project:</b>
+      <input style="margin-left:10px;" name="isproject" [(ngModel)]="output.project_flag" type="checkbox"/>
     </div>
   </div>
 
   <div class="row justify-content-center">
     <div class="col-5">
-    <table class="table table-sm table-striped">
-      <tr>
-        <th colspan="3">* Topics</th>
-      </tr>
-      <tr class="test-topics" *ngFor="let topic of output.topics">
-        <td>{{ topic }}</td>
-        <td><button class="btn-outline-danger" (click)="topicUp(topic)">^</button>
-          <button class="btn-outline-danger" (click)="topicDown(topic)">v</button></td>
-        <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
-      </tr>
+      <table class="table table-sm table-striped">
+        <tr>
+          <th colspan="3">* Topics</th>
+        </tr>
+        <tr class="test-topics" *ngFor="let topic of output.topics">
+          <td>{{ topic }}</td>
+          <td><button class="btn-outline-danger" (click)="topicUp(topic)">^</button>
+            <button class="btn-outline-danger" (click)="topicDown(topic)">v</button></td>
+          <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
+        </tr>
       </table>
     </div>
     <div class="col-5 md-form form-sm">
@@ -139,6 +140,42 @@
         </ul>
       </div>
       <button type="button" class="btn btn-sm btn-dark" (click)="addTeachingMaterials()">Add</button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <h4>Personal learning goals</h4>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <table class="table table-sm table-striped">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Weight</th>
+        </tr>
+        <tr *ngFor="let lg of output.learning_goals">
+          <td>{{ lg.name }}</td>
+          <td>{{ lg.description }}</td>
+          <td>{{ lg.type }}</td>
+          <td>{{ lg.weight }}</td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th>Test</th>
+          <th>Test2</th>
+          <th>test3</th>
+        </tr>
+        <tr *ngFor="let lg of output.learning_goals">
+          <td>test</td>
+          <td>test2</td>
+          <td>test3</td>
+        </tr>
+      </table>
     </div>
   </div>
 
