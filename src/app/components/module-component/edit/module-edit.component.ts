@@ -12,66 +12,6 @@ import {AppComponent} from '../../../app.component';
 import { Location } from '@angular/common';
 import {AssesmentPart} from '../../../models/assesment_part';
 
-const outputmockup = {
-  'id': 1,
-  'code': 'DBS',
-  'name': 'Databases',
-  'credits': 5,
-  'semesters': [1],
-  'lectures_in_week': 3,
-  'practical_hours_week': 4,
-  'introductorytext': 'very nice module. everyone should follow it',
-  'topics': ['drinking beer', 'sql injection', 'otherstuff'],
-  'teaching_material': [{
-    'name': 'dbs book',
-    'type': 'book'
-  }, {
-    'name': 'dbs book 2',
-    'type': 'book'
-  }, {
-    'name': 'www.something.com',
-    'type': 'website'
-  }],
-  'teaching_material_types': ['book', 'website', 'physical'],
-  'additional_information': 'vey nice course',
-  'all_lecturers': [{
-    'id': 1,
-    'name': 'Dorssers, T',
-  }, {
-    'id': 2,
-    'name': 'Van Odenhoven, F',
-  }, {
-    'id': 5,
-    'name': 'Van der Ham, R',
-  }],
-  'active_lecturers': [{
-    'id': 1,
-    'name': 'Dorssers, T',
-  }, {
-    'id': 2,
-    'name': 'Van Odenhoven, F',
-  }],
-  'credentials': 'vey nice course',
-  'project_flag': false,
-  'learning_goals': [],
-  'prior_knowledge_references': [],
-  'assesment_parts': [
-    {
-      'subcode': 'sofa1',
-      'description': 'research some stuff',
-      'percentage': 0.1,
-      'minimal_grade': 5.5,
-      'remark': 'nice'
-    },
-    {
-      'subcode': 'sofa2',
-      'description': 'something',
-      'percentage': 0.9,
-      'minimal_grade': 5.5,
-      'remark': 'not nice'
-    }]
-};
-
 @Component({
   selector: 'app-editable-module',
   templateUrl: './module-edit.component.html',
@@ -109,14 +49,10 @@ const outputmockup = {
       params => {
         if (params['module_code']) {
           this.modulecode = params['module_code'];
-          // use mockupdata for design
-          this.output = outputmockup;
-          /*
           this.backendService.getEditableModule(this.modulecode)
             .subscribe(emo => {
               this.output = emo;
             });
-            */
           }});
   }
   //#region lecturers
