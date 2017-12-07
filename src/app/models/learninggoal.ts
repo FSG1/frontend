@@ -1,6 +1,6 @@
 import {StudentSkill} from './studentskill';
 
-export interface LearningGoal {
+export class LearningGoal {
   name: string;
   description: string;
   type: string;

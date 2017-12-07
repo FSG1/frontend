@@ -157,23 +157,20 @@
           <th>Type</th>
           <th>Weight</th>
         </tr>
-        <tr *ngFor="let lg of output.learning_goals">
+        <tr *ngFor="let lg of output.learning_goals" (click)="selectLearningGoal(lg)">
           <td>{{ lg.name }}</td>
           <td>{{ lg.description }}</td>
           <td>{{ lg.type }}</td>
           <td>{{ lg.weight }}</td>
         </tr>
       </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
       <table>
         <tr>
-          <th>Test</th>
-          <th>Test2</th>
-          <th>test3</th>
-        </tr>
-        <tr *ngFor="let lg of output.learning_goals">
-          <td>test</td>
-          <td>test2</td>
-          <td>test3</td>
+          <th></th>
         </tr>
       </table>
     </div>

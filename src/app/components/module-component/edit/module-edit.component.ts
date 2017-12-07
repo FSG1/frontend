@@ -10,6 +10,7 @@ import {isNullOrUndefined} from 'util';
 import {RestrictedComponent} from '../../../../util/RestrictedComponent';
 import {AppComponent} from '../../../app.component';
 import { Location } from '@angular/common';
+import {LearningGoal} from '../../../models/learninggoal';
 
 const outputmockup = {
   'id': 1,
@@ -125,10 +126,12 @@ const outputmockup = {
   private routeSubscription: Subscription;
   selectedTeachingMaterial: string;
   selectedTeachingMaterialType: string;
+  selectedLearningGoal: LearningGoal;
   defaultType = 'Teaching Material';
   //#endregion
 
   ngOnInit(): void {
+    this.selectedLearningGoal = new LearningGoal();
     this.output = new EditableModuleOutput();
     this.selectedLecturer = {
       'name': 'Lecturers',
@@ -244,6 +247,11 @@ const outputmockup = {
     }
   }
   //#endregion
+  // #region learningGoals
+  selectLearningGoal(learningGoal: LearningGoal): void {
+    this.selectedLearningGoal = learningGoal;
+  }
+  // #end region
   // send save data
   save(): void {
     this.input = new EditableModuleInput(this.output);
