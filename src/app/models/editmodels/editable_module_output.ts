@@ -1,5 +1,6 @@
 import {TeachingMaterial} from '../teaching_material';
 import {Lecturer} from '../lecturer';
+import {LearningGoal} from '../learninggoal';
 
 export class EditableModuleOutput {
   id: number;
@@ -14,6 +15,7 @@ export class EditableModuleOutput {
   teaching_material: TeachingMaterial[];
   teaching_material_types: string[];
   additional_information: string;
+  learning_goals: LearningGoal[];
   all_lecturers: Lecturer[];
   active_lecturers: Lecturer[];
   credentials: string;

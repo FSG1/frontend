@@ -1,5 +1,6 @@
 import {TeachingMaterial} from '../teaching_material';
 import {EditableModuleOutput} from './editable_module_output';
+import {LearningGoal} from '../learninggoal';
 
 export class EditableModuleInput {
   id: number;
@@ -12,6 +13,7 @@ export class EditableModuleInput {
   topics: string[];
   teaching_material: TeachingMaterial[];
   additional_information: string;
+  learning_goals: LearningGoal[];
   lecturers: number[];
   credentials: string;
   project_flag: boolean;
@@ -26,6 +28,7 @@ export class EditableModuleInput {
     this.topics = output.topics;
     this.teaching_material = output.teaching_material;
     this.additional_information = output.additional_information;
+    this.learning_goals = output.learning_goals;
     this.credentials = output.credentials;
     this.project_flag = output.project_flag;
     this.lecturers = [];
