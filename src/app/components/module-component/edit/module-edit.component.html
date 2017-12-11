@@ -184,11 +184,11 @@
       <label for="description">Description</label>
     </div>
     <div class="col-2">
-      <input onkeyup="if(this.value.length > 2 || this.value > 100) this.value = 100;" mdbActive id="percentage" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.percentage">
+      <input onkeyup="if(this.value.length > 3 || this.value > 1) this.value = 1;" mdbActive id="percentage" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.percentage">
       <label for="percentage">Percentage</label>
     </div>
     <div class="col-2">
-      <input mdbActive id="minimalGrade" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.minimal_grade">
+      <input onkeyup="if(this.value.length > 3 || this.value > 10) this.value = 10;" mdbActive id="minimalGrade" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.minimal_grade">
       <label for="minimalGrade">Minimal grade</label>
     </div>
     <div class="col-2">
