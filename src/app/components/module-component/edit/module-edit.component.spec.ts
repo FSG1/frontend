@@ -17,7 +17,7 @@ const outputmockup = {
   'code': 'DBS',
   'name': 'Databases',
   'credits': 5,
-  'semesters': [1, 2],
+  'semesters': [1],
   'lectures_in_week': 3,
   'practical_hours_week': 4,
   'introductorytext': 'very nice module. everyone should follow it',
@@ -52,7 +52,14 @@ const outputmockup = {
     'name': 'Van Odenhoven, F',
   }],
   'credentials': 'vey nice course',
-  'project_flag': false
+  'project_flag': false,
+  'prior_knowledge_references': [
+    {'id': 1, 'code': 'mod1', 'name': 'moduleren', 'type': 'concurrent', 'remarks': 'blabla'},
+    {'id': 2, 'code': 'JAV1', 'name': 'java einz', 'type': 'prior', 'remarks': 'blabla'}],
+  'modules': [{'code': 'mod1', 'name': 'moduleren', 'credits': 5, 'is_project': false},
+    {'code': 'JAV1', 'name': 'java einz', 'credits': 5, 'is_project': false},
+    {'code': 'PRO1', 'name': 'projeckt 1', 'credits': 10, 'is_project': true},
+    {'code': 'LFT', 'name': 'Lift project', 'credits': 8, 'is_project': true}]
 };
 
 describe('Testing module edit component', () => {
@@ -181,5 +188,26 @@ describe('Testing module edit component', () => {
     component.removeTeachingMaterial(material);
     fixture.detectChanges();
     expect(de.queryAll(By.css('.test-teaching-material')).length).toBe(3);
+  });
+  it('testing everything to do with teaching module references', () => {
+    const priorreference = 'Lift project';
+    const remark = 'burp';
+    const type = 'prior';
+
+    expect(de.queryAll(By.css('.test-prior-reference')).length).toBe(2);
+    component.addPriorReference();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-prior-reference')).length).toBe(2);
+    component.selectedpriorKnowledgeType = type;
+    component.selectedPriorModule = 'Lift project';
+    component.addPriorReference();
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-prior-reference')).length).toBe(3);
+    component.removePriorReference('boopidie');
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-prior-reference')).length).toBe(3);
+    component.removePriorReference(priorreference);
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('.test-prior-reference')).length).toBe(2);
   });
 });

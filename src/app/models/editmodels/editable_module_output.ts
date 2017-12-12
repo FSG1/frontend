@@ -1,5 +1,7 @@
 import {TeachingMaterial} from '../teaching_material';
 import {Lecturer} from '../lecturer';
+import {PriorKnowledgeReference} from '../prior_knowledge_reference.model';
+import {SimpleModule} from '../qualificiationfiltermodels/simple_module';
 
 export class EditableModuleOutput {
   id: number;
@@ -18,4 +20,6 @@ export class EditableModuleOutput {
   active_lecturers: Lecturer[];
   credentials: string;
   project_flag: boolean;
+  prior_knowledge_references: PriorKnowledgeReference[];
+  modules: SimpleModule[];
 }

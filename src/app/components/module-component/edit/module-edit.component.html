@@ -157,6 +157,62 @@
     </div>
   </div>
 
+  <div class="row justify-content-center">
+    <div class="col-10 md-form form-sm">
+      <table class="table table-sm table-striped">
+        <tr>
+          <th colspan="4">Prior knowledge references</th>
+        </tr>
+        <tr>
+          <th>Module name</th>
+          <th>Reference type</th>
+          <th>Remark</th>
+        </tr>
+        <tr class="test-prior-reference" *ngFor="let pkr of output.prior_knowledge_references">
+          <td contenteditable="true" [textContent]="pkr.name" (input)="tm.name=$event.target.textContent">{{ pkr.name }}</td>
+          <td contenteditable="true" [textContent]="pkr.type" (input)="tm.name=$event.target.textContent">{{ pkr.type }}</td>
+          <td contenteditable="true" [textContent]="pkr.remarks" (input)="tm.name=$event.target.textContent">{{ pkr.remarks }}</td>
+          <td><button class="btn-outline-danger" (click)="removePriorReference(pkr.name)">X</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10 form-sm">
+      <input mdbActive (keyup.enter)="addPriorReference()" type="text" class="form-control" [(ngModel)]="selectedPriorKnowledgeRemark" placeholder="(Optional) Remark about prior knowledge">
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="md-form form-sm">
+      <div class="btn-group" dropdown>
+        <button dropdownToggle class="a btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          {{selectedPriorModule}}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" *ngFor="let module of output.modules" >
+            <a (click)="selectPriorKnowledgeModule(module.name)">
+              {{module.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="btn-group" dropdown>
+        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          {{selectedpriorKnowledgeType}}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" *ngFor="let type of priorKnowledgeTypes" >
+            <a (click)="selectPriorKnowledgeType(type)">
+              {{type}}
+            </a>
+          </li>
+        </ul>
+        <button type="button" class="btn btn-sm btn-dark" (click)="addPriorReference()">Add</button>
+      </div>
+    </div>
+  </div>
+
+
   <div class="row justify-content-center" style="padding-bottom: 40px">
     <div class="col-2">
       <button type="button" [disabled]="!canSave()" class="btn btn-dark" (click)="save()">Save</button>
@@ -165,5 +221,7 @@
       <button type="button" class="btn btn-danger" (click)="back()">Cancel</button>
     </div>
   </div>
+
+
 
 </div>
