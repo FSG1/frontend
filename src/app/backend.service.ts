@@ -27,12 +27,10 @@ export class BackendService {
     return this.get<CompleteSemester>('curriculum/' + curriculum + '/semester/' + semester);
   }
 
-  // endpoint doesn't exist yet
   getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
      return this.get<EditableModuleOutput>('module/' + modulecode);
   }
 
-  // endpoint does not exist yet
   updateEditableModule(moduleid: number, input: EditableModuleInput): Observable<any> {
     return this.post('module/' + moduleid, input);
   }
