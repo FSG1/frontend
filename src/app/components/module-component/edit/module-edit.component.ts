@@ -11,99 +11,9 @@ import {RestrictedComponent} from '../../../../util/RestrictedComponent';
 import {AppComponent} from '../../../app.component';
 import { Location } from '@angular/common';
 import {LearningGoal} from '../../../models/learninggoal';
-
-const outputmockup = {
-  'id': 1,
-  'code': 'DBS',
-  'name': 'Databases',
-  'credits': 5,
-  'semesters': [1],
-  'lectures_in_week': 3,
-  'practical_hours_week': 4,
-  'introductorytext': 'very nice module. everyone should follow it',
-  'topics': ['drinking beer', 'sql injection', 'otherstuff'],
-  'teaching_material': [{
-    'name': 'dbs book',
-    'type': 'book'
-  }, {
-    'name': 'dbs book 2',
-    'type': 'book'
-  }, {
-    'name': 'www.something.com',
-    'type': 'website'
-  }],
-  'teaching_material_types': ['book', 'website', 'physical'],
-  'additional_information': 'vey nice course',
-  'all_lecturers': [{
-    'id': 1,
-    'name': 'Dorssers, T',
-  }, {
-    'id': 2,
-    'name': 'Van Odenhoven, F',
-  }, {
-    'id': 5,
-    'name': 'Van der Ham, R',
-  }],
-  'active_lecturers': [{
-    'id': 1,
-    'name': 'Dorssers, T',
-  }, {
-    'id': 2,
-    'name': 'Van Odenhoven, F',
-  }],
-  'credentials': 'vey nice course',
-  'project_flag': false,
-  'learning_goals': [
-  {
-    'name': 'LG 1',
-    'description': 'apply control structures, function invocation and memory management in C ',
-    'type': 'personal',
-    'skillmatrix': [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1},
-      {'lifecycle_activity': 2, 'architectural_layer': 3, 'level': 1}],
-    'assesment_types': null,
-    'weight': null
-  },
-  {
-    'name': 'LG 2',
-    'description': 'apply object orientation and memory management in C++ managed and unmanaged',
-    'type': 'personal',
-    'skillmatrix': [{'lifecycle_activity': 1, 'architectural_layer': 3, 'level': 1}],
-    'assesment_types': null,
-    'weight': null
-  },
-  {
-    'name': 'LG 3',
-    'description': 'apply C++11 and C++14 extensions of C++',
-    'type': 'personal',
-    'skillmatrix': [{'lifecycle_activity': 3, 'architectural_layer': 1, 'level': 2}],
-    'assesment_types': null,
-    'weight': null
-  },
-  {
-    'name': 'LG 4',
-    'description': 'do group stuff',
-    'type': 'group',
-    'skillmatrix': [{'lifecycle_activity': 0, 'architectural_layer': 0, 'level': 3}],
-    'assesment_types': null,
-    'weight': null
-  }],
-  'prior_knowledge_references': [],
-  'assesment_parts': [
-    {
-      'subcode': 'sofa1',
-      'description': 'research some stuff',
-      'percentage': 0.1,
-      'minimal_grade': 5.5,
-      'remark': 'nice'
-    },
-    {
-      'subcode': 'sofa2',
-      'description': 'something',
-      'percentage': 0.9,
-      'minimal_grade': 5.5,
-      'remark': 'not nice'
-    }]
-};
+import {StudentSkill} from '../../../models/studentskill';
+import {ArchitecturalLayer} from '../../../models/architecturallayer';
+import {LifecycleActivity} from '../../../models/lifecycleactivity';
 
 @Component({
   selector: 'app-editable-module',
@@ -119,6 +29,8 @@ const outputmockup = {
   output: EditableModuleOutput;
   input: EditableModuleInput;
   modulecode: string;
+  lifecycle_activities: LifecycleActivity[];
+  architectural_layers: ArchitecturalLayer[];
 
   //#region selection variables
   selectedLecturer: Lecturer;
@@ -127,10 +39,18 @@ const outputmockup = {
   selectedTeachingMaterial: string;
   selectedTeachingMaterialType: string;
   selectedLearningGoal: LearningGoal;
+  selectedArchtecturalLayer: ArchitecturalLayer;
+  selectedLifecycleActivity: LifecycleActivity;
+  selectedLevel: number;
   defaultType = 'Teaching Material';
   //#endregion
 
   ngOnInit(): void {
+    this.backendService.getQualifications()
+      .subscribe(filter => {
+        this.lifecycle_activities = filter.lifecycle_activities;
+        this.architectural_layers = filter.architectural_layers;
+      });
     this.selectedLearningGoal = new LearningGoal();
     this.output = new EditableModuleOutput();
     this.selectedLecturer = {
@@ -142,13 +62,10 @@ const outputmockup = {
       params => {
         if (params['module_code']) {
           this.modulecode = params['module_code'];
-          this.output = outputmockup;
-          /*
           this.backendService.getEditableModule(this.modulecode)
             .subscribe(emo => {
               this.output = emo;
             });
-          */
           }});
   }
   //#region lecturers
@@ -248,8 +165,60 @@ const outputmockup = {
   }
   //#endregion
   // #region learningGoals
-  selectLearningGoal(learningGoal: LearningGoal): void {
-    this.selectedLearningGoal = learningGoal;
+  addLearningGoal(): void {
+    this.selectedLearningGoal.expanded = false;
+    this.selectedLearningGoal.skillmatrix = new Array();
+    this.output.learning_goals.push(this.selectedLearningGoal);
+  }
+  selectLearningGoalType(type: string) {
+    this.selectedLearningGoal.type = type;
+  }
+  getArchitecturalLayerName(id: number) {
+    let name = '';
+    if (!isNullOrUndefined(this.architectural_layers)) {
+      this.architectural_layers.forEach( a => {
+        if (a.id === id) {
+          name =  a.name;
+        }
+      });
+      return name;
+    }
+  }
+  getLifecycleActivityName(id: number) {
+    if (!isNullOrUndefined(this.lifecycle_activities)) {
+      let name = '';
+      this.lifecycle_activities.forEach( l => {
+        if (l.id === id) {
+          name = l.name;
+        }
+      });
+      return name;
+    }
+  }
+  selectArchitecturalLayer(architecturalLayer: ArchitecturalLayer): void {
+    this.selectedArchtecturalLayer = architecturalLayer;
+  }
+  selectLifecycleActivity(lifecycleActivity: LifecycleActivity): void {
+    this.selectedLifecycleActivity = lifecycleActivity;
+  }
+  addSkill(goal: LearningGoal): void {
+    const selectedSkill: StudentSkill = new StudentSkill();
+    selectedSkill.architectural_layer = this.selectedArchtecturalLayer.id;
+    selectedSkill.lifecycle_activity = this.selectedLifecycleActivity.id;
+    selectedSkill.level = this.selectedLevel;
+    this.output.learning_goals.forEach(lg => {
+      if (lg === goal) {
+        lg.skillmatrix.push(selectedSkill);
+        console.log(this.output.learning_goals);
+      }
+    });
+  }
+  removeSkill(goal: LearningGoal, sk: StudentSkill): void {
+    this.output.learning_goals.forEach(lg => {
+      if (lg === goal) {
+        lg.skillmatrix.filter(s => s.lifecycle_activity !== sk.lifecycle_activity && s.architectural_layer !== sk.architectural_layer);
+      }
+    });
   }
   // #end region
   // send save data

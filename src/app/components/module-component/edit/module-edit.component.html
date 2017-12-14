@@ -145,34 +145,110 @@
 
   <div class="row justify-content-center">
     <div class="col-10">
-      <h4>Personal learning goals</h4>
+      <h4>Learning goals</h4>
     </div>
   </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" *ngFor="let lg of output.learning_goals; index as i">
     <div class="col-10">
-      <table class="table table-sm table-striped">
+      <table class="table table-sm table-striped" >
         <tr>
           <th>Name</th>
           <th>Description</th>
           <th>Type</th>
           <th>Weight</th>
         </tr>
-        <tr *ngFor="let lg of output.learning_goals" (click)="selectLearningGoal(lg)">
+        <tr>
           <td>{{ lg.name }}</td>
           <td>{{ lg.description }}</td>
           <td>{{ lg.type }}</td>
           <td>{{ lg.weight }}</td>
         </tr>
+        <tr>
+          <th>Architectual layer</th>
+          <th>Lifecycle Activity</th>
+          <th>Level</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let lgi of lg.skillmatrix">
+          <td>{{ getArchitecturalLayerName(lgi.architectural_layer) }}</td>
+          <td>{{ getLifecycleActivityName(lgi.lifecycle_activity) }}</td>
+          <td>{{ lgi.level }}</td>
+          <td><button (click)="removeSkill(lg, lgi)" class="btn-outline-danger">X</button></td>
+        </tr>
       </table>
+    </div>
+
+  <div class="row">
+    <div class="col-2 md-form form-sm">
+      <div class="btn-group" dropdown>
+        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          {{ selectedArchtecturalLayer?.name }}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" *ngFor="let architecturalLayer of architectural_layers">
+            <a (click)="selectArchitecturalLayer(architecturalLayer)">
+              {{architecturalLayer.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-2 md-form form-sm">
+      <div class="btn-group" dropdown>
+        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          {{ selectedLifecycleActivity?.name }}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" *ngFor="let lifecycleActivity of lifecycle_activities">
+            <a (click)="selectLifecycleActivity(lifecycleActivity)">
+              {{lifecycleActivity.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-2 md-form form-sm">
+      <input style="margin-left: 20px;" maxlength="80" mdbActive id="level" class="form-control-sm" type="text" [(ngModel)]="selectedLevel">
+      <label style="margin-left: 20px;" [ngClass]="{'active' : selectedLevel}" for="level">Level</label>
     </div>
   </div>
   <div class="row">
-    <div class="col-10">
-      <table>
-        <tr>
-          <th></th>
-        </tr>
-      </table>
+    <div class="col-2 md-form form-sm">
+      <button type="button" class="btn btn-sm btn-dark" (click)="addSkill(lg)">Add</button>
+    </div>
+  </div>
+  </div>
+
+  <div class="row justify-content-center md-form" style="margin-top: 5%; margin-bottom: 5%;">
+    <div class="col-2">
+      <input mdbActive id="lgName" type="text" min="0" max="30" class="form-control-sm" [(ngModel)]="selectedLearningGoal.name">
+      <label for="lgName">Name</label>
+    </div>
+    <div class="col-2">
+      <input mdbActive id="lgDescription" class="form-control-sm" type="text" min="0" max="60" [(ngModel)]="selectedLearningGoal.description">
+      <label for="lgDescription">Description</label>
+    </div>
+    <div class="col-2">
+      <div class="btn-group" dropdown>
+        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          {{ selectedLearningGoal?.type }}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item">
+            <a (click)="selectLearningGoalType('personal')">personal</a>
+          </li>
+          <li class="dropdown-item">
+            <a (click)="selectLearningGoalType('group')">group</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-2">
+      <input onkeyup="if(this.value.length > 3 || this.value > 100) this.value = 100;" mdbActive id="lgWeight" class="form-control-sm" type="number" min="0" max="100" [(ngModel)]="selectedLearningGoal.weight">
+      <label for="lgWeight">Weight</label>
+    </div>
+    <div class="col-2">
+      <button (click)="addLearningGoal()" class="btn btn-sm btn-dark">Add LearningGoal</button>
     </div>
   </div>
 
