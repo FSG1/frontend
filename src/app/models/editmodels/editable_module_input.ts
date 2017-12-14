@@ -34,7 +34,8 @@ export class EditableModuleInput {
     this.additional_information = output.additional_information;
     this.credentials = output.credentials;
     this.project_flag = output.project_flag;
-    this.lecturers = [];
+    this.prior_knowledge_references = output.prior_knowledge_references;
+    this.lecturers = new Array();
     this.learning_goals = output.learning_goals;
     this.assesment_parts = output.assesment_parts;
     this.prior_knowledge_references = output.prior_knowledge_references;

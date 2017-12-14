@@ -9,8 +9,10 @@ import {TeachingMaterial} from '../../../models/teaching_material';
 import {isNullOrUndefined} from 'util';
 import {RestrictedComponent} from '../../../../util/RestrictedComponent';
 import {AppComponent} from '../../../app.component';
+import {PriorKnowledgeReference} from '../../../models/prior_knowledge_reference.model';
+import {Module} from '../../../models/module.model';
 import { Location } from '@angular/common';
-import {AssesmentPart} from '../../../models/assesment_part';
+import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_module';
 
 @Component({
   selector: 'app-editable-module',
@@ -35,6 +37,12 @@ import {AssesmentPart} from '../../../models/assesment_part';
   selectedTeachingMaterialType: string;
   selectedAssesmentPart: AssesmentPart;
   defaultType = 'Teaching Material';
+  selectedPriorKnowledgeRemark: string;
+  selectedPriorModule: string;
+  defaultPriorModule= 'Module';
+  defaultPriorType= 'Type';
+  priorKnowledgeTypes = ['concurrent', 'mandatory', 'prior'];
+  selectedpriorKnowledgeType: string;
   //#endregion
 
   ngOnInit(): void {
@@ -44,6 +52,8 @@ import {AssesmentPart} from '../../../models/assesment_part';
       'name': 'Lecturers',
       'id': -1
     };
+    this.selectedPriorModule = this.defaultPriorModule;
+    this.selectedpriorKnowledgeType = this.defaultPriorType;
     this.selectedTeachingMaterialType = this.defaultType;
     this.routeSubscription = this.route.params.subscribe(
       params => {
@@ -173,6 +183,39 @@ import {AssesmentPart} from '../../../models/assesment_part';
     this.output.assesment_parts.push(assesmentPart);
   }
   //#endregion
+  //#region prior knowledge references
+  removePriorReference(prior: string): void {
+    this.output.prior_knowledge_references = this.output.prior_knowledge_references.filter( pr => pr.name != prior);
+  }
+  addPriorReference(): void {
+    if (this.selectedPriorModule != this.defaultPriorModule &&  this.selectedpriorKnowledgeType != this.defaultPriorType) {
+      let found = true;
+      this.output.prior_knowledge_references.forEach( pkr => {
+        if (pkr.name === this.selectedPriorModule) {
+          found = false;
+        }
+      });
+      if (found) {
+        let module: SimpleModule;
+        this.output.modules.forEach( m => {
+          if (m.name === this.selectedPriorModule) {
+            module = m;
+          }
+        });
+        this.output.prior_knowledge_references.push(new PriorKnowledgeReference(module, this.selectedpriorKnowledgeType, this.selectedPriorKnowledgeRemark));
+        this.selectedPriorKnowledgeRemark = '';
+      }
+    }
+  }
+  selectPriorKnowledgeModule(modulename: string): void {
+    this.selectedPriorModule = modulename;
+  }
+  selectPriorKnowledgeType(type: string): void {
+    this.selectedpriorKnowledgeType = type;
+  }
+  //#endregion
+  //#region other methods
+
   // send save data
   save(): void {
     this.input = new EditableModuleInput(this.output);
@@ -193,6 +236,7 @@ import {AssesmentPart} from '../../../models/assesment_part';
     }
     return false;
   }
+  //#endregion
   back(): void {
     this.location.back();
   }
