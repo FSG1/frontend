@@ -149,74 +149,7 @@
     </div>
   </div>
   <div class="row justify-content-center" *ngFor="let lg of output.learning_goals; index as i">
-    <div class="col-10">
-      <table class="table table-sm table-striped" >
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Type</th>
-          <th>Weight</th>
-        </tr>
-        <tr>
-          <td>{{ lg.name }}</td>
-          <td>{{ lg.description }}</td>
-          <td>{{ lg.type }}</td>
-          <td>{{ lg.weight }}</td>
-        </tr>
-        <tr>
-          <th>Architectual layer</th>
-          <th>Lifecycle Activity</th>
-          <th>Level</th>
-          <th></th>
-        </tr>
-        <tr *ngFor="let lgi of lg.skillmatrix">
-          <td>{{ getArchitecturalLayerName(lgi.architectural_layer) }}</td>
-          <td>{{ getLifecycleActivityName(lgi.lifecycle_activity) }}</td>
-          <td>{{ lgi.level }}</td>
-          <td><button (click)="removeSkill(lg, lgi)" class="btn-outline-danger">X</button></td>
-        </tr>
-      </table>
-    </div>
-
-  <div class="row">
-    <div class="col-2 md-form form-sm">
-      <div class="btn-group" dropdown>
-        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
-          {{ selectedArchtecturalLayer?.name }}
-        </button>
-        <ul class="dropdown-menu">
-          <li class="dropdown-item" *ngFor="let architecturalLayer of architectural_layers">
-            <a (click)="selectArchitecturalLayer(architecturalLayer)">
-              {{architecturalLayer.name}}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-2 md-form form-sm">
-      <div class="btn-group" dropdown>
-        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
-          {{ selectedLifecycleActivity?.name }}
-        </button>
-        <ul class="dropdown-menu">
-          <li class="dropdown-item" *ngFor="let lifecycleActivity of lifecycle_activities">
-            <a (click)="selectLifecycleActivity(lifecycleActivity)">
-              {{lifecycleActivity.name}}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-2 md-form form-sm">
-      <input style="margin-left: 20px;" maxlength="80" mdbActive id="level" class="form-control-sm" type="text" [(ngModel)]="selectedLevel">
-      <label style="margin-left: 20px;" [ngClass]="{'active' : selectedLevel}" for="level">Level</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-2 md-form form-sm">
-      <button type="button" class="btn btn-sm btn-dark" (click)="addSkill(lg)">Add</button>
-    </div>
-  </div>
+    <app-skill-matrix-edit [architecturallayers]="architectural_layers" [lifecycleactivities]="lifecycle_activities" [lg]="lg"></app-skill-matrix-edit>
   </div>
 
   <div class="row justify-content-center md-form" style="margin-top: 5%; margin-bottom: 5%;">

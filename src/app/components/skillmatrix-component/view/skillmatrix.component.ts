@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ArchitecturalLayer} from '../../models/architecturallayer';
-import {LifecycleActivity} from '../../models/lifecycleactivity';
-import {StudentSkill} from '../../models/studentskill';
+import {Component, Input} from '@angular/core';
+import {ArchitecturalLayer} from '../../../models/architecturallayer';
+import {LifecycleActivity} from '../../../models/lifecycleactivity';
+import {StudentSkill} from '../../../models/studentskill';
 
 @Component({
   selector: 'app-skill-matrix',

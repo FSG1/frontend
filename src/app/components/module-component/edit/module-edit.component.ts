@@ -20,10 +20,13 @@ import {LifecycleActivity} from '../../../models/lifecycleactivity';
   templateUrl: './module-edit.component.html',
   styleUrls: ['./module-edit.component.scss']
 })
-  export class ModuleEditComponent extends RestrictedComponent implements OnInit {
+// export class ModuleEditComponent implements OnInit {
+  export class ModuleEditComponent implements OnInit {
 
-  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router, private location: Location) {
+/*  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router, private location: Location) {
     super(app, router);
+  }*/
+  constructor(private backendService: BackendService, private route: ActivatedRoute, router: Router, private location: Location) {
   }
 
   output: EditableModuleOutput;
@@ -164,7 +167,7 @@ import {LifecycleActivity} from '../../../models/lifecycleactivity';
     }
   }
   //#endregion
-  // #region learningGoals
+  //#region learningGoals
   addLearningGoal(): void {
     this.selectedLearningGoal.expanded = false;
     this.selectedLearningGoal.skillmatrix = new Array();
@@ -173,54 +176,7 @@ import {LifecycleActivity} from '../../../models/lifecycleactivity';
   selectLearningGoalType(type: string) {
     this.selectedLearningGoal.type = type;
   }
-  getArchitecturalLayerName(id: number) {
-    let name = '';
-    if (!isNullOrUndefined(this.architectural_layers)) {
-      this.architectural_layers.forEach( a => {
-        if (a.id === id) {
-          name =  a.name;
-        }
-      });
-      return name;
-    }
-  }
-  getLifecycleActivityName(id: number) {
-    if (!isNullOrUndefined(this.lifecycle_activities)) {
-      let name = '';
-      this.lifecycle_activities.forEach( l => {
-        if (l.id === id) {
-          name = l.name;
-        }
-      });
-      return name;
-    }
-  }
-  selectArchitecturalLayer(architecturalLayer: ArchitecturalLayer): void {
-    this.selectedArchtecturalLayer = architecturalLayer;
-  }
-  selectLifecycleActivity(lifecycleActivity: LifecycleActivity): void {
-    this.selectedLifecycleActivity = lifecycleActivity;
-  }
-  addSkill(goal: LearningGoal): void {
-    const selectedSkill: StudentSkill = new StudentSkill();
-    selectedSkill.architectural_layer = this.selectedArchtecturalLayer.id;
-    selectedSkill.lifecycle_activity = this.selectedLifecycleActivity.id;
-    selectedSkill.level = this.selectedLevel;
-    this.output.learning_goals.forEach(lg => {
-      if (lg === goal) {
-        lg.skillmatrix.push(selectedSkill);
-        console.log(this.output.learning_goals);
-      }
-    });
-  }
-  removeSkill(goal: LearningGoal, sk: StudentSkill): void {
-    this.output.learning_goals.forEach(lg => {
-      if (lg === goal) {
-        lg.skillmatrix.filter(s => s.lifecycle_activity !== sk.lifecycle_activity && s.architectural_layer !== sk.architectural_layer);
-      }
-    });
-  }
-  // #end region
+  // #endregion
   // send save data
   save(): void {
     this.input = new EditableModuleInput(this.output);

@@ -12,7 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 import {AppRoutingModule} from '../../app.routing';
 import {ModuleComponent} from '../module-component/view/module.component';
 import {ExamLGComponent} from '../examlg-component/examlg.component';
-import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
+import {SkillMatrixComponent} from '../skillmatrix-component/view/skillmatrix.component';
 import {ErrorComponent} from '../../../util/error/error.component';
 import {SemesterOverviewComponent} from '../semester-overview-component/semester-overview.component';
 import {APP_BASE_HREF} from '@angular/common';
