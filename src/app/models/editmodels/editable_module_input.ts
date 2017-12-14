@@ -1,8 +1,8 @@
 import {TeachingMaterial} from '../teaching_material';
 import {EditableModuleOutput} from './editable_module_output';
 import {LearningGoal} from '../learninggoal';
-import {PriorKnowledgeReferenceModel} from '../prior_knowledge_reference.model';
 import {AssesmentPart} from '../assesment_part';
+import {PriorKnowledgeReference} from '../prior_knowledge_reference.model';
 
 export class EditableModuleInput {
   id: number;
@@ -20,7 +20,7 @@ export class EditableModuleInput {
   project_flag: boolean;
   learning_goals: LearningGoal[];
   assesment_parts: AssesmentPart[];
-  prior_knowledge_references: PriorKnowledgeReferenceModel[];
+  prior_knowledge_references: PriorKnowledgeReference[];
   public constructor(output: EditableModuleOutput) {
     this.id = output.id;
     this.code = output.code.toUpperCase();
