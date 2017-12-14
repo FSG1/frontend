@@ -148,8 +148,8 @@
       <h4>Learning goals</h4>
     </div>
   </div>
-  <div class="row justify-content-center" *ngFor="let lg of output.learning_goals; index as i">
-    <app-skill-matrix-edit [architecturallayers]="architectural_layers" [lifecycleactivities]="lifecycle_activities" [lg]="lg"></app-skill-matrix-edit>
+  <div *ngFor="let lg of output.learning_goals; index as i">
+    <app-skill-matrix-edit [output]="output" [lg]="lg"></app-skill-matrix-edit>
   </div>
 
   <div class="row justify-content-center md-form" style="margin-top: 5%; margin-bottom: 5%;">

@@ -117,11 +117,7 @@ export class BackendService {
   }
 
   getEditableModule(modulecode: string): Observable<EditableModuleOutput> {
-     // return this.get<EditableModuleOutput>('module/' + modulecode);
-    return Observable.create((observer: Subscriber<any>) => {
-      observer.next(outputmockup);
-      observer.complete();
-    });
+     return this.get<EditableModuleOutput>('module/' + modulecode);
   }
 
   // endpoint does not exist yet
@@ -130,11 +126,7 @@ export class BackendService {
   }
 
   getQualifications(): Observable<FilterQualifications> {
-    // return this.get<FilterQualifications>('qualifications');
-    return Observable.create((observer: Subscriber<any>) => {
-      observer.next(filterqualifications);
-      observer.complete();
-    });
+    return this.get<FilterQualifications>('qualifications');
   }
 
   getQualificationTable(curriculum: number, architecturallayer: number, activity: number): Observable<QualificationsOverview[]> {
