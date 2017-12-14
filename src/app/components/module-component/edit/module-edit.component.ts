@@ -13,6 +13,7 @@ import {PriorKnowledgeReference} from '../../../models/prior_knowledge_reference
 import {Module} from '../../../models/module.model';
 import { Location } from '@angular/common';
 import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_module';
+import {AssesmentPart} from '../../../models/assesment_part';
 
 @Component({
   selector: 'app-editable-module',
@@ -35,6 +36,7 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
   private routeSubscription: Subscription;
   selectedTeachingMaterial: string;
   selectedTeachingMaterialType: string;
+  selectedAssesmentPart: AssesmentPart;
   defaultType = 'Teaching Material';
   selectedPriorKnowledgeRemark: string;
   selectedPriorModule: string;
@@ -46,6 +48,7 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
 
   ngOnInit(): void {
     this.output = new EditableModuleOutput();
+    this.selectedAssesmentPart = new AssesmentPart();
     this.selectedLecturer = {
       'name': 'Lecturers',
       'id': -1
@@ -57,7 +60,6 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
       params => {
         if (params['module_code']) {
           this.modulecode = params['module_code'];
-
           this.backendService.getEditableModule(this.modulecode)
             .subscribe(emo => {
               this.output = emo;
@@ -158,6 +160,28 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
       this.output.teaching_material[index + 1] = material;
       this.output.teaching_material[index] = objectToGoDown;
     }
+  }
+  // endregion
+  // assesmentParts region
+  addAssesmentPart(): void {
+    if (!isNullOrUndefined(this.selectedAssesmentPart)) {
+      let found = true;
+      this.output.assesment_parts.forEach(a => {
+        if (a.subcode === this.selectedAssesmentPart.subcode) {
+          found = false;
+        }
+      });
+      if (found) {
+        this.output.assesment_parts.push(this.selectedAssesmentPart);
+      }
+    }
+  }
+  removeAssesmentPart(assesmentPart: AssesmentPart): void {
+    this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
+  }
+  editAssesmentPart(assesmentPart: AssesmentPart): void {
+    this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
+    this.output.assesment_parts.push(assesmentPart);
   }
   //#endregion
   //#region prior knowledge references
