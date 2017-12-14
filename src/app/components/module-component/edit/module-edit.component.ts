@@ -9,21 +9,22 @@ import {TeachingMaterial} from '../../../models/teaching_material';
 import {isNullOrUndefined} from 'util';
 import {RestrictedComponent} from '../../../../util/RestrictedComponent';
 import {AppComponent} from '../../../app.component';
+import {PriorKnowledgeReference} from '../../../models/prior_knowledge_reference.model';
+import {Module} from '../../../models/module.model';
 import { Location } from '@angular/common';
+import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_module';
+import {AssesmentPart} from '../../../models/assesment_part';
 import {LearningGoal} from '../../../models/learninggoal';
-import {StudentSkill} from '../../../models/studentskill';
-import {ArchitecturalLayer} from '../../../models/architecturallayer';
-import {LifecycleActivity} from '../../../models/lifecycleactivity';
 
 @Component({
   selector: 'app-editable-module',
   templateUrl: './module-edit.component.html',
   styleUrls: ['./module-edit.component.scss']
 })
-// export class ModuleEditComponent implements OnInit {
-  export class ModuleEditComponent implements OnInit {
+  export class ModuleEditComponent extends RestrictedComponent implements OnInit {
 
-  constructor(private backendService: BackendService, private route: ActivatedRoute, router: Router, private location: Location) {
+  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router, private location: Location) {
+    super(app, router);
   }
 
   output: EditableModuleOutput;
@@ -36,18 +37,28 @@ import {LifecycleActivity} from '../../../models/lifecycleactivity';
   private routeSubscription: Subscription;
   selectedTeachingMaterial: string;
   selectedTeachingMaterialType: string;
+  selectedAssesmentPart: AssesmentPart;
   selectedLearningGoal: LearningGoal;
   defaultType = 'Teaching Material';
+  selectedPriorKnowledgeRemark: string;
+  selectedPriorModule: string;
+  defaultPriorModule= 'Module';
+  defaultPriorType= 'Type';
+  priorKnowledgeTypes = ['concurrent', 'mandatory', 'prior'];
+  selectedpriorKnowledgeType: string;
   //#endregion
 
   ngOnInit(): void {
     this.selectedLearningGoal = new LearningGoal();
     this.selectedLearningGoal.type = 'personal';
     this.output = new EditableModuleOutput();
+    this.selectedAssesmentPart = new AssesmentPart();
     this.selectedLecturer = {
       'name': 'Lecturers',
       'id': -1
     };
+    this.selectedPriorModule = this.defaultPriorModule;
+    this.selectedpriorKnowledgeType = this.defaultPriorType;
     this.selectedTeachingMaterialType = this.defaultType;
     this.routeSubscription = this.route.params.subscribe(
       params => {
@@ -153,6 +164,59 @@ import {LifecycleActivity} from '../../../models/lifecycleactivity';
       this.output.teaching_material[index + 1] = material;
       this.output.teaching_material[index] = objectToGoDown;
     }
+  }
+  // endregion
+  // assesmentParts region
+  addAssesmentPart(): void {
+    if (!isNullOrUndefined(this.selectedAssesmentPart)) {
+      let found = true;
+      this.output.assesment_parts.forEach(a => {
+        if (a.subcode === this.selectedAssesmentPart.subcode) {
+          found = false;
+        }
+      });
+      if (found) {
+        this.output.assesment_parts.push(this.selectedAssesmentPart);
+      }
+    }
+  }
+  removeAssesmentPart(assesmentPart: AssesmentPart): void {
+    this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
+  }
+  editAssesmentPart(assesmentPart: AssesmentPart): void {
+    this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
+    this.output.assesment_parts.push(assesmentPart);
+  }
+  //#endregion
+  //#region prior knowledge references
+  removePriorReference(prior: string): void {
+    this.output.prior_knowledge_references = this.output.prior_knowledge_references.filter( pr => pr.name != prior);
+  }
+  addPriorReference(): void {
+    if (this.selectedPriorModule != this.defaultPriorModule &&  this.selectedpriorKnowledgeType != this.defaultPriorType) {
+      let found = true;
+      this.output.prior_knowledge_references.forEach( pkr => {
+        if (pkr.name === this.selectedPriorModule) {
+          found = false;
+        }
+      });
+      if (found) {
+        let module: SimpleModule;
+        this.output.modules.forEach( m => {
+          if (m.name === this.selectedPriorModule) {
+            module = m;
+          }
+        });
+        this.output.prior_knowledge_references.push(new PriorKnowledgeReference(module, this.selectedpriorKnowledgeType, this.selectedPriorKnowledgeRemark));
+        this.selectedPriorKnowledgeRemark = '';
+      }
+    }
+  }
+  selectPriorKnowledgeModule(modulename: string): void {
+    this.selectedPriorModule = modulename;
+  }
+  selectPriorKnowledgeType(type: string): void {
+    this.selectedpriorKnowledgeType = type;
   }
   //#endregion
   //#region learningGoals

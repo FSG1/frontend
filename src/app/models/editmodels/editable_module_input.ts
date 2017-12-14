@@ -1,6 +1,8 @@
 import {TeachingMaterial} from '../teaching_material';
 import {EditableModuleOutput} from './editable_module_output';
 import {LearningGoal} from '../learninggoal';
+import {AssesmentPart} from '../assesment_part';
+import {PriorKnowledgeReference} from '../prior_knowledge_reference.model';
 
 export class EditableModuleInput {
   id: number;
@@ -13,10 +15,12 @@ export class EditableModuleInput {
   topics: string[];
   teaching_material: TeachingMaterial[];
   additional_information: string;
-  learning_goals: LearningGoal[];
   lecturers: number[];
   credentials: string;
   project_flag: boolean;
+  learning_goals: LearningGoal[];
+  assesment_parts: AssesmentPart[];
+  prior_knowledge_references: PriorKnowledgeReference[];
   public constructor(output: EditableModuleOutput) {
     this.id = output.id;
     this.code = output.code.toUpperCase();
@@ -28,10 +32,13 @@ export class EditableModuleInput {
     this.topics = output.topics;
     this.teaching_material = output.teaching_material;
     this.additional_information = output.additional_information;
-    this.learning_goals = output.learning_goals;
     this.credentials = output.credentials;
     this.project_flag = output.project_flag;
-    this.lecturers = [];
+    this.prior_knowledge_references = output.prior_knowledge_references;
+    this.lecturers = new Array();
+    this.learning_goals = output.learning_goals;
+    this.assesment_parts = output.assesment_parts;
+    this.prior_knowledge_references = output.prior_knowledge_references;
     for (let i = 0; i < output.active_lecturers.length; i++) {
       this.lecturers[i] = output.active_lecturers[i].id;
     }
