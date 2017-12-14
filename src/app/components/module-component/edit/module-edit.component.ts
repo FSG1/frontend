@@ -23,17 +23,12 @@ import {LifecycleActivity} from '../../../models/lifecycleactivity';
 // export class ModuleEditComponent implements OnInit {
   export class ModuleEditComponent implements OnInit {
 
-/*  constructor(private backendService: BackendService, private route: ActivatedRoute, app: AppComponent, router: Router, private location: Location) {
-    super(app, router);
-  }*/
   constructor(private backendService: BackendService, private route: ActivatedRoute, router: Router, private location: Location) {
   }
 
   output: EditableModuleOutput;
   input: EditableModuleInput;
   modulecode: string;
-  lifecycle_activities: LifecycleActivity[];
-  architectural_layers: ArchitecturalLayer[];
 
   //#region selection variables
   selectedLecturer: Lecturer;
@@ -42,19 +37,12 @@ import {LifecycleActivity} from '../../../models/lifecycleactivity';
   selectedTeachingMaterial: string;
   selectedTeachingMaterialType: string;
   selectedLearningGoal: LearningGoal;
-  selectedArchtecturalLayer: ArchitecturalLayer;
-  selectedLifecycleActivity: LifecycleActivity;
-  selectedLevel: number;
   defaultType = 'Teaching Material';
   //#endregion
 
   ngOnInit(): void {
-    this.backendService.getQualifications()
-      .subscribe(filter => {
-        this.lifecycle_activities = filter.lifecycle_activities;
-        this.architectural_layers = filter.architectural_layers;
-      });
     this.selectedLearningGoal = new LearningGoal();
+    this.selectedLearningGoal.type = 'personal';
     this.output = new EditableModuleOutput();
     this.selectedLecturer = {
       'name': 'Lecturers',
