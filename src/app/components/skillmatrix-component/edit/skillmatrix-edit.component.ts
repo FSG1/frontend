@@ -67,7 +67,12 @@ export class SkillmatrixEditComponent implements OnInit {
   selectLifecycleActivity(lifecycleActivity: LifecycleActivity): void {
     this.selectedLifecycleActivity = lifecycleActivity;
   }
-
+  canAddSkill(): boolean {
+    if (!isNullOrUndefined(this.selectedArchtecturalLayer) && !isNullOrUndefined(this.selectedLifecycleActivity) && !isNullOrUndefined(this.selectedLevel)) {
+      return false;
+    }
+    return true;
+  }
   addSkill(goal: LearningGoal): void {
     if (this.selectedArchtecturalLayer.id !== -1 && this.selectedLifecycleActivity.id !== -1 && !isNullOrUndefined(this.selectedLevel)) {
       let exist = false;

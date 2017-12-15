@@ -167,6 +167,12 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   // endregion
   // assesmentParts region
+  canAddAssesment(): boolean {
+    if (!isNullOrUndefined(this.selectedAssesmentPart.subcode) && !isNullOrUndefined(this.selectedAssesmentPart.description)  && !isNullOrUndefined(this.selectedAssesmentPart.percentage) && !isNullOrUndefined(this.selectedAssesmentPart.minimal_grade)) {
+      return false;
+    }
+    return true;
+  }
   addAssesmentPart(): void {
     if (!isNullOrUndefined(this.selectedAssesmentPart)) {
       let found = true;
@@ -182,10 +188,6 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   removeAssesmentPart(assesmentPart: AssesmentPart): void {
     this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
-  }
-  editAssesmentPart(assesmentPart: AssesmentPart): void {
-    this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
-    this.output.assesment_parts.push(assesmentPart);
   }
   //#endregion
   //#region prior knowledge references
@@ -220,6 +222,12 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   //#endregion
   //#region learningGoals
+  canAddLearningGoal(): boolean {
+    if (!isNullOrUndefined(this.selectedLearningGoal.name) && !isNullOrUndefined(this.selectedLearningGoal.description) && !isNullOrUndefined(this.selectedLearningGoal.type) && !isNullOrUndefined(this.selectedLearningGoal.weight)) {
+      return false;
+    }
+    return true;
+  }
   addLearningGoal(): void {
     this.selectedLearningGoal.expanded = false;
     this.selectedLearningGoal.skillmatrix = new Array();

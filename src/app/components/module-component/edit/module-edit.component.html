@@ -152,8 +152,8 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-10">
-      <h4>Learning goals</h4>
+    <div class="col-3">
+      <h4><u>Learning goals</u></h4>
     </div>
   </div>
   <div *ngFor="let lg of output.learning_goals; index as i">
@@ -189,7 +189,7 @@
       <label for="lgWeight">Weight</label>
     </div>
     <div class="col-2">
-      <button (click)="addLearningGoal()" class="btn btn-sm btn-dark">Add LearningGoal</button>
+      <button [disabled]="canAddLearningGoal()" (click)="addLearningGoal()" class="btn btn-sm btn-dark">Add LearningGoal</button>
     </div>
   </div>
 
@@ -283,7 +283,7 @@
   </div>
   <div class="row md-form justify-content-center align-items-center">
     <div class="col-2">
-      <input mdbActive id="subcode" type="text" class="form-control-sm" [(ngModel)]="selectedAssesmentPart.subcode">
+      <input mdbActive id="subcode" required type="text" class="form-control-sm" [(ngModel)]="selectedAssesmentPart.subcode">
       <label for="subcode">Subcode</label>
     </div>
     <div class="col-2">
@@ -291,11 +291,11 @@
       <label for="description">Description</label>
     </div>
     <div class="col-2">
-      <input onkeyup="if(this.value.length > 3 || this.value > 1) this.value = 1;" mdbActive id="percentage" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.percentage">
+      <input onkeyup="if(this.value.length > 3 || this.value > 1) this.value = 1;" step="0.1" min="0" max="1" mdbActive id="percentage" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.percentage">
       <label for="percentage">Percentage</label>
     </div>
     <div class="col-2">
-      <input onkeyup="if(this.value.length > 3 || this.value > 10) this.value = 10;" mdbActive id="minimalGrade" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.minimal_grade">
+      <input onkeyup="if(this.value.length > 3 || this.value > 10) this.value = 10;" min="0" step="0.1" max="10" mdbActive id="minimalGrade" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.minimal_grade">
       <label for="minimalGrade">Minimal grade</label>
     </div>
     <div class="col-2">
@@ -304,20 +304,18 @@
     </div>
   </div>
   <div class="row justify-content-center">
-    <div class="col-2">
-      <button type="button" class="btn btn-sm btn-dark" (click)="addAssesmentPart()">Add</button>
+    <div class="col-2 justify-content-center">
+      <button type="button" [disabled]="canAddAssesment()" class="btn btn-sm btn-dark" (click)="addAssesmentPart()">Add</button>
     </div>
   </div>
 
   <div class="row justify-content-center" style="padding-bottom: 40px">
     <div class="col-2">
-      <button type="button" [disabled]="!canSave()" class="btn btn-dark" (click)="save()">Save</button>
+      <button style="width: 100%" type="button" [disabled]="!canSave()" class="btn btn-dark" (click)="save()">Save</button>
     </div>
     <div class="col-2">
       <button type="button" class="btn btn-danger" (click)="back()">Cancel</button>
     </div>
   </div>
-
-
 
 </div>
