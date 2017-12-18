@@ -106,9 +106,16 @@
         <tbody>
         <tr class="test-topics" *ngFor="let topic of output.topics">
           <td>{{ topic }}</td>
-          <td><button class="btn-outline-danger" (click)="topicUp(topic)">^</button>
-            <button class="btn-outline-danger" (click)="topicDown(topic)">v</button></td>
-          <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
+          <td>
+            <button class="btn-outline-danger btn-move" (click)="topicUp(topic)">
+            <i class="fa fa-chevron-up"></i>
+            </button>
+            <button class="btn-outline-danger btn-move" (click)="topicDown(topic)">
+              <i class="fa fa-chevron-down"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn-outline-danger btn-move" (click)="removeTopic(topic)">X</button></td>
         </tr>
         </tbody>
       </table>
@@ -129,7 +136,7 @@
         </thead>
         <tbody>
         <tr class="test-teaching-material" *ngFor="let tm of output?.teaching_material">
-          <td [textContent]="tm.name" (input)="tm.name=$event.target.textContent">{{ tm.name }}</td>
+          <td>{{ tm.name }}</td>
           <td>
             <button class="btn-outline-danger btn-move" (click)="teachingMaterialUp(tm)">
               <i class="fa fa-chevron-up"></i>
@@ -139,7 +146,7 @@
             </button>
           </td>
           <td>
-            <button class="btn-outline-danger" (click)="removeTeachingMaterial(tm.name)">X</button>
+            <button class="btn-outline-danger btn-move" (click)="removeTeachingMaterial(tm.name)">X</button>
           </td>
         </tr>
         </tbody>
