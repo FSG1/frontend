@@ -70,7 +70,7 @@
           </li>
         </ul>
       </div>
-      <button type="button" class="btn btn-sm btn-dark" (click)="addLecturer()">Add</button>
+      <button type="button" class="btn btn-sm btn-default" (click)="addLecturer()">Add</button>
     </div>
   </div>
 
@@ -115,7 +115,7 @@
     </div>
     <div class="col-5 md-form form-sm">
       <input maxlength="80" (keyup.enter)="addTopic()" class="form-control" type="text" mdbActive [(ngModel)]="selectedTopic" placeholder="New topic">
-      <button type="button" class="btn btn-sm btn-dark" (click)="addTopic()">Add</button>
+      <button type="button" class="btn btn-sm btn-default" (click)="addTopic()">Add</button>
     </div>
   </div>
 
@@ -159,7 +159,7 @@
           </li>
         </ul>
       </div>
-      <button type="button" class="btn btn-sm btn-dark" (click)="addTeachingMaterials()">Add</button>
+      <button type="button" class="btn btn-sm btn-default" (click)="addTeachingMaterials()">Add</button>
     </div>
   </div>
 
@@ -188,20 +188,20 @@
         </button>
         <ul class="dropdown-menu">
           <li class="dropdown-item">
-            <a (click)="selectLearningGoalType('personal')">personal</a>
+            <a (click)="selectLearningGoalType('personal')">Personal</a>
           </li>
           <li class="dropdown-item">
-            <a (click)="selectLearningGoalType('group')">group</a>
+            <a (click)="selectLearningGoalType('group')">Group</a>
           </li>
         </ul>
       </div>
     </div>
     <div class="col-2">
-      <input onkeyup="if(this.value.length > 3 || this.value > 100) this.value = 100;" mdbActive id="lgWeight" class="form-control-sm" type="number" min="0" max="100" [(ngModel)]="selectedLearningGoal.weight">
+      <input onkeyup="if(this.value.length > 0 && this.value < 1) this.value = 1; else if(this.value.length > 3 || this.value > 100) this.value = 100;" mdbActive id="lgWeight" class="form-control-sm" type="number" min="1" max="100" [(ngModel)]="selectedLearningGoal.weight">
       <label for="lgWeight">Weight</label>
     </div>
     <div class="col-2">
-      <button [disabled]="canAddLearningGoal()" (click)="addLearningGoal()" class="btn btn-sm btn-dark">Add LearningGoal</button>
+      <button [disabled]="canAddLearningGoal()" (click)="addLearningGoal()" class="btn btn-sm btn-default">Add LearningGoal</button>
     </div>
   </div>
 
@@ -329,7 +329,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-2 justify-content-center">
-      <button type="button" [disabled]="canAddAssesment()" class="btn btn-sm btn-dark" (click)="addAssesmentPart()">Add</button>
+      <button type="button" [disabled]="canAddAssesment()" class="btn btn-sm btn-default" (click)="addAssesmentPart()">Add</button>
     </div>
   </div>
 
