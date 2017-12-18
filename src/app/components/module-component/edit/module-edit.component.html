@@ -44,13 +44,17 @@
   <div class="row justify-content-center">
     <div class="col-5">
       <table id="lecturers" class="table table-sm table-striped">
+        <thead>
         <tr>
           <th colspan="2">* Lecturers</th>
         </tr>
+        </thead>
+        <tbody>
         <tr class="test-lecturers" *ngFor="let lecturer of output?.active_lecturers">
           <td>{{ lecturer.name }}</td>
           <td><button class="btn-outline-danger hoverable" (click)="removeLecturer(lecturer)">X</button></td>
         </tr>
+        </tbody>
       </table>
     </div>
     <div class="col-5">
@@ -94,15 +98,19 @@
   <div class="row justify-content-center">
     <div class="col-5">
       <table class="table table-sm table-striped">
+        <thead>
         <tr>
           <th colspan="3">* Topics</th>
         </tr>
+        </thead>
+        <tbody>
         <tr class="test-topics" *ngFor="let topic of output.topics">
           <td>{{ topic }}</td>
           <td><button class="btn-outline-danger" (click)="topicUp(topic)">^</button>
             <button class="btn-outline-danger" (click)="topicDown(topic)">v</button></td>
           <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
         </tr>
+        </tbody>
       </table>
     </div>
     <div class="col-5 md-form form-sm">
@@ -114,9 +122,12 @@
   <div class="row justify-content-center">
     <div class="col-5">
       <table class="table table-sm table-striped">
+        <thead>
         <tr>
           <th colspan="3">Teaching material</th>
         </tr>
+        </thead>
+        <tbody>
         <tr class="test-teaching-material" *ngFor="let tm of output?.teaching_material">
           <td [textContent]="tm.name" (input)="tm.name=$event.target.textContent">{{ tm.name }}</td>
           <td>
@@ -131,6 +142,7 @@
             <button class="btn-outline-danger" (click)="removeTeachingMaterial(tm.name)">X</button>
           </td>
         </tr>
+        </tbody>
       </table>
     </div>
     <div class="col-5 md-form form-sm">
@@ -208,17 +220,22 @@
   <div class="row justify-content-center">
     <div class="col-10 md-form form-sm">
       <table class="table table-sm table-striped">
+        <thead>
         <tr>
           <th>Module name</th>
           <th>Reference type</th>
           <th>Remark</th>
+          <th></th>
         </tr>
+        </thead>
+        <tbody>
         <tr class="test-prior-reference" *ngFor="let pkr of output.prior_knowledge_references">
           <td contenteditable="true" [textContent]="pkr.name" (input)="tm.name=$event.target.textContent">{{ pkr.name }}</td>
           <td contenteditable="true" [textContent]="pkr.type" (input)="tm.name=$event.target.textContent">{{ pkr.type }}</td>
           <td contenteditable="true" [textContent]="pkr.remarks" (input)="tm.name=$event.target.textContent">{{ pkr.remarks }}</td>
           <td><button class="btn-outline-danger" (click)="removePriorReference(pkr.name)">X</button></td>
         </tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -265,6 +282,7 @@
   <div class="row justify-content-center">
     <div class="col-10">
       <table class="table table-striped">
+        <thead>
         <tr>
           <th>Subcode</th>
           <th>Description</th>
@@ -273,6 +291,8 @@
           <th>Remarks</th>
           <th></th>
         </tr>
+        </thead>
+        <tbody>
         <tr *ngFor="let assesmentPart of output.assesment_parts">
           <td>{{ assesmentPart.subcode }}</td>
           <td>{{ assesmentPart.description }}</td>
@@ -281,6 +301,7 @@
           <td>{{ assesmentPart.remark }}</td>
           <td><button class="btn-outline-danger" (click)="removeAssesmentPart(assesmentPart)">X</button></td>
         </tr>
+        </tbody>
       </table>
     </div>
   </div>
