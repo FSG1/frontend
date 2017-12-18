@@ -49,10 +49,11 @@ import {LearningGoal} from '../../../models/learninggoal';
   //#endregion
 
   ngOnInit(): void {
-    this.selectedLearningGoal = new LearningGoal();
-    this.selectedLearningGoal.type = 'personal';
+    this.selectedLearningGoal = {
+      type: 'personal'
+    };
     this.output = new EditableModuleOutput();
-    this.selectedAssesmentPart = new AssesmentPart();
+    this.selectedAssesmentPart = {};
     this.selectedLecturer = {
       'name': 'Lecturers',
       'id': -1

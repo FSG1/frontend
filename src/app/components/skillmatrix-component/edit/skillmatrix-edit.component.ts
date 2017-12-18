@@ -82,10 +82,11 @@ export class SkillmatrixEditComponent implements OnInit {
         }
       });
       if (!exist) {
-        const newskill: StudentSkill = new StudentSkill();
-        newskill.architectural_layer = this.selectedArchtecturalLayer.id;
-        newskill.lifecycle_activity = this.selectedLifecycleActivity.id;
-        newskill.level = this.selectedLevel;
+        const newskill: StudentSkill = {
+          architectural_layer: this.selectedArchtecturalLayer.id,
+          lifecycle_activity: this.selectedLifecycleActivity.id,
+          level: this.selectedLevel
+        };
 
         this.lg.skillmatrix.push(newskill);
       }
