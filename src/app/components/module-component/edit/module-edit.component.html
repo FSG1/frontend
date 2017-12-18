@@ -152,7 +152,7 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-3">
+    <div class="col-3 justify-content-center">
       <h4><u>Learning goals</u></h4>
     </div>
   </div>
@@ -201,11 +201,13 @@
   </div>
 
   <div class="row justify-content-center">
+    <div class="col-3 justify-content-center">
+      <h4><u>Prior knowledge</u></h4>
+    </div>
+  </div>
+  <div class="row justify-content-center">
     <div class="col-10 md-form form-sm">
       <table class="table table-sm table-striped">
-        <tr>
-          <th colspan="4">Prior knowledge references</th>
-        </tr>
         <tr>
           <th>Module name</th>
           <th>Reference type</th>
@@ -220,12 +222,7 @@
       </table>
     </div>
   </div>
-  <div class="row justify-content-center">
-    <div class="col-10 form-sm">
-      <input mdbActive (keyup.enter)="addPriorReference()" type="text" class="form-control" [(ngModel)]="selectedPriorKnowledgeRemark" placeholder="(Optional) Remark about prior knowledge">
-    </div>
-  </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center prior-knowledge-buttons">
     <div class="md-form form-sm">
       <div class="btn-group" dropdown>
         <button dropdownToggle class="a btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
@@ -244,24 +241,30 @@
           {{selectedpriorKnowledgeType}}
         </button>
         <ul class="dropdown-menu">
-          <li class="dropdown-item" *ngFor="let type of priorKnowledgeTypes" >
+          <li class="dropdown-item capitalize" *ngFor="let type of priorKnowledgeTypes" >
             <a (click)="selectPriorKnowledgeType(type)">
               {{type}}
             </a>
           </li>
         </ul>
-        <button type="button" class="btn btn-sm btn-dark" (click)="addPriorReference()">Add</button>
+        <button type="button" class="btn btn-sm btn-default" (click)="addPriorReference()">Add</button>
       </div>
     </div>
   </div>
+  <div class="row justify-content-center">
+    <div class="col-10 form-sm">
+      <input mdbActive (keyup.enter)="addPriorReference()" type="text" class="form-control" [(ngModel)]="selectedPriorKnowledgeRemark" placeholder="(Optional) Remark about prior knowledge">
+    </div>
+  </div>
 
-
+  <div class="row justify-content-center">
+    <div class="col-3 justify-content-center">
+      <h4><u>Exam information</u></h4>
+    </div>
+  </div>
   <div class="row justify-content-center">
     <div class="col-10">
       <table class="table table-striped">
-        <tr>
-          <th colspan="6">Exam information</th>
-        </tr>
         <tr>
           <th>Subcode</th>
           <th>Description</th>
