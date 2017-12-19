@@ -94,5 +94,7 @@ export class ModuleComponent implements OnInit, OnDestroy {
 
     learningGoal.expanded = !learningGoal.expanded;
   }
+
+  getPDF(): void {  }
 }
 
