@@ -13,6 +13,8 @@ import {PriorKnowledgeReference} from '../../../models/prior_knowledge_reference
 import {Module} from '../../../models/module.model';
 import { Location } from '@angular/common';
 import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_module';
+import {AssesmentPart} from '../../../models/assesment_part';
+import {LearningGoal} from '../../../models/learninggoal';
 
 @Component({
   selector: 'app-editable-module',
@@ -35,6 +37,8 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
   private routeSubscription: Subscription;
   selectedTeachingMaterial: string;
   selectedTeachingMaterialType: string;
+  selectedAssesmentPart: AssesmentPart;
+  selectedLearningGoal: LearningGoal;
   defaultType = 'Teaching Material';
   selectedPriorKnowledgeRemark: string;
   selectedPriorModule: string;
@@ -45,7 +49,11 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
   //#endregion
 
   ngOnInit(): void {
+    this.selectedLearningGoal = {
+      type: 'personal'
+    };
     this.output = new EditableModuleOutput();
+    this.selectedAssesmentPart = {};
     this.selectedLecturer = {
       'name': 'Lecturers',
       'id': -1
@@ -57,7 +65,6 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
       params => {
         if (params['module_code']) {
           this.modulecode = params['module_code'];
-
           this.backendService.getEditableModule(this.modulecode)
             .subscribe(emo => {
               this.output = emo;
@@ -159,6 +166,30 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
       this.output.teaching_material[index] = objectToGoDown;
     }
   }
+  // endregion
+  // assesmentParts region
+  canAddAssesment(): boolean {
+    if (!isNullOrUndefined(this.selectedAssesmentPart.subcode) && !isNullOrUndefined(this.selectedAssesmentPart.description)  && !isNullOrUndefined(this.selectedAssesmentPart.percentage) && !isNullOrUndefined(this.selectedAssesmentPart.minimal_grade)) {
+      return false;
+    }
+    return true;
+  }
+  addAssesmentPart(): void {
+    if (!isNullOrUndefined(this.selectedAssesmentPart)) {
+      let found = true;
+      this.output.assesment_parts.forEach(a => {
+        if (a.subcode === this.selectedAssesmentPart.subcode) {
+          found = false;
+        }
+      });
+      if (found) {
+        this.output.assesment_parts.push(this.selectedAssesmentPart);
+      }
+    }
+  }
+  removeAssesmentPart(assesmentPart: AssesmentPart): void {
+    this.output.assesment_parts = this.output.assesment_parts.filter( as => as !== assesmentPart);
+  }
   //#endregion
   //#region prior knowledge references
   removePriorReference(prior: string): void {
@@ -191,8 +222,22 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
     this.selectedpriorKnowledgeType = type;
   }
   //#endregion
-  //#region other methods
-
+  //#region learningGoals
+  canAddLearningGoal(): boolean {
+    if (!isNullOrUndefined(this.selectedLearningGoal.name) && !isNullOrUndefined(this.selectedLearningGoal.description) && !isNullOrUndefined(this.selectedLearningGoal.type) && !isNullOrUndefined(this.selectedLearningGoal.weight)) {
+      return false;
+    }
+    return true;
+  }
+  addLearningGoal(): void {
+    this.selectedLearningGoal.expanded = false;
+    this.selectedLearningGoal.skillmatrix = new Array();
+    this.output.learning_goals.push(this.selectedLearningGoal);
+  }
+  selectLearningGoalType(type: string) {
+    this.selectedLearningGoal.type = type;
+  }
+  // #endregion
   // send save data
   save(): void {
     this.input = new EditableModuleInput(this.output);
@@ -213,7 +258,6 @@ import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_mo
     }
     return false;
   }
-  //#endregion
   back(): void {
     this.location.back();
   }

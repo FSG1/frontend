@@ -8,7 +8,7 @@ import {BackendService} from '../../../backend.service';
 import {By} from '@angular/platform-browser';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {ExamLGComponent} from '../../examlg-component/examlg.component';
-import {SkillMatrixComponent} from '../../skillmatrix-component/skillmatrix.component';
+import {SkillMatrixComponent} from '../../skillmatrix-component/view/skillmatrix.component';
 import {APP_BASE_HREF, LocationStrategy} from '@angular/common';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {AppComponent} from '../../../app.component';

@@ -1,0 +1,17 @@
+.md-form .btn {
+  margin-bottom: 0px;
+}
+.dropdown-menu .dropdown-item {
+  padding: 0;
+
+  a {
+    display: flex;
+    padding: 4px 24px;
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+thead th {
+  font-weight: bold !important;
+}

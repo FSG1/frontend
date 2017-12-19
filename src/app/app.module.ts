@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app.routing';
 import { ModuleOverviewComponent } from './components/module-overview-component/module-overview.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SkillMatrixComponent } from './components/skillmatrix-component/skillmatrix.component';
+import { SkillMatrixComponent } from './components/skillmatrix-component/view/skillmatrix.component';
 
 import { BackendService } from './backend.service';
 import {ModuleComponent} from './components/module-component/view/module.component';
@@ -17,6 +17,7 @@ import {SemesterOverviewComponent} from './components/semester-overview-componen
 import {QualificationOverviewComponent} from './components/qualification-overview-component/qualification-overview.component';
 import {ModuleEditComponent} from './components/module-component/edit/module-edit.component';
 import {FormsModule} from '@angular/forms';
+import {SkillmatrixEditComponent} from './components/skillmatrix-component/edit/skillmatrix-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {FormsModule} from '@angular/forms';
     SkillMatrixComponent,
     SemesterOverviewComponent,
     QualificationOverviewComponent,
-    ModuleEditComponent
+    ModuleEditComponent,
+    SkillmatrixEditComponent
   ],
   imports: [
     BrowserModule,

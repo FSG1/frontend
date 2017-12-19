@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {ModuleContent} from '../../models/modulecontent.model';
 import {Subscriber} from 'rxjs/Subscriber';
 import {ModuleOverviewComponent} from '../module-overview-component/module-overview.component';
-import {SkillMatrixComponent} from '../skillmatrix-component/skillmatrix.component';
+import {SkillMatrixComponent} from '../skillmatrix-component/view/skillmatrix.component';
 import {ModuleComponent} from '../module-component/view/module.component';
 import {BackendService} from '../../backend.service';
 import {ActivatedRoute} from '@angular/router';

@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+  <div class="col-10">
+    <table class="table table-sm table-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Weight</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{ lg.name }}</td>
+        <td>{{ lg.description }}</td>
+        <td>{{ lg.type }}</td>
+        <td>{{ lg.weight }}</td>
+        <td>
+          <button (click)="removeLg(lg)" class="btn-outline-danger">X</button>
+        </td>
+      </tr>
+      <tbody>
+    </table>
+
+    <table class="table table-sm table-striped">
+      <thead>
+      <tr>
+        <th>Architectual layer</th>
+        <th>Lifecycle Activity</th>
+        <th>Level</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let lgi of lg.skillmatrix">
+        <td>{{ getArchitecturalLayerName(lgi.architectural_layer) }}</td>
+        <td>{{ getLifecycleActivityName(lgi.lifecycle_activity) }}</td>
+        <td>{{ lgi.level }}</td>
+        <td>
+          <button (click)="removeSkill(lgi)" class="btn-outline-danger">X</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-2 md-form form-sm">
+    <div class="btn-group" dropdown>
+      <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+        {{ selectedArchtecturalLayer?.name }}
+      </button>
+      <ul class="dropdown-menu">
+        <li class="dropdown-item" *ngFor="let architecturalLayer of architecturallayers">
+          <a (click)="selectArchitecturalLayer(architecturalLayer)">
+            {{architecturalLayer.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-2 md-form form-sm">
+    <div class="btn-group" dropdown>
+      <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle " type="button" data-toggle="dropdown">
+        {{ selectedLifecycleActivity?.name }}
+      </button>
+      <ul class="dropdown-menu">
+        <li class="dropdown-item" *ngFor="let lifecycleActivity of lifecycleactivities">
+          <a (click)="selectLifecycleActivity(lifecycleActivity)">
+            {{lifecycleActivity.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-2 md-form form-sm btn-group">
+    <input style="margin-left: 20px;" onkeyup="if(this.value.length > 1 || this.value > 3) this.value = 3;" mdbActive
+           id="level" class="form-control-sm" [(ngModel)]="selectedLevel" type="number" min="1" max="3"
+           ondrop="return false;" (paste)="false" onkeypress="return event.charCode >= 49 && event.charCode <= 51">
+    <label style="margin-left: 20px;" [ngClass]="{'active' : selectedLevel}" for="level">Level</label>
+  </div>
+  <div class="col-2 md-form form-sm btn-group">
+    <button [disabled]="canAddSkill()" type="button" class="btn btn-sm btn-default" (click)="addSkill(lg)">Add</button>
+  </div>
+</div>

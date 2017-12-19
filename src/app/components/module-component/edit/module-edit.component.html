@@ -44,13 +44,17 @@
   <div class="row justify-content-center">
     <div class="col-5">
       <table id="lecturers" class="table table-sm table-striped">
+        <thead>
         <tr>
           <th colspan="2">* Lecturers</th>
         </tr>
+        </thead>
+        <tbody>
         <tr class="test-lecturers" *ngFor="let lecturer of output?.active_lecturers">
           <td>{{ lecturer.name }}</td>
           <td><button class="btn-outline-danger hoverable" (click)="removeLecturer(lecturer)">X</button></td>
         </tr>
+        </tbody>
       </table>
     </div>
     <div class="col-5">
@@ -66,7 +70,7 @@
           </li>
         </ul>
       </div>
-      <button type="button" class="btn btn-sm btn-dark" (click)="addLecturer()">Add</button>
+      <button type="button" class="btn btn-sm btn-default" (click)="addLecturer()">Add</button>
     </div>
   </div>
 
@@ -86,38 +90,53 @@
 
   <div class="row justify-content-center">
     <div class="col-10 md-form">
-      <b> This module is a project:</b> <input style="margin-left:10px;" name="isproject" [(ngModel)]="output.project_flag" type="checkbox"/>
-    </div>
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="col-5">
-    <table class="table table-sm table-striped">
-      <tr>
-        <th colspan="3">* Topics</th>
-      </tr>
-      <tr class="test-topics" *ngFor="let topic of output.topics">
-        <td>{{ topic }}</td>
-        <td><button class="btn-outline-danger" (click)="topicUp(topic)">^</button>
-          <button class="btn-outline-danger" (click)="topicDown(topic)">v</button></td>
-        <td><button class="btn-outline-danger" (click)="removeTopic(topic)">X</button></td>
-      </tr>
-      </table>
-    </div>
-    <div class="col-5 md-form form-sm">
-      <input maxlength="80" (keyup.enter)="addTopic()" class="form-control" type="text" mdbActive [(ngModel)]="selectedTopic" placeholder="New topic">
-      <button type="button" class="btn btn-sm btn-dark" (click)="addTopic()">Add</button>
+      <b> This module is a project:</b>
+      <input style="margin-left:10px;" name="isproject" [(ngModel)]="output.project_flag" type="checkbox"/>
     </div>
   </div>
 
   <div class="row justify-content-center">
     <div class="col-5">
       <table class="table table-sm table-striped">
+        <thead>
+        <tr>
+          <th colspan="3">* Topics</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="test-topics" *ngFor="let topic of output.topics">
+          <td>{{ topic }}</td>
+          <td>
+            <button class="btn-outline-danger btn-move" (click)="topicUp(topic)">
+            <i class="fa fa-chevron-up"></i>
+            </button>
+            <button class="btn-outline-danger btn-move" (click)="topicDown(topic)">
+              <i class="fa fa-chevron-down"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn-outline-danger btn-move" (click)="removeTopic(topic)">X</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-5 md-form form-sm">
+      <input maxlength="80" (keyup.enter)="addTopic()" class="form-control" type="text" mdbActive [(ngModel)]="selectedTopic" placeholder="New topic">
+      <button type="button" class="btn btn-sm btn-default" (click)="addTopic()">Add</button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <table class="table table-sm table-striped">
+        <thead>
         <tr>
           <th colspan="3">Teaching material</th>
         </tr>
+        </thead>
+        <tbody>
         <tr class="test-teaching-material" *ngFor="let tm of output?.teaching_material">
-          <td [textContent]="tm.name" (input)="tm.name=$event.target.textContent">{{ tm.name }}</td>
+          <td>{{ tm.name }}</td>
           <td>
             <button class="btn-outline-danger btn-move" (click)="teachingMaterialUp(tm)">
               <i class="fa fa-chevron-up"></i>
@@ -127,9 +146,10 @@
             </button>
           </td>
           <td>
-            <button class="btn-outline-danger" (click)="removeTeachingMaterial(tm.name)">X</button>
+            <button class="btn-outline-danger btn-move" (click)="removeTeachingMaterial(tm.name)">X</button>
           </td>
         </tr>
+        </tbody>
       </table>
     </div>
     <div class="col-5 md-form form-sm">
@@ -146,7 +166,49 @@
           </li>
         </ul>
       </div>
-      <button type="button" class="btn btn-sm btn-dark" (click)="addTeachingMaterials()">Add</button>
+      <button type="button" class="btn btn-sm btn-default" (click)="addTeachingMaterials()">Add</button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-3 justify-content-center">
+      <h4><u>Learning goals</u></h4>
+    </div>
+  </div>
+  <div *ngFor="let lg of output.learning_goals; index as i">
+    <app-skill-matrix-edit [output]="output" [lg]="lg"></app-skill-matrix-edit>
+  </div>
+
+  <div class="row justify-content-center md-form" style="margin-top: 5%; margin-bottom: 5%;">
+    <div class="col-2">
+      <input mdbActive id="lgName" type="text" min="0" max="30" class="form-control-sm" [(ngModel)]="selectedLearningGoal.name">
+      <label for="lgName">Name</label>
+    </div>
+    <div class="col-2">
+      <input mdbActive id="lgDescription" class="form-control-sm" type="text" min="0" max="60" [(ngModel)]="selectedLearningGoal.description">
+      <label for="lgDescription">Description</label>
+    </div>
+    <div class="col-2">
+      <div class="btn-group" dropdown>
+        <button dropdownToggle class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          {{ selectedLearningGoal?.type }}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item">
+            <a (click)="selectLearningGoalType('personal')">Personal</a>
+          </li>
+          <li class="dropdown-item">
+            <a (click)="selectLearningGoalType('group')">Group</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-2">
+      <input onkeyup="if(this.value.length > 0 && this.value < 1) this.value = 1; else if(this.value.length > 3 || this.value > 100) this.value = 100;" mdbActive id="lgWeight" class="form-control-sm" type="number" min="1" max="100" [(ngModel)]="selectedLearningGoal.weight">
+      <label for="lgWeight">Weight</label>
+    </div>
+    <div class="col-2">
+      <button [disabled]="canAddLearningGoal()" (click)="addLearningGoal()" class="btn btn-sm btn-default">Add LearningGoal</button>
     </div>
   </div>
 
@@ -158,31 +220,33 @@
   </div>
 
   <div class="row justify-content-center">
+    <div class="col-3 justify-content-center">
+      <h4><u>Prior knowledge</u></h4>
+    </div>
+  </div>
+  <div class="row justify-content-center">
     <div class="col-10 md-form form-sm">
       <table class="table table-sm table-striped">
-        <tr>
-          <th colspan="4">Prior knowledge references</th>
-        </tr>
+        <thead>
         <tr>
           <th>Module name</th>
           <th>Reference type</th>
           <th>Remark</th>
+          <th></th>
         </tr>
+        </thead>
+        <tbody>
         <tr class="test-prior-reference" *ngFor="let pkr of output.prior_knowledge_references">
           <td contenteditable="true" [textContent]="pkr.name" (input)="tm.name=$event.target.textContent">{{ pkr.name }}</td>
           <td contenteditable="true" [textContent]="pkr.type" (input)="tm.name=$event.target.textContent">{{ pkr.type }}</td>
           <td contenteditable="true" [textContent]="pkr.remarks" (input)="tm.name=$event.target.textContent">{{ pkr.remarks }}</td>
           <td><button class="btn-outline-danger" (click)="removePriorReference(pkr.name)">X</button></td>
         </tr>
+        </tbody>
       </table>
     </div>
   </div>
-  <div class="row justify-content-center">
-    <div class="col-10 form-sm">
-      <input mdbActive (keyup.enter)="addPriorReference()" type="text" class="form-control" [(ngModel)]="selectedPriorKnowledgeRemark" placeholder="(Optional) Remark about prior knowledge">
-    </div>
-  </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center prior-knowledge-buttons">
     <div class="md-form form-sm">
       <div class="btn-group" dropdown>
         <button dropdownToggle class="a btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
@@ -201,27 +265,88 @@
           {{selectedpriorKnowledgeType}}
         </button>
         <ul class="dropdown-menu">
-          <li class="dropdown-item" *ngFor="let type of priorKnowledgeTypes" >
+          <li class="dropdown-item capitalize" *ngFor="let type of priorKnowledgeTypes" >
             <a (click)="selectPriorKnowledgeType(type)">
               {{type}}
             </a>
           </li>
         </ul>
-        <button type="button" class="btn btn-sm btn-dark" (click)="addPriorReference()">Add</button>
+        <button type="button" class="btn btn-sm btn-default" (click)="addPriorReference()">Add</button>
       </div>
     </div>
   </div>
+  <div class="row justify-content-center">
+    <div class="col-10 form-sm">
+      <input mdbActive (keyup.enter)="addPriorReference()" type="text" class="form-control" [(ngModel)]="selectedPriorKnowledgeRemark" placeholder="(Optional) Remark about prior knowledge">
+    </div>
+  </div>
 
+  <div class="row justify-content-center">
+    <div class="col-3 justify-content-center">
+      <h4><u>Exam information</u></h4>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Subcode</th>
+          <th>Description</th>
+          <th>Percentage</th>
+          <th>Minimal grade</th>
+          <th>Remarks</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let assesmentPart of output.assesment_parts">
+          <td>{{ assesmentPart.subcode }}</td>
+          <td>{{ assesmentPart.description }}</td>
+          <td>{{ assesmentPart.percentage | percent }}</td>
+          <td>{{ assesmentPart.minimal_grade }}</td>
+          <td>{{ assesmentPart.remark }}</td>
+          <td><button class="btn-outline-danger" (click)="removeAssesmentPart(assesmentPart)">X</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row md-form justify-content-center align-items-center">
+    <div class="col-2">
+      <input mdbActive id="subcode" required type="text" class="form-control-sm" [(ngModel)]="selectedAssesmentPart.subcode">
+      <label for="subcode">Subcode</label>
+    </div>
+    <div class="col-2">
+      <input mdbActive id="description" type="text" class="form-control-sm" [(ngModel)]="selectedAssesmentPart.description">
+      <label for="description">Description</label>
+    </div>
+    <div class="col-2">
+      <input onkeyup="if(this.value.length > 3 || this.value > 1) this.value = 1;" step="0.1" min="0" max="1" mdbActive id="percentage" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.percentage">
+      <label for="percentage">Percentage</label>
+    </div>
+    <div class="col-2">
+      <input onkeyup="if(this.value.length > 3 || this.value > 10) this.value = 10;" min="0" step="0.1" max="10" mdbActive id="minimalGrade" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.minimal_grade">
+      <label for="minimalGrade">Minimal grade</label>
+    </div>
+    <div class="col-2">
+      <input mdbActive id="remarks" class="form-control-sm" type="text" [(ngModel)]="selectedAssesmentPart.remark">
+      <label for="remarks">Remarks</label>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-2 justify-content-center">
+      <button type="button" [disabled]="canAddAssesment()" class="btn btn-sm btn-default" (click)="addAssesmentPart()">Add</button>
+    </div>
+  </div>
 
   <div class="row justify-content-center" style="padding-bottom: 40px">
     <div class="col-2">
-      <button type="button" [disabled]="!canSave()" class="btn btn-dark" (click)="save()">Save</button>
+      <button style="width: 100%" type="button" [disabled]="!canSave()" class="btn btn-dark" (click)="save()">Save</button>
     </div>
     <div class="col-2">
       <button type="button" class="btn btn-danger" (click)="back()">Cancel</button>
     </div>
   </div>
-
-
 
 </div>

@@ -17,7 +17,6 @@ import {EditableModuleInput} from './models/editmodels/editable_module_input';
 import {AppComponent} from "./app.component";
 import {Subscriber} from 'rxjs/Subscriber';
 
-
 @Injectable()
 export class BackendService {
   constructor(private http: HttpClient, private app: AppComponent) {
@@ -31,7 +30,6 @@ export class BackendService {
      return this.get<EditableModuleOutput>('module/' + modulecode);
   }
 
-  // endpoint does not exist yet
   updateEditableModule(moduleid: number, input: EditableModuleInput): Observable<any> {
     return this.post('module/' + moduleid, input);
   }
