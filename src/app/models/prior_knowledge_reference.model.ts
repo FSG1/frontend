@@ -1,4 +1,4 @@
-import {SimpleModule} from './qualificiationfiltermodels/simple_module';
+import {SimpleModule} from './editmodels/simple_module';
 
 export class PriorKnowledgeReference {
   id: number;

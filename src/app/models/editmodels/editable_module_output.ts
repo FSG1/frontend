@@ -3,8 +3,10 @@ import {Lecturer} from '../lecturer';
 import {LearningGoal} from '../learninggoal';
 import {AssesmentPart} from '../assesment_part';
 import {PriorKnowledgeReference} from '../prior_knowledge_reference.model';
-import {SimpleModule} from '../qualificiationfiltermodels/simple_module';
+import {SimpleModule} from './simple_module';
 
+// This model is used to fill the module-edit.component.ts component.
+// The model is retrieved from the backend using getEditableModule method from backend service
 export class EditableModuleOutput {
   id: number;
   code: string;

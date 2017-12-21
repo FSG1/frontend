@@ -12,7 +12,7 @@ import {AppComponent} from '../../../app.component';
 import {PriorKnowledgeReference} from '../../../models/prior_knowledge_reference.model';
 import {Module} from '../../../models/module.model';
 import { Location } from '@angular/common';
-import {SimpleModule} from '../../../models/qualificiationfiltermodels/simple_module';
+import {SimpleModule} from '../../../models/editmodels/simple_module';
 import {AssesmentPart} from '../../../models/assesment_part';
 import {LearningGoal} from '../../../models/learninggoal';
 
