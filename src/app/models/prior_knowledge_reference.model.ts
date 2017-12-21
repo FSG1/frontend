@@ -1,7 +1,9 @@
 import {SimpleModule} from './editmodels/simple_module';
 
-// This model represents a prerequisite module of a module.
-// Example: java one is a prerequisite of java two.
+/**
+ * This model represents a prerequisite module of a module.
+ * Example: java one is a prerequisite of java two.
+ */
 export class PriorKnowledgeReference {
   id: number;
   // Module code like DBS1

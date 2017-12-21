@@ -4,9 +4,12 @@ import {LearningGoal} from '../learninggoal';
 import {AssesmentPart} from '../assesment_part';
 import {PriorKnowledgeReference} from '../prior_knowledge_reference.model';
 
-// This model is used for posting an edited module to the backed.
-// This model is used in module-edit.component.ts
-// The backend service method used to post this model is updateEditableModule
+/**
+ * This model is used for posting an edited module to the backed.
+ * This model is used in module-edit.component.ts
+ * The backend service method used to post this model is updateEditableModule
+ */
+
 export class EditableModuleInput {
   id: number;
   // Module code like DBS1

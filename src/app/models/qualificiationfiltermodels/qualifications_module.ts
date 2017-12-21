@@ -1,6 +1,8 @@
 import {QualificationsLearningGoal} from './qualifications_learning_goal.model';
 
-// This module exists because contentmodule has too many fields that won't be filled and learning goals are a necessity.
+/**
+ * This module exists because contentmodule has too many fields that won't be filled and learning goals are a necessity.
+ */
 export interface QualificationsModule {
   // Module code like DBS1
   code: string;

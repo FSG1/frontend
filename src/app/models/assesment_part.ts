@@ -1,4 +1,6 @@
-// this model represents an entry in the assesment table in module.component.ts
+/**
+ * this model represents an entry in the assesment table in module.component.ts
+ */
 export interface AssesmentPart {
   subcode?: string;
   description?: string;

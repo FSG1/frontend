@@ -1,4 +1,6 @@
-// This Module object represents a module with basic identification.
+/**
+ * This Module object represents a module with basic identification.
+ */
 export interface Module {
   // Module code like DBS1
   code: string;
