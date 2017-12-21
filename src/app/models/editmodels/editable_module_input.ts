@@ -9,6 +9,7 @@ import {PriorKnowledgeReference} from '../prior_knowledge_reference.model';
 // The backend service method used to post this model is updateEditableModule
 export class EditableModuleInput {
   id: number;
+  // Module code like DBS1
   code: string;
   name: string;
   credits: number;
@@ -20,12 +21,15 @@ export class EditableModuleInput {
   additional_information: string;
   lecturers: number[];
   credentials: string;
+  // Project_flag represents if the module is a project or not.
   project_flag: boolean;
   learning_goals: LearningGoal[];
   assesment_parts: AssesmentPart[];
   prior_knowledge_references: PriorKnowledgeReference[];
+  // This constructor only takes the things from editablemoduleoutput that are needed for updating a module.
   public constructor(output: EditableModuleOutput) {
     this.id = output.id;
+    // Visually the code is uppercase in the module-edit.component.html. The value can differ however. this is why the .toUpperCase is added
     this.code = output.code.toUpperCase();
     this.name = output.name;
     this.credits = output.credits;

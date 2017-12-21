@@ -4,6 +4,7 @@ import {SimpleModule} from './editmodels/simple_module';
 // Example: java one is a prerequisite of java two.
 export class PriorKnowledgeReference {
   id: number;
+  // Module code like DBS1
   code: string;
   name: string;
   // type can be concurrent, prior or mandatory

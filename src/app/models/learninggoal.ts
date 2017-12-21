@@ -5,6 +5,7 @@ import {StudentSkill} from './studentskill';
 export interface LearningGoal {
   name?: string;
   description?: string;
+  // type defines if it is a group learning goal or personal learning goal
   type?: string;
   skillmatrix?: StudentSkill[];
   weight?: number;
