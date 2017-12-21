@@ -1,12 +1,11 @@
-///<reference path="../../../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {LearningGoal} from '../../../models/learninggoal';
 import {ActivatedRoute} from '@angular/router';
 import {ModuleContent} from '../../../models/modulecontent.model';
 import {BackendService} from '../../../backend.service';
 import {Subscription} from 'rxjs/Subscription';
-import {AssesmentPart} from '../../../models/assesment_part';
-import {AppComponent} from "../../../app.component";
+import {AppComponent} from '../../../app.component';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-module',
@@ -24,6 +23,21 @@ export class ModuleComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription;
 
   constructor(private backendService: BackendService, private route: ActivatedRoute, public app: AppComponent) {
+  }
+
+  get generatorUrl(): string {
+    const backendUrl: string = environment.backend.scheme + '://'
+      + environment.backend.host
+      + ':' + environment.backend.port
+      + '/' + environment.backend.base
+      + '/curriculum/' +  this.moduleCurriculum
+      + '/module/' + this.selectedModule
+      + '/pdf';
+
+    let url = '/assets/pdfgenerator/?';
+    url += 'url=' + encodeURI(backendUrl)
+      + '&module=' + encodeURI(this.selectedModule);
+    return url;
   }
 
   ngOnInit(): void {
