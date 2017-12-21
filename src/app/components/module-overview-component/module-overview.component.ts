@@ -14,6 +14,7 @@ export class ModuleOverviewComponent implements OnInit, OnDestroy {
   semesters: Semester[];
   curricula: Curriculum[];
 
+  // variables that get selected from the HTML
   selectedCurriculum: Curriculum;
   selectedCurriculumName: string;
 
@@ -28,11 +29,18 @@ export class ModuleOverviewComponent implements OnInit, OnDestroy {
     this.routeSubscription.unsubscribe();
   }
 
+  /**
+   * This method gets the semesters of selected curriculum from the dropdown menu from the backend.
+   * @param {number} curriculumId
+   */
   getSemesters(curriculumId: number): void {
       this.backendService.getSemesters(curriculumId)
         .subscribe(semesters => this.semesters = semesters);
   }
 
+  /**
+   * This method gets the values(curricula) for the filter from the backend
+   */
   getCurriculum(): void {
     this.backendService.getCurricula()
       .subscribe(curricula => {
@@ -50,6 +58,9 @@ export class ModuleOverviewComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * If there are params the init method will load the page with the previously selected filter
+   */
   ngOnInit(): void {
     this.routeSubscription = this.route.params.subscribe(params => {
       if (params && params['curriculum']) {
