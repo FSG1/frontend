@@ -5,6 +5,8 @@ import {StudentSkill} from './studentskill';
 import {PriorKnowledgeReference} from './prior_knowledge_reference.model';
 import {AssesmentPart} from './assesment_part';
 
+// This model is used in model.component.ts and is returned by the getModuleContent method of backend.service.ts
+// This model represents a complete module.
 export interface ModuleContent {
   code: string;
   name: string;

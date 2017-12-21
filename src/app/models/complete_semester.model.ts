@@ -3,6 +3,7 @@ import {StudentSkill} from './studentskill';
 import {LifecycleActivity} from './lifecycleactivity';
 import {ArchitecturalLayer} from './architecturallayer';
 
+// This model is used in semester-overview.component.ts it contains extra information like the skills (HBO-I matrix) after a semester.
 export interface CompleteSemester {
   curriculum_name: string;
   modules: Module[];

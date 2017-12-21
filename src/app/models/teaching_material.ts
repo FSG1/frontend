@@ -1,3 +1,4 @@
+// This method represents the material a student needs to have for a module.
 export class TeachingMaterial {
   name: string;
   type: string;
