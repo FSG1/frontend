@@ -28,7 +28,10 @@ function dataURItoBlob(dataURI) {
 $(function() {
   var backendUrl = $.getUrlVar('url');
   var moduleCode = $.getUrlVar('module') || 'Module';
-
+  console.log(backendUrl);
+  console.log(moduleCode);
+  backendUrl = decodeURI(backendUrl);
+  moduleCode = decodeURI(moduleCode);
 
   var compileLatex = function(data) {
     var appendOutput = function(msg) {
@@ -62,11 +65,12 @@ $(function() {
         a.click();
 
         window.URL.revokeObjectURL(url);
-        window.close();
+        setTimeout(function() {
+          window.close();
+        }, 1500);
       });
     });
   };
 
-  backendUrl = "template.tex";
   $.get(backendUrl, compileLatex);
 });
