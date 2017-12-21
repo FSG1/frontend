@@ -26,10 +26,14 @@ export class ModuleComponent implements OnInit, OnDestroy {
   }
 
   get generatorUrl(): string {
-    const backendUrl: string = environment.backend.scheme + '://'
-      + environment.backend.host
-      + ':' + environment.backend.port
-      + '/' + environment.backend.base
+    let backendUrl: string = environment.backend.scheme + '://'
+      + environment.backend.host;
+
+    if ((environment.backend.port !== null && environment.backend.port > 0)) {
+      backendUrl += ':' + environment.backend.port;
+    }
+
+    backendUrl += '/' + environment.backend.base
       + '/curriculum/' +  this.moduleCurriculum
       + '/module/' + this.selectedModule
       + '/pdf';
