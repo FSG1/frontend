@@ -26,6 +26,10 @@ function dataURItoBlob(dataURI) {
 }
 
 $(function() {
+  var backendUrl = $.getUrlVar('url');
+  var moduleCode = $.getUrlVar('module') || 'Module';
+
+
   var compileLatex = function(data) {
     var appendOutput = function(msg) {
       console.log(msg);
@@ -43,8 +47,10 @@ $(function() {
         console.timeEnd("Execution time");
         console.log(pdf_dataurl);
 
-        if (pdf_dataurl === false)
+        if (pdf_dataurl === false) {
+          console.error("Something went really really wrong.");
           return;
+        }
 
         var blob = dataURItoBlob(dataurl);
         var url = window.URL.createObjectURL(blob);
@@ -52,17 +58,15 @@ $(function() {
         document.body.appendChild(a);
         a.style = "display: none";
         a.href = url;
-        a.download = "ModuleDescription.pdf";
+        a.download = moduleCode + ".pdf";
         a.click();
+
         window.URL.revokeObjectURL(url);
         window.close();
       });
     });
   };
 
-
-  var backendUrl = $.getUrlVar('url');
   backendUrl = "template.tex";
-
   $.get(backendUrl, compileLatex);
 });
