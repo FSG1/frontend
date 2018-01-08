@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate PDF</title>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.220/pdf.min.js" crossorigin="anonymous" async></script>
+  <script type="text/javascript" src="promisejs/promise.js"></script>
+  <script type="text/javascript" src="pdftex.js"></script>
+  <script type="text/javascript" src="compile.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+</head>
+
+<style type="text/css">
+  .row {
+    margin-top: 5rem;
+  }
+</style>
+<body>
+
+<main class="container">
+  <div class="row">
+    <div class="col-12 justify-content-center d-flex">
+      <h1>
+        Please wait while the PDF is generated
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 justify-content-center d-flex">
+      <i class="fa fa-5x fa-pulse fa-spinner"></i>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

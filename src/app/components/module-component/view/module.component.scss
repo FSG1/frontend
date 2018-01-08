@@ -6,6 +6,16 @@
   vertical-align: middle;
 }
 
+.buttons-top {
+  .col-12 {
+    padding: 0;
+  }
+
+  .btn {
+    width: auto !important;
+  }
+}
+
 .hoverable {
   cursor: pointer;
 }
