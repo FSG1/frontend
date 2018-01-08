@@ -124,7 +124,7 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   //#endregion lecturers
   /**
-   * In this region the methods exists the remove/select and add a topic to the module
+   * In this region the methods exists to remove/select and add a topic to the module
    */
   //#region topics
   removeTopic(topic: string): void {
@@ -162,7 +162,7 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   //#endregion
   /**
-   * In this region the methods exists the remove/select and add a teaching material to the module
+   * In this region the methods exists to remove/select and add a teaching material to the module
    */
   //#region teaching_materials
   removeTeachingMaterial(material: string): void {
@@ -205,7 +205,7 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   // endregion
   /**
-   * In this region the methods exists the remove/select and add a assesment part to the module
+   * In this region the methods exists to remove/select and add a assesment part to the module
    */
   //#region assesmentParts
   canAddAssesment(): boolean {
@@ -232,7 +232,7 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   //#endregion
   /**
-   * In this region the methods exists the remove/select and add a prior knowledge reference to the module
+   * In this region the methods exists to remove/select and add a prior knowledge reference to the module
    */
   //#region prior knowledge references
   removePriorReference(prior: string): void {
@@ -266,7 +266,7 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   //#endregion
   /**
-   * In this region the methods exists the remove and add a learning goal to the module
+   * In this region the methods exists to remove and add a learning goal to the module
    */
   //#region learningGoals
   canAddLearningGoal(): boolean {
@@ -285,7 +285,7 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   // #endregion
   /**
-   * This method saves the module with the inputted value
+   * This method saves the module with the inputted values
    */
   save(): void {
     this.input = new EditableModuleInput(this.output);
@@ -302,7 +302,7 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
 
   /**
-   * This method checks if some mandatory fields are filled in in order to save.
+   * This method checks if some mandatory fields are filled in, in order to save.
    * @returns {boolean}
    */
   canSave(): boolean {

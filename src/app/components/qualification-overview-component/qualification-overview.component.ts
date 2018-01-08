@@ -240,7 +240,7 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
    */
   //#region check if loaded methods
   /**
-   * This method check is the skill level is already loaded
+   * This method checks if the skill level is already loaded
    */
   levelLoaded(spot: number): boolean {
     if (spot === 0) return true;
@@ -251,7 +251,7 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
     return !(cur.overview.skills_level === previous.overview.skills_level);
   }
   /**
-   * This method check is the semester is already loaded
+   * This method checks if the semester is already loaded
    */
   semesterLoaded(spot: number): boolean {
     if (spot === 0) return true;
@@ -264,7 +264,7 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
     );
   }
   /**
-   * This method check is the module is already loaded
+   * This method checks if the module is already loaded
    */
   moduleLoaded(spot: number): boolean {
     if (spot === 0) return true;
@@ -276,10 +276,4 @@ export class QualificationOverviewComponent implements AfterContentInit, OnInit,
     );
   }
   //#endregion
-
-
-
-
-
-
 }
