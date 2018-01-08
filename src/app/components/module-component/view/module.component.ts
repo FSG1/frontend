@@ -7,6 +7,9 @@ import {Subscription} from 'rxjs/Subscription';
 import {AppComponent} from '../../../app.component';
 import {environment} from '../../../../environments/environment';
 
+/**
+ * This component is part of viewing a complete module page
+ */
 @Component({
   selector: 'app-module',
   templateUrl: './module.component.html',
@@ -24,7 +27,6 @@ export class ModuleComponent implements OnInit, OnDestroy {
 
   constructor(private backendService: BackendService, private route: ActivatedRoute, public app: AppComponent) {
   }
-
   get generatorUrl(): string {
     let backendUrl: string = environment.backend.scheme + '://'
       + environment.backend.host;
@@ -44,6 +46,9 @@ export class ModuleComponent implements OnInit, OnDestroy {
     return url;
   }
 
+  /**
+   * This method calls the endpoint with the inputted params and loads the component
+   */
   ngOnInit(): void {
     this.moduleContent = null;
     this.selectedModule = null;
@@ -70,6 +75,11 @@ export class ModuleComponent implements OnInit, OnDestroy {
     this.routeSubscription.unsubscribe();
   }
 
+  /**
+   * This method prepares the learning goals and hides the skill matrices by default
+   * It also sorts if a LG is a group LG or not
+   * @param {ModuleContent} data
+   */
   private contentReceive(data: ModuleContent) {
     const personal = [];
     const group = [];
@@ -89,7 +99,12 @@ export class ModuleComponent implements OnInit, OnDestroy {
     // Regex extract number from learning goals name
     const regex = /LG\s(\d+)/;
 
-    // Sorts learning goals ascending according to their number
+    /**
+     * Sorts learning goals ascending according to their number
+     * @param {LearningGoal} lg1
+     * @param {LearningGoal} lg2
+     * @returns {number}
+     */
     const sortFunc = function(lg1: LearningGoal, lg2: LearningGoal): number {
       let matches = lg1.name.match(regex);
       const a = matches[1];
@@ -105,6 +120,10 @@ export class ModuleComponent implements OnInit, OnDestroy {
     this.groupGoals = group.sort(sortFunc);
   }
 
+  /**
+   * This method expands or hides the skillmatrix of a learning goal
+   * @param {LearningGoal} learningGoal is the learning goal clicked
+   */
   onSelect(learningGoal: LearningGoal): void {
     if (learningGoal.expanded == null) {
       learningGoal.expanded = false;
