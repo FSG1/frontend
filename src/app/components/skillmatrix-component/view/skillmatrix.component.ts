@@ -3,6 +3,9 @@ import {ArchitecturalLayer} from '../../../models/architecturallayer';
 import {LifecycleActivity} from '../../../models/lifecycleactivity';
 import {StudentSkill} from '../../../models/studentskill';
 
+/**
+ * This component represents the HBO-I matrix, found in multiple pages.
+ */
 @Component({
   selector: 'app-skill-matrix',
   templateUrl: './skillmatrix.component.html',

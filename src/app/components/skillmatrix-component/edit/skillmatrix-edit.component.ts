@@ -6,7 +6,9 @@ import {isNullOrUndefined} from 'util';
 import {StudentSkill} from '../../../models/studentskill';
 import {BackendService} from '../../../backend.service';
 import {EditableModuleOutput} from '../../../models/editmodels/editable_module_output';
-
+/**
+* This component is the editable skillmatrix found in the edit module page.
+*/
 @Component ({
   selector: 'app-skill-matrix-edit',
   templateUrl: './skillmatrix-edit.component.html',

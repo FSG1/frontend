@@ -5,6 +5,9 @@ import {Curriculum} from '../../models/curriculum.model';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
+/**
+ * This component is part of the curriculum overview page
+ */
 @Component({
   selector: 'app-module-overview',
   templateUrl: './module-overview.component.html',
@@ -14,7 +17,9 @@ export class ModuleOverviewComponent implements OnInit, OnDestroy {
   semesters: Semester[];
   curricula: Curriculum[];
 
-  // variables that get selected from the HTML
+  /**
+   * variables that get selected from the HTML
+   */
   selectedCurriculum: Curriculum;
   selectedCurriculumName: string;
 
