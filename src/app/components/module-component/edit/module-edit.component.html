@@ -322,7 +322,7 @@
       <label for="description">Description</label>
     </div>
     <div class="col-2">
-      <input onkeyup="if(this.value.length > 3 || this.value > 1) this.value = 1;" step="0.1" min="0" max="1" mdbActive id="percentage" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.percentage">
+      <input onkeyup="if(this.value < 0) this.value = 1; if(this.value > 100) this.value = 100;" step="1" min="1" max="100" mdbActive id="percentage" class="form-control-sm" type="number" [(ngModel)]="selectedAssesmentPart.percentage">
       <label for="percentage">Percentage</label>
     </div>
     <div class="col-2">

@@ -52,7 +52,7 @@ export class SkillmatrixEditComponent implements OnInit {
     let name = '';
     if (!isNullOrUndefined(this.architecturallayers)) {
       this.architecturallayers.forEach(a => {
-        if (a.id === id) {
+        if (a.id === id + 1) {
           name = a.name;
         }
       });
@@ -69,7 +69,7 @@ export class SkillmatrixEditComponent implements OnInit {
     if (!isNullOrUndefined(this.lifecycleactivities)) {
       let name = '';
       this.lifecycleactivities.forEach(l => {
-        if (l.id === id) {
+        if (l.id === id + 1) {
           name = l.name;
         }
       });
@@ -99,7 +99,7 @@ export class SkillmatrixEditComponent implements OnInit {
    */
   canAddSkill(): boolean {
     // -1 is the value if it's unselected
-    if (!isNullOrUndefined(this.selectedArchtecturalLayer.id !== -1 && this.selectedLifecycleActivity.id !== -1 && !isNullOrUndefined(this.selectedLevel))) {
+    if (this.selectedArchtecturalLayer.id !== -1 && this.selectedLifecycleActivity.id !== -1 && !isNullOrUndefined(this.selectedLevel)) {
       return false;
     }
     return true;
@@ -109,23 +109,19 @@ export class SkillmatrixEditComponent implements OnInit {
    * This method adds a new skill to a learning goal.
    */
   addSkill(): void {
-    // -1 is the value if it's unselected
-    if (this.canAddSkill()) {
-      let exist = false;
-      this.lg.skillmatrix.forEach(entry => {
-        if (entry.architectural_layer == this.selectedArchtecturalLayer.id && entry.lifecycle_activity == this.selectedLifecycleActivity.id) {
-          exist = true;
-        }
-      });
-      if (!exist) {
-        const newskill: StudentSkill = {
-          architectural_layer: this.selectedArchtecturalLayer.id,
-          lifecycle_activity: this.selectedLifecycleActivity.id,
-          level: this.selectedLevel
-        };
-
-        this.lg.skillmatrix.push(newskill);
+    let exist = false;
+    this.lg.skillmatrix.forEach(entry => {
+      if (entry.architectural_layer == this.selectedArchtecturalLayer.id && entry.lifecycle_activity == this.selectedLifecycleActivity.id) {
+        exist = true;
       }
+    });
+    if (!exist) {
+      const newskill: StudentSkill = {
+        architectural_layer: this.selectedArchtecturalLayer.id,
+        lifecycle_activity: this.selectedLifecycleActivity.id,
+        level: this.selectedLevel
+      };
+        this.lg.skillmatrix.push(newskill);
     }
   }
 
