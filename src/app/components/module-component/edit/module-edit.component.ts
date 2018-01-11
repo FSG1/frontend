@@ -225,6 +225,7 @@ import {LearningGoal} from '../../../models/learninggoal';
       });
       if (found) {
         this.output.assesment_parts.push(this.selectedAssesmentPart);
+        this.selectedAssesmentPart = {};
       }
     }
   }
