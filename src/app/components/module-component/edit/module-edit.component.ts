@@ -216,6 +216,7 @@ import {LearningGoal} from '../../../models/learninggoal';
   }
   addAssesmentPart(): void {
     if (!isNullOrUndefined(this.selectedAssesmentPart)) {
+      this.selectedAssesmentPart.percentage /= 100;
       let found = true;
       this.output.assesment_parts.forEach(a => {
         if (a.subcode === this.selectedAssesmentPart.subcode) {
