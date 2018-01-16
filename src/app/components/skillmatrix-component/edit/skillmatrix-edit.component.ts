@@ -52,7 +52,7 @@ export class SkillmatrixEditComponent implements OnInit {
     let name = '';
     if (!isNullOrUndefined(this.architecturallayers)) {
       this.architecturallayers.forEach(a => {
-        if (a.id === id + 1) {
+        if (a.id === id) {
           name = a.name;
         }
       });
@@ -69,7 +69,7 @@ export class SkillmatrixEditComponent implements OnInit {
     if (!isNullOrUndefined(this.lifecycleactivities)) {
       let name = '';
       this.lifecycleactivities.forEach(l => {
-        if (l.id === id + 1) {
+        if (l.id === id) {
           name = l.name;
         }
       });
